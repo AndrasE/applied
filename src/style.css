@@ -3,4 +3,13 @@
 body {
   font-family: "Roboto", ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  padding-bottom: 5rem;
+}
+
+/* navbar setup so no overlap on content */
+@media (min-width: 640px) {
+  body {
+    padding-bottom: 0;
+    padding-left: 5rem;
+  }
 }
