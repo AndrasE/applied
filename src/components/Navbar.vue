@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { RouterLink, useRoute } from 'vue-router';
+import LogoDark from '@/assets/logo-dark.svg'
+import LogoLight from '@/assets/logo-light.svg'
 import { Icon } from "@iconify/vue";
+
 
 
 // const isActiveLink = (routePath: string) => {
@@ -13,12 +16,11 @@ import { Icon } from "@iconify/vue";
 <template>
     <nav
         class="fixed bottom-0 w-full z-50 h-auto sm:top-0 sm:left-0 sm:h-full sm:w-auto dark:bg-gray-950 dark:shadow-gray-300">
+        <img :src="LogoLight" alt="logo" class="w-20" />
         <div
             class="flex flex-row justify-evenly items-center p-2 gap-2 h-full  sm:gap-5 sm:flex-col sm:justify-center sm:items-center">
             <span
                 class="hidden sm:flex sm:flex-col justify-center items-center w-full  text-gray-900 dark:text-gray-300 text-lg">
-                <Icon icon="bxl:visual-studio" class="text-4xl rotate-90" />
-
 
             </span>
             <RouterLink to="/"
