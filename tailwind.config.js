@@ -5,7 +5,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Roboto", ...defaultTheme.fontFamily.sans],
+        sans: ["var(--default-font-family)", ...defaultTheme.fontFamily.sans], // default sans font
+        heading: ['"Poppins"', "sans-serif"], // example heading font
+        display: ['"Playfair Display"', "serif"], // another option
       },
     },
   },
