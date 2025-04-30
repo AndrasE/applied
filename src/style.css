@@ -1,8 +1,14 @@
 @import "tailwindcss";
 
-:root {
-  --default-font-family: "InterVariable", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+@layer theme {
+  :root {
+    --font-sans: "InterVariable", ui-sans-serif, system-ui, sans-serif,
+      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+      "Noto Color Emoji";
+    --font-heading: "Poppins", sans-serif;
+    --font-display: "Playfair Display", serif;
+    --font-size-tiny: 0.425rem;
+  }
 }
 
 body {

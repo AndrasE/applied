@@ -54,12 +54,12 @@ import { Icon } from "@iconify/vue";
                 </RouterLink>
             </div>
 
-            <p class="text-sky-400/60 text-[0.425rem] m-auto">theme</p>
+            <p class="text-sky-400/60 text-tiny">theme</p>
 
             <!-- theme toggle -->
             <div class="hidden w-full sm:flex sm:flex-col sm:items-end text-center">
                 <div class="block w-full mb-2 sm:items-end">
-                    <p class="text-sky-400/60 text-tiny m-auto">theme</p>
+                    <p class="text-sky-400/60 font-size-tiny m-auto">theme</p>
                     <hr class="flex w-full border-gray-950/5 dark:border-white/10" />
                 </div>
                 <RouterLink to="/"
