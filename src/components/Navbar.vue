@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RouterLink, useRoute } from 'vue-router';
+import { RouterLink } from 'vue-router';
 import { Icon } from "@iconify/vue";
 
 
@@ -54,16 +54,17 @@ import { Icon } from "@iconify/vue";
                 </RouterLink>
             </div>
 
+            <p class="text-sky-400/60 text-[0.425rem] m-auto">theme</p>
 
-
-            <div class="hidden sm:flex sm:flex-col sm:items-end">
+            <!-- theme toggle -->
+            <div class="hidden w-full sm:flex sm:flex-col sm:items-end text-center">
                 <div class="block w-full mb-2 sm:items-end">
-                    <h6 class="text-gray-950 dark:text-gray-300 text-xs align-center">theme</h6>
-                    <hr class="block w-full border-gray-950/5 dark:border-white/10" />
+                    <p class="text-sky-400/60 text-tiny m-auto">theme</p>
+                    <hr class="flex w-full border-gray-950/5 dark:border-white/10" />
                 </div>
                 <RouterLink to="/"
-                    class=" items-center w-full text-gray-950  dark:text-gray-300 dark:hover:text-white 3xl">
-                    <Icon icon="material-symbols-light:brightness-6" class="text-6xl" />
+                    class="flex justify-center items-center w-full text-gray-950  dark:text-gray-300 dark:hover:text-white 3xl">
+                    <Icon icon="material-symbols-light:brightness-6" class="text-3xl" />
                 </RouterLink>
             </div>
         </div>
