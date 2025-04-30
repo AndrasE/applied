@@ -1,15 +1,55 @@
 @import "tailwindcss";
 
-body {
-  background-color: aquamarine;
-}
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
-  /* ... */
-  --text-massive: 3rem;
+  /*  font families */
+  --font-sans: "InterVariable", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  /* theme */
+  --bg-light: #dcd8d8; /* Light background (example: off-white) */
+  --bg-dark: #0f172a; /* Dark background (example: dark gray) */
+  --text-color-light: #1e293b;
+  --text-color-dark: #d1d5db;
+
+  /* custom class */
+  --text-tiny: 0.7rem;
+}
+
+@layer base {
+  body {
+    padding-bottom: 5rem;
+    color: var(--text-color-light); /* Default text color */
+    background-color: var(--bg-light);
+  }
+
+  .dark body {
+    color: var(--text-color-dark); /* Dark mode text color */
+    background-color: var(--bg-dark);
+  }
+}
+
+@layer components {
+  .nav-link {
+    @apply flex flex-col justify-center items-center w-full;
+  }
+
+  .text-hover {
+    @apply hover:text-sky-600 dark:hover:text-sky-400 transition-transform duration-300 ease-in-out;
+  }
+}
+
+@layer utilities {
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+}
+
+/* navbar setup so no overlap on content */
+@media (min-width: 640px) {
+  body {
+    padding-bottom: 0;
+    padding-left: 5rem;
+  }
 }
