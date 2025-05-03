@@ -9,7 +9,7 @@ import { Icon } from "@iconify/vue";
 
 <template>
     <nav
-        class="fixed bottom-0 w-full z-50 h-auto sm:top-0 sm:left-0 sm:h-full sm:w-auto border-t-1 p-2 sm:border-r-1 border-subtle">
+        class="fixed bottom-0 w-full z-50 h-auto sm:top-0 sm:left-0 sm:h-full sm:w-auto border-t-1 p-2 sm:border-r-1 nav-border">
         <div
             class="flex flex-row justify-evenly items-center gap-2 sm:flex-col sm:justify-between sm:items-center sm:h-full sm:w-auto">
 
@@ -21,8 +21,8 @@ import { Icon } from "@iconify/vue";
 
                 <!-- divider line -->
                 <div class="block w-full mt-2 sm:items-end">
-                    <div class="w-full h-px bg-slate-300 dark:bg-slate-600"></div>
-                    <p class="text-tiny text-gray-500 dark:text-gray-300 text-center">logo</p>
+                    <div class="w-full h-px tiny-border"></div>
+                    <p class="text-tiny  text-center">logo</p>
                 </div>
             </div>
 
@@ -31,8 +31,8 @@ import { Icon } from "@iconify/vue";
 
                 <!-- divider line -->
                 <div class="block w-full">
-                    <p class="text-tiny text-gray-500 dark:text-gray-300 text-center">nav</p>
-                    <div class="w-full h-px bg-slate-300 dark:bg-slate-600"></div>
+                    <p class="text-tiny  text-center">nav</p>
+                    <div class="w-full h-px tiny-border"></div>
                 </div>
 
                 <RouterLink to="/" class="nav-link text-hover">
@@ -57,20 +57,20 @@ import { Icon } from "@iconify/vue";
 
                 <!-- divider line -->
                 <div class="block w-full sm:items-end">
-                    <div class="w-full h-px bg-slate-300 dark:bg-slate-600"></div>
-                    <p class="text-tiny text-gray-500 dark:text-gray-300 text-center">links</p>
+                    <div class="w-full h-px tiny-border"></div>
+                    <p class="text-tiny  text-center">links</p>
                 </div>
             </div>
 
-            <!-- theme toggle -->
-            <div class="hidden w-full sm:flex sm:flex-col sm:items-end text-center">
+
+            <div class="hidden sm:flex sm:flex-col sm:items-end">
                 <!-- divider line -->
-                <div class="block w-full py-2 sm:items-end">
-                    <p class="text-tiny text-gray-500 dark:text-gray-300">theme</p>
-                    <div class="w-full h-px bg-slate-300 dark:bg-slate-600"></div>
+                <div class="block w-full mb-2 sm:items-end">
+                    <p class="text-tiny  text-center">theme</p>
+                    <div class="w-full h-px tiny-border"></div>
                 </div>
-                <RouterLink to="/" class="flex-center text-tiny text-hover w-full 3xl">
-                    <Icon icon="material-symbols-light:brightness-6" class="text-3xl" />
+                <RouterLink to="/" class="w-full text-hover xl">
+                    <Icon icon="material-symbols-light:brightness-6" class="text-4xl" />
                 </RouterLink>
             </div>
         </div>
