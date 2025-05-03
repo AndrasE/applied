@@ -1,10 +1,35 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import { Icon } from "@iconify/vue";
+import { setTheme } from '@/theme.ts'
 // const isActiveLink = (routePath: string) => {
 //     const route = useRoute();
 //     return route.path === routePath;
 // };
+
+const currentTheme = ref<'light' | 'dark' | 'system'>('system');
+onMounted(() => {
+    // Initialize the theme based on localStorage or system preference on component mount
+    if (localStorage.theme) {
+        currentTheme.value = localStorage.theme as 'light' | 'dark';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        currentTheme.value = 'dark';
+    } else {
+        currentTheme.value = 'light';
+    }
+    setTheme(currentTheme.value); // Apply the initial theme
+});
+
+const toggleTheme = () => {
+    if (currentTheme.value === 'light') {
+        currentTheme.value = 'dark';
+    } else {
+        currentTheme.value = 'light';
+    }
+    localStorage.setItem('theme', currentTheme.value);
+    setTheme(currentTheme.value);
+};
 </script>
 
 <template>
@@ -61,16 +86,15 @@ import { Icon } from "@iconify/vue";
                 </div>
             </div>
 
-
+            <!-- theme toggle -->
             <div class="hidden sm:flex sm:flex-col sm:items-end">
-                <!-- divider line -->
                 <div class="block w-full mb-2 sm:items-end">
-                    <p class="text-tiny  text-center">theme</p>
+                    <p class="text-tiny  text-center">theme</p>
                     <div class="w-full h-px tiny-border"></div>
                 </div>
-                <RouterLink to="/" class="w-full text-hover xl">
+                <button @click="toggleTheme" class="w-full text-hover xl cursor-pointer">
                     <Icon icon="material-symbols-light:brightness-6" class="text-4xl" />
-                </RouterLink>
+                </button>
             </div>
         </div>
     </nav>
