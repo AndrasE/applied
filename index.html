@@ -1,16 +1,28 @@
 <!DOCTYPE html>
-<html lang="">
+<!-- empty class theme will be injected by the theme switcher or default browser theme -->
+<html lang="en" class="">
 
 <head>
   <meta charset="UTF-8">
   <link rel="icon" href="/favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <stylesheet href="/src/assets/styles.css" rel="stylesheet">
-    <title>Vite App</title>
+  <!-- On page load or when changing themes, inline in `head` to avoid breathing -->
+  <script>
+    document.documentElement.classList.toggle(
+      "dark",
+      localStorage.theme === "dark" ||
+      (!("theme" in localStorage) &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+    );
+  </script>
+
+  <link href="/src/assets/styles.css" rel="stylesheet">
+  <title>Vite App</title>
 </head>
 
 <body>
   <div id="app"></div>
+  <script type="module" src="/src/theme.js"></script>
   <script type="module" src="/src/main.ts"></script>
 </body>
 

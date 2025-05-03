@@ -8,8 +8,7 @@ import { Icon } from "@iconify/vue";
 </script>
 
 <template>
-    <nav
-        class="fixed bottom-0 w-full z-50 h-auto sm:top-0 sm:left-0 sm:h-full sm:w-auto border-t-1 p-2 sm:border-r-1 nav-border">
+    <nav class="fixed bottom-0 w-full z-50 h-auto sm:top-0 sm:left-0 sm:h-full sm:w-auto p-2 sm:border-r-1 nav-border">
         <div
             class="flex flex-row justify-evenly items-center gap-2 sm:flex-col sm:justify-between sm:items-center sm:h-full sm:w-auto">
 
