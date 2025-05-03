@@ -34,19 +34,18 @@ const toggleTheme = () => {
 
 <template>
     <nav class="fixed bottom-0 w-full z-50 h-auto sm:top-0 sm:left-0 sm:h-full sm:w-auto p-2 sm:border-r-1 nav-border">
-        <div
-            class="flex flex-row justify-evenly items-center gap-2 sm:flex-col sm:justify-between sm:items-center sm:h-full sm:w-auto">
+        <div class="flex flex-row flex-center gap-2 sm:flex-col sm:justify-between sm:items-center sm:h-full sm:w-auto">
 
             <!-- logo -->
-            <div class="hidden sm:flex sm:flex-col sm:items-start">
+            <div class="hidden sm:flex sm:flex-col">
                 <RouterLink to="/" class="w-full text-hover 3xl">
                     <Icon icon="material-symbols-light:font-download-outline-rounded" class="text-6xl" />
                 </RouterLink>
 
                 <!-- divider line -->
-                <div class="block w-full mt-2 sm:items-end">
-                    <div class="w-full h-px tiny-border"></div>
-                    <p class="text-tiny  text-center">logo</p>
+                <div class="block w-full mt-2">
+                    <div class="h-px tiny-border"></div>
+                    <p class="text-tiny text-center">logo</p>
                 </div>
             </div>
 
@@ -56,7 +55,7 @@ const toggleTheme = () => {
                 <!-- divider line -->
                 <div class="block w-full">
                     <p class="text-tiny  text-center">nav</p>
-                    <div class="w-full h-px tiny-border"></div>
+                    <div class="h-px tiny-border"></div>
                 </div>
 
                 <RouterLink to="/" class="nav-link text-hover">
@@ -80,19 +79,25 @@ const toggleTheme = () => {
                 </RouterLink>
 
                 <!-- divider line -->
-                <div class="block w-full sm:items-end">
-                    <div class="w-full h-px tiny-border"></div>
+                <div class="block w-full">
+                    <div class="h-px tiny-border"></div>
                     <p class="text-tiny  text-center">links</p>
                 </div>
+
+
             </div>
 
             <!-- theme toggle -->
-            <div class="hidden sm:flex sm:flex-col sm:items-end">
+
+            <div class="hidden sm:w-full sm:flex sm:flex-col sm:items-center">
+                <!-- divider line -->
                 <div class="block w-full mb-2 sm:items-end">
-                    <p class="text-tiny  text-center">theme</p>
-                    <div class="w-full h-px tiny-border"></div>
+                    <p class="text-tiny text-center">theme</p>
+                    <div class="h-px tiny-border"></div>
                 </div>
-                <button @click="toggleTheme" class="w-full text-hover xl cursor-pointer">
+
+
+                <button @click="toggleTheme" class="text-hover xl cursor-pointer">
                     <Icon icon="material-symbols-light:brightness-6" class="text-4xl" />
                 </button>
             </div>

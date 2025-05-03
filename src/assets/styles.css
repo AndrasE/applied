@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
   /* Font families */
@@ -9,9 +9,9 @@
   --font-mono: "Fira Code", "Fira Mono", "Courier New", monospace;
 
   /* Theme */
-  --bg-light: #dcd8d8;
-  --bg-dark: #0f172a;
-  --text-color-light: #1e293b;
+  --bg-light: #f0f0f0;
+  --bg-dark: #1a1a1a;
+  --text-color-light: #213547;
   --text-color-dark: #d1d5db;
 }
 
@@ -30,11 +30,11 @@
 
 @layer components {
   .nav-link {
-    @apply flex flex-col justify-center items-center w-full py-2;
+    @apply flex flex-col justify-center items-center w-full py-2 cursor-pointer;
   }
 
   .text-hover {
-    @apply hover:text-sky-600 dark:hover:text-sky-400 transition-transform duration-300 ease-in-out;
+    @apply dark:hover:text-green-300 hover:text-green-400 transition-colors duration-300 ease-in-out;
   }
 
   /* nav-border-color (same as tiny in utility) */
@@ -54,7 +54,7 @@
   }
 
   .text-tiny {
-    @apply text-[0.6rem] leading-[0.5rem] font-mono text-slate-500 dark:text-slate-300;
+    @apply text-[0.6rem] leading-[0.5rem] font-mono dark:text-green-300 text-green-400;
   }
 }
 
