@@ -33,7 +33,7 @@ const toggleTheme = () => {
 </script>
 
 <template>
-    <nav class="fixed bottom-0 w-full z-50 h-auto sm:top-0 sm:left-0 sm:h-full sm:w-auto p-2 sm:border-r-1 nav-border">
+    <nav class="fixed bottom-0 w-full z-50 h-auto nav-border sm:top-0 sm:left-0 sm:h-full sm:w-auto p-2 sm:border-r-1 ">
         <div class="flex flex-row flex-center gap-2 sm:flex-col sm:justify-between sm:items-center sm:h-full sm:w-auto">
 
             <!-- logo -->
@@ -43,19 +43,19 @@ const toggleTheme = () => {
                 </RouterLink>
 
                 <!-- divider line -->
-                <div class="block w-full mt-2">
-                    <div class="h-px tiny-border"></div>
-                    <p class="text-tiny text-center">logo</p>
+                <div class="block mt-2">
+                    <div class="sm:h-px tiny-border"></div>
+                    <p class="text-tiny text-center tracking-widest">logo</p>
                 </div>
             </div>
 
             <!-- nav links -->
-            <div class="flex flex-row sm:flex-col w-full items-center justify-center flex-grow">
+            <div class="flex flex-row flex-center sm:w-full  flex-grow sm:flex-col">
 
                 <!-- divider line -->
-                <div class="block w-full">
-                    <p class="text-tiny  text-center">nav</p>
-                    <div class="h-px tiny-border"></div>
+                <div class="sm:block sm:w-full flex flex-row items-center">
+                    <p class="text-tiny text-center text-orientation tracking-wider">nav</p>
+                    <div class="tiny-border h-12 w-px sm:w-full sm:h-px"></div>
                 </div>
 
                 <RouterLink to="/" class="nav-link text-hover">
@@ -79,10 +79,12 @@ const toggleTheme = () => {
                 </RouterLink>
 
                 <!-- divider line -->
-                <div class="block w-full">
-                    <div class="h-px tiny-border"></div>
-                    <p class="text-tiny  text-center">links</p>
+                <div class="sm:block sm:w-full flex flex-row items-center">
+                    <div class="tiny-border h-12 w-px sm:w-full sm:h-px"></div>
+                    <p class="text-tiny text-center text-orientation ">link</p>
                 </div>
+
+
 
 
             </div>
@@ -91,8 +93,8 @@ const toggleTheme = () => {
 
             <div class="hidden sm:w-full sm:flex sm:flex-col sm:items-center">
                 <!-- divider line -->
-                <div class="block w-full mb-2 sm:items-end">
-                    <p class="text-tiny text-center">theme</p>
+                <div class="block w-full mb-2">
+                    <p class="text-tiny text-center tracking-widest">theme</p>
                     <div class="h-px tiny-border"></div>
                 </div>
 
