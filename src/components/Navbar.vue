@@ -1,16 +1,21 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import { RouterLink } from 'vue-router';
 import { Icon } from "@iconify/vue";
-import { setTheme } from '@/theme.ts'
-// const isActiveLink = (routePath: string) => {
-//     const route = useRoute();
-//     return route.path === routePath;
-// };
+import { applyTheme } from '@/theme.ts'
 
-const currentTheme = ref<'light' | 'dark' | 'system'>('system');
+// Define reactive variables for the current theme and the icon.
+const currentTheme = ref<'light' | 'dark'>('light');
+const themeIcon = ref('material-symbols:light-mode-outline-rounded');
+
+// Function to set the 'data-theme' attribute and store in localStorage.
+const setTheme = (theme: 'light' | 'dark') => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.theme = theme;
+};
+
+// Initialize theme and icon on component mounted (initial detection) and applyTheme() (class switching to html)
 onMounted(() => {
-    // Initialize the theme based on localStorage or system preference on component mount
     if (localStorage.theme) {
         currentTheme.value = localStorage.theme as 'light' | 'dark';
     } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -18,18 +23,31 @@ onMounted(() => {
     } else {
         currentTheme.value = 'light';
     }
-    setTheme(currentTheme.value); // Apply the initial theme
+    applyTheme(currentTheme.value);
+    // Set the initial icon to match the resolved theme.
+    themeIcon.value = currentTheme.value === 'dark'
+        ? 'material-symbols:dark-mode-outline-rounded'
+        : 'material-symbols:light-mode-outline-rounded';
 });
 
+// Function to toggle the theme and update localStorage and the icon.
 const toggleTheme = () => {
-    if (currentTheme.value === 'light') {
-        currentTheme.value = 'dark';
-    } else {
-        currentTheme.value = 'light';
-    }
+    currentTheme.value = currentTheme.value === 'light' ? 'dark' : 'light';
     localStorage.setItem('theme', currentTheme.value);
-    setTheme(currentTheme.value);
+    applyTheme(currentTheme.value);
+    themeIcon.value = currentTheme.value === 'dark'
+        ? 'material-symbols:dark-mode-outline-rounded'
+        : 'material-symbols:light-mode-outline-rounded';
 };
+
+// Watch for changes in 'currentTheme' to update the document theme and icon.
+watch(currentTheme, (newTheme) => {
+    setTheme(newTheme);
+    themeIcon.value = newTheme === 'dark'
+        ? 'material-symbols:dark-mode-outline-rounded'
+        : 'material-symbols:light-mode-outline-rounded';
+});
+
 </script>
 
 <template>
@@ -100,7 +118,7 @@ const toggleTheme = () => {
 
 
                 <button @click="toggleTheme" class="text-hover xl cursor-pointer">
-                    <Icon icon="material-symbols-light:brightness-6" class="text-4xl" />
+                    <Icon :icon="themeIcon" class="text-4xl" />
                 </button>
             </div>
         </div>

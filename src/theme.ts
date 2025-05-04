@@ -1,18 +1,23 @@
-// On page load or when changing themes, best to add inline in `head` to avoid FOUC
+// On page load or when changing themes, best to add inline in `head` to avoid flicker or visual lag
 
 export type Theme = "light" | "dark" | "system";
 
-export function setTheme(theme: Theme): void {
+export function applyTheme(theme: Theme): void {
   if (theme === "system") {
     localStorage.removeItem("theme");
   } else {
     localStorage.theme = theme;
   }
 
-  document.documentElement.classList.toggle(
-    "dark",
+  // Check if the user has a preference for dark mode returns true or false
+  const isDark =
     localStorage.theme === "dark" ||
-      (!("theme" in localStorage) &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches)
-  );
+    (!("theme" in localStorage) &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+  if (isDark) {
+    document.documentElement.classList.add("dark");
+  } else {
+    document.documentElement.classList.remove("dark");
+  }
 }
