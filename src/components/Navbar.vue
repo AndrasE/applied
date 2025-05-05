@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue';
 import { RouterLink } from 'vue-router';
-import { Icon } from "@iconify/vue";
+import { Icon, addCollection } from "@iconify/vue";
+import clarityIcons from '@iconify-json/clarity/icons.json';
 import { applyTheme } from '@/theme.ts'
+
+// Register the Clarity Icons collection
+addCollection(clarityIcons);
 
 // Define reactive variables for the current theme and the icon.
 const currentTheme = ref<'light' | 'dark'>('light');
-const themeIcon = ref('material-symbols:light-mode-outline-rounded');
+const themeIcon = ref('ci:moon');
 
 // Function to set the 'data-theme' attribute and store in localStorage.
 const setTheme = (theme: 'light' | 'dark') => {
@@ -26,8 +30,8 @@ onMounted(() => {
     applyTheme(currentTheme.value);
     // Set the initial icon to match the resolved theme.
     themeIcon.value = currentTheme.value === 'dark'
-        ? 'material-symbols:dark-mode-outline-rounded'
-        : 'material-symbols:light-mode-outline-rounded';
+        ? 'ci:moon'
+        : 'ci:sun';
 });
 
 // Function to toggle the theme and update localStorage and the icon.
@@ -36,22 +40,23 @@ const toggleTheme = () => {
     localStorage.setItem('theme', currentTheme.value);
     applyTheme(currentTheme.value);
     themeIcon.value = currentTheme.value === 'dark'
-        ? 'material-symbols:dark-mode-outline-rounded'
-        : 'material-symbols:light-mode-outline-rounded';
+        ? 'ci:moon'
+        : 'ci:sun';
 };
 
 // Watch for changes in 'currentTheme' to update the document theme and icon.
 watch(currentTheme, (newTheme) => {
     setTheme(newTheme);
     themeIcon.value = newTheme === 'dark'
-        ? 'material-symbols:dark-mode-outline-rounded'
-        : 'material-symbols:light-mode-outline-rounded';
+        ? 'ci:moon'
+        : 'ci:sun';
 });
 
 </script>
 
 <template>
-    <nav class="fixed bottom-0 w-full z-50 h-auto nav-border sm:top-0 sm:left-0 sm:h-full sm:w-auto p-2 sm:border-r-1 ">
+    <nav
+        class="fixed bottom-0 w-full z-50 h-auto nav-border border-t-1 sm:top-0 sm:left-0 sm:h-full sm:w-auto p-2  sm:border-r-1 ">
         <div class="flex flex-row flex-center gap-2 sm:flex-col sm:justify-between sm:items-center sm:h-full sm:w-auto">
 
             <!-- logo -->
@@ -117,8 +122,8 @@ watch(currentTheme, (newTheme) => {
                 </div>
 
 
-                <button @click="toggleTheme" class="text-hover xl cursor-pointer">
-                    <Icon :icon="themeIcon" class="text-4xl" />
+                <button @click="toggleTheme" class="flex flex-center text-hover  cursor-pointer">
+                    <Icon :icon="themeIcon" class="text-2xl sm:text-3xl" />
                 </button>
             </div>
         </div>
