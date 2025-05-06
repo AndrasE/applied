@@ -57,6 +57,10 @@
     @apply text-[0.6rem] leading-[0.5rem] font-mono dark:text-green-300 text-green-400;
   }
 
+  .rotate-270 {
+    transform: rotate(deg);
+  }
+
   .text-orientation {
     writing-mode: vertical-rl; /* Text flows top to bottom, right to left */
     text-orientation: upright; /* Letters remain horizontal */

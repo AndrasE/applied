@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
 import { RouterLink } from 'vue-router';
 import { Icon, addCollection } from "@iconify/vue";
 import clarityIcons from '@iconify-json/clarity/icons.json';
@@ -10,51 +10,37 @@ addCollection(clarityIcons);
 
 // Define reactive variables for the current theme and the icon.
 const currentTheme = ref<'light' | 'dark'>('light'); // This variable is used to store the current theme of the application.
-const themeIcon = ref('ci:moon'); // This variable is used to store the icon name based on the current theme.
 const isHovered = ref(false); // This variable is used to track the hover state of the icon.
+const themeIcon = computed(() => { // This computed property returns the icon based on the current theme and hover state.
+    const isDark = currentTheme.value === 'dark'; // Check if the current theme is dark.
+    const hoverIcon = isDark ? 'ci:sun' : 'ci:moon';    // icon shown on hover (indicates the *next* theme)
+    const staticIcon = isDark ? 'ci:moon' : 'ci:sun';   // icon shown normally
+    return isHovered.value ? hoverIcon : staticIcon; // Return the icon based on the hover state.
+});
 
 // Function to set the 'data-theme' attribute and store in localStorage.
 const setTheme = (theme: 'light' | 'dark') => {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.theme = theme;
+    applyTheme(theme); // <- this was missing
 };
 
 // Initialize theme and icon on component mounted (initial detection) and applyTheme() (class switching to html)
 onMounted(() => {
-    if (localStorage.theme) {
-        currentTheme.value = localStorage.theme as 'light' | 'dark';
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    if (localStorage.theme === 'dark' || (!localStorage.theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         currentTheme.value = 'dark';
     } else {
         currentTheme.value = 'light';
     }
-    applyTheme(currentTheme.value);
-    // Set the initial icon to match the resolved theme.
-    themeIcon.value = currentTheme.value === 'dark'
-        ? 'ci:moon'
-        : 'ci:sun';
+
+    setTheme(currentTheme.value); // Apply theme to <html>
 });
 
-// Function to toggle the theme and update localStorage and the icon.
 const toggleTheme = () => {
     currentTheme.value = currentTheme.value === 'light' ? 'dark' : 'light';
-    localStorage.setItem('theme', currentTheme.value);
-    applyTheme(currentTheme.value);
-    themeIcon.value = currentTheme.value === 'dark'
-        ? 'ci:moon'
-        : 'ci:sun';
 };
-
-// Watch for changes in 'currentTheme' to update the document theme and icon.
 watch(currentTheme, (newTheme) => {
     setTheme(newTheme);
-    themeIcon.value = newTheme === 'dark'
-        ? 'ci:moon'
-        : 'ci:sun';
-
-    currentTheme.value === 'dark'
-        ? (isHovered.value ? 'ci:sun' : 'ci:moon')
-        : (isHovered.value ? 'ci:moon' : 'ci:sun')
 });
 
 
@@ -130,8 +116,9 @@ watch(currentTheme, (newTheme) => {
 
 
                 <button @click="toggleTheme" @mouseenter="isHovered = true" @mouseleave="isHovered = false"
-                    class="flex flex-center text-hover cursor-pointer transition-transform duration-200 ease-in-out">
-                    <Icon :icon="themeIcon" class="text-2xl sm:text-3xl" />
+                    class="flex flex-center text-hover cursor-pointer " aria-label="Toggle theme">
+                    <Icon :icon="themeIcon" class="text-2xl sm:text-3xl transition-transform duration-300 ease-in-out"
+                        :class="{ 'rotate-270': isHovered }" />
                 </button>
             </div>
         </div>
