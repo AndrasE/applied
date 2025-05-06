@@ -9,8 +9,9 @@ import { applyTheme } from '@/theme.ts'
 addCollection(clarityIcons);
 
 // Define reactive variables for the current theme and the icon.
-const currentTheme = ref<'light' | 'dark'>('light');
-const themeIcon = ref('ci:moon');
+const currentTheme = ref<'light' | 'dark'>('light'); // This variable is used to store the current theme of the application.
+const themeIcon = ref('ci:moon'); // This variable is used to store the icon name based on the current theme.
+const isHovered = ref(false); // This variable is used to track the hover state of the icon.
 
 // Function to set the 'data-theme' attribute and store in localStorage.
 const setTheme = (theme: 'light' | 'dark') => {
@@ -50,7 +51,13 @@ watch(currentTheme, (newTheme) => {
     themeIcon.value = newTheme === 'dark'
         ? 'ci:moon'
         : 'ci:sun';
+
+    currentTheme.value === 'dark'
+        ? (isHovered.value ? 'ci:sun' : 'ci:moon')
+        : (isHovered.value ? 'ci:moon' : 'ci:sun')
 });
+
+
 
 </script>
 
@@ -122,7 +129,8 @@ watch(currentTheme, (newTheme) => {
                 </div>
 
 
-                <button @click="toggleTheme" class="flex flex-center text-hover  cursor-pointer">
+                <button @click="toggleTheme" @mouseenter="isHovered = true" @mouseleave="isHovered = false"
+                    class="flex flex-center text-hover cursor-pointer transition-transform duration-200 ease-in-out">
                     <Icon :icon="themeIcon" class="text-2xl sm:text-3xl" />
                 </button>
             </div>
