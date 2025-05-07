@@ -7,18 +7,17 @@ const count = ref(0)
 </script>
 
 <template>
-  <div
-    class="grid min-h-screen grid-cols-1 md:grid-cols-[auto_auto_1fr_auto_auto] lg:grid-cols-[1fr_auto_minmax(0,theme(maxWidth.7xl))_auto_1fr]">
-    <div class="bg-gray-400 hidden lg:block">buffer</div>
-    <div class="bg-yellow-100 hidden md:block w-14">pattern</div>
-    <main class="bg-red-100 max-w-7xl w-full mx-auto">
+  <div class="grid min-h-screen grid-cols-1 md:grid-cols-[auto_1fr_auto]
+    lg:grid-cols-[1fr_auto_minmax(0,theme(maxWidth.6xl))_auto_1fr] text-green-700">
+    <div class=" bg-red-400 hidden lg:block">buffer</div>
+    <div class="bg-yellow-400 hidden md:block w-14">pattern</div>
+    <main class="bg-gray-400 w-full ">
       <p>This is the main content area.</p>
       <p>It will be in the middle column on larger screens.</p>
     </main>
-    <div class="bg-yellow-100 hidden md:block w-14">pattern</div>
-    <div class="bg-gray-400 hidden lg:block">buffer</div>
+    <div class="bg-yellow-400 hidden md:block w-14">pattern</div>
+    <div class="bg-red-400 hidden lg:block">buffer</div>
   </div>
-
 
   <!-- <div
     class=" grid min-h-dvh grid-cols-1 grid-rows-[1fr_1px_auto_1px_auto] justify-center pt-14.25
