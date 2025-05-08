@@ -49,7 +49,7 @@ watch(currentTheme, (newTheme) => {
 
 <template>
     <nav
-        class="fixed bottom-0 w-full z-50 h-auto nav-border border-t-1 sm:border-t-0  sm:top-0 sm:left-0 sm:h-full sm:w-auto p-2 sm:border-r-1 ">
+        class="fixed bottom-0 w-full z-50 h-auto border-color border-t-1 sm:border-t-0  sm:top-0 sm:left-0 sm:h-full sm:w-auto p-2 sm:border-r-1 ">
         <div class="flex flex-row flex-center gap-2 sm:flex-col sm:justify-between sm:items-center sm:h-full sm:w-auto">
 
             <!-- logo -->

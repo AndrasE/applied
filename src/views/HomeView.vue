@@ -9,14 +9,16 @@ const count = ref(0)
 <template>
   <div class="grid min-h-screen grid-cols-1 md:grid-cols-[auto_1fr_auto]
     lg:grid-cols-[1fr_auto_minmax(0,theme(maxWidth.6xl))_auto_1fr] text-green-700">
-    <div class=" bg-red-400 hidden lg:block">buffer</div>
-    <div class="bg-yellow-400 hidden md:block w-14">pattern</div>
-    <main class="bg-gray-400 w-full ">
+    <div class="  hidden lg:block"></div>
+    <div class="border-x border-solid border-color hidden md:mx-3 md:block w-14"></div>
+    <main class="bg-black-900 w-full ">
       <p>This is the main content area.</p>
       <p>It will be in the middle column on larger screens.</p>
     </main>
-    <div class="bg-yellow-400 hidden md:block w-14">pattern</div>
-    <div class="bg-red-400 hidden lg:block">buffer</div>
+    <div
+      class="border-x border-solid border-color hidden md:mx-3 md:block w-14 bg-[image:repeating-linear-gradient(315deg,_var(--pattern-fg)_0,_var(--pattern-fg)_1px,_transparent_0,_transparent_50%)] bg-[size:10px_10px] bg-fixed [--pattern-fg:var(--color-black)]/5  dark:[--pattern-fg:var(--color-white)]/10">
+    </div>
+    <div class="hidden lg:block"></div>
   </div>
 
   <!-- <div

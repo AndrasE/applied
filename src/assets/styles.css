@@ -37,8 +37,8 @@
     @apply dark:hover:text-green-300 hover:text-green-400 transition-colors duration-300 ease-in-out;
   }
 
-  /* nav-border-color (same as tiny in utility) */
-  .nav-border {
+  /* border-color (same as tiny in utility) but there is bg (1px divs as devider lines)*/
+  .border-color {
     @apply border-slate-300 dark:border-slate-600;
   }
 }
@@ -48,7 +48,7 @@
     @apply flex justify-center items-center;
   }
 
-  /* tiny text and border color */
+  /* tiny text and border color (1px divs as divider lines) */
   .tiny-border {
     @apply bg-slate-300 dark:bg-slate-600;
   }
