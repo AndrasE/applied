@@ -83,6 +83,12 @@
   }
 }
 
+@media (max-width: 1419px) {
+  .hide-under-1420 {
+    display: none !important;
+  }
+}
+
 /* Navbar setup so no overlap on content */
 @media (min-width: 640px) {
   body {

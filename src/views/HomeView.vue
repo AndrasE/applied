@@ -11,7 +11,9 @@ const count = ref(0);
 <template>
   <div
     class="grid min-h-screen grid-cols-1 md:grid-cols-[auto_auto_1fr_auto_auto] lg:grid-cols-[1fr_auto_auto_minmax(0,theme(maxWidth.6xl))_auto_auto_1fr]">
-    <div class="hidden lg:flex justify-center items-start text-tiny text-upright">buffer</div>
+    <div class="hidden lg:flex justify-center items-start relative bottom-30 text-tiny text-upright hide-under-1420">
+      buffer
+    </div>
     <div
       class="border-r border-solid border-color hidden md:block w-14 bg-[image:repeating-linear-gradient(315deg,var(--pattern-color-light)_0,var(--pattern-color-light)_1px,transparent_0,transparent_50%)] dark:bg-[image:repeating-linear-gradient(315deg,var(--pattern-color-dark)_0,var(--pattern-color-dark)_1px,transparent_0,transparent_50%)] bg-[size:10px_10px] bg-fixed">
     </div>
@@ -25,6 +27,8 @@ const count = ref(0);
     <div
       class="border-l border-solid border-color hidden md:block w-14 bg-[image:repeating-linear-gradient(315deg,var(--pattern-color-light)_0,var(--pattern-color-light)_1px,transparent_0,transparent_50%)] dark:bg-[image:repeating-linear-gradient(315deg,var(--pattern-color-dark)_0,var(--pattern-color-dark)_1px,transparent_0,transparent_50%)] bg-[size:10px_10px] bg-fixed">
     </div>
-    <div class="hidden lg:flex justify-center items-end text-tiny text-upright">buffer</div>
+    <div class="hidden lg:flex justify-center relative bottom-30 items-end text-tiny text-upright hide-under-1420">
+      buffer
+    </div>
   </div>
 </template>
