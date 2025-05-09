@@ -13,6 +13,8 @@
   --bg-dark: #1a1a1a;
   --text-color-light: #213547;
   --text-color-dark: #d1d5db;
+  --pattern-color-light: #2135472d;
+  --pattern-color-dark: #d1d5db0c;
 }
 
 @layer base {
@@ -79,6 +81,6 @@
 @media (min-width: 640px) {
   body {
     padding-bottom: 0;
-    padding-left: 5rem;
+    padding-left: 76px; /* 75px is the width of the navbar */
   }
 }
