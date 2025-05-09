@@ -75,6 +75,12 @@
       letter-spacing: 0.4px;
     }
   }
+
+  .text-upright {
+    writing-mode: vertical-rl; /* Text flows top to bottom, right to left */
+    text-orientation: upright; /* Letters remain horizontal */
+    letter-spacing: -2px;
+  }
 }
 
 /* Navbar setup so no overlap on content */
