@@ -15,6 +15,8 @@
   --text-color-dark: #d1d5db;
   --pattern-color-light: #2135472d;
   --pattern-color-dark: #d1d5db0c;
+  --gradient-color-start: #42d392;
+  --gradient-color-end: #647eff;
 }
 
 @layer base {
