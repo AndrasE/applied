@@ -8,9 +8,9 @@ import { Vue3Lottie } from "vue3-lottie";
 <template>
   <Container>
     <div class="grid grid-cols-1 gap-4 p-4 center">
-      <div>
+      <div class="h-min sm:w-1/2 items-center b-1 bg-gray-200 rounded-lg shadow-md">
         <Vue3Lottie :animationData="applying" class="w-1/2 h-1/2" :loop="true" :autoplay="true" :speed="0.6" />
-        <h1 class="text-4xl font-bold">Applied</h1>
+        <h1 class="text-3xl font-bold text-center">Applied</h1>
       </div>
       <div class="text-2xl font-bold text-center">
         <p class="text-lg">This is a simple application using Vue 3 and Lottie animations.</p>
