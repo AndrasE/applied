@@ -7,9 +7,14 @@ import { Vue3Lottie } from "vue3-lottie";
 
 <template>
   <Container>
-    <main class="bg-black-900 w-full text-green-700 border-y-1 border-solid border-color">
-      <h1 class="text-3xl font-bold">Home</h1>
-      <Vue3Lottie :animationData="applying" class="w-1/2 h-1/2" :loop="true" :autoplay="true" :speed="0.6" />
-    </main>
+    <div class="grid grid-cols-1 gap-4 p-4 center">
+      <div>
+        <Vue3Lottie :animationData="applying" class="w-1/2 h-1/2" :loop="true" :autoplay="true" :speed="0.6" />
+        <h1 class="text-4xl font-bold">Applied</h1>
+      </div>
+      <div class="text-2xl font-bold text-center">
+        <p class="text-lg">This is a simple application using Vue 3 and Lottie animations.</p>
+      </div>
+    </div>
     </ Container>
 </template>
