@@ -84,7 +84,7 @@ watch(currentTheme, (newTheme) => {
                     Jobs
                 </RouterLink>
 
-                <RouterLink to="/addjob" class="nav-link text-hover">
+                <RouterLink to="/add" class="nav-link text-hover">
                     <Icon icon="ci:file-add" class="text-2xl sm:text-3xl" />
                     Add
                 </RouterLink>
