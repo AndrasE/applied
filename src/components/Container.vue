@@ -9,10 +9,9 @@ import { ref } from "vue";
     <div
         class="grid min-h-screen grid-cols-1 md:grid-cols-[auto_auto_1fr_auto_auto] lg:grid-cols-[1fr_auto_auto_minmax(0,theme(maxWidth.6xl))_auto_auto_1fr]">
         <!-- Left Buffer Label -->
-        <span
-            class="hidden lg:flex justify-center items-start relative bottom-30 text-tiny text-upright hide-under-1420"
+        <span class="hidden lg:flex justify-center items-start relative bottom-30 text-tiny text-upright "
             role="presentation" aria-hidden="true">
-            buffer
+            <span class="hide-under-1420"> buffer</span>
         </span>
 
         <!-- Left Pattern Bar -->
@@ -39,9 +38,9 @@ import { ref } from "vue";
         </div>
 
         <!-- Right Buffer Label -->
-        <span class="hidden lg:flex justify-center items-end relative bottom-30 text-tiny text-upright hide-under-1420"
+        <span class="hidden lg:flex justify-center items-end relative bottom-30 text-tiny text-upright "
             role="presentation" aria-hidden="true">
-            buffer
+            <span class="hide-under-1420"> buffer</span>
         </span>
     </div>
 </template>

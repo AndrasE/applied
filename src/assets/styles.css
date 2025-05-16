@@ -84,7 +84,7 @@
     letter-spacing: -2px;
   }
 }
-
+/* Hide buffer label on small screens */
 @media (max-width: 1419px) {
   .hide-under-1420 {
     display: none !important;
