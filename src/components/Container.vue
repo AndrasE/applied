@@ -11,7 +11,7 @@ import { ref } from "vue";
         <!-- Left Buffer Label -->
         <span class="hidden lg:flex justify-center items-start relative bottom-30 text-tiny text-upright "
             role="presentation" aria-hidden="true">
-            <span class="hide-under-1420"> buffer</span>
+            <span class="hide-under-1420"> buffer hidden</span>
         </span>
 
         <!-- Left Pattern Bar -->
@@ -21,7 +21,7 @@ import { ref } from "vue";
 
         <!-- Left Pattern Label -->
         <span class="hidden md:flex md:justify-center text-tiny text-upright" role="presentation" aria-hidden="true">
-            image:repeating
+            image repeating
         </span>
 
         <!-- Main Content -->
@@ -29,7 +29,7 @@ import { ref } from "vue";
 
         <!-- Right Pattern Label -->
         <span class="hidden md:flex md:justify-center text-tiny text-upright" role="presentation" aria-hidden="true">
-            linear-gradient
+            linear gradient
         </span>
 
         <!-- Right Pattern Bar -->
@@ -38,9 +38,9 @@ import { ref } from "vue";
         </div>
 
         <!-- Right Buffer Label -->
-        <span class="hidden lg:flex justify-center items-end relative bottom-30 text-tiny text-upright "
+        <span class="hidden lg:flex justify-center items-end relative bottom-30 text-tiny text-upright"
             role="presentation" aria-hidden="true">
-            <span class="hide-under-1420"> buffer</span>
+            <span class="hide-under-1420"> buffer lg flex</span>
         </span>
     </div>
 </template>

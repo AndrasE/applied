@@ -10,7 +10,7 @@ import { Vue3Lottie } from "vue3-lottie";
     <div class="flex flex-col flex-grow items-center justify-center min-h-screen w-full">
       <!-- divider line and label for lottie -->
       <div class="block w-full">
-        <p class="text-tiny text-center tracking-wider">lottie</p>
+        <p class="text-tiny text-center tracking-wider">vue3lottie</p>
         <div class="tiny-border h-px w-full"></div>
       </div>
 
@@ -33,7 +33,7 @@ import { Vue3Lottie } from "vue3-lottie";
       <!-- divider line and label for lottie -->
       <div class="block w-full">
         <div class="tiny-border h-px w-full"></div>
-        <p class="text-tiny text-center tracking-wider">stats</p>
+        <p class="text-tiny text-center tracking-wider">stats comin up</p>
       </div>
     </div>
   </Container>
