@@ -9,13 +9,15 @@ import { Vue3Lottie } from "vue3-lottie";
   <Container>
     <div class="flex flex-col flex-grow items-center justify-center min-h-screen w-full">
       <!-- divider line and label for lottie -->
-      <span class="text-tiny">lottie</span>
-      <hr class="border-t w-full" />
+      <div class="sm:block sm:w-full flex flex-row items-center">
+        <p class="text-tiny text-center text-orientation tracking-wider">lottie</p>
+        <div class="tiny-border h-12 w-px sm:w-full sm:h-px"></div>
+      </div>
 
       <!-- lottie and app-name -->
       <div class="w-3/4 lg:w-1/2 xl:w-1/3 flex flex-col items-center p-1 ">
         <Vue3Lottie :animationData="applying" :loop="true" :autoplay="true" :speed="0.6" />
-        <h1 class="text-3xl font-bold text-center">Applied</h1>
+        <h1 class="text-3xl text-center">Applied</h1>
       </div>
 
 
@@ -23,11 +25,15 @@ import { Vue3Lottie } from "vue3-lottie";
       <!-- later.. -->
 
       <div class="flex flex-col items-center text-2xl font-bold text-center rounded-lg ">
-        <p class="text-lg">This is a simple application using Vue 3 and Lottie animations.</p>
+        <div class="flex flex-center h-60 w-150 border border-color">
+          stats
+        </div>
       </div>
       <!-- divider line and label for lottie -->
-      <hr class="border-t w-full" />
-      <span class="text-tiny">progress</span>
+      <div class="sm:block sm:w-full flex flex-row items-center">
+        <div class="tiny-border h-12 w-px sm:w-full sm:h-px"></div>
+        <p class="text-tiny text-center text-orientation tracking-wider">stats</p>
+      </div>
     </div>
   </Container>
 </template>
