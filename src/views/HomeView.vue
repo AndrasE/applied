@@ -9,9 +9,9 @@ import { Vue3Lottie } from "vue3-lottie";
   <Container>
     <div class="flex flex-col flex-grow items-center justify-center min-h-screen w-full">
       <!-- divider line and label for lottie -->
-      <div class="sm:block sm:w-full flex flex-row items-center">
-        <p class="text-tiny text-center text-orientation tracking-wider">lottie</p>
-        <div class="tiny-border h-12 w-px sm:w-full sm:h-px"></div>
+      <div class="block w-full">
+        <p class="text-tiny text-center tracking-wider">lottie</p>
+        <div class="tiny-border h-px w-full"></div>
       </div>
 
       <!-- lottie and app-name -->
@@ -25,14 +25,15 @@ import { Vue3Lottie } from "vue3-lottie";
       <!-- later.. -->
 
       <div class="flex flex-col items-center text-2xl font-bold text-center rounded-lg ">
-        <div class="flex flex-center h-60 w-150 border border-color">
+        <div class="flex flex-center h-60 w-150 border-t border-x  border-color">
           stats
         </div>
       </div>
+
       <!-- divider line and label for lottie -->
-      <div class="sm:block sm:w-full flex flex-row items-center">
-        <div class="tiny-border h-12 w-px sm:w-full sm:h-px"></div>
-        <p class="text-tiny text-center text-orientation tracking-wider">stats</p>
+      <div class="block w-full">
+        <div class="tiny-border h-px w-full"></div>
+        <p class="text-tiny text-center tracking-wider">stats</p>
       </div>
     </div>
   </Container>
