@@ -9,14 +9,14 @@
   --font-mono: "Fira Code", "Fira Mono", "Courier New", monospace;
 
   /* Theme */
-  --bg-light: #f0f0f0;
+  --bg-light: #d6d5d5;
   --bg-dark: #1a1a1a;
   --text-color-light: #213547;
   --text-color-dark: #d1d5db;
   --pattern-color-light: #2135472d;
   --pattern-color-dark: #d1d5db0c;
-  --gradient-color-start: #42d392;
-  --gradient-color-end: #647eff;
+  /* --gradient-color-start: #42d392;
+  --gradient-color-end: #647eff; */
 }
 
 @layer base {
@@ -38,12 +38,12 @@
   }
 
   .text-hover {
-    @apply dark:hover:text-green-300 hover:text-green-400 transition-colors duration-300 ease-in-out;
+    @apply dark:hover:text-green-300 hover:text-green-500 transition-colors duration-300 ease-in-out;
   }
 
   /* border-color (same as tiny in utility) but there is bg (1px divs as devider lines)*/
   .border-color {
-    @apply border-slate-300 dark:border-slate-600;
+    @apply border-slate-400 dark:border-slate-600;
   }
 }
 
@@ -54,11 +54,11 @@
 
   /* tiny text and border color (1px divs as divider lines) */
   .tiny-border {
-    @apply bg-slate-300 dark:bg-slate-600;
+    @apply bg-slate-400 dark:bg-slate-600;
   }
 
   .text-tiny {
-    @apply text-[0.6rem] leading-[0.5rem] font-mono dark:text-green-300 text-green-400;
+    @apply text-[0.6rem] leading-[0.5rem] font-mono dark:text-green-300 text-green-500;
   }
 
   .rotate-270 {
