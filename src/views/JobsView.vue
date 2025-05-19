@@ -32,7 +32,7 @@ const toggleLimit = () => {
 
             <!-- divider -->
             <div class="w-full">
-                <p class="text-tiny text-center tracking-wider">grid gap‑4</p>
+                <p class="text-tiny text-center tracking-wider">grid gap-4</p>
                 <div class="tiny-border h-px w-full" />
             </div>
 
@@ -56,4 +56,4 @@ const toggleLimit = () => {
             </button>
         </div>
     </Container>
-</template>lk
+</template>

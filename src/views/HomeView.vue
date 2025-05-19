@@ -31,7 +31,7 @@ import { Icon } from "@iconify/vue";
       <!-- later.. -->
 
       <div class="flex flex-col items-center text-2xl text-center rounded-lg ">
-        <div class="flex flex-center h-60 w-150 border-t border-x  border-color">
+        <div class="flex flex-center h-40 w-100 border-t border-x  border-color">
           stats
         </div>
       </div>
