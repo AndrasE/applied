@@ -14,6 +14,8 @@ interface Job {
 }
 
 const jobs = ref<Job[]>(jobsRaw)
+const viewStyle = ref<string>('list') // 'list' or 'grid'
+
 
 const DEFAULT_LIMIT = 8
 const limit = ref<number>(DEFAULT_LIMIT)
@@ -24,42 +26,41 @@ const toggleLimit = () => {
     limit.value = limit.value === DEFAULT_LIMIT ? jobs.value.length : DEFAULT_LIMIT
 }
 
-const changeView = () => {
-    console.log("penis")
+const changeView = (style: string) => {
+    viewStyle.value = style
+
 }
 </script>
 
 <template>
     <Container>
+
         <div class="flex flex-col items-center justify-center h-full">
-            <h1 class="text-2xl text-center mb-6">Recent applications</h1>
+            <!-- view change button -->
+            <div class="flex flex-row gap-4 p-6 px-4 ">
+
+                <Icon @click="changeView('list')" icon="heroicons-solid:view-list" class="text-xl text-hover" />
+                <Icon @click="changeView('grid')" icon="flowbite:grid-outline" class="text-xl text-hover" />
+            </div>
+            <transition name="fade" mode="out-in">
+                <h1 :key="viewStyle" class="text-2xl text-center mb-6">Recent applications</h1>
+            </transition>
 
             <!-- divider -->
             <div class="w-full">
-                <p class="text-tiny text-center tracking-wider">grid gap-4</p>
+                <p class="text-tiny text-center tracking-wider"> {{ viewStyle === 'grid' ? 'grid cols' : 'flex col'
+                }}</p>
                 <div class="tiny-border h-px w-full" />
             </div>
 
             <!-- Job grid -->
-            <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-4">
+            <div v-if="viewStyle === 'grid'" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-4">
                 <JobCard v-for="job in visibleJobs" :key="job.id" :job="job" :char-limit="200" />
             </div>
 
             <!-- Job list -->
-            <div class="flex flex-col gap-4 p-4">
+            <div v-else class="flex flex-col gap-4 p-4">
                 <JobCard v-for="job in visibleJobs" :key="job.id" :job="job" :char-limit="330" />
-            </div>
-
-            <!-- divider -->
-            <div class=" w-full">
-                <p class="text-tiny text-center tracking-wider">@click toggleView</p>
-                <div class="tiny-border h-px w-full" />
-
-            </div>
-            <!-- view change button -->
-            <div class="flex flex-row gap-4 p-6 px-4 ">
-                <Icon icon="heroicons-solid:view-list" class="text-xl text-hover" />
-                <Icon icon="flowbite:grid-outline" class="text-xl text-hover" />
             </div>
 
             <!-- divider -->
@@ -76,5 +77,6 @@ const changeView = () => {
                     class="transform transition-opacity duration-200 opacity-0 group-hover:opacity-100" />
             </button>
         </div>
+
     </Container>
 </template>
