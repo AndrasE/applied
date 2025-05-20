@@ -34,19 +34,15 @@ const changeView = (style: string) => {
 
 <template>
     <Container>
-
-        <div class="flex flex-col items-center justify-center h-full">
+        <div class=" relative flex flex-col items-center justify-center h-full">
             <!-- view change button -->
-            <div class="flex flex-row gap-4 p-6 px-4 ">
-
-                <Icon @click="changeView('list')" icon="heroicons-solid:view-list"
-                    :class="['text-xl text-hover', { 'text-blue-500': viewStyle === 'list' }]" />
-                <Icon @click="changeView('grid')" icon="flowbite:grid-outline"
-                    :class="['text-xl text-hover', { 'text-blue-500': viewStyle === 'grid' }]" />
-            </div>
-
             <h1 class="text-2xl text-center mb-6">Recent applications</h1>
-
+            <div class="absolute top-8 right-5 flex flex-row gap-4  ">
+                <Icon @click="changeView('list')" icon="heroicons-solid:view-list"
+                    :class="['text-xl text-hover', { 'dark:text-green-300 text-green-500': viewStyle === 'list' }]" />
+                <Icon @click="changeView('grid')" icon="flowbite:grid-outline"
+                    :class="['text-xl text-hover', { 'dark:text-green-300 text-green-500': viewStyle === 'grid' }]" />
+            </div>
 
             <!-- divider -->
             <div class="w-full">
@@ -55,15 +51,18 @@ const changeView = (style: string) => {
                 <div class="tiny-border h-px w-full" />
             </div>
 
-            <!-- Job grid -->
-            <div v-if="viewStyle === 'grid'" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-4">
-                <JobCard v-for="job in visibleJobs" :key="job.id" :job="job" :char-limit="200" />
-            </div>
-
-            <!-- Job list -->
-            <div v-else class="flex flex-col gap-4 p-4">
-                <JobCard v-for="job in visibleJobs" :key="job.id" :job="job" :char-limit="330" />
-            </div>
+            <transition name="fade" mode="out-in">
+                <template v-if="viewStyle === 'grid'">
+                    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-4">
+                        <JobCard v-for="job in visibleJobs" :key="job.id" :job="job" :char-limit="200" />
+                    </div>
+                </template>
+                <template v-else>
+                    <div class="flex flex-col gap-4 p-4">
+                        <JobCard v-for="job in visibleJobs" :key="job.id" :job="job" :char-limit="330" />
+                    </div>
+                </template>
+            </transition>
 
             <!-- divider -->
             <div class=" w-full">
@@ -79,6 +78,5 @@ const changeView = (style: string) => {
                     class="transform transition-opacity duration-200 opacity-0 group-hover:opacity-100" />
             </button>
         </div>
-
     </Container>
 </template>

@@ -11,7 +11,7 @@ interface Job {
 }
 defineProps<{
     job: Job
-    charLimit: number // optional with default fallback
+    charLimit: number
 }>()
 </script>
 

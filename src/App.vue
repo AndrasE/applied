@@ -5,5 +5,8 @@ import Navbar from '@/components/Navbar.vue';
 
 <template>
   <Navbar />
-  <RouterView />
+
+  <transition name="fade" mode="out-in">
+    <RouterView :key="$route.fullPath" />
+  </transition>
 </template>
