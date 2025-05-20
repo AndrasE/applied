@@ -39,12 +39,14 @@ const changeView = (style: string) => {
             <!-- view change button -->
             <div class="flex flex-row gap-4 p-6 px-4 ">
 
-                <Icon @click="changeView('list')" icon="heroicons-solid:view-list" class="text-xl text-hover" />
-                <Icon @click="changeView('grid')" icon="flowbite:grid-outline" class="text-xl text-hover" />
+                <Icon @click="changeView('list')" icon="heroicons-solid:view-list"
+                    :class="['text-xl text-hover', { 'text-blue-500': viewStyle === 'list' }]" />
+                <Icon @click="changeView('grid')" icon="flowbite:grid-outline"
+                    :class="['text-xl text-hover', { 'text-blue-500': viewStyle === 'grid' }]" />
             </div>
-            <transition name="fade" mode="out-in">
-                <h1 :key="viewStyle" class="text-2xl text-center mb-6">Recent applications</h1>
-            </transition>
+
+            <h1 class="text-2xl text-center mb-6">Recent applications</h1>
+
 
             <!-- divider -->
             <div class="w-full">
