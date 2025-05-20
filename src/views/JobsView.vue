@@ -23,6 +23,10 @@ const visibleJobs = computed(() => jobs.value.slice(0, limit.value))
 const toggleLimit = () => {
     limit.value = limit.value === DEFAULT_LIMIT ? jobs.value.length : DEFAULT_LIMIT
 }
+
+const changeView = () => {
+    console.log("penis")
+}
 </script>
 
 <template>
@@ -36,13 +40,30 @@ const toggleLimit = () => {
                 <div class="tiny-border h-px w-full" />
             </div>
 
-            <!-- job grid -->
+            <!-- Job grid -->
             <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-4">
-                <JobCard v-for="job in visibleJobs" :key="job.id" :job="job" />
+                <JobCard v-for="job in visibleJobs" :key="job.id" :job="job" :char-limit="200" />
+            </div>
+
+            <!-- Job list -->
+            <div class="flex flex-col gap-4 p-4">
+                <JobCard v-for="job in visibleJobs" :key="job.id" :job="job" :char-limit="330" />
             </div>
 
             <!-- divider -->
-            <div class="w-full">
+            <div class=" w-full">
+                <p class="text-tiny text-center tracking-wider">@click toggleView</p>
+                <div class="tiny-border h-px w-full" />
+
+            </div>
+            <!-- view change button -->
+            <div class="flex flex-row gap-4 p-6 px-4 ">
+                <Icon icon="heroicons-solid:view-list" class="text-xl text-hover" />
+                <Icon icon="flowbite:grid-outline" class="text-xl text-hover" />
+            </div>
+
+            <!-- divider -->
+            <div class=" w-full">
                 <div class="tiny-border h-px w-full" />
                 <p class="text-tiny text-center tracking-wider">@click toggleLimit</p>
             </div>
