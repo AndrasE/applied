@@ -122,5 +122,11 @@ watch(currentTheme, (newTheme) => {
                 </button>
             </div>
         </div>
+
     </nav>
+    <!-- router views transition -->
+    <!-- The name="fade" tells Vue to prefix transition classes with fade- -->
+    <transition name="fade" mode="out-in">
+        <router-view :key="$route.fullPath" />
+    </transition>
 </template>

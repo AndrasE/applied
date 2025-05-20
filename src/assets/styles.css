@@ -92,7 +92,7 @@
     @apply opacity-100 translate-y-0;
   }
   .fade-enter-active {
-    @apply transition duration-300 ease-out;
+    @apply transition duration-200 ease-out;
   }
 
   .fade-leave-from {
@@ -102,7 +102,7 @@
     @apply opacity-0 translate-y-2;
   }
   .fade-leave-active {
-    @apply transition duration-200 ease-in;
+    @apply transition duration-150 ease-in;
   }
 }
 /* Hide buffer label on small screens */
