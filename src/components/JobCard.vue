@@ -17,7 +17,9 @@ defineProps<{ job: Job }>()
     <div class="p-4 rounded shadow border border-color">
         <h2 class="text-lg  mb-1">{{ job.title }}</h2>
         <p class="text-sm mb-2">{{ job.company }}</p>
-        <p class="text-sm mb-3 text-justify word-break: break-all">{{ job.description }}</p>
+        <p class="text-sm mb-3 text-justify break-words">
+            {{ job.description.slice(0, 150) }}{{ job.description.length > 150 ? '...' : '' }}
+        </p>
         <RouterLink :to="`/jobs/${job.id}`"
             class="group inline-flex items-center gap-1 text-sm dark:text-green-300 text-green-500 hover:underline">
             Read more
