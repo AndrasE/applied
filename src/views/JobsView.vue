@@ -34,10 +34,11 @@ const changeView = (style: string) => {
 
 <template>
     <Container>
-        <div class=" relative flex flex-col items-center justify-center h-full">
-            <!-- view change button -->
+        <div class="relative flex flex-col items-center justify-start h-full">
             <h1 class="text-2xl text-center mb-6">Recent applications</h1>
-            <div class="absolute top-8 right-5 flex flex-row gap-4  ">
+
+            <!-- toggle between list and grid  -->
+            <div class="absolute top-8 right-5 flex flex-row gap-4 hidden sm:flex">
                 <Icon @click="changeView('list')" icon="heroicons-solid:view-list"
                     :class="['text-xl text-hover', { 'dark:text-green-300 text-green-500': viewStyle === 'list' }]" />
                 <Icon @click="changeView('grid')" icon="flowbite:grid-outline"
@@ -51,6 +52,7 @@ const changeView = (style: string) => {
                 <div class="tiny-border h-px w-full" />
             </div>
 
+            <!-- job listing cards list or grid view -->
             <transition name="fade" mode="out-in">
                 <template v-if="viewStyle === 'grid'">
                     <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-4">
@@ -70,7 +72,7 @@ const changeView = (style: string) => {
                 <p class="text-tiny text-center tracking-wider">@click toggleLimit</p>
             </div>
 
-            <!-- toggle button -->
+            <!-- increase how many listing shown -->
             <button @click="toggleLimit"
                 class="my-3 group inline-flex items-center gap-1 text-sm dark:text-green-300 text-green-500 hover:underline">
                 {{ limit === DEFAULT_LIMIT ? 'Browse all' : 'See less' }}
