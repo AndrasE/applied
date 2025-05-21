@@ -116,6 +116,12 @@ html {
   }
 }
 
+@media (max-width: 949px) {
+  .hide-under-950 {
+    display: none !important;
+  }
+}
+
 /* Navbar setup so no overlap on content */
 @media (min-width: 640px) {
   body {
