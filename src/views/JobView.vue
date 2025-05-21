@@ -12,7 +12,7 @@ const job = jobs.find(j => j.id === jobId)   // look‑up the one listing
 
 <template>
     <Container v-if="job">
-        <div class="flex flex-col items-center h-full">
+        <div class="flex flex-col sm:items-center h-full">
             <h1 class="text-2xl text-center mb-6">Job details</h1>
 
             <!-- divider -->
@@ -20,7 +20,7 @@ const job = jobs.find(j => j.id === jobId)   // look‑up the one listing
                 <p class="text-tiny text-center tracking-wider">flex flex-col</p>
                 <div class="tiny-border h-px w-full" />
             </div>
-            <div class="flex flex-col items-center justify-center h-full">
+            <div class="flex flex-col items-center justify-start sm:justify-center h-full">
 
                 <!-- job details -->
                 <div class="m-4 p-4 rounded border border-color xs:w-full md:w-3/4 xl:w-1/2 ">

@@ -38,7 +38,7 @@ const changeView = (style: string) => {
             <h1 class="text-2xl text-center mb-6">Recent applications</h1>
 
             <!-- toggle between list and grid  -->
-            <div class="absolute top-8 right-5 flex flex-row gap-4 hidden sm:flex">
+            <div class="absolute top-8 right-5 flex-row gap-4 hidden sm:flex">
                 <Icon @click="changeView('list')" icon="heroicons-solid:view-list"
                     :class="['text-xl text-hover', { 'dark:text-green-300 text-green-500': viewStyle === 'list' }]" />
                 <Icon @click="changeView('grid')" icon="flowbite:grid-outline"
@@ -48,7 +48,7 @@ const changeView = (style: string) => {
             <!-- divider -->
             <div class="w-full">
                 <p class="text-tiny text-center tracking-wider"> {{ viewStyle === 'grid' ? 'grid cols' : 'flex col'
-                }}</p>
+                    }}</p>
                 <div class="tiny-border h-px w-full" />
             </div>
 
