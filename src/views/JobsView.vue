@@ -55,12 +55,12 @@ const changeView = (style: string) => {
             <!-- job listing cards list or grid view -->
             <transition name="fade" mode="out-in">
                 <template v-if="viewStyle === 'grid'">
-                    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-4">
+                    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-4 min949:p-6">
                         <JobCard v-for="job in visibleJobs" :key="job.id" :job="job" :char-limit="200" />
                     </div>
                 </template>
                 <template v-else>
-                    <div class="flex flex-col gap-4 p-4">
+                    <div class="flex flex-col gap-4 custom-padding">
                         <JobCard v-for="job in visibleJobs" :key="job.id" :job="job" :char-limit="330" />
                     </div>
                 </template>

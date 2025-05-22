@@ -87,6 +87,11 @@ html {
     letter-spacing: -2px;
   }
 
+  /* Adjust padding for to the visablity of pattern label above @media below overwrites */
+  .custom-padding {
+    padding: 1.5rem 1rem;
+  }
+
   /* fading animation */
   .fade-enter-from {
     @apply opacity-0 translate-y-2;
@@ -108,16 +113,24 @@ html {
     @apply transition duration-150 ease-in;
   }
 }
-/* Hide buffer label on small screens */
+/* Hide buffer label on smaller screens */
 @media (max-width: 1419px) {
   .hide-under-1420 {
     display: none !important;
   }
 }
 
+/* Hide pattern label on small screens */
 @media (max-width: 949px) {
   .hide-under-950 {
     display: none !important;
+  }
+}
+
+/* Adjust padding for to the visablity of pattern label above  */
+@media (max-width: 949px) {
+  .custom-padding {
+    padding: 1rem;
   }
 }
 
