@@ -24,17 +24,13 @@ import { ref } from "vue";
             <span class="sm:sticky top-1/2 hide-under-950">linear gradient</span>
         </span>
 
-
-
         <!-- Main Content -->
         <slot></slot>
 
         <!-- Right Pattern Label -->
-
         <span class="hidden md:block text-tiny text-upright relative" role="presentation" aria-hidden="true">
             <span class="sm:sticky top-1/2 hide-under-950">image repeating</span>
         </span>
-
 
         <!-- Right Pattern Bar -->
         <div
