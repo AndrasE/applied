@@ -51,13 +51,25 @@ watch(currentTheme, (newTheme) => {
     <header class="fixed top-0 left-0 w-full z-50 sm:hidden">
         <div
             class="flex flex-row flex-center gap-2 h-auto w-full p-2 border-color border-b-1 bg-[var(--bg-light)] dark:bg-[var(--bg-dark)]">
+            <div class="flex flex-row items-center">
+                <p class="text-tiny text-center text-orientation">logo</p>
+                <div class="tiny-border h-12 w-px"></div>
+            </div>
             <RouterLink to="/" class="w-full flex text-hover">
-                <Icon icon="material-symbols-light:font-download-outline-rounded" class="text-6xl" />
-                <div class="flex flex-row items-center">
-                    <div class="tiny-border h-12 w-px"></div>
-                    <p class="text-tiny text-center text-orientation">logo</p>
-                </div>
+                <Icon icon="material-symbols-light:font-download-outline-rounded" class="text-5xl" />
             </RouterLink>
+
+            <div class=" flex sm:hidden ">
+                <button @click="toggleTheme" @mouseenter="isHovered = true" @mouseleave="isHovered = false"
+                    class="flex flex-center text-hover cursor-pointer " aria-label="Toggle theme">
+                    <Icon :icon="themeIcon" class="text-3xl transition-transform duration-300 ease-in-out"
+                        :class="{ 'rotate-270': isHovered }" />
+                </button>
+                <div class="flex flex-row items-center pl-2">
+                    <div class="tiny-border h-12 w-px"></div>
+                    <p class="text-tiny text-center text-orientation">theme</p>
+                </div>
+            </div>
         </div>
     </header>
 
