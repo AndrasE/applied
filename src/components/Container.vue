@@ -3,8 +3,8 @@
 
 
 <template>
-    <div
-        class="grid min-h-screen grid-cols-1 md:grid-cols-[auto_auto_1fr_auto_auto] lg:grid-cols-[1fr_auto_auto_minmax(0,theme(maxWidth.6xl))_auto_auto_1fr]">
+    <div class="grid min-h-screen grid-cols-1 md:grid-cols-[auto_auto_1fr_auto_auto] lg:grid-cols-[1fr_auto_auto_minmax(0,theme(maxWidth.6xl))_auto_auto_1fr]
+        my-16 sm:my-0">
 
         <!-- Left Buffer Label -->
         <span class="hidden lg:block relative text-tiny text-upright" role="presentation" aria-hidden="true">

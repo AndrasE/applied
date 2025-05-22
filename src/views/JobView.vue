@@ -23,13 +23,13 @@ const job = jobs.find(j => j.id === jobId)   // look‑up the one listing
             <div class="flex flex-col items-center justify-start sm:justify-center h-full">
 
                 <!-- job details -->
-                <div class="m-4 p-4 rounded border border-color xs:w-full md:w-3/4 xl:w-1/2 ">
+                <div class="m-3 p-4 rounded border border-color xs:w-full md:w-3/4 xl:w-1/2 ">
                     <h2 class="text-lg  mb-1">{{ job.title }}</h2>
                     <p class="text-sm mb-2">{{ job.company }}</p>
                     <p class="text-sm mb-3 text-justify word-break: break-all">{{ job.description }}</p>
                 </div>
                 <RouterLink :to="`/jobs`"
-                    class="group inline-flex items-center gap-1 my-3 text-sm dark:text-green-300 text-green-500 hover:underline">
+                    class="group inline-flex items-center gap-1 mb-8 sm:mb-4 text-sm dark:text-green-300 text-green-500 hover:underline">
 
                     <Icon icon="heroicons-outline:arrow-left"
                         class="inline-block transform transition-opacity duration-200 opacity-0 group-hover:opacity-100" />

@@ -74,7 +74,7 @@ const changeView = (style: string) => {
 
             <!-- increase how many listing shown -->
             <button @click="toggleLimit"
-                class="my-3 group inline-flex items-center gap-1 text-sm dark:text-green-300 text-green-500 hover:underline">
+                class="group inline-flex items-center gap-1 text-sm mt-3 mb-6 sm:my-3 dark:text-green-300 text-green-500 hover:underline">
                 {{ limit === DEFAULT_LIMIT ? 'Browse all' : 'See less' }}
                 <Icon :icon="limit === DEFAULT_LIMIT ? 'heroicons-outline:arrow-down' : 'heroicons-outline:arrow-up'"
                     class="transform transition-opacity duration-200 opacity-0 group-hover:opacity-100" />
