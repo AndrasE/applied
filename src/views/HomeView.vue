@@ -9,7 +9,7 @@ import { Icon } from "@iconify/vue";
 
 <template>
   <Container>
-    <div class="flex flex-col flex-grow items-center justify-center min-h-screen w-full">
+    <div class="flex flex-col  items-center justify-center ">
       <!-- divider line and label for lottie -->
       <div class="block w-full">
         <p class="text-tiny text-center tracking-wider">vue3lottie</p>
@@ -17,7 +17,7 @@ import { Icon } from "@iconify/vue";
       </div>
 
       <!-- lottie and app-name -->
-      <div class="w-3/4 lg:w-1/2 xl:w-1/3 flex flex-col items-center p-1 ">
+      <div class="w-full max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl  flex flex-col items-center p-1 ">
         <Vue3Lottie :animationData="applying" :loop="true" :autoplay="true" :speed="0.6" />
         <h1 class="text-2xl text-center flex items-center justify-center">
           <Icon icon="material-symbols-light:font-download-outline-rounded"

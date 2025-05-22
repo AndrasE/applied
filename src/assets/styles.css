@@ -25,7 +25,6 @@ html {
 
 @layer base {
   body {
-    padding-bottom: 5rem;
     color: var(--text-color-light);
     background-color: var(--bg-light);
   }
