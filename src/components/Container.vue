@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { ref } from "vue";
-
-
 </script>
 
 
@@ -20,7 +17,7 @@ import { ref } from "vue";
         </div>
 
         <!-- Left Pattern Label -->
-        <span class="hidden lg:flex items-end text-tiny text-upright" role="presentation" aria-hidden="true">
+        <span class="hidden md:flex items-end text-tiny text-upright" role="presentation" aria-hidden="true">
             <span class="sm:sticky top-1/2 hide-under-950">linear gradient</span>
         </span>
 

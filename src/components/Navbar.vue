@@ -48,73 +48,64 @@ watch(currentTheme, (newTheme) => {
 </script>
 
 <template>
-    <nav
-        class="fixed bottom-0 w-full z-50 h-auto border-color border-t-1 sm:border-t-0 sm:top-0 sm:left-0 sm:h-full sm:w-auto p-2 sm:border-r-1 bg-[var(--bg-light)] dark:bg-[var(--bg-dark)]">
+    <header class="fixed top-0 left-0 w-full z-50 sm:hidden">
+        <div
+            class="flex flex-row flex-center gap-2 h-auto w-full p-2 border-color border-b-1 bg-[var(--bg-light)] dark:bg-[var(--bg-dark)]">
+            <RouterLink to="/" class="w-full flex text-hover">
+                <Icon icon="material-symbols-light:font-download-outline-rounded" class="text-6xl" />
+                <div class="flex flex-row items-center">
+                    <div class="tiny-border h-12 w-px"></div>
+                    <p class="text-tiny text-center text-orientation">logo</p>
+                </div>
+            </RouterLink>
+        </div>
+    </header>
+
+    <nav class="fixed bottom-0 w-full z-50 h-auto border-color border-t-1
+               sm:border-t-0 sm:top-0 sm:left-0 sm:h-full sm:w-auto sm:border-r-1
+               p-2 bg-[var(--bg-light)] dark:bg-[var(--bg-dark)]">
         <div class="flex flex-row flex-center gap-2 sm:flex-col sm:justify-between sm:items-center sm:h-full sm:w-auto">
 
-            <!-- logo -->
-            <div class="hidden sm:flex sm:flex-col">
-                <RouterLink to="/" class="w-full text-hover 3xl">
+            <div class="hidden sm:flex sm:flex-col sm:items-center">
+                <RouterLink to="/" class="w-full text-hover">
                     <Icon icon="material-symbols-light:font-download-outline-rounded" class="text-6xl" />
                 </RouterLink>
-
-                <!-- divider line -->
                 <div class="block mt-2">
                     <div class="sm:h-px tiny-border"></div>
                     <p class="text-tiny text-center tracking-widest">logo</p>
                 </div>
             </div>
 
-            <!-- nav links -->
-            <div class="flex flex-row flex-center sm:w-full  flex-grow sm:flex-col">
-
-                <!-- divider line -->
+            <div class="flex flex-row flex-center sm:w-full flex-grow sm:flex-col">
                 <div class="sm:block sm:w-full flex flex-row items-center">
                     <p class="text-tiny text-center text-orientation tracking-wider">nav</p>
                     <div class="tiny-border h-12 w-px sm:w-full sm:h-px"></div>
                 </div>
 
                 <RouterLink to="/" class="nav-link text-hover">
-                    <Icon icon="ci:house-01" class="text-2xl sm:text-3xl" />
-                    Home
+                    <Icon icon="ci:house-01" class="text-2xl sm:text-3xl" />Home
                 </RouterLink>
-
                 <RouterLink to="/jobs" class="nav-link text-hover">
-                    <Icon icon="ci:handbag" class="text-2xl sm:text-3xl" />
-                    Jobs
+                    <Icon icon="ci:handbag" class="text-2xl sm:text-3xl" />Jobs
                 </RouterLink>
-
                 <RouterLink to="/add" class="nav-link text-hover">
-                    <Icon icon="ci:file-add" class="text-2xl sm:text-3xl" />
-                    Add
+                    <Icon icon="ci:file-add" class="text-2xl sm:text-3xl" />Add
                 </RouterLink>
-
                 <RouterLink to="/about" class="nav-link text-hover">
-                    <Icon icon="ci:text-align-left" class="text-2xl sm:text-3xl" />
-                    About
+                    <Icon icon="ci:text-align-left" class="text-2xl sm:text-3xl" />About
                 </RouterLink>
 
-                <!-- divider line -->
                 <div class="sm:block sm:w-full flex flex-row items-center">
                     <div class="tiny-border h-12 w-px sm:w-full sm:h-px"></div>
                     <p class="text-tiny text-center text-orientation ">link</p>
                 </div>
-
-
-
-
             </div>
 
-            <!-- theme toggle -->
-
             <div class="hidden sm:w-full sm:flex sm:flex-col sm:items-center">
-                <!-- divider line -->
                 <div class="block w-full mb-2">
                     <p class="text-tiny text-center tracking-widest">theme</p>
                     <div class="h-px tiny-border"></div>
                 </div>
-
-
                 <button @click="toggleTheme" @mouseenter="isHovered = true" @mouseleave="isHovered = false"
                     class="flex flex-center text-hover cursor-pointer " aria-label="Toggle theme">
                     <Icon :icon="themeIcon" class="text-2xl sm:text-3xl transition-transform duration-300 ease-in-out"

@@ -11,6 +11,7 @@ import { Icon } from "@iconify/vue";
   <Container>
     <div class="flex flex-col  items-center justify-center ">
       <!-- divider line and label for lottie -->
+
       <div class="block w-full">
         <p class="text-tiny text-center tracking-wider">vue3lottie</p>
         <div class="tiny-border h-px w-full"></div>
@@ -36,7 +37,7 @@ import { Icon } from "@iconify/vue";
         </div>
       </div>
 
-      <!-- divider line and label for lottie -->
+      <!-- divider line and label for stats  -->
       <div class="block w-full">
         <div class="tiny-border h-px w-full"></div>
         <p class="text-tiny text-center tracking-wider">stats comin up</p>
