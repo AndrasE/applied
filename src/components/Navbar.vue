@@ -3,47 +3,11 @@ import { ref, computed, onMounted, watch } from 'vue';
 import { RouterLink } from 'vue-router';
 import { Icon, addCollection } from "@iconify/vue";
 import clarityIcons from '@iconify-json/clarity/icons.json';
-import { applyTheme } from '@/theme.ts'
+
+import ThemeToggle from './ThemeToggle.vue';
 
 // Register the Clarity Icons collection
 addCollection(clarityIcons);
-
-// Define reactive variables for the current theme and the icon.
-const currentTheme = ref<'light' | 'dark'>('light'); // This variable is used to store the current theme of the application.
-const isHovered = ref(false); // This variable is used to track the hover state of the icon.
-const themeIcon = computed(() => { // This computed property returns the icon based on the current theme and hover state.
-    const isDark = currentTheme.value === 'dark'; // Check if the current theme is dark.
-    const hoverIcon = isDark ? 'ci:sun' : 'ci:moon';    // icon shown on hover (indicates the *next* theme)
-    const staticIcon = isDark ? 'ci:moon' : 'ci:sun';   // icon shown normally
-    return isHovered.value ? hoverIcon : staticIcon; // Return the icon based on the hover state.
-});
-
-// Function to set the 'data-theme' attribute and store in localStorage.
-const setTheme = (theme: 'light' | 'dark') => {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.theme = theme;
-    applyTheme(theme); // <- this was missing
-};
-
-// Initialize theme and icon on component mounted (initial detection) and applyTheme() (class switching to html)
-onMounted(() => {
-    if (localStorage.theme === 'dark' || (!localStorage.theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        currentTheme.value = 'dark';
-    } else {
-        currentTheme.value = 'light';
-    }
-
-    setTheme(currentTheme.value); // Apply theme to <html>
-});
-
-const toggleTheme = () => {
-    currentTheme.value = currentTheme.value === 'light' ? 'dark' : 'light';
-};
-watch(currentTheme, (newTheme) => {
-    setTheme(newTheme);
-});
-
-
 
 </script>
 
@@ -60,11 +24,8 @@ watch(currentTheme, (newTheme) => {
             </RouterLink>
 
             <div class=" flex sm:hidden ">
-                <button @click="toggleTheme" @mouseenter="isHovered = true" @mouseleave="isHovered = false"
-                    class="flex flex-center text-hover cursor-pointer " aria-label="Toggle theme">
-                    <Icon :icon="themeIcon" class="text-3xl transition-transform duration-300 ease-in-out"
-                        :class="{ 'rotate-270': isHovered }" />
-                </button>
+
+                <ThemeToggle />
                 <div class="flex flex-row items-center pl-2">
                     <div class="tiny-border h-12 w-px"></div>
                     <p class="text-tiny text-center text-orientation">theme</p>
@@ -118,11 +79,7 @@ watch(currentTheme, (newTheme) => {
                     <p class="text-tiny text-center tracking-widest">theme</p>
                     <div class="h-px tiny-border"></div>
                 </div>
-                <button @click="toggleTheme" @mouseenter="isHovered = true" @mouseleave="isHovered = false"
-                    class="flex flex-center text-hover cursor-pointer " aria-label="Toggle theme">
-                    <Icon :icon="themeIcon" class="text-2xl sm:text-3xl transition-transform duration-300 ease-in-out"
-                        :class="{ 'rotate-270': isHovered }" />
-                </button>
+                <ThemeToggle />
             </div>
         </div>
     </nav>
