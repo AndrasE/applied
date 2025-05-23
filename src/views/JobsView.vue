@@ -6,6 +6,7 @@ import Divider from "@/components/Divider.vue";
 import JobCard from "@/components/JobCard.vue";
 import { Icon } from "@iconify/vue";
 import jobsRaw from "@/data/jobs.json";
+import ButtonLinkWithIcon from "@/components/ButtonLinkWithIcon.vue";
 
 interface Job {
   id: number;
@@ -86,18 +87,16 @@ const changeView = (style: string) => {
       <Divider label="@click toggleLimit" labelPosition="bottom" />
 
       <!-- increase how many listing shown -->
-      <button
-        @click="toggleLimit"
-        class="inline-flex items-center gap-1 mt-3 mb-6 text-sm text-green-500 group sm:my-3 dark:text-green-300 hover:underline">
-        {{ limit === DEFAULT_LIMIT ? "Browse all" : "See less" }}
-        <Icon
-          :icon="
-            limit === DEFAULT_LIMIT
-              ? 'heroicons-outline:arrow-down'
-              : 'heroicons-outline:arrow-up'
-          "
-          class="transition-opacity duration-200 transform opacity-0 group-hover:opacity-100" />
-      </button>
+      <ButtonLinkWithIcon
+        as="button"
+        :label="limit === DEFAULT_LIMIT ? 'Browse all' : 'See less'"
+        :icon="
+          limit === DEFAULT_LIMIT
+            ? 'heroicons-outline:arrow-down'
+            : 'heroicons-outline:arrow-up'
+        "
+        :onClick="toggleLimit"
+        customClass="my-6" />
     </div>
   </Container>
 </template>

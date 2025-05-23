@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { Icon } from "@iconify/vue";
-import { RouterLink } from "vue-router";
-import RouterLinkWithIcon from "./RouterLinkWithIcon.vue";
+import ButtonLinkWithIcon from "./ButtonLinkWithIcon.vue";
 
 interface Job {
   id: number;
@@ -24,6 +22,6 @@ defineProps<{
       {{ job.description.slice(0, charLimit)
       }}{{ job.description.length > charLimit ? "..." : "" }}
     </p>
-    <RouterLinkWithIcon :to="`/jobs/${job.id}`" label="Read more" />
+    <ButtonLinkWithIcon as="link" :to="`/jobs/${job.id}`" label="Read more" />
   </div>
 </template>

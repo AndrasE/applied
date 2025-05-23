@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { useRoute } from "vue-router";
 import Container from "@/components/Container.vue";
-import { Icon } from "@iconify/vue";
 import jobs from "@/data/jobs.json";
 import Divider from "@/components/Divider.vue";
 import PageHeader from "@/components/PageHeader.vue";
-import RouterLinkWithIcon from "@/components/RouterLinkWithIcon.vue";
+import ButtonLinkWithIcon from "@/components/ButtonLinkWithIcon.vue";
 
 const route = useRoute();
 const jobId = Number(route.params.id); // "1", "2", …
@@ -32,12 +31,14 @@ const job = jobs.find((j) => j.id === jobId); // look‑up the one listing
           </p>
         </div>
         <Divider label="prev list" iconPosition="left" />
-        <RouterLinkWithIcon
+
+        <ButtonLinkWithIcon
+          as="link"
           :to="`/jobs`"
           label="Go back"
           icon-position="left"
           icon="heroicons-outline:arrow-left"
-          class="mt-4" />
+          customClass="my-6" />
       </div>
     </div>
   </Container>
