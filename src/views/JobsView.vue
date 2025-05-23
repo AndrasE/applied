@@ -4,7 +4,6 @@ import Container from "@/components/Container.vue";
 import PageHeader from "@/components/PageHeader.vue";
 import Divider from "@/components/Divider.vue";
 import JobCard from "@/components/JobCard.vue";
-
 import { Icon } from "@iconify/vue";
 import jobsRaw from "@/data/jobs.json";
 
@@ -40,7 +39,7 @@ const changeView = (style: string) => {
       <PageHeader label="Recent applications" />
 
       <!-- toggle between list and grid  -->
-      <div class="absolute flex-row hidden gap-4 top-8 right-5 sm:flex">
+      <div class="absolute flex-row hidden gap-4 top-12 right-5 sm:flex">
         <Icon
           @click="changeView('list')"
           icon="heroicons-solid:view-list"
@@ -59,7 +58,7 @@ const changeView = (style: string) => {
 
       <Divider
         :label="viewStyle === 'grid' ? 'grid cols' : 'flex col'"
-        labelPosition="bottom" />
+        labelPosition="top" />
 
       <!-- job listing cards list or grid view -->
       <transition name="fade" mode="out-in">

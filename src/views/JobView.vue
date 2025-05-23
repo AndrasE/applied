@@ -5,6 +5,7 @@ import { Icon } from "@iconify/vue";
 import jobs from "@/data/jobs.json";
 import Divider from "@/components/Divider.vue";
 import PageHeader from "@/components/PageHeader.vue";
+import RouterLinkWithIcon from "@/components/RouterLinkWithIcon.vue";
 
 const route = useRoute();
 const jobId = Number(route.params.id); // "1", "2", …
@@ -30,15 +31,13 @@ const job = jobs.find((j) => j.id === jobId); // look‑up the one listing
             {{ job.description }}
           </p>
         </div>
-        <Divider label="prev list" labelPosition="bottom" />
-        <RouterLink
+        <Divider label="prev list" iconPosition="left" />
+        <RouterLinkWithIcon
           :to="`/jobs`"
-          class="inline-flex items-center gap-1 mb-8 text-sm text-green-500 group sm:mb-4 dark:text-green-300 hover:underline">
-          <Icon
-            icon="heroicons-outline:arrow-left"
-            class="inline-block transition-opacity duration-200 transform opacity-0 group-hover:opacity-100" />
-          Back to all
-        </RouterLink>
+          label="Go back"
+          icon-position="left"
+          icon="heroicons-outline:arrow-left"
+          class="mt-4" />
       </div>
     </div>
   </Container>

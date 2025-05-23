@@ -39,13 +39,13 @@ addCollection(clarityIcons);
     <div
       class="flex flex-row gap-2 flex-center sm:flex-col sm:justify-between sm:items-center sm:h-full sm:w-auto">
       <div class="hidden sm:flex sm:flex-col sm:items-center">
-        <RouterLink to="/" class="w-full text-hover">
+        <RouterLink to="/" class="hidden sm:w-full sm:flex sm:flex-col">
           <Icon
             icon="material-symbols-light:font-download-outline-rounded"
             class="text-6xl" />
         </RouterLink>
-        <div class="block mt-2">
-          <div class="sm:h-px tiny-border"></div>
+        <div class="block w-full mb-2">
+          <div class="h-px tiny-border"></div>
           <p class="tracking-widest text-center text-tiny">logo</p>
         </div>
       </div>

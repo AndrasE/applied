@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Icon } from "@iconify/vue";
 import { RouterLink } from "vue-router";
+import RouterLinkWithIcon from "./RouterLinkWithIcon.vue";
 
 interface Job {
   id: number;
@@ -23,13 +24,6 @@ defineProps<{
       {{ job.description.slice(0, charLimit)
       }}{{ job.description.length > charLimit ? "..." : "" }}
     </p>
-    <RouterLink
-      :to="`/jobs/${job.id}`"
-      class="inline-flex items-center gap-1 text-sm text-green-500 group dark:text-green-300 hover:underline">
-      Read more
-      <Icon
-        icon="heroicons-outline:arrow-right"
-        class="inline-block transition-opacity duration-200 transform opacity-0 group-hover:opacity-100" />
-    </RouterLink>
+    <RouterLinkWithIcon :to="`/jobs/${job.id}`" label="Read more" />
   </div>
 </template>
