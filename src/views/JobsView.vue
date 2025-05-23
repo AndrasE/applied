@@ -70,7 +70,8 @@ const changeView = (style: string) => {
               v-for="job in visibleJobs"
               :key="job.id"
               :job="job"
-              :char-limit="200" />
+              :char-limit="200"
+              :showLinkButton="true" />
           </div>
         </template>
         <template v-else>
@@ -79,7 +80,8 @@ const changeView = (style: string) => {
               v-for="job in visibleJobs"
               :key="job.id"
               :job="job"
-              :char-limit="330" />
+              :char-limit="330"
+              :showLinkButton="true" />
           </div>
         </template>
       </transition>
@@ -96,7 +98,7 @@ const changeView = (style: string) => {
             : 'heroicons-outline:arrow-up'
         "
         :onClick="toggleLimit"
-        customClass="my-6" />
+        customClass="mb-8 relative left-2 sm:my-5" />
     </div>
   </Container>
 </template>

@@ -4,6 +4,7 @@ import Container from "@/components/Container.vue";
 import jobs from "@/data/jobs.json";
 import Divider from "@/components/Divider.vue";
 import PageHeader from "@/components/PageHeader.vue";
+import JobCard from "@/components/JobCard.vue";
 import ButtonLinkWithIcon from "@/components/ButtonLinkWithIcon.vue";
 
 const route = useRoute();
@@ -17,28 +18,19 @@ const job = jobs.find((j) => j.id === jobId); // look‑up the one listing
     <div class="flex flex-col h-full sm:items-center">
       <PageHeader label="Job details" />
 
-      <Divider label="flex flex-col" labelPosition="top" />
+      <div class="flex flex-col items-center justify-between w-full gap-4 mt-6">
+        <Divider label="flex flex-col" labelPosition="top" />
 
-      <div
-        class="flex flex-col items-center justify-start h-full sm:justify-center">
-        <!-- job details -->
-        <div
-          class="p-4 m-3 border rounded border-color xs:w-full md:w-3/4 xl:w-1/2">
-          <h2 class="mb-1 text-lg">{{ job.title }}</h2>
-          <p class="mb-2 text-sm">{{ job.company }}</p>
-          <p class="mb-3 text-sm text-justify break-all word-break:">
-            {{ job.description }}
-          </p>
-        </div>
-        <Divider label="prev list" iconPosition="left" />
+        <JobCard :key="job.id" :job="job" :showLinkButton="false" />
 
+        <Divider label="prev list" labelPosition="top" />
         <ButtonLinkWithIcon
           as="link"
           :to="`/jobs`"
-          label="Go back"
-          icon-position="left"
-          icon="heroicons-outline:arrow-left"
-          customClass="my-6" />
+          iconPosition="left"
+          label="Back to job listings"
+          icon="heroicons-solid:arrow-left"
+          customClass="relative right-3 mb-8 sm:mb-5 mt-0 " />
       </div>
     </div>
   </Container>
