@@ -2,8 +2,17 @@
 import { RouterLink } from "vue-router";
 import { Icon } from "@iconify/vue";
 
-//polymorphic component reusable component that supports both RouterLink and button style remains the same unless added custom class
+//Polymorphic component reusable component that supports both RouterLink and Button tags while style remains the same unless added custom class
+
+// Props
+// to: string | undefined; // URL to navigate to when the component is a link
+// label: string; // Text to display on the button or link
+// icon: string | undefined; // Icon to display
+// iconPosition: "left" | "right"; // Position of the icon relative to the label
+// as: "link" | "button"; // Determines if the component is a link or button
+// onClick: () => void | undefined; // Function to call when the button is clicked
 const props = defineProps<{
+  //
   to?: string;
   label: string;
   icon?: string;
@@ -13,8 +22,10 @@ const props = defineProps<{
   customClass?: string;
 }>();
 
+// Default values for props as either link or button
 const tagType = props.as === "button" ? "button" : RouterLink;
 
+// Neccessary if onClick is not directly referenced, it won’t be triggered. Even though onClick is defined and passed, this syntax won’t work properly. See at JobsView.vue
 const handleClick = (event: MouseEvent) => {
   if (props.as === "button" && props.onClick) {
     props.onClick();
