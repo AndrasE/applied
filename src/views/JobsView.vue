@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import Container from '@/components/Container.vue'
+import PageHeader from '@/components/PageHeader.vue'
+import Divider from '@/components/Divider.vue'
 import JobCard from '@/components/JobCard.vue'
+
 import { Icon } from '@iconify/vue'
 import jobsRaw from '@/data/jobs.json'
 
@@ -35,7 +38,8 @@ const changeView = (style: string) => {
 <template>
     <Container>
         <div class="relative flex flex-col items-center justify-start h-full">
-            <h1 class="text-2xl text-center mb-6">Recent applications</h1>
+
+            <PageHeader label="Recent applications" />
 
             <!-- toggle between list and grid  -->
             <div class="absolute top-8 right-5 flex-row gap-4 hidden sm:flex">
@@ -45,12 +49,7 @@ const changeView = (style: string) => {
                     :class="['text-xl text-hover', { 'dark:text-green-300 text-green-500': viewStyle === 'grid' }]" />
             </div>
 
-            <!-- divider -->
-            <div class="w-full">
-                <p class="text-tiny text-center tracking-wider"> {{ viewStyle === 'grid' ? 'grid cols' : 'flex col'
-                    }}</p>
-                <div class="tiny-border h-px w-full" />
-            </div>
+            <Divider :label="viewStyle === 'grid' ? 'grid cols' : 'flex col'" labelPosition="bottom" />
 
             <!-- job listing cards list or grid view -->
             <transition name="fade" mode="out-in">
@@ -66,11 +65,7 @@ const changeView = (style: string) => {
                 </template>
             </transition>
 
-            <!-- divider -->
-            <div class=" w-full">
-                <div class="tiny-border h-px w-full" />
-                <p class="text-tiny text-center tracking-wider">@click toggleLimit</p>
-            </div>
+            <Divider label="@click toggleLimit" labelPosition="bottom" />
 
             <!-- increase how many listing shown -->
             <button @click="toggleLimit"

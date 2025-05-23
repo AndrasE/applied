@@ -3,6 +3,8 @@ import { useRoute } from 'vue-router'
 import Container from '@/components/Container.vue'
 import { Icon } from '@iconify/vue'
 import jobs from '@/data/jobs.json'
+import Divider from '@/components/Divider.vue'
+import PageHeader from '@/components/PageHeader.vue'
 
 const route = useRoute()
 const jobId = Number(route.params.id)        // "1", "2", …
@@ -13,13 +15,11 @@ const job = jobs.find(j => j.id === jobId)   // look‑up the one listing
 <template>
     <Container v-if="job">
         <div class="flex flex-col sm:items-center h-full">
-            <h1 class="text-2xl text-center mb-6">Job details</h1>
 
-            <!-- divider -->
-            <div class="w-full">
-                <p class="text-tiny text-center tracking-wider">flex flex-col</p>
-                <div class="tiny-border h-px w-full" />
-            </div>
+            <PageHeader label="Job details" />
+
+            <Divider label="flex flex-col" labelPosition="top" />
+
             <div class="flex flex-col items-center justify-start sm:justify-center h-full">
 
                 <!-- job details -->
@@ -28,6 +28,7 @@ const job = jobs.find(j => j.id === jobId)   // look‑up the one listing
                     <p class="text-sm mb-2">{{ job.company }}</p>
                     <p class="text-sm mb-3 text-justify word-break: break-all">{{ job.description }}</p>
                 </div>
+                <Divider label="prev list" labelPosition="bottom" />
                 <RouterLink :to="`/jobs`"
                     class="group inline-flex items-center gap-1 mb-8 sm:mb-4 text-sm dark:text-green-300 text-green-500 hover:underline">
 
@@ -36,7 +37,9 @@ const job = jobs.find(j => j.id === jobId)   // look‑up the one listing
                     Back to all
                 </RouterLink>
             </div>
+
         </div>
+
     </Container>
 
     <p v-else class="p-6">Job not found.</p>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Container from "@/components/Container.vue";
+import Divider from "@/components/Divider.vue";
 import applying from "@/assets/animations/applying.json"
 import { Vue3Lottie } from "vue3-lottie";
 import { Icon } from "@iconify/vue";
@@ -10,12 +11,8 @@ import { Icon } from "@iconify/vue";
 <template>
   <Container>
     <div class="flex flex-col items-center justify-center ">
-      <!-- divider line and label for lottie -->
 
-      <div class="block w-full">
-        <p class="text-tiny text-center tracking-wider">vue3lottie</p>
-        <div class="tiny-border h-px w-full"></div>
-      </div>
+      <Divider label="vue3lottie" labelPosition="top" />
 
       <!-- lottie and app-name -->
       <div class="flex flex-col items-center w-full max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl p-1">
@@ -38,11 +35,7 @@ import { Icon } from "@iconify/vue";
 
       </div>
 
-      <!-- divider line and label for stats  -->
-      <div class="block w-full">
-        <div class="tiny-border h-px w-full"></div>
-        <p class="text-tiny text-center tracking-wider">stats comin up</p>
-      </div>
+      <Divider label="stats" labelPosition="bottom" />
     </div>
   </Container>
 </template>
