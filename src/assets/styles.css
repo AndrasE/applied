@@ -10,7 +10,7 @@ html {
   /* Font families */
   --font-sans: "InterVariable", ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-mono: "Fira Code", "Fira Mono", "Courier New", monospace;
+  --font-mono: "Courier New", monospace;
 
   /* Theme */
   --bg-light: #ffffff;
