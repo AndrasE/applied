@@ -2,7 +2,7 @@
 import Container from "@/components/Container.vue";
 import Divider from "@/components/Divider.vue";
 import applying from "@/assets/animations/applying.json";
-// Import Vue3Lottie and Icon components dynamically for better performance on initial load reduce bundle size
+// Import Vue3Lottie and Icon components dynamically for better performance on initial load reduce bundle size 92.1 KiB -> 75.1 KiB
 import { defineAsyncComponent } from "vue";
 import type { Component } from "vue";
 
