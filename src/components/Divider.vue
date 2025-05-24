@@ -10,17 +10,23 @@ defineProps({
 </script>
 
 <template>
-  <!-- divider line and label -->
-  <div class="hidden w-full sm:block">
+  <!-- purely visual divider line and label -->
+  <div aria-hidden="true" class="hidden w-full sm:block">
     <template v-if="labelPosition === 'top'">
-      <p v-if="label" class="tracking-wider text-center text-tiny">
+      <p
+        v-if="label"
+        aria-hidden="true"
+        class="tracking-wider text-center text-tiny">
         {{ label }}
       </p>
-      <div class="w-full h-px tiny-border" />
+      <div role="presentation" class="w-full h-px tiny-border" />
     </template>
     <template v-else>
-      <div class="w-full h-px tiny-border" />
-      <p v-if="label" class="tracking-wider text-center text-tiny">
+      <div role="presentation" class="w-full h-px tiny-border" />
+      <p
+        v-if="label"
+        aria-hidden="true"
+        class="tracking-wider text-center text-tiny">
         {{ label }}
       </p>
     </template>

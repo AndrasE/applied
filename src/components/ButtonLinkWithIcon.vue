@@ -11,17 +11,21 @@ import { Icon } from "@iconify/vue";
 // iconPosition: "left" | "right"; // Position of the icon relative to the label
 // as: "link" | "button"; // Determines if the component is a link or button
 // onClick: () => void | undefined; // Function to call when the button is clicked
-const props = defineProps<{
-  //
-  to?: string;
-  label: string;
-  icon?: string;
-  iconPosition?: "left" | "right";
-  as?: "link" | "button";
-  onClick?: () => void;
-  customClass?: string;
-}>();
-
+const props = withDefaults(
+  defineProps<{
+    to?: string;
+    label: string;
+    icon?: string;
+    iconPosition?: "left" | "right";
+    as?: "link" | "button";
+    onClick?: () => void;
+    customClass?: string;
+  }>(),
+  {
+    iconPosition: "right", // Default icon position
+    as: "link", // Default to link
+  }
+);
 // Default values for props as either link or button
 const tagType = props.as === "button" ? "button" : RouterLink;
 

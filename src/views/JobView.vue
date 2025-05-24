@@ -8,9 +8,10 @@ import JobCard from "@/components/JobCard.vue";
 import ButtonLinkWithIcon from "@/components/ButtonLinkWithIcon.vue";
 
 const route = useRoute();
-const jobId = Number(route.params.id); // "1", "2", …
+const jobId = Number(route.params.id);
+const isValidId = !isNaN(jobId);
 
-const job = jobs.find((j) => j.id === jobId); // look‑up the one listing
+const job = isValidId ? jobs.find((j) => j.id === jobId) : null;
 </script>
 
 <template>
