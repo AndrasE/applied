@@ -47,11 +47,13 @@ const handleClick = (event: MouseEvent) => {
       customClass,
     ]">
     <Icon
+      role="presentation"
       v-if="iconPosition === 'left'"
       :icon="icon ?? ''"
       class="inline-block transition-opacity duration-200 transform opacity-0 group-hover:opacity-100" />
     {{ label }}
     <Icon
+      role="presentation"
       v-if="iconPosition !== 'left'"
       :icon="icon ?? ''"
       class="inline-block transition-opacity duration-200 transform opacity-0 group-hover:opacity-100" />
