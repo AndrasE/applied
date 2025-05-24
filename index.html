@@ -1,19 +1,22 @@
 <!DOCTYPE html>
-<!-- empty class theme will be injected by the theme switcher or default browser theme -->
 <html lang="en" class="">
 
 <head>
   <meta charset="UTF-8">
-  <link rel="icon" href="/favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Applied</title>
+  <link rel="icon" href="/favicon.ico">
   <meta name="description"
     content="Applied is a simple, fast, and beautiful personal task management app that helps tracking my application progress.">
+
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
     rel="stylesheet">
-  <!-- On page load or when changing themes, inline in `head` to avoid breathing -->
+
+  <!-- Get color scheme from localStorage or system preference -->
   <script>
     document.documentElement.classList.toggle(
       "dark",
@@ -23,8 +26,8 @@
     );
   </script>
 
-  <link href="/src/assets/styles.css" rel="stylesheet">
-  <title>Applied</title>
+  <!-- Tailwind CSS -->
+  <link href="/src/assets/styles.css" rel="stylesheet" media="print" onload="this.media='all'">
 </head>
 
 <body>
