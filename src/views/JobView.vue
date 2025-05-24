@@ -16,7 +16,7 @@ const job = isValidId ? jobs.find((j) => j.id === jobId) : null;
 
 <template>
   <Container v-if="job">
-    <div class="flex flex-col h-full sm:items-center">
+    <div class="flex flex-col items-center justify-start h-full">
       <PageHeader label="Job details" />
 
       <div class="flex flex-col items-center justify-between w-full">
