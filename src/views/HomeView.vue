@@ -2,8 +2,19 @@
 import Container from "@/components/Container.vue";
 import Divider from "@/components/Divider.vue";
 import applying from "@/assets/animations/applying.json";
-import { Vue3Lottie } from "vue3-lottie";
-import { Icon } from "@iconify/vue";
+import { defineAsyncComponent } from "vue"; // Import
+// defineAsyncComponent
+import type { Component } from "vue"; // Import Component type for type assertion
+
+// Dynamically import Vue3Lottie with a type assertion
+const Vue3Lottie = defineAsyncComponent(
+  () => import("vue3-lottie").then((m) => m.Vue3Lottie as Component) // Add `as Component`
+);
+
+// Dynamically import Icon component from @iconify/vue
+const Icon = defineAsyncComponent(
+  () => import("@iconify/vue").then((m) => m.Icon as Component) // Add `as Component` here too, just in case
+);
 </script>
 
 <template>
