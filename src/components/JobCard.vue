@@ -21,7 +21,7 @@ const limit = computed(() => props.charLimit ?? props.job.description.length);
 </script>
 
 <template>
-  <div class="p-4 border rounded shadow border-color">
+  <div aria-label="job card" class="p-4 border rounded shadow border-color">
     <h2 class="mb-1 text-lg">{{ job.title }}</h2>
     <p class="mb-2 text-sm">{{ job.company }}</p>
     <p class="mb-2 text-sm text-justify break-words">

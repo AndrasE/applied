@@ -42,18 +42,22 @@ const changeView = (style: string) => {
       <!-- toggle between list and grid  -->
       <div class="absolute flex-row hidden gap-4 top-12 right-5 sm:flex">
         <Icon
+          type="button"
+          aria-label="Toggle view list"
           @click="changeView('list')"
           icon="heroicons-solid:view-list"
           :class="[
             'text-xl text-hover',
-            { 'dark:text-green-300 text-green-500': viewStyle === 'list' },
+            { 'dark:text-green-300 text-green-600': viewStyle === 'list' },
           ]" />
         <Icon
+          type="button"
+          aria-label="Toggle view grid"
           @click="changeView('grid')"
           icon="flowbite:grid-outline"
           :class="[
             'text-xl text-hover',
-            { 'dark:text-green-300 text-green-500': viewStyle === 'grid' },
+            { 'dark:text-green-300 text-green-600': viewStyle === 'grid' },
           ]" />
       </div>
 

@@ -43,7 +43,7 @@ const handleClick = (event: MouseEvent) => {
     :to="as === 'link' ? to : undefined"
     @click="handleClick"
     :class="[
-      'inline-flex items-center gap-1 text-sm text-green-500 group dark:text-green-300 hover:underline',
+      'inline-flex items-center gap-1 text-sm text-green-600 group dark:text-green-300 hover:underline',
       customClass,
     ]">
     <Icon
