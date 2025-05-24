@@ -55,11 +55,12 @@ watch(currentTheme, (newTheme) => {
 
 <template>
   <button
+    aria-label="Toggle theme"
+    type="button"
     @click="toggleTheme"
     @mouseenter="isHovered = true"
     @mouseleave="isHovered = false"
-    class="flex cursor-pointer flex-center text-hover"
-    aria-label="Toggle theme">
+    class="flex flex-center text-hover cursor-pointer">
     <Icon
       :icon="themeIcon"
       :class="[
