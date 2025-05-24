@@ -60,13 +60,10 @@ const route = useRoute();
         <RouterLink
           to="/"
           class="hidden sm:w-full sm:flex sm:flex-col"
-          aria-label="Go to homepage"
-          :aria-current="route.path === '/' ? 'page' : undefined">
+          aria-label="Go to homepage">
           <Icon
             icon="material-symbols-light:font-download-outline-rounded"
-            class="text-6xl"
-            role="img"
-            aria-hidden="true" />
+            class="text-6xl text-hover" />
         </RouterLink>
 
         <div aria-hidden="true" class="block w-full mb-2">
