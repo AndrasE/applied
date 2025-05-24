@@ -19,19 +19,19 @@ const job = isValidId ? jobs.find((j) => j.id === jobId) : null;
     <div class="flex flex-col h-full sm:items-center">
       <PageHeader label="Job details" />
 
-      <div class="flex flex-col items-center justify-between w-full gap-4 mt-6">
+      <div class="flex flex-col items-center justify-between w-full">
         <Divider label="flex flex-col" labelPosition="top" />
 
         <JobCard :key="job.id" :job="job" :showLinkButton="false" />
 
-        <Divider label="prev list" labelPosition="top" />
+        <Divider label="prev list" labelPosition="bottom" />
         <ButtonLinkWithIcon
           as="link"
           :to="`/jobs`"
           iconPosition="left"
           label="Back to job listings"
           icon="heroicons-solid:arrow-left"
-          customClass="relative right-3 mb-8 sm:mb-5 mt-0 " />
+          customClass="relative right-3 mb-10 mt-5 sm:mb-4 sm:mt-5 " />
       </div>
     </div>
   </Container>

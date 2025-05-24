@@ -102,7 +102,7 @@ const changeView = (style: string) => {
             : 'heroicons-outline:arrow-up'
         "
         :onClick="toggleLimit"
-        customClass="mb-8 relative left-2 sm:my-5" />
+        customClass="mb-9 relative left-2 sm:my-5" />
     </div>
   </Container>
 </template>
