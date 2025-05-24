@@ -2,8 +2,19 @@
 import Container from "@/components/Container.vue";
 import Divider from "@/components/Divider.vue";
 import applying from "@/assets/animations/applying.json";
-import { Vue3Lottie } from "vue3-lottie";
-import { Icon } from "@iconify/vue";
+// Import Vue3Lottie and Icon components dynamically for better performance on initial load reduce bundle size
+import { defineAsyncComponent } from "vue";
+import type { Component } from "vue";
+
+// Dynamically import Vue3Lottie with a type assertion
+const Vue3Lottie = defineAsyncComponent(() =>
+  import("vue3-lottie").then((m) => m.Vue3Lottie as Component)
+);
+
+// Dynamically import Icon component from @iconify/vue with a type assertion
+const Icon = defineAsyncComponent(() =>
+  import("@iconify/vue").then((m) => m.Icon as Component)
+);
 </script>
 
 <template>
