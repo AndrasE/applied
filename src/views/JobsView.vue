@@ -40,7 +40,7 @@ const changeView = (style: string) => {
       <PageHeader label="Recent applications" />
 
       <!-- toggle between list and grid  -->
-      <div class="absolute flex-row hidden gap-3 top-12 right-2 sm:flex">
+      <div class="absolute flex-row hidden gap-3 top-12 right-4 sm:flex">
         <Icon
           type="button"
           aria-label="Toggle view list"
@@ -69,7 +69,7 @@ const changeView = (style: string) => {
       <transition name="fade" mode="out-in">
         <template v-if="viewStyle === 'grid'">
           <div
-            class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 my-4 sm:mx-2 mx-4">
+            class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 margin950">
             <JobCard
               v-for="job in visibleJobs"
               :key="job.id"
@@ -79,7 +79,7 @@ const changeView = (style: string) => {
           </div>
         </template>
         <template v-else>
-          <div class="flex flex-col gap-4 my-4 sm:mx-2 mx-4">
+          <div class="flex flex-col gap-4 margin950">
             <JobCard
               v-for="job in visibleJobs"
               :key="job.id"

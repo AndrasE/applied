@@ -22,7 +22,11 @@ const job = isValidId ? jobs.find((j) => j.id === jobId) : null;
       <div class="flex flex-col items-center justify-between w-full">
         <Divider label="flex flex-col" labelPosition="top" />
 
-        <JobCard :key="job.id" :job="job" :showLinkButton="false" />
+        <JobCard
+          class="margin950"
+          :key="job.id"
+          :job="job"
+          :showLinkButton="false" />
 
         <Divider label="prev list" labelPosition="bottom" />
         <ButtonLinkWithIcon

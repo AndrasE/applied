@@ -113,7 +113,7 @@ html {
   }
 
   /* Adjust padding for to the visablity of pattern label above @media below overwrites */
-  .custom-margin {
+  .margin950 {
     margin: 1.5rem 1rem;
   }
 
@@ -154,8 +154,8 @@ html {
 
 /* Adjust padding for to the visablity of pattern label above  */
 @media (max-width: 949px) {
-  .custom-padding {
-    padding: 1rem;
+  .margin950 {
+    margin: 1rem;
   }
 }
 
