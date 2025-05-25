@@ -33,6 +33,6 @@ const limit = computed(() => props.charLimit ?? props.job.description.length);
       as="link"
       :to="`/jobs/${job.id}`"
       label="Read more"
-      :icon="'heroicons:arrow-right'" />
+      :icon="'heroicons-solid:arrow-right'" />
   </div>
 </template>

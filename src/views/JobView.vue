@@ -16,27 +16,25 @@ const job = isValidId ? jobs.find((j) => j.id === jobId) : null;
 
 <template>
   <Container v-if="job">
-    <div class="flex flex-col items-center justify-start h-full">
-      <PageHeader label="Job details" />
+    <PageHeader label="Job details" />
 
-      <div class="flex flex-col items-center justify-between w-full">
-        <Divider label="flex flex-col" labelPosition="top" />
+    <div class="flex flex-col items-center justify-between w-full">
+      <Divider label="flex flex-col" labelPosition="top" />
 
-        <JobCard
-          class="margin950"
-          :key="job.id"
-          :job="job"
-          :showLinkButton="false" />
+      <JobCard
+        class="margin950"
+        :key="job.id"
+        :job="job"
+        :showLinkButton="false" />
 
-        <Divider label="prev list" labelPosition="bottom" />
-        <ButtonLinkWithIcon
-          as="link"
-          :to="`/jobs`"
-          iconPosition="left"
-          label="Back to job listings"
-          icon="heroicons-solid:arrow-left"
-          customClass="relative right-3 mb-10 mt-5 sm:mb-4 sm:mt-5 " />
-      </div>
+      <Divider label="prev list" labelPosition="bottom" />
+      <ButtonLinkWithIcon
+        as="link"
+        :to="`/jobs`"
+        iconPosition="left"
+        label="Back to job listings"
+        icon="heroicons-solid:arrow-left"
+        customClass="relative right-3 pb-9 sm:py-5" />
     </div>
   </Container>
 

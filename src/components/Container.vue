@@ -1,8 +1,19 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { computed } from "vue";
+
+// Slot props to align content vertically, defaults to justify-start
+const props = defineProps<{
+  justify?: "start" | "center" | "between" | "end";
+}>();
+
+const justifyClass = computed(() => {
+  return `justify-${props.justify ?? "start"}`;
+});
+</script>
 
 <template>
   <div
-    class="grid min-h-screen grid-cols-1 md:grid-cols-[auto_auto_1fr_auto_auto] lg:grid-cols-[1fr_auto_auto_minmax(0,theme(maxWidth.6xl))_auto_auto_1fr] my-16 sm:my-0">
+    class="grid min-h-screen grid-cols-1 md:grid-cols-[auto_auto_1fr_auto_auto] lg:grid-cols-[1fr_auto_auto_minmax(0,theme(maxWidth.6xl))_auto_auto_1fr]">
     <!-- Left Buffer Label -->
     <span
       class="relative hidden lg:block text-tiny text-upright"
@@ -26,7 +37,13 @@
     </span>
 
     <!-- Main Content -->
-    <slot></slot>
+    <div
+      :class="[
+        'relative flex flex-col items-center h-full py-16 sm:py-0',
+        justifyClass,
+      ]">
+      <slot></slot>
+    </div>
 
     <!-- Right Pattern Label -->
     <span
