@@ -34,14 +34,12 @@
   --font-mono: "Courier New", monospace;
 
   /* Theme */
-  --bg-light: #ffffff;
-  --bg-dark: #1a1a1a;
-  --text-color-light: #213547;
-  --text-color-dark: #d1d5db;
-  --pattern-color-light: #2135472d;
-  --pattern-color-dark: #d1d5db0c;
-  /* --gradient-color-start: #42d392;
---gradient-color-end: #647eff; */
+  --bg-light: #ffffff; /* slate-50 */
+  --bg-dark: #1a1a1a; /* slate-900 */
+  --text-color-light: #213547; /* slate-800 */
+  --text-color-dark: #d1d5db; /* slate-200 */
+  --pattern-color-light: #2135472d; /* slate-800 with 0.18 opacity */
+  --pattern-color-dark: #d1d5db0c; /* slate-200 with 0.05 opacity */
 }
 
 @layer base {
@@ -66,7 +64,7 @@
   }
 
   .text-hover {
-    @apply dark:hover:text-green-300 hover:text-green-600 transition-colors duration-300 ease-in-out;
+    @apply dark:hover:text-green-300 hover:text-green-700 transition-colors duration-300 ease-in-out;
   }
 
   /* border-color (same as tiny in utility) but there is bg (1px divs as devider lines)*/
@@ -86,7 +84,7 @@
   }
 
   .text-tiny {
-    @apply text-[0.6rem] leading-[0.5rem] font-mono dark:text-green-300 text-green-600;
+    @apply text-[0.6rem] leading-[0.5rem] font-mono dark:text-green-300 text-green-700;
   }
 
   .rotate-270 {

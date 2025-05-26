@@ -31,7 +31,7 @@ const tagType = props.as === "button" ? "button" : RouterLink;
 
 // Neccessary if onClick is not directly referenced, it won’t be triggered. Even though onClick is defined and passed, this syntax won’t work properly. See at JobsView.vue
 const handleClick = (event: MouseEvent) => {
-  if (props.as === "button" && props.onClick) {
+  if (props.onClick) {
     props.onClick();
   }
 };
@@ -43,7 +43,7 @@ const handleClick = (event: MouseEvent) => {
     :to="as === 'link' ? to : undefined"
     @click="handleClick"
     :class="[
-      'inline-flex items-center gap-1 text-sm text-green-600 group dark:text-green-300 hover:underline',
+      'inline-flex items-center gap-1 text-sm text-green-700 group dark:text-green-300 hover:underline',
       customClass,
     ]">
     <Icon

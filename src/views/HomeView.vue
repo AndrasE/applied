@@ -32,7 +32,7 @@ const Icon = defineAsyncComponent(() =>
       <h1 class="flex items-center justify-center text-2xl text-center">
         <Icon
           icon="material-symbols-light:font-download-outline-rounded"
-          class="relative top-0.5 text-5xl text-green-600 dark:text-green-300 hover:rotate-90 ease-in-out duration-300" />
+          class="relative top-0.5 text-5xl text-green-700 dark:text-green-300 hover:rotate-90 ease-in-out duration-300" />
         <span
           class="relative underline right-1 decoration-green-600 dark:decoration-green-300"
           >pplied</span
