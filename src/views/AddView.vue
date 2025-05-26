@@ -36,6 +36,7 @@ const toggleLimit = () => {
         customClass="my-10" />
       <ActionButton
         outlineBtn
+        deleteBtn
         label="Delete"
         @="toggleLimit"
         icon="material-symbols:update" />
