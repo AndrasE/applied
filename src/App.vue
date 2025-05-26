@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router'
-import Navbar from '@/components/Navbar.vue';
+import { RouterView } from "vue-router";
+import Navbar from "@/components/Navbar.vue";
 </script>
 
 <template>
   <Navbar />
 
-  <transition name="fade" mode="out-in">
-    <RouterView :key="$route.fullPath" />
-  </transition>
+  <RouterView v-slot="{ Component }">
+    <transition name="fade" mode="out-in">
+      <component :is="Component" :key="$route.fullPath" />
+    </transition>
+  </RouterView>
 </template>
