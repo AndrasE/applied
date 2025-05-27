@@ -14,6 +14,7 @@ const toggleLimit = () => {
     <main
       class="w-full text-green-700 border-solid bg-black-900 border-y-1 border-color">
       <h1 class="text-3xl font-bold">Add</h1>
+
       <RouterButton
         to="/jobs"
         label="To Job"
@@ -27,18 +28,9 @@ const toggleLimit = () => {
         @click="toggleLimit"
         customClass="my-10" />
 
-      <ActionButton
-        outlineBtn
-        label="Update"
-        @="toggleLimit"
-        icon="material-symbols:update"
-        customClass="my-10" />
-      <ActionButton
-        outlineBtn
-        deleteBtn
-        label="Delete"
-        @="toggleLimit"
-        icon="material-symbols:update" />
+      <ActionButton outlineBtn label="Update" customClass="my-10" />
+
+      <ActionButton outlineBtn deleteBtn label="Delete" @="toggleLimit" />
     </main>
   </Container>
 </template>
