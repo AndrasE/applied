@@ -12,29 +12,31 @@ const props = withDefaults(
   }>(),
   {
     to: "",
-    iconPosition: "right", // Default icon position
+    iconPosition: "right",
   }
 );
 </script>
 
 <template>
   <component
-    :is="RouterLink"
-    :to="to"
+    :is="to ? RouterLink : 'span'"
+    :to="to || undefined"
     :class="[
       'inline-flex items-center gap-1 text-sm text-green-700 group dark:text-green-300 hover:underline',
       customClass,
     ]">
     <Icon
+      v-if="icon && iconPosition === 'left'"
+      :icon="icon"
       role="presentation"
-      v-if="iconPosition === 'left'"
-      :icon="icon ?? ''"
+      aria-hidden="true"
       class="inline-block transition-opacity duration-200 transform opacity-0 group-hover:opacity-100" />
     {{ label }}
     <Icon
+      v-if="icon && iconPosition !== 'left'"
+      :icon="icon"
       role="presentation"
-      v-if="iconPosition !== 'left'"
-      :icon="icon ?? ''"
+      aria-hidden="true"
       class="inline-block transition-opacity duration-200 transform opacity-0 group-hover:opacity-100" />
   </component>
 </template>
