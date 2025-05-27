@@ -10,15 +10,19 @@ const props = defineProps<{
   outlineBtn?: boolean;
 }>();
 
-function handleClick() {
-  // click handler logic
+const emit = defineEmits<{
+  (e: "click", event: MouseEvent): void;
+}>();
+
+function handleClick(event: MouseEvent) {
+  emit("click", event);
 }
 
 const buttonClass = computed(() => {
   if (!props.outlineBtn) {
     return [
       "inline-flex items-center text-sm text-green-700 group dark:text-green-300 hover:underline cursor-pointer",
-      props.customClass,
+      props.customClass || "",
     ];
   }
 
@@ -27,20 +31,17 @@ const buttonClass = computed(() => {
   const theme = props.deleteBtn
     ? "text-red-700 dark:text-red-300 bg-red-100 dark:bg-red-300/10 hover:dark:bg-red-500 hover:bg-red-300 hover:text-slate-800 hover:dark:text-slate-200"
     : "text-green-700 dark:text-green-300 bg-green-100 dark:bg-green-300/10 hover:dark:bg-green-600 hover:bg-green-300 hover:text-slate-800 hover:dark:text-slate-200";
-  return [base, theme, props.customClass];
+  return [base, theme, props.customClass || ""];
 });
 </script>
 
 <template>
-  <component
-    :is="'button'"
-    type="button"
-    @click="handleClick"
-    :class="buttonClass">
+  <button type="button" @click="handleClick" :class="buttonClass">
     {{ label }}
     <Icon
-      v-if="icon && !outlineBtn"
+      v-if="icon"
       :icon="icon"
-      class="inline-block transition-opacity duration-200 transform opacity-0 group-hover:opacity-100" />
-  </component>
+      aria-hidden="true"
+      class="inline-block transition-opacity duration-200 transform opacity-0 group-hover:opacity-100 ml-1" />
+  </button>
 </template>
