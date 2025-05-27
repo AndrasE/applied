@@ -22,7 +22,7 @@ const props = withDefaults(
     :is="to ? RouterLink : 'span'"
     :to="to || undefined"
     :class="[
-      'inline-flex items-center gap-1 text-sm text-green-700 group dark:text-green-300 hover:underline',
+      'inline-flex items-center gap-1 text-sm text-green-700 group dark:text-green-300 hover:underline cursor-pointer',
       customClass,
     ]">
     <Icon

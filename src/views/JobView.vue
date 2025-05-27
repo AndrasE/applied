@@ -5,7 +5,7 @@ import jobs from "@/data/jobs.json";
 import Divider from "@/components/Divider.vue";
 import PageHeader from "@/components/PageHeader.vue";
 import JobCard from "@/components/JobCard.vue";
-import ButtonLinkWithIcon from "@/components/ButtonLinkWithIcon.vue";
+import RouterButton from "@/components/RouterButton.vue";
 
 const route = useRoute();
 const jobId = Number(route.params.id);
@@ -25,10 +25,10 @@ const job = isValidId ? jobs.find((j) => j.id === jobId) : null;
         class="margin950"
         :key="job.id"
         :job="job"
-        :showLinkButton="false" />
+        viewingMode="viewing" />
 
       <Divider label="prev list" labelPosition="bottom" />
-      <ButtonLinkWithIcon
+      <RouterButton
         as="link"
         :to="`/jobs`"
         iconPosition="left"

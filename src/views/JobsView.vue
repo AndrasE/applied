@@ -7,6 +7,7 @@ import JobCard from "@/components/JobCard.vue";
 import { Icon } from "@iconify/vue";
 import jobsRaw from "@/data/jobs.json";
 import ButtonLinkWithIcon from "@/components/ButtonLinkWithIcon.vue";
+import RouterButton from "@/components/RouterButton.vue";
 
 interface Job {
   id: number;
@@ -74,12 +75,14 @@ const changeView = (style: string) => {
             :key="job.id"
             :job="job"
             :char-limit="200"
-            :showLinkButton="true" />
+            :showLinkButton="true"
+            viewingMode="browsing" />
         </div>
       </template>
       <template v-else>
         <div class="flex flex-col gap-4 margin950">
           <JobCard
+            viewingMode="viewing"
             v-for="job in visibleJobs"
             :key="job.id"
             :job="job"
@@ -92,7 +95,7 @@ const changeView = (style: string) => {
     <Divider label="@click toggleLimit" labelPosition="bottom" />
 
     <!-- increase how many listing shown -->
-    <ButtonLinkWithIcon
+    <RouterButton
       as="button"
       :label="limit === DEFAULT_LIMIT ? 'Browse all' : 'See less'"
       :icon="
