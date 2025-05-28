@@ -3,7 +3,7 @@ import { ref, computed } from "vue";
 import Container from "@/components/Container.vue";
 import PageHeader from "@/components/PageHeader.vue";
 import Divider from "@/components/Divider.vue";
-import JobCard from "@/components/JobCard.vue";
+import JobCard from "@/components/JobCard33.vue";
 import { Icon } from "@iconify/vue";
 import jobsRaw from "@/data/jobs.json";
 import ButtonLinkWithIcon from "@/components/ButtonLinkWithIcon.vue";

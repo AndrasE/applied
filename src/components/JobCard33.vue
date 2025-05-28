@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, reactive } from "vue";
-import ButtonLinkWithIcon from "./ButtonLinkWithIcon.vue";
+import ActionButton from "./ActionButton.vue";
+import RouterButton from "./RouterButton.vue";
 
 interface Job {
   id: number;
@@ -10,12 +11,16 @@ interface Job {
   link: string;
 }
 
-const props = defineProps<{
-  job: Job;
-  charLimit?: number;
-  viewingMode: "browsing" | "viewing" | "editing" | "adding";
-  editable?: boolean;
-}>();
+const props = withDefaults(
+  defineProps<{
+    job: Job;
+    charLimit?: number;
+  }>(),
+  {
+    charLimit: undefined,
+    buttonType: undefined,
+  }
+);
 
 const emit = defineEmits<{
   (e: "update", job: Job): void;
@@ -33,23 +38,11 @@ const emitUpdate = () => {
 
 <template>
   <div aria-label="job card" class="p-4 border rounded border-color">
-    <!-- Job Title -->
+    <!-- Editable Title -->
     <h2 class="mb-1 text-lg">
-      <!-- 'browsing' or 'viewing' mode -->
       <template v-if="viewingMode === 'browsing' || viewingMode === 'viewing'">
         {{ job.title }}
       </template>
-
-      <!-- 'editing' mode -->
-      <template v-else-if="viewingMode === 'editing'">
-        <input
-          v-model="editableJob.title"
-          class="w-full p-1 border border-color rounded"
-          type="text"
-          placeholder="Job title" />
-      </template>
-
-      <!-- 'adding' mode -->
       <template v-else>
         <input
           v-model="editableJob.title"
@@ -59,21 +52,11 @@ const emitUpdate = () => {
       </template>
     </h2>
 
-    <!-- Job Company -->
+    <!-- Editable Company -->
     <p class="mb-2 text-sm">
-      <!-- 'browsing' or 'viewing' mode -->
       <template v-if="viewingMode === 'browsing' || viewingMode === 'viewing'">
         {{ job.company }}
       </template>
-      <!-- 'editing' mode -->
-      <template v-else-if="viewingMode === 'editing'">
-        <input
-          v-model="editableJob.company"
-          class="w-full p-1 border border-color rounded"
-          type="text"
-          placeholder="Company name" />
-      </template>
-      <!-- 'adding' mode -->
       <template v-else>
         <input
           v-model="editableJob.company"

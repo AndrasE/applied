@@ -4,7 +4,7 @@ import Container from "@/components/Container.vue";
 import jobs from "@/data/jobs.json";
 import Divider from "@/components/Divider.vue";
 import PageHeader from "@/components/PageHeader.vue";
-import JobCard from "@/components/JobCard.vue";
+import JobCard from "@/components/JobCard33.vue";
 import RouterButton from "@/components/RouterButton.vue";
 
 const route = useRoute();
