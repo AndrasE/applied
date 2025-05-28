@@ -61,7 +61,7 @@ const changeView = (style: string) => {
     </div>
 
     <Divider
-      :label="viewStyle === 'grid' ? 'browsing grid' : 'browsing flex '"
+      :label="viewStyle === 'grid' ? 'grid cols' : 'flex col'"
       labelPosition="top" />
 
     <!-- job listing cards list or grid view -->
@@ -71,10 +71,11 @@ const changeView = (style: string) => {
           class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 margin950">
           <JobCard
             v-for="job in visibleJobs"
-            viewingMode="browsing"
             :key="job.id"
             :job="job"
-            :char-limit="200" />
+            :char-limit="200"
+            :showLinkButton="true"
+            :viewingMode="'browsing'" />
         </div>
       </template>
       <template v-else>

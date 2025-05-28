@@ -17,10 +17,6 @@ const props = defineProps<{
 }>();
 console.log("Viewing mode received:", props.viewingMode);
 
-const emit = defineEmits<{
-  (e: "update", job: Job): void;
-}>();
-
 // Local reactive copy to allow editing
 const editableJob = reactive({ ...props.job });
 
@@ -50,6 +46,11 @@ const truncatedDescription = computed(() => {
   const desc = props.job.description;
   return desc.length > limit.value ? desc.slice(0, limit.value) + "..." : desc;
 });
+
+const emit = defineEmits<{
+  (e: "update", job: Job): void;
+  (e: "delete", id: number): void;
+}>();
 </script>
 
 <template>
@@ -87,7 +88,7 @@ const truncatedDescription = computed(() => {
     </p>
 
     <!-- Job Description -->
-    <p class="mb-2 text-sm text-justify break-words">
+    <p class="text-sm text-justify break-words">
       <!-- 'browsing' or 'viewing' mode -->
       <template v-if="viewingMode === 'browsing' || viewingMode === 'viewing'">
         <!-- Truncate description if too long -->
@@ -97,19 +98,55 @@ const truncatedDescription = computed(() => {
       <template v-else>
         <textarea
           v-model="editableJob.description"
-          rows="18"
+          rows="14"
           class="w-full p-1 custom-scrollbar border border-color rounded"
           placeholder="Job description"></textarea>
       </template>
     </p>
 
     <!-- Action Buttons -->
-    <div class="flex justify-start items-center mt-2">
+    <div
+      class="flex flex-col sm:flex-row justify-between sm:items-center mt-4 gap-2">
+      <!-- 'browsing' mode: browsing -->
       <ButtonLinkWithIcon
         v-if="viewingMode === 'browsing'"
         :to="`/jobs/${job.id}`"
         label="Read more"
         icon="heroicons-solid:arrow-right" />
+
+      <!-- Button group aligned right -->
+      <div class="flex-1 flex justify-end gap-2">
+        <!-- 'viewing' mode: viewing -->
+        <template v-if="viewingMode === 'viewing'">
+          <ButtonLinkWithIcon
+            label="Delete job"
+            icon-position="left"
+            icon="heroicons-solid:trash"
+            :to="`/jobs`"
+            @click="$emit('delete', job.id)" />
+          <ButtonLinkWithIcon
+            :to="`/jobs/${job.id}/update`"
+            label="Update job"
+            icon-position="left"
+            icon="heroicons-solid:pencil-alt"
+            @click="$emit('update', editableJob)" />
+        </template>
+
+        <!-- viewing mode: editing -->
+        <template v-else-if="viewingMode === 'editing'">
+          <ButtonLinkWithIcon
+            :to="`/jobs/${job.id}`"
+            label="Cancel"
+            icon="heroicons-solid:x"
+            customClass="pb-2" />
+          <ButtonLinkWithIcon
+            label="Save changes"
+            icon-position="left"
+            icon="heroicons-solid:check"
+            customClass="pb-2"
+            @click="$emit('update', editableJob)" />
+        </template>
+      </div>
     </div>
   </div>
 </template>
