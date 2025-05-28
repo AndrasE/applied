@@ -18,9 +18,9 @@ const job = isValidId ? jobs.find((j) => j.id === jobId) : null;
   <Container v-if="job">
     <PageHeader label="Job details" />
 
-    <div class="flex flex-col items-center justify-between margin950">
-      <Divider label="viewing mode" labelPosition="top" />
-
+    <Divider label="viewing mode" labelPosition="top" />
+    <div
+      class="flex flex-col items-center justify-between sm:gap-6 gap-0 margin950">
       <JobCard viewingMode="viewing" :key="job.id" :job="job" />
 
       <Divider label="prev list" labelPosition="bottom" />
@@ -30,7 +30,7 @@ const job = isValidId ? jobs.find((j) => j.id === jobId) : null;
         iconPosition="left"
         label="Back to job listings"
         icon="heroicons-solid:arrow-left"
-        customClass="relative right-3  sm:py-5" />
+        customClass="relative right-3 py-4" />
     </div>
   </Container>
 

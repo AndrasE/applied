@@ -101,6 +101,6 @@ const changeView = (style: string) => {
           : 'heroicons-solid:arrow-up'
       "
       :onClick="toggleLimit"
-      customClass="relative left-3 pb-9 sm:py-5" />
+      customClass="relative left-3 pb-8 sm:py-5" />
   </Container>
 </template>

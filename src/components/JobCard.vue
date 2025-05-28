@@ -98,7 +98,7 @@ const emit = defineEmits<{
       <template v-else>
         <textarea
           v-model="editableJob.description"
-          rows="14"
+          rows="22"
           class="w-full p-1 custom-scrollbar border border-color rounded"
           placeholder="Job description"></textarea>
       </template>
@@ -119,12 +119,6 @@ const emit = defineEmits<{
         <!-- 'viewing' mode: viewing -->
         <template v-if="viewingMode === 'viewing'">
           <ButtonLinkWithIcon
-            label="Delete job"
-            icon-position="left"
-            icon="heroicons-solid:trash"
-            :to="`/jobs`"
-            @click="$emit('delete', job.id)" />
-          <ButtonLinkWithIcon
             :to="`/jobs/${job.id}/update`"
             label="Update job"
             icon-position="left"
@@ -135,15 +129,15 @@ const emit = defineEmits<{
         <!-- viewing mode: editing -->
         <template v-else-if="viewingMode === 'editing'">
           <ButtonLinkWithIcon
-            :to="`/jobs/${job.id}`"
-            label="Cancel"
-            icon="heroicons-solid:x"
-            customClass="pb-2" />
+            label="Delete job"
+            icon-position="left"
+            icon="heroicons-solid:trash"
+            :to="`/jobs`"
+            @click="$emit('delete', job.id)" />
           <ButtonLinkWithIcon
             label="Save changes"
             icon-position="left"
             icon="heroicons-solid:check"
-            customClass="pb-2"
             @click="$emit('update', editableJob)" />
         </template>
       </div>
