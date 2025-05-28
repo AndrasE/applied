@@ -4,7 +4,7 @@ import Container from "@/components/Container.vue";
 import jobs from "@/data/jobs.json";
 import Divider from "@/components/Divider.vue";
 import PageHeader from "@/components/PageHeader.vue";
-import JobCard from "@/components/JobCard33.vue";
+import JobCard from "@/components/JobCard.vue";
 import RouterButton from "@/components/RouterButton.vue";
 
 const route = useRoute();
@@ -23,9 +23,9 @@ const job = isValidId ? jobs.find((j) => j.id === jobId) : null;
 
       <JobCard
         class="margin950"
+        viewingMode="viewing"
         :key="job.id"
-        :job="job"
-        viewingMode="viewing" />
+        :job="job" />
 
       <Divider label="prev list" labelPosition="bottom" />
       <RouterButton

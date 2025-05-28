@@ -4,7 +4,7 @@ import Container from "@/components/Container.vue";
 import jobs from "@/data/jobs.json";
 import Divider from "@/components/Divider.vue";
 import PageHeader from "@/components/PageHeader.vue";
-import JobCard from "@/components/JobCard33.vue";
+import JobCard from "@/components/JobCard.vue";
 import ButtonLinkWithIcon from "@/components/ButtonLinkWithIcon.vue";
 
 const route = useRoute();
@@ -22,11 +22,10 @@ const job = isValidId ? jobs.find((j) => j.id === jobId) : null;
       <Divider label="editable" labelPosition="top" />
 
       <JobCard
-        editable
         class="w-full"
         :key="job.id"
         :job="job"
-        :showLinkButton="false" />
+        :viewingMode="'editing'" />
 
       <Divider label="prev list" labelPosition="bottom" />
       <ButtonLinkWithIcon

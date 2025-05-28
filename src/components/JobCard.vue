@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, reactive } from "vue";
+import { computed, reactive, watch } from "vue";
 import ButtonLinkWithIcon from "./ButtonLinkWithIcon.vue";
 
 interface Job {
@@ -16,6 +16,7 @@ const props = defineProps<{
   viewingMode: "browsing" | "viewing" | "editing" | "adding";
   editable?: boolean;
 }>();
+console.log("Viewing mode received:", props.viewingMode);
 
 const emit = defineEmits<{
   (e: "update", job: Job): void;
@@ -23,6 +24,24 @@ const emit = defineEmits<{
 
 // Local reactive copy to allow editing
 const editableJob = reactive({ ...props.job });
+
+// Watch for mode changes and reset editable fields in 'adding' mode
+watch(
+  () => props.viewingMode,
+  (newMode) => {
+    if (newMode === "adding") {
+      // Clear editable fields for new entry
+      editableJob.title = "";
+      editableJob.company = "";
+      editableJob.description = "";
+      editableJob.link = "";
+    } else if (newMode === "editing") {
+      // Reset to current job values for editing
+      Object.assign(editableJob, props.job);
+    }
+  },
+  { immediate: true } // Run it on first load
+);
 
 const limit = computed(() => props.charLimit ?? props.job.description.length);
 
@@ -40,17 +59,8 @@ const emitUpdate = () => {
         {{ job.title }}
       </template>
 
-      <!-- 'editing' mode -->
-      <template v-else-if="viewingMode === 'editing'">
-        <input
-          v-model="editableJob.title"
-          class="w-full p-1 border border-color rounded"
-          type="text"
-          placeholder="Job title" />
-      </template>
-
-      <!-- 'adding' mode -->
-      <template v-else>
+      <!-- 'editing' or 'adding' mode (adding mode title reset to empty string) -->
+      <template v-else">
         <input
           v-model="editableJob.title"
           class="w-full p-1 border border-color rounded"
@@ -65,15 +75,7 @@ const emitUpdate = () => {
       <template v-if="viewingMode === 'browsing' || viewingMode === 'viewing'">
         {{ job.company }}
       </template>
-      <!-- 'editing' mode -->
-      <template v-else-if="viewingMode === 'editing'">
-        <input
-          v-model="editableJob.company"
-          class="w-full p-1 border border-color rounded"
-          type="text"
-          placeholder="Company name" />
-      </template>
-      <!-- 'adding' mode -->
+      <!--  'editing' or 'adding' mode (adding mode company reset to empty string) -->
       <template v-else>
         <input
           v-model="editableJob.company"
@@ -83,9 +85,11 @@ const emitUpdate = () => {
       </template>
     </p>
 
-    <!-- Editable Description -->
+    <!-- Job Description -->
     <p class="mb-2 text-sm text-justify break-words">
-      <template v-if="viewingMode === 'viewing'">
+      <!-- 'browsing' or 'viewing' mode -->
+      <template v-if="viewingMode === 'browsing' || viewingMode === 'viewing'">
+        <!-- Truncate description if too long -->
         {{
           job.description.length > limit
             ? job.description.slice(0, limit) + "..."
@@ -94,6 +98,7 @@ const emitUpdate = () => {
         {{ job.description.slice(0, limit)
         }}{{ job.description.length > limit ? "..." : "" }}
       </template>
+      <!-- 'editing' or 'adding' mode (adding mode description reset to empty string) -->
       <template v-else>
         <textarea
           v-model="editableJob.description"
@@ -105,38 +110,19 @@ const emitUpdate = () => {
 
     <!-- Action Buttons -->
     <div class="flex justify-start items-center mt-2">
-      <RouterButton
-        v-if="!editable"
+      <ButtonLinkWithIcon
+        v-if="viewingMode === 'browsing'"
         :to="`/jobs/${job.id}`"
         label="Read more"
         icon="heroicons-solid:arrow-right" />
     </div>
     <div class="flex justify-end items-center mt-2">
       <ActionButton
-        v-if="!editable && buttonType === 'update'"
         outlineBtn
         deleteBtn
-        label="Delete"
+        label="asdasd"
         @click="emitUpdate"
         customClass="mt-2" />
-      <ActionButton
-        v-if="!editable && buttonType === 'update'"
-        outlineBtn
-        label="Update"
-        @click="emitUpdate"
-        customClass="mt-2" />
-
-      <ActionButton
-        v-if="editable && buttonType === 'delete'"
-        outlineBtn
-        deleteBtn
-        label="Cancel"
-        @click="emitUpdate" />
-      <ActionButton
-        v-if="editable && buttonType === 'delete'"
-        outlineBtn
-        label="Update"
-        @click="emitUpdate" />
     </div>
   </div>
 </template>

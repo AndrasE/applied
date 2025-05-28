@@ -3,10 +3,9 @@ import { ref, computed } from "vue";
 import Container from "@/components/Container.vue";
 import PageHeader from "@/components/PageHeader.vue";
 import Divider from "@/components/Divider.vue";
-import JobCard from "@/components/JobCard33.vue";
+import JobCard from "@/components/JobCard.vue";
 import { Icon } from "@iconify/vue";
 import jobsRaw from "@/data/jobs.json";
-import ButtonLinkWithIcon from "@/components/ButtonLinkWithIcon.vue";
 import RouterButton from "@/components/RouterButton.vue";
 
 interface Job {
@@ -76,24 +75,22 @@ const changeView = (style: string) => {
             :job="job"
             :char-limit="200"
             :showLinkButton="true"
-            viewingMode="browsing" />
+            :viewingMode="'browsing'" />
         </div>
       </template>
       <template v-else>
         <div class="flex flex-col gap-4 margin950">
           <JobCard
-            viewingMode="viewing"
             v-for="job in visibleJobs"
             :key="job.id"
             :job="job"
             :char-limit="330"
-            :showLinkButton="true" />
+            :viewingMode="'browsing'" />
         </div>
       </template>
     </transition>
 
     <Divider label="@click toggleLimit" labelPosition="bottom" />
-
     <!-- increase how many listing shown -->
     <RouterButton
       as="button"
