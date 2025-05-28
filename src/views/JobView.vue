@@ -22,8 +22,8 @@ const job = isValidId ? jobs.find((j) => j.id === jobId) : null;
       <Divider label="flex flex-col" labelPosition="top" />
 
       <JobCard
-        class="margin950"
         viewingMode="viewing"
+        class="margin950"
         :key="job.id"
         :job="job" />
 

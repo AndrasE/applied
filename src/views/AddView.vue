@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import ActionButton from "@/components/ActionButton.vue";
 import Container from "@/components/Container.vue";
+import JobCard from "@/components/JobCard.vue";
 import RouterButton from "@/components/RouterButton.vue";
 
 const toggleLimit = () => {
@@ -14,6 +15,7 @@ const toggleLimit = () => {
     <main
       class="w-full text-green-700 border-solid bg-black-900 border-y-1 border-color">
       <h1 class="text-3xl font-bold">Add</h1>
+      <JobCard viewingMode="adding" />
 
       <RouterButton
         to="/jobs"

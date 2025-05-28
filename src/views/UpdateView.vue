@@ -19,13 +19,9 @@ const job = isValidId ? jobs.find((j) => j.id === jobId) : null;
     <PageHeader label="Job details" />
 
     <div class="flex flex-col items-center justify-between w-full margin950">
-      <Divider label="editable" labelPosition="top" />
+      <Divider label="viewing mode" labelPosition="top" />
 
-      <JobCard
-        class="w-full"
-        :key="job.id"
-        :job="job"
-        :viewingMode="'editing'" />
+      <JobCard viewingMode="editing" class="w-full" :key="job.id" :job="job" />
 
       <Divider label="prev list" labelPosition="bottom" />
       <ButtonLinkWithIcon

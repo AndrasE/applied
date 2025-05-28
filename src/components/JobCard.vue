@@ -14,7 +14,6 @@ const props = defineProps<{
   job: Job;
   charLimit?: number;
   viewingMode: "browsing" | "viewing" | "editing" | "adding";
-  editable?: boolean;
 }>();
 console.log("Viewing mode received:", props.viewingMode);
 
@@ -43,11 +42,14 @@ watch(
   { immediate: true } // Run it on first load
 );
 
-const limit = computed(() => props.charLimit ?? props.job.description.length);
+const limit = computed(() =>
+  props.charLimit != null ? props.charLimit : props.job.description.length
+);
 
-const emitUpdate = () => {
-  emit("update", { ...editableJob });
-};
+const truncatedDescription = computed(() => {
+  const desc = props.job.description;
+  return desc.length > limit.value ? desc.slice(0, limit.value) + "..." : desc;
+});
 </script>
 
 <template>
@@ -58,9 +60,8 @@ const emitUpdate = () => {
       <template v-if="viewingMode === 'browsing' || viewingMode === 'viewing'">
         {{ job.title }}
       </template>
-
       <!-- 'editing' or 'adding' mode (adding mode title reset to empty string) -->
-      <template v-else">
+      <template v-else>
         <input
           v-model="editableJob.title"
           class="w-full p-1 border border-color rounded"
@@ -90,13 +91,7 @@ const emitUpdate = () => {
       <!-- 'browsing' or 'viewing' mode -->
       <template v-if="viewingMode === 'browsing' || viewingMode === 'viewing'">
         <!-- Truncate description if too long -->
-        {{
-          job.description.length > limit
-            ? job.description.slice(0, limit) + "..."
-            : job.description
-        }}
-        {{ job.description.slice(0, limit)
-        }}{{ job.description.length > limit ? "..." : "" }}
+        {{ truncatedDescription }}
       </template>
       <!-- 'editing' or 'adding' mode (adding mode description reset to empty string) -->
       <template v-else>
@@ -115,14 +110,6 @@ const emitUpdate = () => {
         :to="`/jobs/${job.id}`"
         label="Read more"
         icon="heroicons-solid:arrow-right" />
-    </div>
-    <div class="flex justify-end items-center mt-2">
-      <ActionButton
-        outlineBtn
-        deleteBtn
-        label="asdasd"
-        @click="emitUpdate"
-        customClass="mt-2" />
     </div>
   </div>
 </template>
