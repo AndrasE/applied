@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, reactive, watch } from "vue";
-import ButtonLinkWithIcon from "./ButtonLinkWithIcon.vue";
 import RouterButton from "./RouterButton.vue";
 
 interface Job {
@@ -39,15 +38,18 @@ watch(
   { immediate: true } // Run it on first load
 );
 
+// Character limit for description or fallback to full length
 const limit = computed(() =>
   props.charLimit != null ? props.charLimit : props.job.description.length
 );
 
+// Truncate description based on character limit
 const truncatedDescription = computed(() => {
   const desc = props.job.description;
   return desc.length > limit.value ? desc.slice(0, limit.value) + "..." : desc;
 });
 
+// Emit events for update and delete actions
 const emit = defineEmits<{
   (e: "update", job: Job): void;
   (e: "delete", id: number): void;
@@ -55,90 +57,89 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <div aria-label="job card" class="p-4 border rounded border-color">
-    <!-- Job Title -->
+  <div aria-label="job card" class="p-4 rounded border border-color">
+    <!-- Job title -->
     <h2 class="mb-1 text-lg">
-      <!-- 'browsing' or 'viewing' mode -->
+      <!-- Browse or view mode -->
       <template v-if="viewingMode === 'browsing' || viewingMode === 'viewing'">
         {{ job.title }}
       </template>
-      <!-- 'editing' or 'adding' mode (adding mode title reset to empty string) -->
+      <!-- Update or add mode -->
       <template v-else>
         <input
           v-model="editableJob.title"
-          class="w-full p-1 border border-color rounded"
           type="text"
+          class="w-full rounded border border-color p-1"
           placeholder="Job title" />
       </template>
     </h2>
 
-    <!-- Job Company -->
+    <!-- Company name -->
     <p class="mb-2 text-sm">
-      <!-- 'browsing' or 'viewing' mode -->
+      <!-- Browse or view mode -->
       <template v-if="viewingMode === 'browsing' || viewingMode === 'viewing'">
         {{ job.company }}
       </template>
-      <!--  'editing' or 'adding' mode (adding mode company reset to empty string) -->
+      <!-- Update or add mode -->
       <template v-else>
         <input
           v-model="editableJob.company"
-          class="w-full p-1 border border-color rounded"
           type="text"
+          class="w-full rounded border border-color p-1"
           placeholder="Company name" />
       </template>
     </p>
 
-    <!-- Job Description -->
+    <!-- Description -->
     <p class="text-sm text-justify break-words">
-      <!-- 'browsing' or 'viewing' mode -->
+      <!--  Browse or view mode -->
       <template v-if="viewingMode === 'browsing' || viewingMode === 'viewing'">
-        <!-- Truncate description if too long -->
         {{ truncatedDescription }}
       </template>
-      <!-- 'editing' or 'adding' mode (adding mode description reset to empty string) -->
+      <!-- Update or add mode -->
       <template v-else>
         <textarea
           v-model="editableJob.description"
-          class="w-full p-1 custom-scrollbar border border-color rounded"
+          class="w-full rounded border border-color p-1 custom-scrollbar"
           placeholder="Job description"></textarea>
       </template>
     </p>
 
-    <!-- Action Buttons -->
+    <!-- Buttons and links based on mode -->
     <div class="flex">
-      <!-- 'browsing' mode: browsing -->
+      <!-- Browse mode  -->
       <RouterButton
         v-if="viewingMode === 'browsing'"
         :to="`/jobs/${job.id}`"
         label="Read more"
         icon="heroicons-solid:arrow-right"
         custom-class="pt-2" />
-
-      <!-- Button group aligned right -->
-      <div class="flex-1 flex justify-end gap-2">
-        <!-- 'viewing' mode: viewing -->
+      <div class="flex flex-1 justify-end gap-2">
+        <!-- Viewmode -->
         <template v-if="viewingMode === 'viewing'">
           <RouterButton
             :to="`/jobs/${job.id}/update`"
             label="Update job"
-            icon-position="left"
             icon="heroicons-solid:pencil-alt"
-            @click="$emit('update', editableJob)"
-            custom-class="pt-2" />
+            icon-position="left"
+            custom-class="pt-2"
+            @click="$emit('update', editableJob)" />
         </template>
-
-        <!-- viewing mode: editing -->
+        <!-- Edit mode -->
         <template v-else-if="viewingMode === 'editing'">
           <RouterButton
-            label="Delete job"
-            icon-position="left"
-            icon="heroicons-solid:trash"
             :to="`/jobs`"
+            label="Delete job"
+            icon="heroicons-solid:trash"
+            icon-position="left"
+            custom-class="pt-2"
             @click="$emit('delete', job.id)" />
           <RouterButton
+            :to="`/jobs/${job.id}`"
             label="Save changes"
-            icon-position="left"
             icon="heroicons-solid:check"
+            icon-position="left"
+            custom-class="pt-2"
             @click="$emit('update', editableJob)" />
         </template>
       </div>
