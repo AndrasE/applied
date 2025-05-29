@@ -16,13 +16,13 @@ const job = isValidId ? jobs.find((j) => j.id === jobId) : null;
 
 <template>
   <Container v-if="job">
-    <PageHeader label="Job details" />
+    <PageHeader label="Update job" />
     <Divider label="editing mode" labelPosition="top" />
 
     <div class="flex flex-col items-center w-full justify-between margin950">
       <JobCard
         viewingMode="editing"
-        class="w-full border-0"
+        class="w-full sm:border-0"
         :key="job.id"
         :job="job" />
 
@@ -33,7 +33,7 @@ const job = isValidId ? jobs.find((j) => j.id === jobId) : null;
         iconPosition="left"
         label="Back to job listings"
         icon="heroicons-solid:arrow-left"
-        customClass="relative right-3 py-4" />
+        customClass="relative right-3  py-4" />
     </div>
   </Container>
 

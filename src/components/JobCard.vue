@@ -98,7 +98,7 @@ const emit = defineEmits<{
       <template v-else>
         <textarea
           v-model="editableJob.description"
-          rows="22"
+          rows="33"
           class="w-full p-1 custom-scrollbar border border-color rounded"
           placeholder="Job description"></textarea>
       </template>

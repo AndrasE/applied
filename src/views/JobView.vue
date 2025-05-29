@@ -19,18 +19,18 @@ const job = isValidId ? jobs.find((j) => j.id === jobId) : null;
     <PageHeader label="Job details" />
 
     <Divider label="viewing mode" labelPosition="top" />
-    <div
-      class="flex flex-col items-center justify-between sm:gap-6 gap-0 margin950">
+    <div class="flex flex-col items-center justify-between gap-4 margin950">
       <JobCard viewingMode="viewing" :key="job.id" :job="job" />
 
       <Divider label="prev list" labelPosition="bottom" />
-
-      <RouterButton
-        :to="`/jobs`"
-        iconPosition="left"
-        label="Back to job listings"
-        icon="heroicons-solid:arrow-left"
-        customClass="relative right-3 py-4" />
+      <div class="flex justify-center my-5 bg-yellow-800">
+        <RouterButton
+          :to="`/jobs`"
+          iconPosition="left"
+          label="Back to job listings"
+          icon="heroicons-solid:arrow-left"
+          customClass="pd-3 " />
+      </div>
     </div>
   </Container>
 
