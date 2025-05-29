@@ -9,6 +9,7 @@ const props = withDefaults(
     label: string;
     icon?: string;
     iconPosition?: "left" | "right";
+    customClass?: string;
   }>(),
   {
     to: "",
@@ -26,21 +27,23 @@ const handleClick = (event: MouseEvent) => {
 
 <template>
   <component
+    role="button"
     :is="to ? RouterLink : 'span'"
     :to="to || undefined"
     :onclick="handleClick"
-    class="inline-flex items-center text-sm group gap-1 hover:underline cursor-pointer text-[var(--green-accent-light)] dark:text-[var(--green-accent-dark)]">
+    :class="[
+      'inline-flex items-center text-sm group gap-1 hover:underline cursor-pointer text-[var(--green-accent-light)] dark:text-[var(--green-accent-dark)]',
+      customClass,
+    ]">
     <Icon
       v-if="icon && iconPosition === 'left'"
       :icon="icon"
       role="presentation"
       aria-hidden="true"
       class="inline-block transition-opacity duration-200 transform opacity-0 group-hover:opacity-100" />
-
     <span>
       {{ label }}
     </span>
-
     <Icon
       v-if="icon && iconPosition !== 'left'"
       :icon="icon"
