@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, reactive, watch } from "vue";
 import ButtonLinkWithIcon from "./ButtonLinkWithIcon.vue";
+import RouterButton from "./RouterButton.vue";
 
 interface Job {
   id: number;
@@ -105,10 +106,9 @@ const emit = defineEmits<{
     </p>
 
     <!-- Action Buttons -->
-    <div
-      class="flex flex-col sm:flex-row justify-between sm:items-center mt-4 gap-2">
+    <div class="flex mt-4">
       <!-- 'browsing' mode: browsing -->
-      <ButtonLinkWithIcon
+      <RouterButton
         v-if="viewingMode === 'browsing'"
         :to="`/jobs/${job.id}`"
         label="Read more"
@@ -118,7 +118,7 @@ const emit = defineEmits<{
       <div class="flex-1 flex justify-end gap-2">
         <!-- 'viewing' mode: viewing -->
         <template v-if="viewingMode === 'viewing'">
-          <ButtonLinkWithIcon
+          <RouterButton
             :to="`/jobs/${job.id}/update`"
             label="Update job"
             icon-position="left"
@@ -128,13 +128,13 @@ const emit = defineEmits<{
 
         <!-- viewing mode: editing -->
         <template v-else-if="viewingMode === 'editing'">
-          <ButtonLinkWithIcon
+          <RouterButton
             label="Delete job"
             icon-position="left"
             icon="heroicons-solid:trash"
             :to="`/jobs`"
             @click="$emit('delete', job.id)" />
-          <ButtonLinkWithIcon
+          <RouterButton
             label="Save changes"
             icon-position="left"
             icon="heroicons-solid:check"

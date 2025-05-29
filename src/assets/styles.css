@@ -173,6 +173,13 @@
   }
 }
 
+/* Adjust padding for to the visablity of pattern label above */
+@media (max-width: 639px) {
+  .margin950 {
+    margin: 0 1rem;
+  }
+}
+
 /* Navbar setup so no overlap on content */
 @media (min-width: 640px) {
   body {

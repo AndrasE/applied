@@ -25,16 +25,14 @@ const job = isValidId ? jobs.find((j) => j.id === jobId) : null;
         class="w-full sm:border-0"
         :key="job.id"
         :job="job" />
-
-      <Divider label="prev list" labelPosition="bottom" />
-      <ButtonLinkWithIcon
-        as="link"
-        :to="`/jobs`"
-        iconPosition="left"
-        label="Back to job listings"
-        icon="heroicons-solid:arrow-left"
-        customClass="relative right-3  py-4" />
     </div>
+    <Divider label="prev list" labelPosition="bottom" />
+    <ButtonLinkWithIcon
+      as="link"
+      :to="`/jobs`"
+      iconPosition="left"
+      label="Back to job listings"
+      icon="heroicons-solid:arrow-left" />
   </Container>
 
   <p v-else class="p-6">Job not found.</p>

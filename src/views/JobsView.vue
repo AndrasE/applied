@@ -92,7 +92,7 @@ const changeView = (style: string) => {
 
     <Divider label="@click toggleLimit" labelPosition="bottom" />
     <!-- increase how many listing shown -->
-    <div class="flex justify-center my-5 bg-yellow-900">
+    <div class="h-15 flex items-center justify-center">
       <RouterButton
         :label="limit === DEFAULT_LIMIT ? 'Browse all' : 'See less'"
         :icon="
@@ -100,8 +100,7 @@ const changeView = (style: string) => {
             ? 'heroicons-solid:arrow-down'
             : 'heroicons-solid:arrow-up'
         "
-        :onClick="toggleLimit"
-        customClass="pl-3 " />
+        :onClick="toggleLimit" />
     </div>
   </Container>
 </template>
