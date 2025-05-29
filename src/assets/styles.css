@@ -40,6 +40,8 @@
   --text-color-dark: #d1d5db; /* slate-200 */
   --pattern-color-light: #2135472d; /* slate-800 with 0.18 opacity */
   --pattern-color-dark: #d1d5db0c; /* slate-200 with 0.05 opacity */
+  --green-accent-light: #15803d; /* green-700 */
+  --green-accent-dark: #7bf1a8; /* green-300 */
 }
 
 @layer base {

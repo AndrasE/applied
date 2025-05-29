@@ -47,7 +47,10 @@ const changeView = (style: string) => {
         icon="heroicons-solid:view-list"
         :class="[
           'text-xl text-hover',
-          { 'dark:text-green-300 text-green-700': viewStyle === 'list' },
+          {
+            'text-[var(--green-accent-light)] dark:text-[var(--green-accent-dark)]':
+              viewStyle === 'list',
+          },
         ]" />
       <Icon
         type="button"
@@ -56,7 +59,10 @@ const changeView = (style: string) => {
         icon="flowbite:grid-outline"
         :class="[
           'text-xl text-hover',
-          { 'dark:text-green-300 text-green-700': viewStyle === 'grid' },
+          {
+            'text-[var(--green-accent-light)] dark:text-[var(--green-accent-dark)]':
+              viewStyle === 'grid',
+          },
         ]" />
     </div>
 

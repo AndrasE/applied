@@ -23,13 +23,12 @@ const job = isValidId ? jobs.find((j) => j.id === jobId) : null;
       <JobCard viewingMode="viewing" :key="job.id" :job="job" />
     </div>
     <Divider label="prev list" labelPosition="bottom" />
-    <div class="h-15 flex items-center justify-center">
-      <RouterButton
-        :to="`/jobs`"
-        iconPosition="left"
-        label="Back to job listings"
-        icon="heroicons-solid:arrow-left" />
-    </div>
+
+    <RouterButton
+      :to="`/jobs`"
+      iconPosition="left"
+      label="Back to job listings"
+      icon="heroicons-solid:arrow-left" />
   </Container>
 
   <p v-else class="p-6">Job not found.</p>
