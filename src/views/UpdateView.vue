@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import { useRoute } from "vue-router";
 import Container from "@/components/Container.vue";
-import jobs from "@/data/jobs.json";
 import Divider from "@/components/Divider.vue";
 import PageHeader from "@/components/PageHeader.vue";
 import JobCard from "@/components/JobCard.vue";
-import ButtonLinkWithIcon from "@/components/ButtonLinkWithIcon.vue";
 import RouterButton from "@/components/RouterButton.vue";
+import jobs from "@/data/jobs.json";
 
 const route = useRoute();
 const jobId = Number(route.params.id);
@@ -30,10 +29,11 @@ const job = isValidId ? jobs.find((j) => j.id === jobId) : null;
     <Divider label="prev list" labelPosition="bottom" />
     <RouterButton
       as="link"
-      :to="`/jobs`"
+      :to="`/jobs/${job.id}`"
       iconPosition="left"
-      label="Back to job listings"
-      icon="heroicons-solid:arrow-left" />
+      label="Cancel and go back "
+      icon="heroicons-solid:arrow-left"
+      customClass="pr-5 py-4" />
   </Container>
 
   <p v-else class="p-6">Job not found.</p>

@@ -58,6 +58,13 @@
     color: var(--text-color-dark);
     background-color: var(--bg-dark);
   }
+
+  textarea {
+    resize: vertical; /* Allows only vertical resizing */
+
+    min-height: 300px;
+    max-height: 600px;
+  }
 }
 
 @layer components {

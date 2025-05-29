@@ -99,20 +99,20 @@ const emit = defineEmits<{
       <template v-else>
         <textarea
           v-model="editableJob.description"
-          rows="33"
           class="w-full p-1 custom-scrollbar border border-color rounded"
           placeholder="Job description"></textarea>
       </template>
     </p>
 
     <!-- Action Buttons -->
-    <div class="flex mt-4">
+    <div class="flex">
       <!-- 'browsing' mode: browsing -->
       <RouterButton
         v-if="viewingMode === 'browsing'"
         :to="`/jobs/${job.id}`"
         label="Read more"
-        icon="heroicons-solid:arrow-right" />
+        icon="heroicons-solid:arrow-right"
+        custom-class="pt-2" />
 
       <!-- Button group aligned right -->
       <div class="flex-1 flex justify-end gap-2">
@@ -123,7 +123,8 @@ const emit = defineEmits<{
             label="Update job"
             icon-position="left"
             icon="heroicons-solid:pencil-alt"
-            @click="$emit('update', editableJob)" />
+            @click="$emit('update', editableJob)"
+            custom-class="pt-2" />
         </template>
 
         <!-- viewing mode: editing -->

@@ -39,7 +39,7 @@ const justifyClass = computed(() => {
     <!-- Main Content -->
     <div
       :class="[
-        'relative flex flex-col items-center h-full py-16 sm:py-0',
+        'relative flex flex-col items-center h-full pt-16 pb-20 sm:py-0',
         justifyClass,
       ]">
       <slot></slot>

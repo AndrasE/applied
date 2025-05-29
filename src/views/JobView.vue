@@ -28,7 +28,8 @@ const job = isValidId ? jobs.find((j) => j.id === jobId) : null;
       :to="`/jobs`"
       iconPosition="left"
       label="Back to job listings"
-      icon="heroicons-solid:arrow-left" />
+      icon="heroicons-solid:arrow-left"
+      customClass="pr-5 py-4" />
   </Container>
 
   <p v-else class="p-6">Job not found.</p>
