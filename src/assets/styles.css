@@ -99,7 +99,8 @@
   }
 
   .text-tiny {
-    @apply text-[0.6rem] leading-[0.5rem] font-mono dark:text-green-300 text-green-700;
+    @apply text-[0.6rem] leading-[0.5rem] font-mono dark:text-green-300 text-green-700 sm:tracking-wider
+    tracking-[-2px]; /* Adjusts letter spacing for better readability */
   }
 
   .rotate-270 {
@@ -109,13 +110,11 @@
   .text-orientation {
     writing-mode: vertical-rl; /* Text flows top to bottom, right to left */
     text-orientation: upright; /* Letters remain horizontal */
-    letter-spacing: -2px; /* Adjust letter spacing for better readability */
   }
   @media (min-width: 640px) {
     .text-orientation {
       writing-mode: horizontal-tb; /* Text flows left to right */
       text-orientation: mixed; /* Letters remain horizontal */
-      letter-spacing: 0.4px;
     }
   }
 

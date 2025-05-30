@@ -3,6 +3,8 @@ import { ref } from "vue";
 import Container from "@/components/Container.vue";
 import JobCard from "@/components/JobCard.vue";
 import RouterButton from "@/components/RouterButton.vue";
+import Divider from "@/components/Divider.vue";
+import PageHeader from "@/components/PageHeader.vue";
 
 interface Job {
   id: number;
@@ -22,20 +24,26 @@ const job = ref<Job>({
 </script>
 
 <template>
-  <Container>
-    <main
-      class="w-full text-green-700 border-solid bg-black-900 border-y-1 border-color">
-      <h1 class="text-3xl font-bold">Add</h1>
-      <JobCard viewingMode="adding" :key="job.id" :job="job" />
+  <Container v-if="job">
+    <PageHeader label="Add job" />
+    <Divider label="adding mode" labelPosition="top" />
 
-      <RouterButton
-        to="/jobs"
-        label="To Job"
-        icon="heroicons-solid:arrow-right"
-        iconPosition="right"
-        customClass="my-10" />
-
-      <RouterButton label="Toggle Limit" icon="heroicons-solid:arrow-down" />
-    </main>
+    <div
+      class="flex flex-col items-center w-full justify-between margin950and640 4border-color">
+      <JobCard
+        viewingMode="adding"
+        class="w-full border-0 border-b sm:border-0 rounded-none pb-3 sm:pb-0 pt-0 sm:p-4"
+        :key="job.id"
+        :job="job" />
+    </div>
+    <Divider label="nein geh zurück" labelPosition="bottom" />
+    <RouterButton
+      as="link"
+      :to="`/jobs`"
+      iconPosition="left"
+      label="Cancel and go back "
+      icon="heroicons-solid:arrow-left"
+      customClass="pr-5 py-4 " />
   </Container>
+  <p v-else class="p-6">Job not found.</p>
 </template>

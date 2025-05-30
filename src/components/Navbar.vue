@@ -68,7 +68,7 @@ const route = useRoute();
 
         <div aria-hidden="true" class="block w-full mb-2">
           <div role="presentation" class="h-px tiny-border"></div>
-          <p class="tracking-wider text-center text-tiny">logo</p>
+          <p class="text-center text-tiny">logo</p>
         </div>
       </div>
 
@@ -77,9 +77,7 @@ const route = useRoute();
           aria-hidden="true"
           role="presentation"
           class="flex flex-row items-center sm:block sm:w-full">
-          <p class="tracking-wider text-center text-tiny text-orientation">
-            nav
-          </p>
+          <p class="text-center text-tiny text-orientation">nav</p>
           <div class="w-px h-12 tiny-border sm:w-full sm:h-px"></div>
         </div>
 
@@ -134,7 +132,7 @@ const route = useRoute();
 
       <div class="hidden sm:w-full sm:flex sm:flex-col sm:items-center">
         <div class="block w-full mb-2">
-          <p class="tracking-wider text-center text-tiny">theme</p>
+          <p class="text-center text-tiny">theme</p>
           <div
             aria-hidden="true"
             role="presentation"

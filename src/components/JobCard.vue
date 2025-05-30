@@ -53,6 +53,7 @@ const truncatedDescription = computed(() => {
 const emit = defineEmits<{
   (e: "update", job: Job): void;
   (e: "delete", id: number): void;
+  (e: "add", job: Job): void;
 }>();
 </script>
 
@@ -115,7 +116,7 @@ const emit = defineEmits<{
         icon="heroicons-solid:arrow-right"
         custom-class="pt-2" />
       <div class="flex flex-1 justify-end gap-2">
-        <!-- Viewmode -->
+        <!-- Viewing mode -->
         <template v-if="viewingMode === 'viewing'">
           <RouterButton
             :to="`/jobs/${job.id}/update`"
@@ -125,24 +126,32 @@ const emit = defineEmits<{
             custom-class="pt-2"
             @click="$emit('update', editableJob)" />
         </template>
-        <!-- Edit mode -->
+        <!-- Editing mode -->
         <template v-else-if="viewingMode === 'editing'">
-          <div>
-            <RouterButton
-              :to="`/jobs`"
-              label="Delete job"
-              icon="heroicons-solid:trash"
-              icon-position="left"
-              custom-class="pt-2 xl:pt-0  mr-2  "
-              @click="$emit('delete', job.id)" />
-            <RouterButton
-              :to="`/jobs/${job.id}`"
-              label="Save changes"
-              icon="heroicons-solid:check"
-              icon-position="left"
-              custom-class="pt-2 xl:pt-0 "
-              @click="$emit('update', editableJob)" />
-          </div>
+          <RouterButton
+            :to="`/jobs`"
+            label="Delete job"
+            icon="heroicons-solid:trash"
+            icon-position="left"
+            custom-class="pt-2 xl:pt-0  mr-2  "
+            @click="$emit('delete', job.id)" />
+          <RouterButton
+            :to="`/jobs/${job.id}`"
+            label="Save changes"
+            icon="heroicons-solid:check"
+            icon-position="left"
+            custom-class="pt-2 xl:pt-0 "
+            @click="$emit('update', editableJob)" />
+        </template>
+        <!-- Adding mode -->
+        <template v-else>
+          <RouterButton
+            :to="`/jobs`"
+            label="Add job"
+            icon="heroicons-solid:plus"
+            icon-position="left"
+            custom-class="pt-2 xl:pt-0 mr-2"
+            @click="$emit('add', editableJob)" />
         </template>
       </div>
     </div>
