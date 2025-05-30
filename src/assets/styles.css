@@ -61,9 +61,15 @@
 
   textarea {
     resize: vertical; /* Allows only vertical resizing */
+    min-height: 400px;
+    max-height: 800px;
+  }
 
-    min-height: 300px;
-    max-height: 600px;
+  @media screen and (max-width: 640px) {
+    textarea {
+      min-height: 500px;
+      max-height: 800px;
+    }
   }
 }
 
@@ -120,7 +126,7 @@
   }
 
   /* Adjust padding for to the visablity of pattern label above @media below overwrites */
-  .margin950 {
+  .margin950and640 {
     margin: 1.5rem 1rem;
   }
 
@@ -177,14 +183,14 @@
 
 /* Adjust padding for to the visablity of pattern label above */
 @media (max-width: 949px) {
-  .margin950 {
+  .margin950and640 {
     margin: 1rem;
   }
 }
 
 /* Adjust padding for to the visablity of pattern label above */
 @media (max-width: 639px) {
-  .margin950 {
+  .margin950and640 {
     margin: 0 1rem;
   }
 }

@@ -19,10 +19,11 @@ const job = isValidId ? jobs.find((j) => j.id === jobId) : null;
     <PageHeader label="Update job" />
     <Divider label="editing mode" labelPosition="top" />
 
-    <div class="flex flex-col items-center w-full justify-between margin950">
+    <div
+      class="flex flex-col items-center w-full justify-between margin950and640 4border-color">
       <JobCard
         viewingMode="editing"
-        class="w-full sm:border-0"
+        class="w-full border-0 border-b sm:border-0 rounded-none pb-3 sm:pb-0 pt-0 sm:p-4"
         :key="job.id"
         :job="job" />
     </div>
@@ -33,7 +34,7 @@ const job = isValidId ? jobs.find((j) => j.id === jobId) : null;
       iconPosition="left"
       label="Cancel and go back "
       icon="heroicons-solid:arrow-left"
-      customClass="pr-5 py-4" />
+      customClass="pr-5 py-4 " />
   </Container>
 
   <p v-else class="p-6">Job not found.</p>

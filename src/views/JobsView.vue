@@ -74,7 +74,7 @@ const changeView = (style: string) => {
     <transition name="fade" mode="out-in">
       <template v-if="viewStyle === 'grid'">
         <div
-          class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 margin950">
+          class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 margin950and640">
           <JobCard
             v-for="job in visibleJobs"
             :key="job.id"
@@ -85,7 +85,7 @@ const changeView = (style: string) => {
         </div>
       </template>
       <template v-else>
-        <div class="flex flex-col gap-4 margin950">
+        <div class="flex flex-col gap-4 margin950and640">
           <JobCard
             v-for="job in visibleJobs"
             :key="job.id"

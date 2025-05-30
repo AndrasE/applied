@@ -127,20 +127,22 @@ const emit = defineEmits<{
         </template>
         <!-- Edit mode -->
         <template v-else-if="viewingMode === 'editing'">
-          <RouterButton
-            :to="`/jobs`"
-            label="Delete job"
-            icon="heroicons-solid:trash"
-            icon-position="left"
-            custom-class="pt-2"
-            @click="$emit('delete', job.id)" />
-          <RouterButton
-            :to="`/jobs/${job.id}`"
-            label="Save changes"
-            icon="heroicons-solid:check"
-            icon-position="left"
-            custom-class="pt-2"
-            @click="$emit('update', editableJob)" />
+          <div>
+            <RouterButton
+              :to="`/jobs`"
+              label="Delete job"
+              icon="heroicons-solid:trash"
+              icon-position="left"
+              custom-class="pt-2 xl:pt-0  mr-2  "
+              @click="$emit('delete', job.id)" />
+            <RouterButton
+              :to="`/jobs/${job.id}`"
+              label="Save changes"
+              icon="heroicons-solid:check"
+              icon-position="left"
+              custom-class="pt-2 xl:pt-0 "
+              @click="$emit('update', editableJob)" />
+          </div>
         </template>
       </div>
     </div>

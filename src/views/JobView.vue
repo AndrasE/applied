@@ -19,7 +19,8 @@ const job = isValidId ? jobs.find((j) => j.id === jobId) : null;
     <PageHeader label="Job details" />
 
     <Divider label="viewing mode" labelPosition="top" />
-    <div class="flex flex-col items-center justify-between gap-4 margin950">
+    <div
+      class="flex flex-col items-center justify-between gap-4 margin950and640">
       <JobCard viewingMode="viewing" :key="job.id" :job="job" />
     </div>
     <Divider label="prev list" labelPosition="bottom" />
