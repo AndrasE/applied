@@ -1,0 +1,28 @@
+[build]
+  publish = "dist" # or "build", adjust this to your output directory
+  command = "npm run build"
+
+[[redirects]]
+  from = "/jobs"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/jobs/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/jobs/*/update"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/jobs/add"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/about"
+  to = "/index.html"
+  status = 200
