@@ -53,7 +53,7 @@ const emit = defineEmits<{
 
 // Status icon mapping based on JobStatus type (all lowercase)
 const statusIconInfo = computed(() => {
-  switch (props.job.status) {
+  switch (props.job.status ?? "unknown") {
     case "applied":
       return {
         icon: "heroicons:check-circle",
@@ -81,12 +81,36 @@ const statusIconInfo = computed(() => {
         label: "Rejected",
         class: "text-red-500 dark:text-red-400 text-2xl",
       };
+    case "unknown":
+      return {
+        icon: "heroicons:question-mark-circle",
+        label: "Unknown",
+        class: "text-gray-500 dark:text-gray-400 text-2xl",
+      };
     default:
       return {
         icon: "heroicons:question-mark-circle",
-        label: "Status unknown",
+        label: "",
         class: "text-gray-500 dark:text-gray-400 text-2xl",
       };
+  }
+});
+
+const statusTextClass = computed(() => {
+  switch (props.job.status ?? "unknown") {
+    case "applied":
+      return "bg-[var(--green-accent-light)] dark:bg-[var(--green-accent-dark)] text-[var(--bg-light)] dark:text-[var(--bg-dark)] px-0.5 rounded-sm";
+    case "1st round":
+    case "2nd round":
+    case "3rd round":
+      return "bg-yellow-500 dark:bg-yellow-200 rounded text-[var(--bg-light)] dark:text-[var(--bg-dark)] px-0.5 rounded-sm";
+    case "no response":
+    case "rejected":
+      return "bg-red-500 dark:bg-red-400 text-[var(--bg-light)] dark:text-[var(--bg-dark)] px-0.5 rounded-sm";
+    case "unknown":
+      return "bg-gray-500 dark:bg-gray-400 text-[var(--bg-light)] dark:text-[var(--bg-dark)] px-0.5 rounded-sm";
+    default:
+      return "bg-gray-500 dark:bg-gray-400 text-[var(--bg-light)] dark:text-[var(--bg-dark)] px-0.5 rounded-sm";
   }
 });
 </script>
@@ -118,6 +142,14 @@ const statusIconInfo = computed(() => {
             :icon="statusIconInfo.icon"
             :class="[statusIconCustomClass, statusIconInfo.class]" />
         </div>
+      </template>
+      <!-- status text -->
+      <template v-if="viewingMode === 'viewing'">
+        <span
+          class="flex items-center text-xs ml-2 whitespace-nowrap"
+          :class="statusTextClass">
+          {{ job.status ?? "unknown" }}
+        </span>
       </template>
     </div>
 

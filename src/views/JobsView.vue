@@ -81,7 +81,7 @@ const changeView = (style: string) => {
             :char-limit="200"
             :showLinkButton="true"
             :viewingMode="'browsing'"
-            statusIconCustomClass="text-xl ml-1 mt-1" />
+            statusIconCustomClass="text-xl ml-1" />
         </div>
       </template>
       <template v-else>
