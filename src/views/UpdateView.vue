@@ -6,20 +6,13 @@ import PageHeader from "@/components/PageHeader.vue";
 import JobCard from "@/components/JobCard.vue";
 import RouterButton from "@/components/RouterButton.vue";
 import jobs from "@/data/jobs.json";
+import type { JobStatus } from "@/types/job";
 
 const route = useRoute();
 const jobId = Number(route.params.id);
 const isValidId = !isNaN(jobId);
 
-type JobStatus =
-  | "applied"
-  | "1st round"
-  | "2nd round"
-  | "3rd round"
-  | "rejected"
-  | "no response"
-  | undefined;
-
+// Ensure jobs are typed correctly and status is of the correct type
 const job = isValidId
   ? (() => {
       const found = jobs.find((j) => j.id === jobId);

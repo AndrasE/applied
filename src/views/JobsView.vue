@@ -7,17 +7,15 @@ import JobCard from "@/components/JobCard.vue";
 import { Icon } from "@iconify/vue";
 import jobsRaw from "@/data/jobs.json";
 import RouterButton from "@/components/RouterButton.vue";
+import type { Job, JobStatus } from "@/types/job";
 
-interface Job {
-  id: number;
-  title: string;
-  status?: string;
-  description: string;
-  company: string;
-  link: string;
-}
-
-const jobs = ref<Job[]>(jobsRaw);
+// Ensure the jobsRaw data is typed correctly and for status
+const jobs = ref<Job[]>(
+  jobsRaw.map((j) => ({
+    ...j,
+    status: j.status as JobStatus,
+  }))
+);
 const viewStyle = ref<string>("list"); // 'list' or 'grid'
 
 const DEFAULT_LIMIT = 8;

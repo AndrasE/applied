@@ -2,24 +2,7 @@
 import { computed, reactive, watch } from "vue";
 import RouterButton from "./RouterButton.vue";
 import { Icon } from "@iconify/vue";
-
-const validStatuses = [
-  "Applied",
-  "1st round",
-  "2nd round",
-  "3rd round",
-  "Rejected",
-  "No response",
-];
-
-interface Job {
-  id: number;
-  title: string;
-  status?: string;
-  description: string;
-  company: string;
-  link: string;
-}
+import type { Job } from "@/types/job";
 
 const props = defineProps<{
   job: Job;
@@ -67,6 +50,45 @@ const emit = defineEmits<{
   (e: "delete", id: number): void;
   (e: "add", job: Job): void;
 }>();
+
+// Status icon mapping based on JobStatus type (all lowercase)
+const statusIconInfo = computed(() => {
+  switch (props.job.status) {
+    case "applied":
+      return {
+        icon: "heroicons:check-circle",
+        label: "Applied",
+        class:
+          "text-[var(--green-accent-light)] dark:text-[var(--green-accent-dark)]",
+      };
+    case "1st round":
+    case "2nd round":
+    case "3rd round":
+      return {
+        icon: "heroicons:exclamation-circle",
+        label: "Interview round",
+        class: "text-yellow-500 dark:text-yellow-200 text-2xl",
+      };
+    case "no response":
+      return {
+        icon: "heroicons:minus-circle",
+        label: "No response",
+        class: "text-red-500 dark:text-red-400 text-2xl",
+      };
+    case "rejected":
+      return {
+        icon: "heroicons:x-circle",
+        label: "Rejected",
+        class: "text-red-500 dark:text-red-400 text-2xl",
+      };
+    default:
+      return {
+        icon: "heroicons:question-mark-circle",
+        label: "Status unknown",
+        class: "text-gray-500 dark:text-gray-400 text-2xl",
+      };
+  }
+});
 </script>
 
 <template>
@@ -92,50 +114,9 @@ const emit = defineEmits<{
       <template v-if="viewingMode === 'browsing'">
         <div class="flex flex-col items-end">
           <Icon
-            v-if="job.status === 'Applied'"
-            area-label="Applied"
-            icon="heroicons:check-circle"
-            :class="[
-              statusIconCustomClass,
-              'text-[var(--green-accent-light)] dark:text-[var(--green-accent-dark)]',
-            ]" />
-
-          <Icon
-            v-else-if="
-              job.status === '1st round' ||
-              job.status === '2nd round' ||
-              job.status === '3rd round'
-            "
-            area-label="interview rounds"
-            icon="heroicons:exclamation-circle"
-            :class="[
-              statusIconCustomClass,
-              'text-yellow-500 dark:text-yellow-200 text-2xl',
-            ]" />
-          <Icon
-            v-else-if="job.status === 'No response'"
-            area-label="No response"
-            icon="heroicons:minus-circle"
-            :class="[
-              statusIconCustomClass,
-              'text-red-500 dark:text-red-400 text-2xl',
-            ]" />
-          <Icon
-            v-else-if="job.status === 'Rejected'"
-            area-label="Rejected"
-            icon="heroicons:x-circle"
-            :class="[
-              statusIconCustomClass,
-              'text-red-500 dark:text-red-400 text-2xl',
-            ]" />
-          <Icon
-            v-else
-            area-label="Status unknown"
-            icon="heroicons:question-mark-circle"
-            :class="[
-              statusIconCustomClass,
-              'text-gray-500 dark:text-gray-400 text-2xl',
-            ]" />
+            :area-label="statusIconInfo.label"
+            :icon="statusIconInfo.icon"
+            :class="[statusIconCustomClass, statusIconInfo.class]" />
         </div>
       </template>
     </div>
