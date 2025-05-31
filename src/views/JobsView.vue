@@ -9,7 +9,7 @@ import jobsRaw from "@/data/jobs.json";
 import RouterButton from "@/components/RouterButton.vue";
 import type { Job, JobStatus } from "@/types/job";
 
-// Ensure the jobsRaw data is typed correctly and for status
+// Ensure the jobsRaw data is typed correctly especially for status
 const jobs = ref<Job[]>(
   jobsRaw.map((j) => ({
     ...j,
@@ -81,7 +81,7 @@ const changeView = (style: string) => {
             :char-limit="200"
             :showLinkButton="true"
             :viewingMode="'browsing'"
-            statusIconCustomClass="text-xl ml-1" />
+            statusIconCustomClass="text-xl ml-1 mt-1" />
         </div>
       </template>
       <template v-else>
@@ -92,7 +92,7 @@ const changeView = (style: string) => {
             :job="job"
             :char-limit="330"
             :viewingMode="'browsing'"
-            statusIconCustomClass="text-xl ml-1" />
+            statusIconCustomClass="text-xl ml-1  mt-1" />
         </div>
       </template>
     </transition>
