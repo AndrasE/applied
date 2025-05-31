@@ -1,10 +1,18 @@
 <script setup lang="ts">
 import { computed, reactive, watch } from "vue";
 import RouterButton from "./RouterButton.vue";
+import { Icon } from "@iconify/vue";
 
 interface Job {
   id: number;
   title: string;
+  status?:
+    | "applied"
+    | "1st round"
+    | "2nd round"
+    | "3rd round"
+    | "rejected"
+    | "no response";
   description: string;
   company: string;
   link: string;
@@ -14,6 +22,7 @@ const props = defineProps<{
   job: Job;
   charLimit?: number;
   viewingMode: "browsing" | "viewing" | "editing" | "adding";
+  statusIconCustomClass?: string;
 }>();
 console.log("Viewing mode received:", props.viewingMode);
 
@@ -59,21 +68,75 @@ const emit = defineEmits<{
 
 <template>
   <div aria-label="job card" class="p-4 rounded border border-color">
-    <!-- Job title -->
-    <h2 class="mb-1 text-lg">
-      <!-- Browse or view mode -->
-      <template v-if="viewingMode === 'browsing' || viewingMode === 'viewing'">
-        {{ job.title }}
+    <!-- Job title  and status -->
+    <div class="flex items-start justify-between">
+      <h2 class="mb-1 w-full text-lg">
+        <!-- Browse or view mode -->
+        <template
+          v-if="viewingMode === 'browsing' || viewingMode === 'viewing'">
+          {{ job.title }}
+        </template>
+        <!-- Update or add mode -->
+        <template v-else>
+          <input
+            v-model="editableJob.title"
+            type="text"
+            class="w-full rounded border border-color p-1"
+            placeholder="Job title" />
+        </template>
+      </h2>
+      <!-- Status icons -->
+      <template v-if="viewingMode === 'browsing'">
+        <div class="flex flex-col items-end">
+          <Icon
+            v-if="job.status === 'applied'"
+            area-label="applied"
+            icon="heroicons:check-circle"
+            :class="[
+              statusIconCustomClass,
+              'text-[var(--green-accent-light)] dark:text-[var(--green-accent-dark)]',
+            ]" />
+
+          <Icon
+            v-else-if="
+              job.status === '1st round' ||
+              job.status === '2nd round' ||
+              job.status === '3rd round'
+            "
+            area-label="interview rounds"
+            icon="heroicons:exclamation-circle"
+            :class="[
+              statusIconCustomClass,
+              'text-yellow-500 dark:text-yellow-200 text-2xl',
+            ]" />
+          <Icon
+            v-else-if="job.status === 'no response'"
+            area-label="no response"
+            icon="heroicons:minus-circle"
+            :class="[
+              statusIconCustomClass,
+              'text-red-500 dark:text-red-400 text-2xl',
+            ]" />
+          <Icon
+            v-else-if="job.status === 'rejected'"
+            area-label="rejected"
+            icon="heroicons:x-circle"
+            :class="[
+              statusIconCustomClass,
+              'text-red-500 dark:text-red-400 text-2xl',
+            ]" />
+          <Icon
+            v-else
+            area-label="status unknown"
+            te
+            icon="heroicons:question-mark-circle"
+            :class="[
+              statusIconCustomClass,
+              'text-gray-500 dark:text-gray-400 text-2xl',
+            ]" />
+        </div>
       </template>
-      <!-- Update or add mode -->
-      <template v-else>
-        <input
-          v-model="editableJob.title"
-          type="text"
-          class="w-full rounded border border-color p-1"
-          placeholder="Job title" />
-      </template>
-    </h2>
+    </div>
 
     <!-- Company name -->
     <p class="mb-2 text-sm">
@@ -109,12 +172,13 @@ const emit = defineEmits<{
     <!-- Buttons and links based on mode -->
     <div class="flex">
       <!-- Browse mode  -->
-      <RouterButton
-        v-if="viewingMode === 'browsing'"
-        :to="`/jobs/${job.id}`"
-        label="Read more"
-        icon="heroicons-solid:arrow-right"
-        custom-class="pt-2" />
+      <template v-if="viewingMode === 'browsing'">
+        <RouterButton
+          :to="`/jobs/${job.id}`"
+          label="Read more"
+          icon="heroicons-solid:arrow-right"
+          custom-class="pt-2" />
+      </template>
       <div class="flex flex-1 justify-end gap-2">
         <!-- Viewing mode -->
         <template v-if="viewingMode === 'viewing'">
@@ -144,7 +208,7 @@ const emit = defineEmits<{
             @click="$emit('update', editableJob)" />
         </template>
         <!-- Adding mode -->
-        <template v-else>
+        <template v-else-if="viewingMode === 'adding'">
           <RouterButton
             :to="`/jobs`"
             label="Add job"

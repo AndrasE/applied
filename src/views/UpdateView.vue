@@ -11,7 +11,26 @@ const route = useRoute();
 const jobId = Number(route.params.id);
 const isValidId = !isNaN(jobId);
 
-const job = isValidId ? jobs.find((j) => j.id === jobId) : null;
+type JobStatus =
+  | "applied"
+  | "1st round"
+  | "2nd round"
+  | "3rd round"
+  | "rejected"
+  | "no response"
+  | undefined;
+
+const job = isValidId
+  ? (() => {
+      const found = jobs.find((j) => j.id === jobId);
+      if (!found) return null;
+      // Ensure status is of the correct type
+      return {
+        ...found,
+        status: (found.status as JobStatus) ?? undefined,
+      };
+    })()
+  : null;
 </script>
 
 <template>

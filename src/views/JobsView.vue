@@ -81,7 +81,8 @@ const changeView = (style: string) => {
             :job="job"
             :char-limit="200"
             :showLinkButton="true"
-            :viewingMode="'browsing'" />
+            :viewingMode="'browsing'"
+            statusIconCustomClass="text-xl ml-1 mt-1" />
         </div>
       </template>
       <template v-else>
@@ -91,7 +92,8 @@ const changeView = (style: string) => {
             :key="job.id"
             :job="job"
             :char-limit="330"
-            :viewingMode="'browsing'" />
+            :viewingMode="'browsing'"
+            statusIconCustomClass="text-xl ml-1" />
         </div>
       </template>
     </transition>
