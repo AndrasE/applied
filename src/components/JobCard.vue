@@ -3,16 +3,19 @@ import { computed, reactive, watch } from "vue";
 import RouterButton from "./RouterButton.vue";
 import { Icon } from "@iconify/vue";
 
+const validStatuses = [
+  "Applied",
+  "1st round",
+  "2nd round",
+  "3rd round",
+  "Rejected",
+  "No response",
+];
+
 interface Job {
   id: number;
   title: string;
-  status?:
-    | "applied"
-    | "1st round"
-    | "2nd round"
-    | "3rd round"
-    | "rejected"
-    | "no response";
+  status?: string;
   description: string;
   company: string;
   link: string;
@@ -89,8 +92,8 @@ const emit = defineEmits<{
       <template v-if="viewingMode === 'browsing'">
         <div class="flex flex-col items-end">
           <Icon
-            v-if="job.status === 'applied'"
-            area-label="applied"
+            v-if="job.status === 'Applied'"
+            area-label="Applied"
             icon="heroicons:check-circle"
             :class="[
               statusIconCustomClass,
@@ -110,16 +113,16 @@ const emit = defineEmits<{
               'text-yellow-500 dark:text-yellow-200 text-2xl',
             ]" />
           <Icon
-            v-else-if="job.status === 'no response'"
-            area-label="no response"
+            v-else-if="job.status === 'No response'"
+            area-label="No response"
             icon="heroicons:minus-circle"
             :class="[
               statusIconCustomClass,
               'text-red-500 dark:text-red-400 text-2xl',
             ]" />
           <Icon
-            v-else-if="job.status === 'rejected'"
-            area-label="rejected"
+            v-else-if="job.status === 'Rejected'"
+            area-label="Rejected"
             icon="heroicons:x-circle"
             :class="[
               statusIconCustomClass,
@@ -127,8 +130,7 @@ const emit = defineEmits<{
             ]" />
           <Icon
             v-else
-            area-label="status unknown"
-            te
+            area-label="Status unknown"
             icon="heroicons:question-mark-circle"
             :class="[
               statusIconCustomClass,

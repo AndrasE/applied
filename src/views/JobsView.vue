@@ -11,6 +11,7 @@ import RouterButton from "@/components/RouterButton.vue";
 interface Job {
   id: number;
   title: string;
+  status?: string;
   description: string;
   company: string;
   link: string;
