@@ -11,7 +11,15 @@ const route = useRoute();
 const jobId = Number(route.params.id);
 const isValidId = !isNaN(jobId);
 
-const job = isValidId ? jobs.find((j) => j.id === jobId) : null;
+// Import the JobStatus enum/type if needed
+import type { JobStatus } from "@/types/job"; // Make sure this path is correct
+const rawJob = isValidId ? jobs.find((j) => j.id === jobId) : null;
+const job = rawJob
+  ? {
+      ...rawJob,
+      status: rawJob.status as JobStatus, // Cast status to JobStatus
+    }
+  : null;
 </script>
 
 <template>
