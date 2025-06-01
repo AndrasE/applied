@@ -1,111 +1,137 @@
 [
   {
     "id": 1,
-    "title": "Loren Ipsum 1s Front-End Developer",
+    "title": "Senior Front-End Developer",
     "status": "applied",
-    "description": "Loren ipsuim dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequatconsectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequatconsectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequatLoren ipsuim dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequatconsectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequatconsectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequatLoren ipsuim dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequatconsectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequatconsectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore boris nisi ut aliquip ex ea commodo consequatconsectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequatLoren ipsuim dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequatconsectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequatconsectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    "company": "NewTek Solutions",
-    "link": "https://www.asdasd.com"
+    "date": "01/05/25",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Vitae et leo duis ut diam quam nulla porttitor massa. Commodo sed egestas egestas fringilla. Convallis aenean et tortor at. Quis ipsum suspendisse ultrices gravida dictum fusce ut placerat. Dignissim suspendisse in est ante in nibh mauris cursus mattis. Ultrices in iaculis nunc sed augue lacus viverra vitae. Quis lectus nulla at volutpat. Sagittis purus sit amet volutpat. Feugiat in ante metus dictum at tempor. Et malesuada fames ac turpis egestas integer eget aliquet nibh. Scelerisque in dictum non consectetur a. Ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at augue eget. Mattis nunc sed blandit libero volutpat. Elementum eu facilisis sed odio morbi. Sed vulputate mi sit amet. Orci eu lobortis elementum nibh tellus molestie nunc non. Tincidunt vitae semper quis lectus nulla at. Id leo in vitae turpis massa sed elementum tempus. Enim praesent elementum facilisis leo vel. Sit amet cursus sit amet dictum sit. Id consectetur purus ut faucibus pulvinar elementum. Aliquam ut porttitor leo a. Ac turpis egestas maecenas pharetra. Nibh cras pulvinar mattis nunc sed blandit. Mattis rhoncus urna neque viverra justo nec ultrices. Mauris sit amet massa vitae tortor condimentum lacinia quis vel. Enim neque volutpat ac tincidunt vitae semper quis lectus. Nulla facilisi cras fermentum odio eu. Ultrices neque ornare aenean euismod elementum nisi quis. Tortor at risus viverra adipiscing at in. Egestas egestas fringilla phasellus faucibus scelerisque eleifend donec. At tellus at urna condimentum mattis pellentesque id. Sed egestas egestas fringilla phasellus. Volutpat ac tincidunt vitae semper quis lectus nulla. Tortor at risus viverra adipiscing at in est. Egestas egestas fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate. At tellus at urna condimentum mattis pellentesque id nibh. Sed egestas egestas fringilla phasellus faucibus scelerisque eleifend. Pretium vulputate sapien nec sagittis aliquam. At tellus at urna condimentum mattis pellentesque id nibh tortor. Sed egestas egestas fringilla phasellus faucibus. Scelerisque eleifend donec pretium vulputate sapien nec sagittis aliquam. Tellus at urna condimentum mattis pellentesque id nibh tortor id. Sed egestas egestas fringilla phasellus faucibus scelerisque eleifend donec pretium.",
+    "company": "Tech Solutions Inc.",
+    "link": "https://www.techsolutions.com/careers"
   },
   {
     "id": 2,
+    "title": "Junior React Developer",
     "status": "1st round",
-    "title": "Loren Ipsum 2 Front-End Developer",
-    "description": "Loren ipsuim dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    "company": "NewTek Solutions",
-    "link": "https://www.asdasd.com"
+    "date": "15/05/25",
+    "description": "We are looking for a passionate Junior React Developer to join our growing team. You'll work on exciting new features and help maintain existing applications, contributing to our next-generation web platforms. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Fermentum leo vel orci porta non pulvinar. Nibh tortor id aliquet lectus proin. Malesuada proin libero nunc consequat interdum varius sit amet. Vestibulum lorem sed risus ultricies tristique nulla. Adipiscing elit duis at consectetur. Velit euismod in pellentesque massa placerat duis ultricies. Vitae et leo duis ut diam quam nulla porttitor massa. Commodo sed egestas egestas fringilla. Convallis aenean et tortor at.",
+    "company": "WebInnovate Co.",
+    "link": "https://www.webinnovate.com/jobs"
   },
   {
     "id": 3,
+    "title": "UI/UX Designer",
     "status": "rejected",
-    "title": "Loren Ipsum 3 Front-End Developer",
-    "description": "Loren ipsuim dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    "company": "NewTek Solutions",
-    "link": "https://www.asdasd.com"
+    "date": "20/04/25",
+    "description": "Seeking a creative UI/UX Designer to craft intuitive and engaging user experiences for our web and mobile platforms. You will be instrumental in transforming complex ideas into beautiful and functional designs. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Ullamcorper eget nulla facilisi etiam dignissim diam. Nec nam aliquam sem et tortor. Enim ut tellus elementum sagittis vitae et leo duis.",
+    "company": "DesignSphere Studio",
+    "link": "https://www.designsphere.com/openings"
   },
   {
     "id": 4,
+    "title": "Back-End Engineer (Node.js)",
     "status": "no response",
-    "title": "Loren Ipsum 4 Front-End Developer",
-    "description": "Loren ipsuim dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    "company": "NewTek Solutions",
-    "link": "https://www.asdasd.com"
+    "date": "10/04/25",
+    "description": "Join our back-end team to build scalable and robust APIs using Node.js and related technologies. Your work will directly impact the performance and reliability of our core services. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Purus in massa tempor nec feugiat nisl pretium fusce. Ut sem nulla pharetra diam sit amet. Ac turpis egestas sed tempus urna et pharetra. Pellentesque habitant morbi tristique senectus et netus et malesuada. Egestas sed tempus urna et pharetra pharetra massa massa. Ullamcorper morbi tincidunt ornare massa eget egestas purus viverra. Quam elementum pulvinar etiam non. Dictumst quisque sagittis purus sit amet volutpat. Et malesuada fames ac turpis egestas integer eget aliquet nibh praesent.",
+    "company": "DataFlow Systems",
+    "link": "https://www.dataflow.com/careers"
   },
   {
     "id": 5,
-    "title": "Loren Ipsum 5 Front-End Developer",
-    "description": "Loren ipsuim dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    "company": "NewTek Solutions",
-    "link": "https://www.asdasd.com"
+    "title": "Full Stack Developer",
+    "status": "applied",
+    "date": "03/05/25",
+    "description": "Looking for an experienced Full Stack Developer comfortable with both front-end (React) and back-end (Python/Django) development. You will take ownership of features from conception to deployment. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Orci porta non pulvinar neque. Vitae elementum curabitur vitae nunc sed velit dignissim sodales. Enim eu turpis egestas pretium. Dignissim suspendisse in est ante in nibh. Malesuada fames ac turpis egestas integer eget aliquet nibh. Amet nulla facilisi morbi tempus iaculis urna id volutpat. Euismod in pellentesque massa placerat duis ultricies lacus sed. Diam donec adipiscing tristique risus nec feugiat in. Leo vel orci porta non pulvinar neque laoreet. Vitae elementum curabitur vitae nunc sed velit. Vitae elementum curabitur vitae nunc sed velit. Vitae elementum curabitur vitae nunc sed velit. Vitae elementum curabitur vitae nunc sed velit.",
+    "company": "Global Tech Ventures",
+    "link": "https://www.globaltech.com/hiring"
   },
   {
     "id": 6,
-    "title": "Loren Ipsum 6 Front-End Developer",
-    "description": "Loren ipsuim dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    "company": "NewTek Solutions",
-    "link": "https://www.asdasd.com"
+    "title": "DevOps Engineer",
+    "status": "2nd round",
+    "date": "28/05/25",
+    "description": "We need a skilled DevOps Engineer to manage our CI/CD pipelines, infrastructure, and deployment processes. You'll work with modern cloud technologies to ensure smooth and efficient operations. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Vulputate eu scelerisque felis imperdiet proin. Egestas dui id ornare arcu odio ut. Quam lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit. Est placerat in egestas erat. Magna fermentum iaculis eu non. Arcu cursus euismod quis viverra nibh. Ac turpis egestas maecenas pharetra convallis. Tortor at risus viverra adipiscing at in. Egestas egestas fringilla phasellus faucibus scelerisque eleifend donec.",
+    "company": "CloudBurst Solutions",
+    "link": "https://www.cloudburst.com/jobs"
   },
   {
     "id": 7,
-    "title": "Loren Ipsum 7 Front-End Developer",
-    "description": "Loren ipsuim dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    "company": "NewTek Solutions",
-    "link": "https://www.asdasd.com"
+    "title": "Product Manager",
+    "status": "no response",
+    "date": "05/04/25",
+    "description": "Seeking a visionary Product Manager to define product roadmaps and lead cross-functional teams. You will be the voice of the customer and guide our product strategy. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Amet nulla facilisi morbi tempus iaculis urna id volutpat. Euismod in pellentesque massa placerat duis ultricies lacus sed. Diam donec adipiscing tristique risus nec feugiat in. Leo vel orci porta non pulvinar neque laoreet. Vitae elementum curabitur vitae nunc sed velit. Amet volutpat consequat mauris nunc congue nisi vitae suscipit. Aliquam sem et tortor consequat id porta. Mauris rhoncus aenean vel elit. Tortor consequat id porta nibh venenatis. Egestas diam in arcu cursus. ",
+    "company": "InnovateNow Ltd.",
+    "link": "https://www.innovatenow.com/jobs"
   },
   {
     "id": 8,
-    "title": "Loren Ipsum 8 Front-End Developer",
-    "description": "Loren ipsuim dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    "company": "NewTek Solutions",
-    "link": "https://www.asdasd.com"
+    "title": "Data Scientist",
+    "status": "applied",
+    "date": "18/05/25",
+    "description": "Exciting opportunity for a Data Scientist to analyze complex datasets and build predictive models. You'll extract insights that drive business decisions and innovation. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nunc mattis enim ut tellus elementum sagittis vitae et leo. Ullamcorper morbi tincidunt ornare massa eget egestas. Non curabitur gravida arcu ac tortor. Sed vulputate mi sit amet mauris commodo. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "company": "Insight Analytics",
+    "link": "https://www.insightanalytics.com/careers"
   },
   {
     "id": 9,
-    "title": "Loren Ipsum 9 Front-End Developer",
-    "description": "Loren ipsuim dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    "company": "NewTek Solutions",
-    "link": "https://www.asdasd.com"
+    "title": "Mobile App Developer (iOS)",
+    "status": "3rd round",
+    "date": "22/05/25",
+    "description": "Passionate iOS Developer needed to create cutting-edge mobile applications for our user base. You'll work on everything from UI implementation to API integration. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Magna fermentum iaculis eu non diam phasellus vestibulum. Purus in massa tempor nec feugiat nisl. Fringilla est ullamcorper eget nulla facilisi. Ipsum dolor sit amet consectetur adipiscing elit. Risus at ultrices mi tempus. Facilisis sed odio morbi quis. Eget nulla facilisi etiam dignissim. Pellentesque habitant morbi tristique senectus et netus et malesuada. Tellus in hac habitasse platea. Nibh praesent tristique magna sit amet. Aliquam ut porttitor leo a diam. Vitae et leo duis ut diam quam nulla. Sed vulputate mi sit amet. Orci eu lobortis elementum nibh tellus molestie nunc non. Tincidunt vitae semper quis lectus nulla at.",
+    "company": "AppGenius Inc.",
+    "link": "https://www.appgenius.com/jobs"
   },
   {
     "id": 10,
-    "title": "Loren Ipsum 10 Front-End Developer",
-    "description": "Loren ipsuim dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    "company": "NewTek Solutions",
-    "link": "https://www.asdasd.com"
+    "title": "QA Engineer",
+    "status": "rejected",
+    "date": "12/04/25",
+    "description": "We're hiring a meticulous QA Engineer to ensure the quality and reliability of our software products. You will design and execute test plans, identify bugs, and collaborate closely with development teams. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nunc scelerisque viverra mauris in aliquam. Orci dapibus ultrices in iaculis nunc sed augue. Tellus in hac habitasse platea dictumst. Amet nulla facilisi morbi tempus iaculis. Volutpat maecenas volutpat blandit aliquam etiam. Amet nulla facilisi morbi tempus iaculis urna id volutpat. Euismod in pellentesque massa placerat duis ultricies lacus sed. Diam donec adipiscing tristique risus nec feugiat in. Leo vel orci porta non pulvinar neque laoreet. Vitae elementum curabitur vitae nunc sed velit. Vitae elementum curabitur vitae nunc sed velit.",
+    "company": "Quality Assured Corp.",
+    "link": "https://www.qualityassured.com/careers"
   },
   {
     "id": 11,
-    "title": "Loren Ipsum 11 Front-End Developer",
-    "description": "Loren ipsuim dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    "company": "NewTek Solutions",
-    "link": "https://www.asdasd.com"
+    "title": "Marketing Specialist",
+    "status": "applied",
+    "date": "08/05/25",
+    "description": "Looking for a dynamic Marketing Specialist to develop and execute digital marketing campaigns. You'll be responsible for driving engagement and growth across various channels. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Aliquet lectus proin nibh nisl condimentum id venenatis. Adipiscing elit duis at consectetur. Velit euismod in pellentesque massa placerat duis ultricies. Vitae et leo duis ut diam quam nulla porttitor massa. Commodo sed egestas egestas fringilla. Convallis aenean et tortor at. Ipsum dolor sit amet consectetur adipiscing elit. Risus at ultrices mi tempus. Facilisis sed odio morbi quis. Eget nulla facilisi etiam dignissim.",
+    "company": "BrandBoost Agency",
+    "link": "https://www.brandboost.com/jobs"
   },
   {
     "id": 12,
-    "title": "Loren Ipsum 12 Front-End Developer",
-    "description": "Loren ipsuim dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    "company": "NewTek Solutions",
-    "link": "https://www.asdasd.com"
+    "title": "Cloud Architect",
+    "status": "1st round",
+    "date": "29/05/25",
+    "description": "Experienced Cloud Architect to design and implement robust cloud solutions on AWS/Azure/GCP. You will define best practices and ensure the scalability and security of our cloud infrastructure. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nisi est sit amet facilisis magna etiam tempor orci eu. Eget nunc lobortis mattis aliquam faucibus. Convallis tellus id interdum velit laoreet id donec ultrices tincidunt. Amet nisl suscipit adipiscing bibendum est ultricies integer quis. Consectetur adipiscing elit pellentesque habitant morbi tristique. Ipsum a lacus vestibulum sed arcu non. Sed viverra tellus in hac habitasse platea dictumst. ",
+    "company": "Nexus Cloud Services",
+    "link": "https://www.nexuscloud.com/careers"
   },
   {
     "id": 13,
-    "title": "Loren Ipsum 13 Front-End Developer",
-    "description": "Loren ipsuim dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    "company": "NewTek Solutions",
-    "link": "https://www.asdasd.com"
+    "title": "Cybersecurity Analyst",
+    "status": "no response",
+    "date": "01/04/25",
+    "description": "Seeking a vigilant Cybersecurity Analyst to protect our systems and data from threats. You will conduct vulnerability assessments, monitor security events, and respond to incidents. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Purus in massa tempor nec feugiat nisl pretium fusce. Ut sem nulla pharetra diam sit amet. Ac turpis egestas sed tempus urna et pharetra. Pellentesque habitant morbi tristique senectus et netus et malesuada. Egestas sed tempus urna et pharetra pharetra massa massa. Ullamcorper morbi tincidunt ornare massa eget egestas purus viverra. Quam elementum pulvinar etiam non. Dictumst quisque sagittis purus sit amet volutpat. Et malesuada fames ac turpis egestas integer eget aliquet nibh praesent.",
+    "company": "SecureNet Solutions",
+    "link": "https://www.securenet.com/jobs"
   },
   {
     "id": 14,
-    "title": "Loren Ipsum 14 Front-End Developer",
-    "description": "Loren ipsuim dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    "company": "NewTek Solutions",
-    "link": "https://www.asdasd.com"
+    "title": "Technical Writer",
+    "status": "applied",
+    "date": "14/05/25",
+    "description": "We need a clear and concise Technical Writer to create documentation for our software products. Your work will enable users and developers to understand and utilize our solutions effectively. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nunc mattis enim ut tellus elementum sagittis vitae et leo. Ullamcorper morbi tincidunt ornare massa eget egestas. Non curabitur gravida arcu ac tortor. Sed vulputate mi sit amet mauris commodo. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Mattis nunc sed blandit libero volutpat.",
+    "company": "DocuTech Inc.",
+    "link": "https://www.docutech.com/careers"
   },
   {
     "id": 15,
-    "title": "Loren Ipsum 15 Front-End Developer",
-    "description": "Loren ipsuim dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    "company": "NewTek Solutions",
-    "link": "https://www.asdasd.com"
+    "title": "IT Support Specialist",
+    "status": "1st round",
+    "date": "27/05/25",
+    "description": "Providing first-line technical support to our internal users and troubleshooting IT issues. You'll be the go-to person for all tech-related queries, ensuring smooth daily operations. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Aliquam sem et tortor consequat id porta. Mauris rhoncus aenean vel elit. Tortor consequat id porta nibh venenatis. Egestas diam in arcu cursus. Convallis aenean et tortor at. Quis ipsum suspendisse ultrices gravida dictum fusce ut placerat. Dignissim suspendisse in est ante in nibh mauris cursus mattis. Ultrices in iaculis nunc sed augue lacus viverra vitae. Quis lectus nulla at volutpat. Sagittis purus sit amet volutpat. Feugiat in ante metus dictum at tempor.",
+    "company": "HelpDesk Heroes",
+    "link": "https://www.helpdeskheroes.com/jobs"
   }
 ]

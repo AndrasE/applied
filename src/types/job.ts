@@ -15,4 +15,5 @@ export interface Job {
   company: string;
   link: string;
   status?: JobStatus;
+  date?: string;
 }

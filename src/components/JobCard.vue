@@ -145,11 +145,15 @@ const statusTextClass = computed(() => {
       </template>
       <!-- status text -->
       <template v-if="viewingMode === 'viewing'">
-        <span
-          class="flex items-center text-xs ml-2 whitespace-nowrap"
-          :class="statusTextClass">
-          {{ job.status ?? "unknown" }}
-        </span>
+        <div class="flex flex-col items-end">
+          <span
+            class="flex items-center text-xs ml-2 whitespace-nowrap"
+            :class="statusTextClass">
+            {{ job.status ?? "unknown" }}
+          </span>
+          <!-- Date -->
+          <span class="text-xs">{{ job.date }}</span>
+        </div>
       </template>
     </div>
 
