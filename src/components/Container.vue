@@ -55,7 +55,7 @@ const justifyClass = computed(() => {
 
     <!-- Right Pattern Bar -->
     <div
-      class="border-l border-solid border-color hidden md:block md:w-9 lg:w-14 bg-[image:repeating-linear-gradient(315deg,var(--pattern-color-light)_0,var(--pattern-color-light)_1px,transparent_0,transparent_50%)] dark:bg-[image:repeating-linear-gradient(315deg,var(--pattern-color-dark)_0,var(--pattern-color-dark)_1px,transparent_0,transparent_50%)] bg-[size:10px_10px] bg-fixed"></div>
+      class="border-l border-solid border-color hidden md:block md:w-9 lg:w-14 bg-[image:repeating-linear-gradient(315deg,var(--pattern-color-light)_0,var(--pattern-color-light)_1px,transparent_0,transparent_50%)] dark:bg-[image:repeating-linear-gradient(315deg,var(--pattern-color-dark)_0,var(--pattern-color-dark)_1px,transparent_0,transparent_50%)] bg-[size:10px_10px] bg-fixed border-r-1 border-hide-over-1368"></div>
 
     <!-- Right Buffer Label -->
     <span

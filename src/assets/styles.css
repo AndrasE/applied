@@ -173,6 +173,13 @@
   }
 }
 
+@media (min-width: 1368px) {
+  /* Hide pattern label on smaller screens */
+  .border-hide-over-1368 {
+    border-right: none !important;
+  }
+}
+
 /* Hide pattern label on small screens */
 @media (max-width: 949px) {
   .hide-under-950 {
