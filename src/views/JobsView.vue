@@ -38,7 +38,7 @@ const changeView = (style: string) => {
     <PageHeader label="Recent applications" />
 
     <!-- toggle between list and grid  -->
-    <div class="absolute flex-row hidden gap-3 top-11 right-4 sm:flex">
+    <div class="absolute flex-row hidden gap-3 top-12 right-4 sm:flex">
       <Icon
         type="button"
         aria-label="Toggle view list"
