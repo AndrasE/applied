@@ -35,7 +35,7 @@ const job = isValidId
       class="flex flex-col items-center w-full justify-between margin950and640 4border-color">
       <JobCard
         viewingMode="editing"
-        class="w-full border-0 border-b sm:border-0 rounded-none pb-3 sm:pb-0 pt-0 sm:p-4"
+        class="w-full border-0 border-b sm:border-0 rounded-none pb-3 sm:pb-0 pt-0"
         :key="job.id"
         :job="job" />
     </div>
