@@ -169,16 +169,21 @@ const statusTextClass = computed(() => {
     </div>
 
     <!-- Status input and date for editing mode -->
-
     <template v-if="viewingMode === 'editing'">
       <div
         class="flex flex-col sm:flex-row text-sm justify-between gap-1 w-full mb-1">
-        <input
+        <select
           v-model="editableJob.status"
-          type="text"
-          class="w-full sm:w-auto flex-1 p-1 rounded border border-color"
-          placeholder="Job status" />
-
+          class="w-full sm:w-auto flex-1 p-1 rounded bg-[var(--bg-light)] dark:bg-[var(--bg-dark)] border border-color">
+          <option disabled value="">Select job status</option>
+          <option value="applied">applied</option>
+          <option value="1st round">1st round</option>
+          <option value="2nd round">2nd round</option>
+          <option value="3rd round">3rd round</option>
+          <option value="rejected">rejected</option>
+          <option value="no response">no response</option>
+          <option value="job offer">job offer</option>
+        </select>
         <div
           class="flex flex-row relative items-center gap-1 w-full sm:w-auto sm:flex-1">
           <input
