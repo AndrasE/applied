@@ -19,7 +19,7 @@ const route = useRoute();
     <div
       class="flex items-center justify-between gap-2 h-auto w-full p-2 border-color border-b-1 bg-[var(--bg-light)] dark:bg-[var(--bg-dark)]">
       <!-- Left section: Logo label + icon -->
-      <div class="flex items-center gap-2">
+      <div class="flex items-center">
         <p class="text-center text-tiny text-orientation">logo</p>
         <div
           role="presentation"
@@ -30,7 +30,7 @@ const route = useRoute();
         <RouterLink aria-label="Go to homepage" to="/" class="text-hover">
           <Icon
             icon="material-symbols-light:font-download-outline-rounded"
-            class="text-5xl"
+            class="text-5xl ml-0.5"
             role="img"
             aria-hidden="true" />
         </RouterLink>
@@ -38,8 +38,8 @@ const route = useRoute();
 
       <!-- Right section: Theme toggle -->
       <div class="flex items-center">
-        <ThemeToggle class="pl-1 py-2" />
-        <div class="flex flex-row items-center pl-2">
+        <ThemeToggle class="mr-1" />
+        <div class="flex flex-row items-center">
           <div
             role="presentation"
             aria-hidden="true"
