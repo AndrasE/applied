@@ -51,6 +51,15 @@ const emit = defineEmits<{
   (e: "add", job: Job): void;
 }>();
 
+// Function to update date to today
+function updateDateToToday() {
+  const today = new Date();
+  const day = String(today.getDate()).padStart(2, "0");
+  const month = String(today.getMonth() + 1).padStart(2, "0");
+  const year = String(today.getFullYear()).slice(-2); // get last 2 digits
+  editableJob.date = `${day}/${month}/${year}`;
+}
+
 // Status icon mapping based on JobStatus type (all lowercase)
 const statusIconInfo = computed(() => {
   switch (props.job.status ?? "unknown") {
@@ -134,7 +143,7 @@ const statusTextClass = computed(() => {
             placeholder="Job title" />
         </template>
       </h2>
-      <!-- Status icons -->
+      <!-- Status icons browsing mode -->
       <template v-if="viewingMode === 'browsing'">
         <div class="flex flex-col items-end">
           <Icon
@@ -143,6 +152,7 @@ const statusTextClass = computed(() => {
             :class="[statusIconCustomClass, statusIconInfo.class]" />
         </div>
       </template>
+
       <!-- status text -->
       <template v-if="viewingMode === 'viewing'">
         <div class="flex flex-col items-end">
@@ -156,6 +166,35 @@ const statusTextClass = computed(() => {
         </div>
       </template>
     </div>
+
+    <!-- Status input and date for editing mode -->
+
+    <template v-if="viewingMode === 'editing'">
+      <div
+        class="flex flex-col sm:flex-row text-sm justify-between gap-1 w-full mb-1">
+        <input
+          v-model="editableJob.status"
+          type="text"
+          class="w-full sm:w-auto flex-1 p-1 rounded border border-color"
+          placeholder="Job status" />
+
+        <div
+          class="flex flex-row relative items-center gap-1 w-full sm:w-auto sm:flex-1">
+          <input
+            v-model="editableJob.date"
+            type="text"
+            readonly
+            placeholder="Date"
+            class="w-full flex-1 rounded border p-1 border-color bg-[var(--input-bg)] cursor-not-allowed" />
+
+          <Icon
+            icon="heroicons-solid:refresh"
+            aria-label="update date"
+            class="text-2xl absolute right-1 text-hover cursor-pointer"
+            @click="updateDateToToday" />
+        </div>
+      </div>
+    </template>
 
     <!-- Company name -->
     <p class="mb-2 text-sm">
