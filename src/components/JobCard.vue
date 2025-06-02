@@ -78,23 +78,24 @@ const statusIconInfo = computed(() => {
         label: "Interview round",
         class: "text-yellow-500 dark:text-yellow-200 text-2xl",
       };
-    case "no response":
-      return {
-        icon: "heroicons:minus-circle",
-        label: "No response",
-        class: "text-red-500 dark:text-red-400 text-2xl",
-      };
     case "rejected":
       return {
         icon: "heroicons:x-circle",
         label: "Rejected",
         class: "text-red-500 dark:text-red-400 text-2xl",
       };
-    case "unknown":
+    case "no response":
       return {
-        icon: "heroicons:question-mark-circle",
-        label: "Unknown",
-        class: "text-gray-500 dark:text-gray-400 text-2xl",
+        icon: "heroicons:minus-circle",
+        label: "No response",
+        class: "text-red-500 dark:text-red-400 text-2xl",
+      };
+    case "job offer":
+      return {
+        icon: "heroicons:sparkles",
+        label: "job offer",
+        class:
+          "text-[var(--green-accent-light)] dark:text-[var(--green-accent-dark)]",
       };
     default:
       return {
@@ -116,8 +117,8 @@ const statusTextClass = computed(() => {
     case "no response":
     case "rejected":
       return "bg-red-500 dark:bg-red-400 text-[var(--bg-light)] dark:text-[var(--bg-dark)] px-0.5 rounded-sm mt-1.5 sm:mt-0";
-    case "unknown":
-      return "bg-gray-500 dark:bg-gray-400 text-[var(--bg-light)] dark:text-[var(--bg-dark)] px-0.5 rounded-sm mt-1.5 sm:mt-0";
+    case "job offer":
+      return "bg-[var(--green-accent-light)] dark:bg-[var(--green-accent-dark)] text-[var(--bg-light)] dark:text-[var(--bg-dark)] px-0.5 rounded-sm mt-1.5 sm:mt-0";
     default:
       return "bg-gray-500 dark:bg-gray-400 text-[var(--bg-light)] dark:text-[var(--bg-dark)] px-0.5 rounded-sm mt-1.5 sm:mt-0";
   }

@@ -6,6 +6,7 @@ export type JobStatus =
   | "3rd round"
   | "rejected"
   | "no response"
+  | "job offer"
   | undefined;
 
 export interface Job {
