@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { computed, reactive, watch } from "vue";
+import { computed, reactive, ref, watch } from "vue";
 import RouterButton from "./RouterButton.vue";
 import { Icon } from "@iconify/vue";
 import type { Job } from "@/types/job";
+
+import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
 
 const props = defineProps<{
   job: Job;
@@ -123,6 +125,15 @@ const statusTextClass = computed(() => {
       return "bg-gray-500 dark:bg-gray-400 text-[var(--bg-light)] dark:text-[var(--bg-dark)] px-0.5 rounded-sm mt-1.5 sm:mt-0";
   }
 });
+const jobStatusOptions = ref([
+  "applied",
+  "1st round",
+  "2nd round",
+  "3rd round",
+  "rejected",
+  "no response",
+  "job offer",
+]);
 </script>
 
 <template>
@@ -172,31 +183,74 @@ const statusTextClass = computed(() => {
     <template v-if="viewingMode === 'editing'">
       <div
         class="flex flex-col sm:flex-row text-sm justify-between gap-1 w-full mb-1">
-        <select
-          v-model="editableJob.status"
-          class="w-full sm:w-auto flex-1 p-1 rounded bg-[var(--bg-light)] dark:bg-[var(--bg-dark)] border border-color">
-          <option disabled>Select job status</option>
-          <option value="applied">applied</option>
-          <option value="1st round">1st round</option>
-          <option value="2nd round">2nd round</option>
-          <option value="3rd round">3rd round</option>
-          <option value="rejected">rejected</option>
-          <option value="no response">no response</option>
-          <option value="job offer">job offer</option>
-        </select>
+        <Menu
+          as="div"
+          class="relative inline-block text-left w-full sm:w-auto flex-1 group">
+          <div>
+            <MenuButton
+              class="inline-flex items-center justify-between w-full p-1 rounded border border-color bg-[var(--bg-light)] dark:bg-[var(--bg-dark)] text-gray-700 dark:text-gray-300 focus:ring-1 focus:ring-slate-700 dark:focus:ring-slate-300">
+              <span>{{ editableJob.status || "Select job status" }}</span>
+              <Icon
+                icon="mdi:chevron-down"
+                class="ml-2 h-5 w-5 text-gray-500 dark:text-gray-400 group-hover:text-[var(--green-accent-light)] dark:group-hover:text-[var(--green-accent-dark)]"
+                aria-label="update date" />
+            </MenuButton>
+          </div>
+
+          <transition
+            enter-active-class="transition ease-out duration-100"
+            enter-from-class="transform opacity-0 scale-95"
+            enter-to-class="transform opacity-100 scale-100"
+            leave-active-class="transition ease-in duration-75"
+            leave-from-class="transform opacity-100 scale-100"
+            leave-to-class="transform opacity-0 scale-95">
+            <MenuItems
+              class="origin-top-right absolute right-0 mt-1 w-full rounded-sm border border-color z-10 bg-[var(--bg-light)] dark:bg-[var(--bg-dark)] focus:outline-none">
+              <div class="p-1">
+                <MenuItem disabled>
+                  <span
+                    class="block px-3 py-2 text-sm text-gray-00 cursor-not-allowed text-gray-500 dark:text-gray-400">
+                    Select job status
+                  </span>
+                </MenuItem>
+
+                <MenuItem
+                  v-for="statusOption in jobStatusOptions"
+                  :key="statusOption"
+                  v-slot="{ active }">
+                  <button
+                    @click="editableJob.status = statusOption as Job['status']"
+                    :class="[
+                      'block w-full text-left px-3 py-2 text-sm rounded-sm ',
+                      // Highlight when active (hover/focus)
+                      active
+                        ? 'text-[var(--green-accent-light)] dark:text-[var(--green-accent-dark)]'
+                        : '',
+                      // Highlight when selected (current value)
+                      statusOption === editableJob.status
+                        ? ' text-[var(--green-accent-light)] dark:text-[var(--green-accent-dark)]'
+                        : '',
+                    ]">
+                    {{ statusOption }}
+                  </button>
+                </MenuItem>
+              </div>
+            </MenuItems>
+          </transition>
+        </Menu>
         <div
-          class="flex flex-row relative items-center gap-1 w-full sm:w-auto sm:flex-1">
+          class="flex flex-row relative items-center gap-1 w-full sm:w-auto sm:flex-1 group">
           <input
             v-model="editableJob.date"
             type="text"
             readonly
             placeholder="Date"
-            class="w-full flex-1 rounded border p-1 border-color bg-[var(--input-bg)] cursor-not-allowed" />
+            class="w-full flex-1 rounded border p-1 border-color cursor-auto" />
 
           <Icon
             icon="heroicons-solid:refresh"
             aria-label="update date"
-            class="text-2xl absolute right-1 text-hover cursor-pointer"
+            class="text-2xl absolute right-1 cursor-pointer text-gray-500 dark:text-gray-400 group-hover:text-[var(--green-accent-light)] dark:group-hover:text-[var(--green-accent-dark)]"
             @click="updateDateToToday" />
         </div>
       </div>

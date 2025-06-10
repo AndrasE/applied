@@ -29,7 +29,7 @@ const job = ref<Job>({
     <Divider label="adding mode" labelPosition="top" />
 
     <div
-      class="flex flex-col items-center w-full justify-between margin950and640 4border-color">
+      class="flex flex-col items-center w-full justify-between margin950and640 border-color">
       <JobCard
         viewingMode="adding"
         class="w-full border-0 border-b sm:border-0 rounded-none pb-3 sm:pb-0 pt-0"

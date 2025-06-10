@@ -65,6 +65,13 @@
     max-height: 800px;
   }
 
+  /* these matches the inline headless-ui dropdowns style */
+  input:focus,
+  textarea:focus,
+  select:focus {
+    @apply outline-none ring-1 ring-offset-0  ring-slate-700 dark:ring-slate-300;
+  }
+
   @media screen and (max-width: 640px) {
     textarea {
       min-height: 500px;
