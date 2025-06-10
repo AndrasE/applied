@@ -175,7 +175,7 @@ const statusTextClass = computed(() => {
         <select
           v-model="editableJob.status"
           class="w-full sm:w-auto flex-1 p-1 rounded bg-[var(--bg-light)] dark:bg-[var(--bg-dark)] border border-color">
-          <option disabled value="">Select job status</option>
+          <option disabled>Select job status</option>
           <option value="applied">applied</option>
           <option value="1st round">1st round</option>
           <option value="2nd round">2nd round</option>
