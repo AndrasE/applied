@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from "vue";
+import { applyTheme } from "@/theme";
 import { Icon, addCollection } from "@iconify/vue";
 import clarityIcons from "@iconify-json/clarity/icons.json";
-import { applyTheme } from "@/theme";
 
 // Register the Clarity Icons collection
 addCollection(clarityIcons);

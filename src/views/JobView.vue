@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { useRoute } from "vue-router";
-import Container from "@/components/Container.vue";
+import Container from "@/components/ui/Container.vue";
 import jobs from "@/data/jobs.json";
-import Divider from "@/components/Divider.vue";
-import PageHeader from "@/components/PageHeader.vue";
-import JobCard from "@/components/JobCard.vue";
-import RouterButton from "@/components/RouterButton.vue";
+import Divider from "@/components/ui/Divider.vue";
+import PageHeader from "@/components/ui/PageHeader.vue";
+import JobCard from "@/components/job-cards/JobCard.vue";
+import RouterButton from "@/components/ui/RouterButton.vue";
 
 const route = useRoute();
 const jobId = Number(route.params.id);

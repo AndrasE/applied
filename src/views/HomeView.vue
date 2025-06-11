@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Container from "@/components/Container.vue";
-import Divider from "@/components/Divider.vue";
+import Container from "@/components/ui/Container.vue";
+import Divider from "@/components/ui/Divider.vue";
 import applying from "@/assets/animations/applying.json";
 // Import Vue3Lottie and Icon components dynamically for better performance on initial load reduce bundle size 92.1 KiB -> 75.1 KiB
 import { defineAsyncComponent } from "vue";
@@ -23,7 +23,7 @@ const Icon = defineAsyncComponent(() =>
 
     <!-- lottie and app-name -->
     <div
-      class="flex flex-col items-center w-full max-w-sm p-1 md:max-w-md lg:max-w-lg xl:max-w-xl">
+      class="flex flex-col items-center w-full mt-3 max-w-sm p-1 md:max-w-md lg:max-w-lg xl:max-w-xl">
       <Vue3Lottie
         :animationData="applying"
         :loop="true"
@@ -41,12 +41,7 @@ const Icon = defineAsyncComponent(() =>
     </div>
 
     <!-- later.. -->
-
-    <div
-      class="flex flex-col items-center w-full max-w-sm p-1 text-center border-t rounded-lg md:max-w-md lg:max-w-lg xl:max-w-xl border-x border-color">
-      stats
-    </div>
-
-    <Divider label="stats" labelPosition="bottom" />
+    <p class="text-center text-sm mb-3">Personal job application tracker</p>
+    <Divider label="crud" labelPosition="bottom" />
   </Container>
 </template>

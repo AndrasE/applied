@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import Container from "@/components/Container.vue";
+import Container from "@/components/ui/Container.vue";
 import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
 import { reactive, ref } from "vue";
-import type { Job } from "@/types/job";
 import { Icon } from "@iconify/vue";
+import type { Job } from "@/types/job";
 
 const props = defineProps<{
   job: Job;

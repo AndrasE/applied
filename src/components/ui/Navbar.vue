@@ -2,7 +2,6 @@
 import { RouterLink, useRoute } from "vue-router";
 import { Icon, addCollection } from "@iconify/vue";
 import clarityIcons from "@iconify-json/clarity/icons.json";
-
 import ThemeToggle from "./ThemeToggle.vue";
 
 // Register icon collection

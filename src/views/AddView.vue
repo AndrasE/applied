@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import Container from "@/components/Container.vue";
-import JobCard from "@/components/JobCard.vue";
-import RouterButton from "@/components/RouterButton.vue";
-import Divider from "@/components/Divider.vue";
-import PageHeader from "@/components/PageHeader.vue";
+import Container from "@/components/ui/Container.vue";
+import JobCard from "@/components/job-cards/JobCard.vue";
+import RouterButton from "@/components/ui/RouterButton.vue";
+import Divider from "@/components/ui/Divider.vue";
+import PageHeader from "@/components/ui/PageHeader.vue";
 
 interface Job {
   id: number;

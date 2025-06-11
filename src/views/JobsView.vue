@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
-import Container from "@/components/Container.vue";
-import PageHeader from "@/components/PageHeader.vue";
-import Divider from "@/components/Divider.vue";
-import JobCard from "@/components/JobCard.vue";
+import Container from "@/components/ui/Container.vue";
+import PageHeader from "@/components/ui/PageHeader.vue";
+import Divider from "@/components/ui/Divider.vue";
+import JobCard from "@/components/job-cards/JobCard.vue";
+import RouterButton from "@/components/ui/RouterButton.vue";
 import { Icon } from "@iconify/vue";
 import jobsRaw from "@/data/jobs.json";
-import RouterButton from "@/components/RouterButton.vue";
 import type { Job, JobStatus } from "@/types/job";
 
 // Ensure the jobsRaw data is typed correctly especially for status
