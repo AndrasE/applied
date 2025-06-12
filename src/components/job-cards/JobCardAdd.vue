@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { reactive, watch } from "vue";
+import { useRouter } from "vue-router";
 import RouterButton from "../ui/RouterButton.vue";
 import type { Job } from "../../types/job";
 
@@ -35,18 +36,14 @@ watch(
   { deep: true }
 );
 
-// Function to update date to today
-function updateDateToToday() {
-  const today = new Date();
-  const day = String(today.getDate()).padStart(2, "0");
-  const month = String(today.getMonth() + 1).padStart(2, "0");
-  const year = String(today.getFullYear()).slice(-2); // get last 2 digits
-  localEditableJob.date = `${day}/${month}/${year}`;
-}
+const router = useRouter();
 
-// Handle Add action
+// Handles the form and emits the job to parent
 function handleAdd() {
+  console.log("✅ JobCardAdd.vue: Emitting 'add'", localEditableJob);
   emit("add", localEditableJob);
+  // Navigate after emitting the event
+  router.push("/jobs");
 }
 </script>
 
@@ -78,13 +75,12 @@ function handleAdd() {
     </p>
 
     <div class="flex justify-end gap-2 pt-2">
-      <RouterButton
-        :to="`/jobs`"
-        label="Add job"
-        icon="heroicons-solid:plus"
-        icon-position="left"
-        custom-class="pt-2 xl:pt-0 mr-2"
-        @click="handleAdd" />
+      <button
+        class="inline-flex items-center gap-2 pt-2 xl:pt-0 mr-2"
+        @click="handleAdd">
+        <span class="heroicons-solid:plus" />
+        Add job
+      </button>
     </div>
   </div>
 </template>

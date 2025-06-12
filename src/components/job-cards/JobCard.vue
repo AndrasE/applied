@@ -19,31 +19,33 @@ console.log("JobCard.vue: Viewing mode received:", props.viewingMode);
 // Local reactive copy of the job for editing/adding
 const editableJob = reactive<Job>({ ...props.job });
 
+// Format today as dd/mm/yy
+function getTodayFormatted(): string {
+  const today = new Date();
+  const dd = String(today.getDate()).padStart(2, "0");
+  const mm = String(today.getMonth() + 1).padStart(2, "0");
+  const yy = String(today.getFullYear()).slice(-2);
+  return `${dd}/${mm}/${yy}`;
+}
+
 // Watch for mode changes and reset editable fields or populate
 // This ensures editableJob is always in the correct state for the current mode
 watch(
   () => props.viewingMode,
   (newMode) => {
     if (newMode === "adding") {
-      // Initialize for a new job
+      // Initialize for a new job - removed id field
       Object.assign(editableJob, {
-        id: undefined, // Crucial: new jobs shouldn't have an ID yet
         title: "",
         company: "",
         description: "",
-        link: "",
-        status: "applied", // Default for new jobs
-        date: "",
+        status: "applied",
+        date: getTodayFormatted(), // Set today's date
       });
-      console.log(
-        "JobCard.vue: editableJob initialized for 'adding'(clearing fields)"
-      );
+      console.log("JobCard.vue: editableJob initialized for 'adding'");
     } else if (newMode === "editing") {
-      // Populate with existing job data for editing
       Object.assign(editableJob, props.job);
-      console.log(
-        "JobCard.vue: editableJob populated for 'editing' for job id:"
-      );
+      console.log("JobCard.vue: editableJob populated for 'editing'");
     }
   },
   { immediate: true, deep: true } // immediate: runs on initial component load. deep: watches nested changes.
@@ -65,8 +67,9 @@ function handleDeleteJob(jobId: number) {
   emit("delete", jobId);
 }
 
-function handleAddJob(jobData: Job) {
-  emit("add", jobData);
+function handleAddJob(job: Job) {
+  console.log("✅ JobCard.vue: Received 'add' event", job);
+  emit("add", job);
 }
 </script>
 
