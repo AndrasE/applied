@@ -42,8 +42,7 @@ watch(
       // Populate with existing job data for editing
       Object.assign(editableJob, props.job);
       console.log(
-        "JobCard.vue: editableJob populated for 'editing' for job id:",
-        editableJob.id
+        "JobCard.vue: editableJob populated for 'editing' for job id:"
       );
     }
   },

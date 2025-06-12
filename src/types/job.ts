@@ -10,11 +10,9 @@ export type JobStatus =
   | undefined;
 
 export interface Job {
-  id: number;
   title: string;
   description: string;
   company: string;
-  link: string;
   status?: JobStatus;
   date?: string;
 }
