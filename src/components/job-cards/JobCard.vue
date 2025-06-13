@@ -6,6 +6,7 @@ import JobCardView from "./JobCardView.vue";
 import JobCardEdit from "./JobCardEdit.vue";
 import JobCardAdd from "./JobCardAdd.vue";
 import type { Job } from "../../types/job";
+import { getTodayFormatted } from "@/utils/getTodayFormatted";
 
 const props = defineProps<{
   job: Job;
@@ -18,15 +19,6 @@ console.log("JobCard.vue: Viewing mode received:", props.viewingMode);
 
 // Local reactive copy of the job for editing/adding
 const editableJob = reactive<Job>({ ...props.job });
-
-// Format today as dd/mm/yy
-function getTodayFormatted(): string {
-  const today = new Date();
-  const dd = String(today.getDate()).padStart(2, "0");
-  const mm = String(today.getMonth() + 1).padStart(2, "0");
-  const yy = String(today.getFullYear()).slice(-2);
-  return `${dd}/${mm}/${yy}`;
-}
 
 // Watch for mode changes and reset editable fields or populate
 // This ensures editableJob is always in the correct state for the current mode

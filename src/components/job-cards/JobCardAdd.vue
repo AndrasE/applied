@@ -75,12 +75,12 @@ function handleAdd() {
     </p>
 
     <div class="flex justify-end gap-2 pt-2">
-      <button
-        class="inline-flex items-center gap-2 pt-2 xl:pt-0 mr-2"
-        @click="handleAdd">
-        <span class="heroicons-solid:plus" />
-        Add job
-      </button>
+      <RouterButton
+        :onClick="handleAdd"
+        label="Add job"
+        icon="heroicons-solid:plus"
+        iconPosition="left"
+        customClass="pt-2 xl:pt-0 mr-2" />
     </div>
   </div>
 </template>
