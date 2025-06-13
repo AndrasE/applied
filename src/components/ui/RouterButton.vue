@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { RouterLink } from "vue-router";
 import { Icon } from "@iconify/vue";
-import type { RouteLocationRaw } from 'vue-router';
+import type { RouteLocationRaw } from "vue-router";
 
 const props = withDefaults(
   defineProps<{
-    to?: string | RouteLocationRaw;  // Use RouteLocationRaw type instead
+    to?: string | RouteLocationRaw; // Allow both string and RouteLocationRaw for flexibility
     onClick?: () => void;
     label: string;
     icon?: string;
