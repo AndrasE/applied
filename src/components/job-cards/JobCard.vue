@@ -26,16 +26,21 @@ watch(
   () => props.viewingMode,
   (newMode) => {
     if (newMode === "adding") {
-      // Initialize for a new job - removed id field
-      Object.assign(editableJob, {
-        title: "",
-        company: "",
-        description: "",
-        status: "applied",
-        date: getTodayFormatted(), // Set today's date
-      });
+      // Assign properties individually
+      editableJob.title = "";
+      editableJob.company = "";
+      editableJob.description = "";
+      editableJob.status = "applied";
+      editableJob.date = getTodayFormatted(); // Set today's date
+      // Remove id if present
+      if ("id" in editableJob) delete editableJob.id;
       console.log("JobCard.vue: editableJob initialized for 'adding'");
     } else if (newMode === "editing") {
+      // Assign properties individually
+      Object.keys(editableJob).forEach((key) => {
+        // @ts-ignore
+        delete editableJob[key];
+      });
       Object.assign(editableJob, props.job);
       console.log("JobCard.vue: editableJob populated for 'editing'");
     }
