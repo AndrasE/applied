@@ -10,6 +10,13 @@ const props = defineProps<{
   statusIconCustomClass?: string;
 }>();
 
+// Add slug computed property
+const slug = computed(() => {
+  const titleSlug = props.job.title.toLowerCase().replace(/\s+/g, "-");
+  const companySlug = props.job.company.toLowerCase().replace(/\s+/g, "-");
+  return `${titleSlug}-at-${companySlug}`;
+});
+
 // Character limit for description or fallback to full length
 const limit = computed(() =>
   props.charLimit != null ? props.charLimit : props.job.description.length
@@ -86,7 +93,11 @@ const statusIconInfo = computed(() => {
 
     <div class="flex">
       <RouterButton
-        :to="`/jobs/${job.id}`"
+        as="link"
+        :to="{
+          name: 'jobDetail',
+          params: { id: job.id },
+        }"
         label="Read more"
         icon="heroicons-solid:arrow-right"
         custom-class="pt-2" />

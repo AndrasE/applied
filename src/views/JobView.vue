@@ -1,25 +1,52 @@
 <script setup lang="ts">
-import { useRoute } from "vue-router";
+import { ref, onMounted, onUnmounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import { ref as dbRef, onValue } from "firebase/database";
+import { database } from "../config/database";
 import Container from "@/components/ui/Container.vue";
-import jobs from "@/data/jobs.json";
 import Divider from "@/components/ui/Divider.vue";
 import PageHeader from "@/components/ui/PageHeader.vue";
 import JobCard from "@/components/job-cards/JobCard.vue";
 import RouterButton from "@/components/ui/RouterButton.vue";
+import type { Job, JobStatus } from "@/types/job";
 
 const route = useRoute();
-const jobId = Number(route.params.id);
-const isValidId = !isNaN(jobId);
+const jobId = route.params.id as string;
 
-// Import the JobStatus enum/type if needed
-import type { JobStatus } from "@/types/job"; // Make sure this path is correct
-const rawJob = isValidId ? jobs.find((j) => j.id === jobId) : null;
-const job = rawJob
-  ? {
-      ...rawJob,
-      status: rawJob.status as JobStatus, // Cast status to JobStatus
+const router = useRouter();
+const job = ref<Job | null>(null);
+
+// Setup Firebase listener
+let unsubscribe: (() => void) | null = null;
+
+onMounted(() => {
+  if (!jobId) {
+    console.error("No job ID provided");
+    router.push("/jobs");
+    return;
+  }
+
+  const jobRef = dbRef(database, `jobs/${jobId}`);
+  unsubscribe = onValue(jobRef, (snapshot) => {
+    if (snapshot.exists()) {
+      const jobData = snapshot.val();
+      job.value = {
+        ...jobData,
+        id: snapshot.key,
+        status: jobData.status as JobStatus,
+      };
+    } else {
+      job.value = null;
+      router.push("/jobs");
     }
-  : null;
+  });
+});
+
+onUnmounted(() => {
+  if (unsubscribe) {
+    unsubscribe();
+  }
+});
 </script>
 
 <template>

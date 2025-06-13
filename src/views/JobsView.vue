@@ -1,27 +1,53 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, onMounted, onUnmounted } from "vue";
+import { ref as dbRef, onValue } from "firebase/database";
+import { database } from "../config/database";
 import Container from "@/components/ui/Container.vue";
 import PageHeader from "@/components/ui/PageHeader.vue";
 import Divider from "@/components/ui/Divider.vue";
 import JobCard from "@/components/job-cards/JobCard.vue";
 import RouterButton from "@/components/ui/RouterButton.vue";
 import { Icon } from "@iconify/vue";
-import jobsRaw from "@/data/jobs.json";
 import type { Job, JobStatus } from "@/types/job";
 
-// Ensure the jobsRaw data is typed correctly especially for status
-const jobs = ref<Job[]>(
-  jobsRaw.map((j) => ({
-    ...j,
-    status: j.status as JobStatus,
-  }))
-);
+// Firebase refs
+const jobs = ref<Job[]>([]);
 const viewStyle = ref<string>("list"); // 'list' or 'grid'
-
 const DEFAULT_LIMIT = 8;
 const limit = ref<number>(DEFAULT_LIMIT);
 
-const visibleJobs = computed(() => jobs.value.slice(0, limit.value));
+// Setup Firebase listener
+let unsubscribe: (() => void) | null = null;
+
+onMounted(() => {
+  const jobsRef = dbRef(database, "jobs");
+  const unsubscribeFn = onValue(jobsRef, (snapshot) => {
+    const jobsData: Job[] = [];
+    snapshot.forEach((childSnapshot) => {
+      const job = childSnapshot.val();
+      jobsData.push({
+        ...job,
+        id: childSnapshot.key, // Ensure ID is assigned first
+        status: job.status as JobStatus,
+      });
+    });
+    jobs.value = jobsData;
+    console.log("📥 Fetched jobs from Firebase:", jobsData);
+  });
+  unsubscribe = unsubscribeFn;
+});
+
+// Clean up listener on component unmount
+onUnmounted(() => {
+  if (unsubscribe) {
+    unsubscribe();
+  }
+});
+
+const visibleJobs = computed(() => {
+  // Reverse the array to show newest entries first
+  return [...jobs.value].reverse().slice(0, limit.value);
+});
 
 const toggleLimit = () => {
   limit.value =
@@ -76,7 +102,6 @@ const changeView = (style: string) => {
           class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 margin950and640">
           <JobCard
             v-for="job in visibleJobs"
-            :key="job.id"
             :job="job"
             :char-limit="200"
             :showLinkButton="true"
@@ -88,7 +113,6 @@ const changeView = (style: string) => {
         <div class="flex flex-col gap-4 margin950and640">
           <JobCard
             v-for="job in visibleJobs"
-            :key="job.id"
             :job="job"
             :char-limit="330"
             :viewingMode="'browsing'"

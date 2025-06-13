@@ -14,7 +14,7 @@ const props = defineProps<{
 const emit = defineEmits<{
   (e: "update:modelValue", job: Job): void;
   (e: "save", job: Job): void;
-  (e: "delete", id: number): void;
+  (e: "delete", id: string): void;
 }>();
 
 // Create a local reactive copy of modelValue to allow editing
@@ -53,7 +53,7 @@ function handleSave() {
 }
 
 function handleDelete() {
-  if (localEditableJob.id != null) {
+  if (localEditableJob.id) {
     emit("delete", localEditableJob.id);
   }
 }
@@ -109,14 +109,12 @@ function handleDelete() {
 
     <div class="flex justify-end gap-2 pt-2">
       <RouterButton
-        :to="`/jobs`"
         label="Delete job"
         icon="heroicons-solid:trash"
         icon-position="left"
         custom-class="pt-2 xl:pt-0 mr-2"
         @click="handleDelete" />
       <RouterButton
-        :to="`/jobs/${localEditableJob.id}`"
         label="Save changes"
         icon="heroicons-solid:check"
         icon-position="left"

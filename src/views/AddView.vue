@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { ref as dbRef, push } from "firebase/database"; // Import dbRef and push from Firebase
 import { database } from "../config/database"; // Make sure you have a database export from your firebase config
+import type { Job } from "@/types/job";
 
 import Container from "@/components/ui/Container.vue";
 import JobCard from "@/components/job-cards/JobCard.vue";
@@ -9,24 +10,6 @@ import RouterButton from "@/components/ui/RouterButton.vue";
 import Divider from "@/components/ui/Divider.vue";
 import PageHeader from "@/components/ui/PageHeader.vue";
 import router from "@/router";
-
-// Define Job type
-type JobStatus =
-  | "applied"
-  | "1st round"
-  | "2nd round"
-  | "3rd round"
-  | "rejected"
-  | "no response"
-  | "job offer"
-  | undefined;
-
-interface Job {
-  title: string;
-  description: string;
-  company: string;
-  status?: JobStatus;
-}
 
 // Default job state - removed date since it's handled in JobCard
 const job = ref<Job>({

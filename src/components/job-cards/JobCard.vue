@@ -46,7 +46,7 @@ watch(
 // Emits events to the parent of JobCard.vue
 const emit = defineEmits<{
   (e: "update", job: Job): void;
-  (e: "delete", id: number): void;
+  (e: "delete", id: string): void;
   (e: "add", job: Job): void;
 }>();
 
@@ -55,7 +55,8 @@ function handleSaveJob(jobData: Job) {
   emit("update", jobData);
 }
 
-function handleDeleteJob(jobId: number) {
+function handleDeleteJob(jobId: string) {
+  console.log("🗑️ Deleting job:", jobId);
   emit("delete", jobId);
 }
 
