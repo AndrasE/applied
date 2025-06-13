@@ -33,7 +33,7 @@ watch(
 watch(
   localEditableJob,
   (newValue) => {
-    emit("update:modelValue", newValue);
+    emit("update:modelValue", { ...newValue });
   },
   { deep: true }
 );
@@ -49,7 +49,7 @@ function updateDateToToday() {
 
 // Handle Save/Delete actions
 function handleSave() {
-  emit("save", localEditableJob);
+  emit("save", { ...localEditableJob });
 }
 
 function handleDelete() {
