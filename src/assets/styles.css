@@ -42,8 +42,8 @@
   --pattern-color-dark: #d1d5db0c; /* slate-200 with 0.05 opacity */
   --green-accent-light: #15803d; /* green-700 */
   --green-accent-dark: #7bf1a8; /* green-300 */
-  --skeleton-bg-dark: #232323d3;
-  --skeleton-bg-light: #f3f4f6;
+  --skeleton-bg-dark: #2a2a2ad3;
+  --skeleton-bg-light: #d1d1d3;
 }
 
 @layer base {
@@ -101,7 +101,7 @@
   }
 
   .subtle-pulse {
-    animation: subtlePulse 0.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    animation: subtlePulse 1.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
 
   @keyframes subtlePulse {
@@ -110,7 +110,7 @@
       opacity: 1;
     }
     50% {
-      opacity: 0.8;
+      opacity: 0.6;
     }
   }
 }
