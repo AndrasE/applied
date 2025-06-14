@@ -34,14 +34,16 @@
   --font-mono: "Courier New", monospace;
 
   /* Theme */
-  --bg-light: #ffffff; /* slate-50 */
-  --bg-dark: #1a1a1a; /* slate-900 */
+  --bg-light: #ffffff;
+  --bg-dark: #1a1a1a;
   --text-color-light: #213547; /* slate-800 */
   --text-color-dark: #d1d5db; /* slate-200 */
   --pattern-color-light: #2135472d; /* slate-800 with 0.18 opacity */
   --pattern-color-dark: #d1d5db0c; /* slate-200 with 0.05 opacity */
   --green-accent-light: #15803d; /* green-700 */
   --green-accent-dark: #7bf1a8; /* green-300 */
+  --skeleton-bg-dark: #232323d3;
+  --skeleton-bg-light: #f3f4f6;
 }
 
 @layer base {
@@ -92,6 +94,24 @@
   /* border-color (same as tiny in utility) but there is bg (1px divs as devider lines)*/
   .border-color {
     @apply border-slate-400 dark:border-slate-600;
+  }
+
+  .color-shift-skeleton {
+    animation: colorShift 1.5s infinite alternate;
+  }
+
+  .subtle-pulse {
+    animation: subtlePulse 0.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes subtlePulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.8;
+    }
   }
 }
 
