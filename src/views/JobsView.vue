@@ -150,11 +150,11 @@ const changeView = (style: string) => {
           :char-limit="viewStyle === 'grid' ? 200 : 330"
           statusIconCustomClass="invisible">
           <template #default>
-            <div class="w-full">
-              <div class="flex items-start justify-between w-full">
+            <div>
+              <div class="flex items-start justify-between">
                 <div class="mb-1 w-full">
                   <div
-                    class="h-6 w-full rounded bg-[var(--skeleton-bg-light)] subtle-pulse dark:bg-[var(--skeleton-bg-dark)]"></div>
+                    class="h-6 w-11/12 rounded bg-[var(--skeleton-bg-light)] subtle-pulse dark:bg-[var(--skeleton-bg-dark)]"></div>
                 </div>
                 <div class="flex flex-col items-end">
                   <div
@@ -164,7 +164,7 @@ const changeView = (style: string) => {
               <div
                 class="mb-2 h-4 w-2/3 rounded bg-[var(--skeleton-bg-light)] subtle-pulse dark:bg-[var(--skeleton-bg-dark)]"></div>
               <div
-                class="mb-2 h-18 w-full rounded bg-[var(--skeleton-bg-light)] subtle-pulse dark:bg-[var(--skeleton-bg-dark)]"></div>
+                class="mb-2 h-18 w-11/12 rounded bg-[var(--skeleton-bg-light)] subtle-pulse dark:bg-[var(--skeleton-bg-dark)]"></div>
               <div class="flex">
                 <div
                   class="h-8 w-32 rounded bg-[var(--skeleton-bg-light)] subtle-pulse dark:bg-[var(--skeleton-bg-dark)] mt-2"></div>
