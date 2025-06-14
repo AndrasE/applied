@@ -24,7 +24,7 @@ let unsubscribe: (() => void) | null = null;
 let jobsSkeletonLoadedOnce: boolean = false;
 
 const isJobsSkeletonReady = ref(jobsSkeletonLoadedOnce);
-const skeletonMinDuration = 20000; // ms
+const skeletonMinDuration = 500; // ms
 
 onMounted(() => {
   let snapshotReceived = false;
@@ -150,11 +150,14 @@ const changeView = (style: string) => {
           :char-limit="viewStyle === 'grid' ? 200 : 330"
           statusIconCustomClass="invisible">
           <template #default>
-            <div>
-              <div class="flex items-start justify-between">
-                <div class="mb-1 w-full">
+            <div class="w-full my-3">
+              <div class="flex w-full items-start justify-between">
+                <div class="flex w-3xl mb-1">
                   <div
-                    class="h-6 w-11/12 rounded bg-[var(--skeleton-bg-light)] subtle-pulse dark:bg-[var(--skeleton-bg-dark)]"></div>
+                    :class="[
+                      'h-6 rounded bg-[var(--skeleton-bg-light)] subtle-pulse dark:bg-[var(--skeleton-bg-dark)]',
+                      viewStyle === 'grid' ? 'w-full' : 'w-50',
+                    ]"></div>
                 </div>
                 <div class="flex flex-col items-end">
                   <div
@@ -162,12 +165,15 @@ const changeView = (style: string) => {
                 </div>
               </div>
               <div
-                class="mb-2 h-4 w-2/3 rounded bg-[var(--skeleton-bg-light)] subtle-pulse dark:bg-[var(--skeleton-bg-dark)]"></div>
+                class="mb-2 my-1 h-4 w-1/2 rounded bg-[var(--skeleton-bg-light)] subtle-pulse dark:bg-[var(--skeleton-bg-dark)]"></div>
               <div
-                class="mb-2 h-18 w-11/12 rounded bg-[var(--skeleton-bg-light)] subtle-pulse dark:bg-[var(--skeleton-bg-dark)]"></div>
+                :class="[
+                  'my-1 w-11/12 rounded bg-[var(--skeleton-bg-light)] subtle-pulse dark:bg-[var(--skeleton-bg-dark)]',
+                  viewStyle === 'grid' ? 'h-36' : 'h-16',
+                ]"></div>
               <div class="flex">
                 <div
-                  class="h-8 w-32 rounded bg-[var(--skeleton-bg-light)] subtle-pulse dark:bg-[var(--skeleton-bg-dark)] mt-2"></div>
+                  class="h-6 w-20 rounded bg-[var(--skeleton-bg-light)] subtle-pulse dark:bg-[var(--skeleton-bg-dark)] mt-1"></div>
               </div>
             </div>
           </template>
