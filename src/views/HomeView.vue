@@ -33,7 +33,7 @@ onMounted(() => {
   setTimeout(() => {
     isLottieReady.value = true;
     lottieAnimationLoadedOnce = true; // Mark as loaded for future instances in this session
-  }, 1200); // Your determined loading time
+  }, 1400); // Your determined loading time
 });
 </script>
 
@@ -46,7 +46,7 @@ onMounted(() => {
         <div
           aria-hidden="true"
           v-if="!isLottieReady"
-          class="absolute inset-0 mb-3 mt-1 mx-3 flex items-center justify-center rounded-lg bg-[var(--skeleton-bg-light)] text-tiny text-gray-500 subtle-pulse dark:bg-[var(--skeleton-bg-dark)] dark:text-gray-400">
+          class="absolute inset-0 mb-3 mt-1 mx-3 flex items-center justify-center rounded-lg bg-[var(--skeleton-bg-light)] text-tiny text-gray-500 subtle-pulse tracking-widest dark:bg-[var(--skeleton-bg-dark)] dark:text-gray-400">
           loading...
         </div>
         <Vue3Lottie

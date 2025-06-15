@@ -101,7 +101,7 @@
   }
 
   .subtle-pulse {
-    animation: subtlePulse 1.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    animation: subtlePulse 1.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
 
   @keyframes subtlePulse {
