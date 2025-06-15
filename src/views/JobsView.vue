@@ -24,7 +24,7 @@ let unsubscribe: (() => void) | null = null;
 let jobsSkeletonLoadedOnce: boolean = false;
 
 const isJobsSkeletonReady = ref(jobsSkeletonLoadedOnce);
-const skeletonMinDuration = 500; // ms
+const skeletonMinDuration = 1400; // ms
 
 onMounted(() => {
   let snapshotReceived = false;
@@ -134,35 +134,38 @@ const changeView = (style: string) => {
       <div
         :class="[
           viewStyle === 'grid'
-            ? 'grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 margin950and640'
-            : 'flex flex-col gap-4 margin950and640',
+            ? 'grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 margin950and640 w-full'
+            : 'flex flex-col gap-4 margin950and640 w-full',
         ]">
-        <div v-for="n in DEFAULT_LIMIT" :key="'skeleton-' + n">
+        <div
+          v-for="n in DEFAULT_LIMIT"
+          :key="'skeleton-' + n"
+          class="mx-6 my-4">
           <div class="flex items-start justify-between animate-pulse">
-            <div class="w-full mb-1">
+            <div class="w-full mb-2">
               <div
-                class="w-full h-4 mb-1 rounded bg-[var(--skeleton-bg-light)] text-gray-500 subtle-pulse dark:bg-[var(--skeleton-bg-dark)] dark:text-gray-400"></div>
+                class="w-3/4 xl:w-1/2 h-8 rounded bg-[var(--skeleton-bg-light)] text-gray-500 subtle-pulse dark:bg-[var(--skeleton-bg-dark)] dark:text-gray-400"></div>
             </div>
             <div class="flex flex-col items-end">
               <div
-                class="w-4 h-4 mb-1 bg-[var(--skeleton-bg-light)] text-gray-500 subtle-pulse dark:bg-[var(--skeleton-bg-dark)] dark:text-gray-400 rounded-full ml-1"></div>
+                class="w-8 h-8 bg-[var(--skeleton-bg-light)] text-gray-500 subtle-pulse dark:bg-[var(--skeleton-bg-dark)] dark:text-gray-400 rounded-full ml-1"></div>
             </div>
           </div>
 
           <div class="mb-2">
             <div
-              class="w-full h-4 mb-1 rounded bg-[var(--skeleton-bg-light)] text-gray-500 subtle-pulse dark:bg-[var(--skeleton-bg-dark)] dark:text-gray-400"></div>
+              class="w-1/2 xl:w-1/3 h-6 mb-1 rounded bg-[var(--skeleton-bg-light)] text-gray-500 subtle-pulse dark:bg-[var(--skeleton-bg-dark)] dark:text-gray-400"></div>
           </div>
 
           <div>
             <div
-              class="w-full h-4 mb-1 rounded bg-[var(--skeleton-bg-light)] text-tiny text-gray-500 subtle-pulse dark:bg-[var(--skeleton-bg-dark)] dark:text-gray-400"></div>
+              :class="[
+                'w-full mb-2 rounded bg-[var(--skeleton-bg-light)] text-tiny text-gray-500 subtle-pulse dark:bg-[var(--skeleton-bg-dark)] dark:text-gray-400',
+                viewStyle === 'grid' ? 'h-36' : 'h-18',
+              ]"></div>
             <div
-              class="w-full h-4 mb-1 rounded bg-[var(--skeleton-bg-light)] text-tiny text-gray-500 subtle-pulse dark:bg-[var(--skeleton-bg-dark)] dark:text-gray-400"></div>
+              class="w-22 md:w-24 xl:w-28 h-6 mb-1 rounded bg-[var(--skeleton-bg-light)] text-tiny text-gray-500 subtle-pulse dark:bg-[var(--skeleton-bg-dark)] dark:text-gray-400"></div>
           </div>
-
-          <div
-            class="w-24 mb-1 rounded bg-[var(--skeleton-bg-light)] text-tiny text-gray-500 subtle-pulse dark:bg-[var(--skeleton-bg-dark)] dark:text-gray-400"></div>
         </div>
       </div>
     </template>
@@ -189,7 +192,7 @@ const changeView = (style: string) => {
               :job="job"
               :char-limit="330"
               :viewingMode="'browsing'"
-              statusIconCustomClass="text-xl ml-1  mt-1" />
+              statusIconCustomClass="text-xl ml-1 mt-1" />
           </div>
         </template>
       </template>

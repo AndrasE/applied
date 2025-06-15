@@ -54,7 +54,7 @@ onMounted(() => {
           :animationData="applying"
           :loop="true"
           :autoplay="true"
-          :speed="0.6"
+          :speed="0.8"
           class="w-full h-full" />
       </div>
 
