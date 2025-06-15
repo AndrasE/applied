@@ -46,7 +46,7 @@ onMounted(() => {
         <div
           aria-hidden="true"
           v-if="!isLottieReady"
-          class="absolute inset-0 mb-5 mt-1 mx-2 flex items-center justify-center rounded-lg bg-[var(--skeleton-bg-light)] text-tiny text-gray-500 subtle-pulse dark:bg-[var(--skeleton-bg-dark)] dark:text-gray-400">
+          class="absolute inset-0 mb-3 mt-1 mx-3 flex items-center justify-center rounded-lg bg-[var(--skeleton-bg-light)] text-tiny text-gray-500 subtle-pulse dark:bg-[var(--skeleton-bg-dark)] dark:text-gray-400">
           loading...
         </div>
         <Vue3Lottie
@@ -61,9 +61,9 @@ onMounted(() => {
       <h1 class="flex items-center justify-center mt-2 text-2xl text-center">
         <template v-if="!isLottieReady">
           <span
-            class="mr-1 block h-9 w-9 rounded bg-[var(--skeleton-bg-light)] subtle-pulse dark:bg-[var(--skeleton-bg-dark)]"></span>
+            class="mr-1 block h-10 w-10 mt-2 rounded bg-[var(--skeleton-bg-light)] subtle-pulse dark:bg-[var(--skeleton-bg-dark)]"></span>
           <span
-            class="block h-7 w-23 rounded bg-[var(--skeleton-bg-light)] subtle-pulse dark:bg-[var(--skeleton-bg-dark)]"></span>
+            class="block h-7 w-19 mt-2 rounded bg-[var(--skeleton-bg-light)] subtle-pulse dark:bg-[var(--skeleton-bg-dark)]"></span>
         </template>
         <template v-else>
           <Icon
@@ -80,7 +80,7 @@ onMounted(() => {
     <p class="mb-3 text-sm text-center">
       <template v-if="!isLottieReady">
         <span
-          class="mx-auto mt-3 block h-5 w-55 rounded bg-[var(--skeleton-bg-light)] subtle-pulse dark:bg-[var(--skeleton-bg-dark)]"></span>
+          class="mx-auto mt-2 block h-5 w-53 rounded bg-[var(--skeleton-bg-light)] subtle-pulse dark:bg-[var(--skeleton-bg-dark)]"></span>
       </template>
       <template v-else> Personal job application tracker </template>
     </p>
