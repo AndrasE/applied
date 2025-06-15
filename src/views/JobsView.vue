@@ -138,10 +138,31 @@ const changeView = (style: string) => {
             : 'flex flex-col gap-4 margin950and640',
         ]">
         <div v-for="n in DEFAULT_LIMIT" :key="'skeleton-' + n">
-          <p
-            class="h-6 w-full bg-[var(--skeleton-bg-light)] dark:bg-[var(--skeleton-bg-dark)] subtle-pulse mb-2">
-            thats a penis
-          </p>
+          <div class="flex items-start justify-between animate-pulse">
+            <div class="w-full mb-1">
+              <div
+                class="w-full h-4 mb-1 rounded bg-[var(--skeleton-bg-light)] text-gray-500 subtle-pulse dark:bg-[var(--skeleton-bg-dark)] dark:text-gray-400"></div>
+            </div>
+            <div class="flex flex-col items-end">
+              <div
+                class="w-4 h-4 mb-1 bg-[var(--skeleton-bg-light)] text-gray-500 subtle-pulse dark:bg-[var(--skeleton-bg-dark)] dark:text-gray-400 rounded-full ml-1"></div>
+            </div>
+          </div>
+
+          <div class="mb-2">
+            <div
+              class="w-full h-4 mb-1 rounded bg-[var(--skeleton-bg-light)] text-gray-500 subtle-pulse dark:bg-[var(--skeleton-bg-dark)] dark:text-gray-400"></div>
+          </div>
+
+          <div>
+            <div
+              class="w-full h-4 mb-1 rounded bg-[var(--skeleton-bg-light)] text-tiny text-gray-500 subtle-pulse dark:bg-[var(--skeleton-bg-dark)] dark:text-gray-400"></div>
+            <div
+              class="w-full h-4 mb-1 rounded bg-[var(--skeleton-bg-light)] text-tiny text-gray-500 subtle-pulse dark:bg-[var(--skeleton-bg-dark)] dark:text-gray-400"></div>
+          </div>
+
+          <div
+            class="w-24 mb-1 rounded bg-[var(--skeleton-bg-light)] text-tiny text-gray-500 subtle-pulse dark:bg-[var(--skeleton-bg-dark)] dark:text-gray-400"></div>
         </div>
       </div>
     </template>
