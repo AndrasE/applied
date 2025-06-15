@@ -10,13 +10,6 @@ const props = defineProps<{
   statusIconCustomClass?: string;
 }>();
 
-// Add slug computed property
-const slug = computed(() => {
-  const titleSlug = props.job.title.toLowerCase().replace(/\s+/g, "-");
-  const companySlug = props.job.company.toLowerCase().replace(/\s+/g, "-");
-  return `${titleSlug}-at-${companySlug}`;
-});
-
 // Character limit for description or fallback to full length
 const limit = computed(() =>
   props.charLimit != null ? props.charLimit : props.job.description.length
@@ -81,7 +74,7 @@ const statusIconInfo = computed(() => {
       <h2 class="mb-1 w-full text-lg">{{ job.title }}</h2>
       <div class="flex flex-col items-end">
         <Icon
-          :area-label="statusIconInfo.label"
+          :aria-label="statusIconInfo.label"
           :icon="statusIconInfo.icon"
           :class="[statusIconCustomClass, statusIconInfo.class]" />
       </div>
