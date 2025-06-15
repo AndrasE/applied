@@ -46,7 +46,7 @@ onMounted(() => {
         <div
           aria-hidden="true"
           v-if="!isLottieReady"
-          class="absolute inset-0 mb-5 mt-1 flex items-center justify-center rounded-lg bg-[var(--skeleton-bg-light)] text-tiny text-gray-500 subtle-pulse dark:bg-[var(--skeleton-bg-dark)] dark:text-gray-400">
+          class="absolute inset-0 mb-5 mt-1 mx-2 flex items-center justify-center rounded-lg bg-[var(--skeleton-bg-light)] text-tiny text-gray-500 subtle-pulse dark:bg-[var(--skeleton-bg-dark)] dark:text-gray-400">
           loading...
         </div>
         <Vue3Lottie

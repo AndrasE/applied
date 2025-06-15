@@ -132,52 +132,17 @@ const changeView = (style: string) => {
     <!-- SKELETON LOADER -->
     <template v-if="!isJobsSkeletonReady">
       <div
-        :class="
+        :class="[
           viewStyle === 'grid'
-            ? 'grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 margin950and640'
-            : 'flex flex-col gap-4 margin950and640'
-        ">
-        <JobCardBrowse
-          v-for="n in 4"
-          :key="'skeleton-' + viewStyle + '-' + n"
-          :job="{
-            id: n.toString(),
-            title: '',
-            company: '',
-            description: '',
-            status: undefined,
-          }"
-          :char-limit="viewStyle === 'grid' ? 200 : 330"
-          statusIconCustomClass="invisible">
-          <template #default>
-            <div class="w-full my-3">
-              <div class="flex w-full items-start justify-between">
-                <div class="flex w-3xl mb-1">
-                  <div
-                    :class="[
-                      'h-6 rounded bg-[var(--skeleton-bg-light)] subtle-pulse dark:bg-[var(--skeleton-bg-dark)]',
-                      viewStyle === 'grid' ? 'w-full' : 'w-50',
-                    ]"></div>
-                </div>
-                <div class="flex flex-col items-end">
-                  <div
-                    class="h-6 w-6 ml-1 rounded-full bg-[var(--skeleton-bg-light)] subtle-pulse dark:bg-[var(--skeleton-bg-dark)]"></div>
-                </div>
-              </div>
-              <div
-                class="mb-2 my-1 h-4 w-1/2 rounded bg-[var(--skeleton-bg-light)] subtle-pulse dark:bg-[var(--skeleton-bg-dark)]"></div>
-              <div
-                :class="[
-                  'my-1 w-11/12 rounded bg-[var(--skeleton-bg-light)] subtle-pulse dark:bg-[var(--skeleton-bg-dark)]',
-                  viewStyle === 'grid' ? 'h-36' : 'h-16',
-                ]"></div>
-              <div class="flex">
-                <div
-                  class="h-6 w-20 rounded bg-[var(--skeleton-bg-light)] subtle-pulse dark:bg-[var(--skeleton-bg-dark)] mt-1"></div>
-              </div>
-            </div>
-          </template>
-        </JobCardBrowse>
+            ? 'grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 margin950and640'
+            : 'flex flex-col gap-4 margin950and640',
+        ]">
+        <div v-for="n in DEFAULT_LIMIT" :key="'skeleton-' + n">
+          <p
+            class="h-6 w-full bg-[var(--skeleton-bg-light)] dark:bg-[var(--skeleton-bg-dark)] subtle-pulse mb-2">
+            thats a penis
+          </p>
+        </div>
       </div>
     </template>
 
@@ -186,7 +151,7 @@ const changeView = (style: string) => {
       <template v-if="isJobsSkeletonReady">
         <template v-if="viewStyle === 'grid'">
           <div
-            class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 margin950and640">
+            class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 margin950and640">
             <JobCard
               v-for="job in visibleJobs"
               :job="job"

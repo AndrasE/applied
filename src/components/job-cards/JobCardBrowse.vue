@@ -77,33 +77,30 @@ const statusIconInfo = computed(() => {
 
 <template>
   <div>
-    <slot />
-    <div v-if="!$slots.default">
-      <div class="flex items-start justify-between">
-        <h2 class="mb-1 w-full text-lg">{{ job.title }}</h2>
-        <div class="flex flex-col items-end">
-          <Icon
-            :area-label="statusIconInfo.label"
-            :icon="statusIconInfo.icon"
-            :class="[statusIconCustomClass, statusIconInfo.class]" />
-        </div>
+    <div class="flex items-start justify-between">
+      <h2 class="mb-1 w-full text-lg">{{ job.title }}</h2>
+      <div class="flex flex-col items-end">
+        <Icon
+          :area-label="statusIconInfo.label"
+          :icon="statusIconInfo.icon"
+          :class="[statusIconCustomClass, statusIconInfo.class]" />
       </div>
+    </div>
 
-      <p class="mb-2 text-sm">{{ job.company }}</p>
+    <p class="mb-2 text-sm">{{ job.company }}</p>
 
-      <p class="text-sm text-justify break-words">{{ truncatedDescription }}</p>
+    <p class="text-sm text-justify break-words">{{ truncatedDescription }}</p>
 
-      <div class="flex">
-        <RouterButton
-          as="link"
-          :to="{
-            name: 'jobDetail',
-            params: { id: job.id },
-          }"
-          label="Read more"
-          icon="heroicons-solid:arrow-right"
-          custom-class="pt-2" />
-      </div>
+    <div class="flex">
+      <RouterButton
+        as="link"
+        :to="{
+          name: 'jobDetail',
+          params: { id: job.id },
+        }"
+        label="Read more"
+        icon="heroicons-solid:arrow-right"
+        custom-class="pt-2" />
     </div>
   </div>
 </template>
