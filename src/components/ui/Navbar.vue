@@ -3,9 +3,18 @@ import { RouterLink, useRoute } from "vue-router";
 import { Icon, addCollection } from "@iconify/vue";
 import clarityIcons from "@iconify-json/clarity/icons.json";
 import ThemeToggle from "./ThemeToggle.vue";
+import { ref } from "vue";
 
 // Register icon collection
 addCollection(clarityIcons);
+
+const isOpen = ref(false);
+
+const emit = defineEmits(["open-popup"]);
+
+const triggerPopup = () => {
+  emit("open-popup");
+};
 
 const route = useRoute();
 </script>
@@ -25,14 +34,19 @@ const route = useRoute();
           aria-hidden="true"
           class="w-px h-12 tiny-border"></div>
 
-        <!-- Logo icon -->
-        <RouterLink aria-label="Go to homepage" to="/" class="text-hover">
+        <!-- Logo icon / popup trigger -->
+        <button
+          type="button"
+          to="/"
+          aria-label="Open popup"
+          @click="triggerPopup"
+          class="text-hover">
           <Icon
             icon="material-symbols-light:font-download-outline-rounded"
             class="text-5xl ml-0.5"
             role="img"
             aria-hidden="true" />
-        </RouterLink>
+        </button>
       </div>
 
       <!-- Right section: Theme toggle -->
@@ -56,14 +70,15 @@ const route = useRoute();
     <div
       class="flex flex-row gap-2 flex-center sm:flex-col sm:justify-between sm:items-center sm:h-full sm:w-auto">
       <div class="hidden sm:flex sm:flex-col sm:items-center">
-        <RouterLink
-          to="/"
+        <button
+          type="button"
+          @click="triggerPopup"
           class="hidden sm:w-full sm:flex sm:flex-col"
-          aria-label="Go to homepage">
+          aria-label="Open popup">
           <Icon
             icon="material-symbols-light:font-download-outline-rounded"
             class="text-6xl text-hover" />
-        </RouterLink>
+        </button>
 
         <div aria-hidden="true" class="block w-full mb-2">
           <div role="presentation" class="h-px tiny-border"></div>
