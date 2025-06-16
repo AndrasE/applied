@@ -6,7 +6,6 @@ import Container from "@/components/ui/Container.vue";
 import PageHeader from "@/components/ui/PageHeader.vue";
 import Divider from "@/components/ui/Divider.vue";
 import JobCard from "@/components/job-cards/JobCard.vue";
-import JobCardBrowse from "@/components/job-cards/JobCardBrowse.vue";
 import RouterButton from "@/components/ui/RouterButton.vue";
 import { Icon } from "@iconify/vue";
 import type { Job, JobStatus } from "@/types/job";
@@ -24,7 +23,7 @@ let unsubscribe: (() => void) | null = null;
 let jobsSkeletonLoadedOnce: boolean = false;
 
 const isJobsSkeletonReady = ref(jobsSkeletonLoadedOnce);
-const skeletonMinDuration = 55400; // ms
+const skeletonMinDuration = 6000; // ms
 
 onMounted(() => {
   let snapshotReceived = false;
@@ -150,27 +149,27 @@ const changeView = (style: string) => {
           <div class="flex items-start justify-between animate-pulse">
             <div class="w-full mb-2">
               <div
-                class="w-3/4 xl:w-1/2 h-8 rounded bg-[var(--skeleton-light)] subtle-pulse dark:bg-[var(--skeleton-dark)]"></div>
+                class="w-3/4 xl:w-5/8 h-7 rounded bg-[var(--skeleton-light)] subtle-pulse dark:bg-[var(--skeleton-dark)]"></div>
             </div>
             <div class="flex flex-col items-end">
               <div
-                class="w-8 h-8 bg-[var(--skeleton-light)] subtle-pulse dark:bg-[var(--skeleton-dark)] rounded-full ml-1"></div>
+                class="w-6 h-6 bg-[var(--skeleton-light)] subtle-pulse dark:bg-[var(--skeleton-dark)] rounded-full ml-1"></div>
             </div>
           </div>
 
           <div class="mb-2">
             <div
-              class="w-1/2 xl:w-1/3 h-6 mb-1 rounded bg-[var(--skeleton-light)] subtle-pulse dark:bg-[var(--skeleton-dark)]"></div>
+              class="w-1/2 md:2/3 2xl:1/3 h-6 mb-1 rounded bg-[var(--skeleton-light)] subtle-pulse dark:bg-[var(--skeleton-dark)]"></div>
           </div>
 
           <div>
             <div
               :class="[
                 'w-full mb-2 rounded bg-[var(--skeleton-light)] text-tiny subtle-pulse dark:bg-[var(--skeleton-dark)] ',
-                viewStyle === 'grid' ? 'h-36' : 'h-16',
+                viewStyle === 'grid' ? 'h-22 sm:h-26 md:h-30 lg:h-34 ' : 'h-16',
               ]"></div>
             <div
-              class="w-22 md:w-24 xl:w-28 h-6 mb-1 rounded bg-[var(--skeleton-light)] text-tiny subtle-pulse dark:bg-[var(--skeleton-dark)]"></div>
+              class="w-1/5 sm:w-2/5 lg:w:1/4 h-6 mb-1 rounded bg-[var(--skeleton-light)] subtle-pulse dark:bg-[var(--skeleton-dark)]"></div>
           </div>
         </div>
       </div>
