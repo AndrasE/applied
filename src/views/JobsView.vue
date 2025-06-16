@@ -23,7 +23,7 @@ let unsubscribe: (() => void) | null = null;
 let jobsSkeletonLoadedOnce: boolean = false;
 
 const isJobsSkeletonReady = ref(jobsSkeletonLoadedOnce);
-const skeletonMinDuration = 6000; // ms
+const skeletonMinDuration = 250; // ms
 
 onMounted(() => {
   let snapshotReceived = false;
@@ -138,6 +138,7 @@ const changeView = (style: string) => {
             : 'flex flex-col gap-4',
           'w-full',
           'px-[1rem]',
+          // margin950and640 utility class due to w-full need to be done separately
           'my-0',
           'sm:my-[1rem]',
           'md-lg:my-[1.5rem]',
@@ -147,29 +148,47 @@ const changeView = (style: string) => {
           :key="'skeleton-' + n"
           class="py-5 px-4 border rounded border-[var(--skeleton-light)] dark:border-[var(--skeleton-dark)] bg-[var(--skeleton-bg-light)] dark:bg-[var(--skeleton-bg-dark)]">
           <div class="flex items-start justify-between animate-pulse">
+            <!-- Title -->
             <div class="w-full mb-2">
               <div
-                class="w-3/4 xl:w-5/8 h-7 rounded bg-[var(--skeleton-light)] subtle-pulse dark:bg-[var(--skeleton-dark)]"></div>
+                :class="[
+                  'h-7 rounded bg-[var(--skeleton-light)] subtle-pulse dark:bg-[var(--skeleton-dark)]',
+                  viewStyle === 'grid' ? 'w-3/4 xl:w-5/8' : 'w-3/4  md:w-1/3',
+                ]"></div>
             </div>
+            <!-- Status -->
             <div class="flex flex-col items-end">
               <div
                 class="w-6 h-6 bg-[var(--skeleton-light)] subtle-pulse dark:bg-[var(--skeleton-dark)] rounded-full ml-1"></div>
             </div>
           </div>
-
+          <!-- Company -->
           <div class="mb-2">
             <div
-              class="w-1/2 md:2/3 2xl:1/3 h-6 mb-1 rounded bg-[var(--skeleton-light)] subtle-pulse dark:bg-[var(--skeleton-dark)]"></div>
+              :class="[
+                'h-6 mb-1 rounded bg-[var(--skeleton-light)] subtle-pulse dark:bg-[var(--skeleton-dark)]',
+                viewStyle === 'grid'
+                  ? 'w-1/2 md:w-2/3 2xl:w-1/3'
+                  : 'w-1/2 md:w-1/4',
+              ]"></div>
           </div>
-
+          <!-- Description -->
           <div>
             <div
               :class="[
-                'w-full mb-2 rounded bg-[var(--skeleton-light)] text-tiny subtle-pulse dark:bg-[var(--skeleton-dark)] ',
-                viewStyle === 'grid' ? 'h-22 sm:h-26 md:h-30 lg:h-34 ' : 'h-16',
+                'w-full mb-2 rounded bg-[var(--skeleton-light)] text-tiny subtle-pulse dark:bg-[var(--skeleton-dark)]',
+                viewStyle === 'grid'
+                  ? 'h-22 sm:h-26 md:h-30 lg:h-34 '
+                  : 'h-34 sm:h-22 md:h-20 lg:h-18 2xl:h-15',
               ]"></div>
+            <!-- Button -->
             <div
-              class="w-1/5 sm:w-2/5 lg:w:1/4 h-6 mb-1 rounded bg-[var(--skeleton-light)] subtle-pulse dark:bg-[var(--skeleton-dark)]"></div>
+              :class="[
+                ' h-6 mb-1 rounded bg-[var(--skeleton-light)] subtle-pulse dark:bg-[var(--skeleton-dark)]',
+                viewStyle === 'grid'
+                  ? 'w-1/5 sm:w-2/5 lg:w:1/4'
+                  : 'w-1/3 md:w-1/7',
+              ]"></div>
           </div>
         </div>
       </div>
@@ -207,6 +226,7 @@ const changeView = (style: string) => {
     <!-- increase how many listing shown -->
 
     <RouterButton
+      v-if="isJobsSkeletonReady"
       :label="limit === DEFAULT_LIMIT ? 'Browse all' : 'See less'"
       :icon="
         limit === DEFAULT_LIMIT
