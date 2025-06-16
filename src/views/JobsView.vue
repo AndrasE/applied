@@ -24,7 +24,7 @@ let unsubscribe: (() => void) | null = null;
 let jobsSkeletonLoadedOnce: boolean = false;
 
 const isJobsSkeletonReady = ref(jobsSkeletonLoadedOnce);
-const skeletonMinDuration = 1400; // ms
+const skeletonMinDuration = 55400; // ms
 
 onMounted(() => {
   let snapshotReceived = false;
@@ -133,38 +133,44 @@ const changeView = (style: string) => {
     <template v-if="!isJobsSkeletonReady">
       <div
         :class="[
+          // These classes change based on viewStyle (grid or flex)
           viewStyle === 'grid'
-            ? 'grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 margin950and640 w-full'
-            : 'flex flex-col gap-4 margin950and640 w-full',
+            ? 'grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
+            : 'flex flex-col gap-4',
+          'w-full',
+          'px-[1rem]',
+          'my-0',
+          'sm:my-[1rem]',
+          'md-lg:my-[1.5rem]',
         ]">
         <div
           v-for="n in DEFAULT_LIMIT"
           :key="'skeleton-' + n"
-          class="mx-6 my-4">
+          class="py-5 px-4 border rounded border-[var(--skeleton-light)] dark:border-[var(--skeleton-dark)] bg-[var(--skeleton-bg-light)] dark:bg-[var(--skeleton-bg-dark)]">
           <div class="flex items-start justify-between animate-pulse">
             <div class="w-full mb-2">
               <div
-                class="w-3/4 xl:w-1/2 h-8 rounded bg-[var(--skeleton-bg-light)] text-gray-500 subtle-pulse dark:bg-[var(--skeleton-bg-dark)] dark:text-gray-400"></div>
+                class="w-3/4 xl:w-1/2 h-8 rounded bg-[var(--skeleton-light)] subtle-pulse dark:bg-[var(--skeleton-dark)]"></div>
             </div>
             <div class="flex flex-col items-end">
               <div
-                class="w-8 h-8 bg-[var(--skeleton-bg-light)] text-gray-500 subtle-pulse dark:bg-[var(--skeleton-bg-dark)] dark:text-gray-400 rounded-full ml-1"></div>
+                class="w-8 h-8 bg-[var(--skeleton-light)] subtle-pulse dark:bg-[var(--skeleton-dark)] rounded-full ml-1"></div>
             </div>
           </div>
 
           <div class="mb-2">
             <div
-              class="w-1/2 xl:w-1/3 h-6 mb-1 rounded bg-[var(--skeleton-bg-light)] text-gray-500 subtle-pulse dark:bg-[var(--skeleton-bg-dark)] dark:text-gray-400"></div>
+              class="w-1/2 xl:w-1/3 h-6 mb-1 rounded bg-[var(--skeleton-light)] subtle-pulse dark:bg-[var(--skeleton-dark)]"></div>
           </div>
 
           <div>
             <div
               :class="[
-                'w-full mb-2 rounded bg-[var(--skeleton-bg-light)] text-tiny text-gray-500 subtle-pulse dark:bg-[var(--skeleton-bg-dark)] dark:text-gray-400',
-                viewStyle === 'grid' ? 'h-36' : 'h-18',
+                'w-full mb-2 rounded bg-[var(--skeleton-light)] text-tiny subtle-pulse dark:bg-[var(--skeleton-dark)] ',
+                viewStyle === 'grid' ? 'h-36' : 'h-16',
               ]"></div>
             <div
-              class="w-22 md:w-24 xl:w-28 h-6 mb-1 rounded bg-[var(--skeleton-bg-light)] text-tiny text-gray-500 subtle-pulse dark:bg-[var(--skeleton-bg-dark)] dark:text-gray-400"></div>
+              class="w-22 md:w-24 xl:w-28 h-6 mb-1 rounded bg-[var(--skeleton-light)] text-tiny subtle-pulse dark:bg-[var(--skeleton-dark)]"></div>
           </div>
         </div>
       </div>

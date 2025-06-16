@@ -42,8 +42,8 @@
   --pattern-color-dark: #d1d5db0c; /* slate-200 with 0.05 opacity */
   --green-accent-light: #15803d; /* green-700 */
   --green-accent-dark: #7bf1a8; /* green-300 */
-  --skeleton-bg-dark: #2a2a2ad3;
-  --skeleton-bg-light: #d1d1d3;
+  --skeleton-dark: #2a2a2ad3;
+  --skeleton-light: #d1d1d3;
 }
 
 @layer base {
