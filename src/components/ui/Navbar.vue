@@ -15,8 +15,6 @@ const emit = defineEmits(["open-popup"]);
 const triggerPopup = () => {
   emit("open-popup");
 };
-
-const route = useRoute();
 </script>
 
 <template>
@@ -98,41 +96,65 @@ const route = useRoute();
         <RouterLink
           aria-label="Go to homepage"
           to="/"
-          class="nav-link text-hover">
-          <Icon
-            role="presentation"
-            icon="ci:house-01"
-            class="text-2xl sm:text-3xl" />Home
+          v-slot="{ isActive, href, navigate }">
+          <a
+            :href="href"
+            @click="navigate"
+            class="nav-link"
+            :class="{ 'text-hover-active': isActive, 'text-hover': !isActive }">
+            <Icon
+              role="presentation"
+              icon="ci:house-01"
+              class="text-2xl sm:text-3xl" />Home
+          </a>
         </RouterLink>
 
         <RouterLink
           aria-label="Go to jobs page"
           to="/jobs"
-          class="nav-link text-hover">
-          <Icon
-            role="presentation"
-            icon="ci:handbag"
-            class="text-2xl sm:text-3xl" />Jobs
+          v-slot="{ isActive, href, navigate }">
+          <a
+            :href="href"
+            @click="navigate"
+            class="nav-link"
+            :class="{ 'text-hover-active': isActive, 'text-hover': !isActive }">
+            <Icon
+              role="presentation"
+              icon="ci:handbag"
+              class="text-2xl sm:text-3xl" />Jobs
+          </a>
         </RouterLink>
 
         <RouterLink
           aria-label="Go to add job page"
           to="/add"
-          class="nav-link text-hover">
-          <Icon
-            role="presentation"
-            icon="ci:file-add"
-            class="text-2xl sm:text-3xl" />Add
+          v-slot="{ isActive, href, navigate }">
+          <a
+            :href="href"
+            @click="navigate"
+            class="nav-link"
+            :class="{ 'text-hover-active': isActive, 'text-hover': !isActive }">
+            <Icon
+              role="presentation"
+              icon="ci:file-add"
+              class="text-2xl sm:text-3xl" />Add
+          </a>
         </RouterLink>
 
         <RouterLink
           aria-label="Go to about page"
           to="/about"
-          class="nav-link text-hover">
-          <Icon
-            role="presentation"
-            icon="ci:text-align-left"
-            class="text-2xl sm:text-3xl" />About
+          v-slot="{ isActive, href, navigate }">
+          <a
+            :href="href"
+            @click="navigate"
+            class="nav-link"
+            :class="{ 'text-hover-active': isActive, 'text-hover': !isActive }">
+            <Icon
+              role="presentation"
+              icon="ci:text-align-left"
+              class="text-2xl sm:text-3xl" />About
+          </a>
         </RouterLink>
 
         <div

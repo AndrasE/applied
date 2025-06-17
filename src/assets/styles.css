@@ -114,6 +114,11 @@
     @apply dark:hover:text-green-300 hover:text-green-700 transition-colors duration-300 ease-in-out;
   }
 
+  .text-hover-active {
+    @apply dark:text-green-300 text-green-700;
+    @apply transition-colors duration-300 ease-in-out;
+  }
+
   /* border-color (same as tiny in utility) but there is bg (1px divs as devider lines)*/
   .border-color {
     @apply border-slate-400 dark:border-slate-600;
