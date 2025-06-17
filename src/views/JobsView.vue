@@ -10,8 +10,18 @@ import RouterButton from "@/components/ui/RouterButton.vue";
 import { Icon } from "@iconify/vue";
 import type { Job, JobStatus } from "@/types/job";
 
+import { useAppStore } from "../stores/jobs"; // Pinia store
+const appStore = useAppStore(); // Use the store
+
+// Variables for the *current* component's loading sequence,
+// only relevant if appStore.jobsDataLoadedOnce is false
+let snapshotReceived: boolean = false;
+let minTimerDone: boolean = false;
+
 // Firebase refs
-const jobs = ref<Job[]>([]);
+// If 'jobs' is in the store, you'd use appStore.jobs directly,
+// otherwise keep it local if only this component needs it
+const jobs = ref<Job[]>([]); // Keep jobs local if it's not truly global state
 const viewStyle = ref<string>(localStorage.getItem("jobsViewStyle") || "list");
 const DEFAULT_LIMIT = 8;
 const limit = ref<number>(DEFAULT_LIMIT);
@@ -19,48 +29,75 @@ const limit = ref<number>(DEFAULT_LIMIT);
 // Setup Firebase listener
 let unsubscribe: (() => void) | null = null;
 
-// Only show skeleton once per session
-let jobsSkeletonLoadedOnce: boolean = false;
-
-const isJobsSkeletonReady = ref(jobsSkeletonLoadedOnce);
+// isJobsSkeletonReady now directly reflects the store's state
+// It will be true if the store says data was loaded once, false otherwise.
+// Since appStore.jobsDataLoadedOnce is a ref inside the store, this computed
+// will react to its changes.
+const isJobsSkeletonReady = computed(() => appStore.jobsDataLoadedOnce);
 const skeletonMinDuration = 250; // ms
 
+const attachFirebaseListener = () => {
+  const jobsRef = dbRef(database, "jobs");
+  const unsubscribeFn = onValue(
+    jobsRef,
+    (snapshot) => {
+      const jobsData: Job[] = [];
+      snapshot.forEach((childSnapshot) => {
+        const job = childSnapshot.val();
+        jobsData.push({
+          ...job,
+          id: childSnapshot.key,
+          status: job.status as JobStatus,
+        });
+      });
+      jobs.value = jobsData;
+
+      // ONLY trigger the skeleton "completion" logic if it's the very first load
+      if (!appStore.jobsDataLoadedOnce) {
+        snapshotReceived = true;
+        if (minTimerDone) {
+          appStore.setJobsDataLoaded(); // Update Pinia store: hide skeleton, mark as loaded
+        }
+      }
+      // If appStore.jobsDataLoadedOnce is already true, no action is needed here
+      // regarding the skeleton, as it's already hidden.
+      console.log("📥 Fetched jobs from Firebase:", jobsData);
+    },
+    (error) => {
+      console.error("Firebase data fetch error:", error);
+      // On error, still mark as loaded to hide skeleton and show potential error message
+      if (!appStore.jobsDataLoadedOnce) {
+        appStore.setJobsDataLoaded();
+      }
+    }
+  );
+  unsubscribe = unsubscribeFn;
+};
+
 onMounted(() => {
-  let snapshotReceived = false;
-  let minTimerDone = false;
+  // If data has already been loaded once in this app session (checked via store):
+  if (appStore.jobsDataLoadedOnce) {
+    console.log(
+      "🚀 Data already loaded in this session, skipping initial skeleton logic."
+    );
+    attachFirebaseListener(); // Still attach listener for real-time updates
+    return; // Exit onMounted
+  }
+
+  // --- Logic for the VERY FIRST load in the application session ---
+  snapshotReceived = false;
+  minTimerDone = false;
 
   // Start min duration timer
   setTimeout(() => {
     minTimerDone = true;
-    if (snapshotReceived && !jobsSkeletonLoadedOnce) {
-      isJobsSkeletonReady.value = true;
-      jobsSkeletonLoadedOnce = true;
+    if (snapshotReceived) {
+      appStore.setJobsDataLoaded(); // Mark as loaded once globally
     }
   }, skeletonMinDuration);
 
-  const jobsRef = dbRef(database, "jobs");
-  const unsubscribeFn = onValue(jobsRef, (snapshot) => {
-    const jobsData: Job[] = [];
-    snapshot.forEach((childSnapshot) => {
-      const job = childSnapshot.val();
-      jobsData.push({
-        ...job,
-        id: childSnapshot.key,
-        status: job.status as JobStatus,
-      });
-    });
-    jobs.value = jobsData;
-    snapshotReceived = true;
-    if (minTimerDone && !jobsSkeletonLoadedOnce) {
-      isJobsSkeletonReady.value = true;
-      jobsSkeletonLoadedOnce = true;
-    }
-    if (jobsSkeletonLoadedOnce) {
-      isJobsSkeletonReady.value = true;
-    }
-    console.log("📥 Fetched jobs from Firebase:", jobsData);
-  });
-  unsubscribe = unsubscribeFn;
+  // Attach the listener for the first time in this session
+  attachFirebaseListener();
 
   // Optionally, sync viewStyle with localStorage if it changes elsewhere
   const stored = localStorage.getItem("jobsViewStyle");
@@ -69,7 +106,6 @@ onMounted(() => {
   }
 });
 
-// Clean up listener on component unmount
 onUnmounted(() => {
   if (unsubscribe) {
     unsubscribe();
@@ -77,7 +113,6 @@ onUnmounted(() => {
 });
 
 const visibleJobs = computed(() => {
-  // Reverse the array to show newest entries first
   return [...jobs.value].reverse().slice(0, limit.value);
 });
 
