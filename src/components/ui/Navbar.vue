@@ -93,69 +93,84 @@ const triggerPopup = () => {
           <div class="w-px h-12 tiny-border sm:w-full sm:h-px"></div>
         </div>
 
-        <RouterLink
-          aria-label="Go to homepage"
-          to="/"
-          v-slot="{ isActive, href, navigate }">
-          <a
-            :href="href"
-            @click="navigate"
-            class="nav-link"
-            :class="{ 'text-hover-active': isActive, 'text-hover': !isActive }">
-            <Icon
-              role="presentation"
-              icon="ci:house-01"
-              class="text-2xl sm:text-3xl" />Home
-          </a>
-        </RouterLink>
+        <div
+          class="flex flex-row justify-around w-full gap-2 sm:flex-col sm:gap-4 sm:p-0">
+          <RouterLink
+            aria-label="Go to homepage"
+            to="/"
+            v-slot="{ isActive, href, navigate }">
+            <a
+              :href="href"
+              @click="navigate"
+              class="nav-link"
+              :class="{
+                'text-hover-active': isActive,
+                'text-hover': !isActive,
+              }">
+              <Icon
+                role="presentation"
+                icon="ci:house-01"
+                class="text-2xl sm:text-3xl" />Home
+            </a>
+          </RouterLink>
 
-        <RouterLink
-          aria-label="Go to jobs page"
-          to="/jobs"
-          v-slot="{ isActive, href, navigate }">
-          <a
-            :href="href"
-            @click="navigate"
-            class="nav-link"
-            :class="{ 'text-hover-active': isActive, 'text-hover': !isActive }">
-            <Icon
-              role="presentation"
-              icon="ci:handbag"
-              class="text-2xl sm:text-3xl" />Jobs
-          </a>
-        </RouterLink>
+          <RouterLink
+            aria-label="Go to jobs page"
+            to="/jobs"
+            v-slot="{ isActive, href, navigate }">
+            <a
+              :href="href"
+              @click="navigate"
+              class="nav-link"
+              :class="{
+                'text-hover-active': isActive,
+                'text-hover': !isActive,
+              }">
+              <Icon
+                role="presentation"
+                icon="ci:handbag"
+                class="text-2xl sm:text-3xl" />Jobs
+            </a>
+          </RouterLink>
 
-        <RouterLink
-          aria-label="Go to add job page"
-          to="/add"
-          v-slot="{ isActive, href, navigate }">
-          <a
-            :href="href"
-            @click="navigate"
-            class="nav-link"
-            :class="{ 'text-hover-active': isActive, 'text-hover': !isActive }">
-            <Icon
-              role="presentation"
-              icon="ci:file-add"
-              class="text-2xl sm:text-3xl" />Add
-          </a>
-        </RouterLink>
+          <RouterLink
+            aria-label="Go to add job page"
+            to="/add"
+            v-slot="{ isActive, href, navigate }">
+            <a
+              :href="href"
+              @click="navigate"
+              class="nav-link"
+              :class="{
+                'text-hover-active': isActive,
+                'text-hover': !isActive,
+              }">
+              <Icon
+                role="presentation"
+                icon="ci:file-add"
+                class="text-2xl sm:text-3xl" />Add
+            </a>
+          </RouterLink>
 
-        <RouterLink
-          aria-label="Go to about page"
-          to="/about"
-          v-slot="{ isActive, href, navigate }">
-          <a
-            :href="href"
-            @click="navigate"
-            class="nav-link"
-            :class="{ 'text-hover-active': isActive, 'text-hover': !isActive }">
-            <Icon
-              role="presentation"
-              icon="ci:text-align-left"
-              class="text-2xl sm:text-3xl" />About
-          </a>
-        </RouterLink>
+          <RouterLink
+            aria-label="Go to about page"
+            to="/about"
+            v-slot="{ isActive, href, navigate }">
+            <a
+              :href="href"
+              @click="navigate"
+              class="nav-link"
+              :class="{
+                'text-hover-active': isActive,
+                'text-hover': !isActive,
+              }">
+              <Icon
+                role="presentation"
+                icon="ci:text-align-left"
+                class="text-2xl sm:text-3xl" />About
+            </a>
+          </RouterLink>
+        </div>
 
         <div
           aria-hidden="true"
