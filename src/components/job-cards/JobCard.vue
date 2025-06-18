@@ -55,12 +55,12 @@ function handleSaveJob(jobData: Job) {
 }
 
 function handleDeleteJob(jobId: string) {
-  console.log("🗑️ Deleting job:", jobId);
+  console.log("✅ JobCard.vue: Received 'delete' event");
   emit("delete", jobId);
 }
 
 function handleAddJob(job: Job) {
-  console.log("✅ JobCard.vue: Received 'add' event", job);
+  console.log("✅ JobCard.vue: Received 'add' event");
   emit("add", job);
 }
 </script>

@@ -3,6 +3,8 @@
 export type Theme = "light" | "dark" | "system";
 
 export function applyTheme(theme: Theme): void {
+  // Set the theme
+  console.log("🌇 Applying theme:", theme);
   if (theme === "system") {
     localStorage.removeItem("theme");
   } else {

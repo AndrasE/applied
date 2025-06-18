@@ -1,119 +1,113 @@
-// src/stores/jobs.ts (or app.ts, matching your import)
+// src/stores/jobs.ts (or app.ts)
 import { defineStore } from "pinia";
-import { ref } from "vue";
-import { ref as dbRef, onValue } from "firebase/database"; // Import Firebase functions
-import { database } from "../config/database"; // Import your Firebase database instance
-import type { Job, JobStatus } from "@/types/job"; // Import your Job types
+import { ref, computed } from "vue";
+import { ref as dbRef, onValue } from "firebase/database";
+import { database } from "../config/database";
+import type { Job, JobStatus } from "@/types/job";
 
 export const useAppStore = defineStore("app", () => {
-  // Or 'jobs' for the store ID
-  const jobsDataLoadedOnce = ref(false);
-  const jobs = ref<Job[]>([]); // Initialize with correct type
+  const jobs = ref<Job[]>([]);
+  const jobsDataLoadedInSession = ref(false); // Indicates if data has *ever* been loaded in this session
+  const isCurrentlyFetching = ref(false); // Indicates if an active fetch/listener setup is in progress
+  const error = ref<string | null>(null);
 
-  // Internal flags for initial loading sequence within the store
-  let snapshotReceivedInternal: boolean = false;
-  let minTimerDoneInternal: boolean = false;
-  const skeletonMinDuration = 250; // ms
+  // This will manage the single, persistent unsubscribe function for the Firebase listener.
+  // It's initialized to null, and only set once the listener is attached.
+  let unsubscribeFirebase: (() => void) | null = null;
 
-  let unsubscribeFirebase: (() => void) | null = null; // To manage the Firebase listener
+  const skeletonMinDuration = 600; // ms
+  let snapshotReceivedDuringInitialLoad = false;
+  let minTimerDoneDuringInitialLoad = false;
 
-  function setJobsDataLoaded() {
-    jobsDataLoadedOnce.value = true;
-  }
-
-  // Action to fetch jobs and manage the loading state
-  function attachAndFetchJobs() {
-    // If already loaded in this session, just ensure listener is attached for updates
-    if (jobsDataLoadedOnce.value) {
-      console.log("🚀 Firebase listener already set up or data loaded.");
-      if (!unsubscribeFirebase) {
-        // Ensure listener is attached if not already
-        const jobsRef = dbRef(database, "jobs");
-        unsubscribeFirebase = onValue(
-          jobsRef,
-          (snapshot) => {
-            const jobsData: Job[] = [];
-            snapshot.forEach((childSnapshot) => {
-              const job = childSnapshot.val();
-              jobsData.push({
-                ...job,
-                id: childSnapshot.key,
-                status: job.status as JobStatus,
-              });
-            });
-            jobs.value = jobsData;
-            console.log(
-              "📥 Fetched jobs from Firebase (subsequent updates):",
-              jobsData
-            );
-          },
-          (error) => {
-            console.error(
-              "Firebase data fetch error on subsequent update:",
-              error
-            );
-          }
-        );
-      }
+  // --- ACTIONS ---
+  // This action will ensure the Firebase listener is attached and persistent.
+  // It will only attach if not already active.
+  const ensureJobsListenerActive = () => {
+    // If the listener is already attached, do nothing. Data is already being kept in sync.
+    if (unsubscribeFirebase !== null) {
+      console.log("🚀 Firebase listener already active. No new fetch needed.");
       return;
     }
 
-    // --- Logic for the VERY FIRST load in the application session ---
-    snapshotReceivedInternal = false;
-    minTimerDoneInternal = false;
-    jobsDataLoadedOnce.value = false; // Ensure it's false for the initial loading state
+    // If a fetch is already in progress, avoid duplicate calls.
+    if (isCurrentlyFetching.value) {
+      console.log("⏳ Fetch already in progress, skipping duplicate call.");
+      return;
+    }
 
-    // Start min duration timer
+    isCurrentlyFetching.value = true; // Set to true to show skeleton for the initial load
+    error.value = null;
+
+    // --- Skeleton Display Logic for the VERY FIRST LOAD IN SESSION ---
+    // These flags ensure the skeleton shows for a minimum duration only during the first fetch.
+    snapshotReceivedDuringInitialLoad = false;
+    minTimerDoneDuringInitialLoad = false;
+
     setTimeout(() => {
-      minTimerDoneInternal = true;
-      if (snapshotReceivedInternal) {
-        jobsDataLoadedOnce.value = true; // Mark as loaded once globally
+      minTimerDoneDuringInitialLoad = true;
+      if (snapshotReceivedDuringInitialLoad) {
+        // If snapshot arrived and timer is done, hide skeleton
+        isCurrentlyFetching.value = false;
       }
     }, skeletonMinDuration);
 
-    // Attach Firebase listener
+    console.log("🔥 Attaching persistent Firebase jobs listener...");
     const jobsRef = dbRef(database, "jobs");
+
+    // Attach the real-time listener
     unsubscribeFirebase = onValue(
       jobsRef,
       (snapshot) => {
-        const jobsData: Job[] = [];
+        const fetchedJobs: Job[] = [];
         snapshot.forEach((childSnapshot) => {
           const job = childSnapshot.val();
-          jobsData.push({
+          fetchedJobs.push({
             ...job,
             id: childSnapshot.key,
             status: job.status as JobStatus,
           });
         });
-        jobs.value = jobsData;
-        snapshotReceivedInternal = true;
+        jobs.value = fetchedJobs;
+        jobsDataLoadedInSession.value = true; // Mark as loaded for the session
 
-        if (minTimerDoneInternal) {
-          jobsDataLoadedOnce.value = true; // Mark as loaded once globally
+        // Handle skeleton hiding for the initial load
+        if (
+          !snapshotReceivedDuringInitialLoad &&
+          !minTimerDoneDuringInitialLoad
+        ) {
+          snapshotReceivedDuringInitialLoad = true;
+          if (minTimerDoneDuringInitialLoad) {
+            isCurrentlyFetching.value = false; // Hide skeleton if duration met
+          }
+        } else {
+          // This is a subsequent real-time update, or initial load already finished its skeleton phase
+          isCurrentlyFetching.value = false; // Ensure skeleton is hidden if it wasn't already
         }
-        console.log("📥 Fetched jobs from Firebase (initial load):", jobsData);
+        console.log(
+          "📥 Jobs data updated from Firebase (initial or real-time):",
+          fetchedJobs
+        );
       },
-      (error) => {
-        console.error("Firebase data fetch error:", error);
-        jobsDataLoadedOnce.value = true; // Hide skeleton even on error
+      (err) => {
+        console.error("Firebase data fetch error:", err);
+        error.value = err.message;
+        isCurrentlyFetching.value = false; // Hide skeleton on error
+        // Optionally: unsubscribeFirebase = null; here if you want to retry attaching on next call
       }
     );
-  }
+  };
 
-  // Action to clean up Firebase listener
-  function detachFirebaseListener() {
-    if (unsubscribeFirebase) {
-      unsubscribeFirebase();
-      unsubscribeFirebase = null;
-      console.log("🔥 Firebase listener detached.");
-    }
-  }
+  // --- GETTERS ---
+  const sortedJobs = computed(() => {
+    return [...jobs.value].reverse();
+  });
 
   return {
-    jobsDataLoadedOnce,
     jobs,
-    setJobsDataLoaded, // You might not need this if `attachAndFetchJobs` handles it
-    attachAndFetchJobs,
-    detachFirebaseListener,
+    jobsDataLoadedInSession, // Can be used to check if any data is loaded at all
+    isCurrentlyFetching, // Use this for skeleton display (true when fetching/initializing)
+    error,
+    ensureJobsListenerActive, // The key action to call from JobsView
+    sortedJobs,
   };
 });
