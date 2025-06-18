@@ -45,6 +45,7 @@ onMounted(() => {
 // Function to toggle the theme
 const toggleTheme = () => {
   currentTheme.value = currentTheme.value === "light" ? "dark" : "light";
+  console.log("🌇 Theme set to", currentTheme.value);
 };
 
 // Watch for changes in the theme and apply it

@@ -3,12 +3,9 @@ import { RouterLink, useRoute } from "vue-router";
 import { Icon, addCollection } from "@iconify/vue";
 import clarityIcons from "@iconify-json/clarity/icons.json";
 import ThemeToggle from "./ThemeToggle.vue";
-import { ref } from "vue";
 
 // Register icon collection
 addCollection(clarityIcons);
-
-const isOpen = ref(false);
 
 const emit = defineEmits(["open-popup"]);
 

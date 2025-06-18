@@ -15,7 +15,7 @@ const props = defineProps<{
   statusIconCustomClass?: string;
 }>();
 
-console.log("JobCard.vue: Viewing mode received:", props.viewingMode);
+console.log("📄 JobCard.vue: Viewing mode received:", props.viewingMode);
 
 // Local reactive copy of the job for editing/adding
 const editableJob = ref<Job>({ ...props.job });
@@ -33,10 +33,10 @@ watch(
         status: "applied",
         date: getTodayFormatted(), // Set today's date
       };
-      console.log("JobCard.vue: editableJob initialized for 'adding'");
+      console.log("📄 JobCard.vue: editableJob initialized for 'adding'");
     } else if (newMode === "editing") {
       editableJob.value = { ...props.job };
-      console.log("JobCard.vue: editableJob populated for 'editing'");
+      console.log("📄 JobCard.vue: editableJob populated for 'editing'");
     }
   },
   { immediate: true }
