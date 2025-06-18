@@ -16,6 +16,9 @@ import type { Component } from "vue";
 // Its initial value depends on whether the animation has loaded globally once.
 const isLottieReady = ref(lottieAnimationLoadedOnce); // Initialize based on persistent state
 
+// isIconRotated is a local reactive state for THIS component instance.
+const isIconRotated = ref(false);
+
 const Vue3Lottie = defineAsyncComponent({
   loader: () => import("vue3-lottie").then((m) => m.Vue3Lottie as Component),
   delay: 0,
@@ -29,11 +32,17 @@ onMounted(() => {
     return;
   }
 
+  // Set the icon to be rotated initially when the skeleton is present
+  isIconRotated.value = true;
+
   // If it's the first time this session, trigger the loading timeout
   setTimeout(() => {
     isLottieReady.value = true;
     lottieAnimationLoadedOnce = true; // Mark as loaded for future instances in this session
-  }, 1400); // Your determined loading time
+    setTimeout(() => {
+      isIconRotated.value = false;
+    }, 300);
+  }, 1400);
 });
 </script>
 
@@ -68,7 +77,10 @@ onMounted(() => {
         <template v-else>
           <Icon
             icon="material-symbols-light:font-download-outline-rounded"
-            class="relative top-0.5 text-5xl text-green-700 duration-300 ease-in-out hover:rotate-90 dark:text-green-300" />
+            :class="[
+              'relative top-0.5 text-5xl text-[var(--green-accent-light)] dark:text-[var(--green-accent-dark)] duration-300 ease-in-out',
+              { 'rotate-90': isIconRotated },
+            ]" />
           <span
             class="relative underline right-1 decoration-green-600 dark:decoration-green-300"
             >pplied</span
