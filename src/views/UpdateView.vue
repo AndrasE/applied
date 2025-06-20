@@ -182,5 +182,5 @@ async function handleDelete(id: string) {
       customClass="pr-5 py-4" />
   </Container>
 
-  <p v-else class="p-6">Job not found.</p>
+  <p v-else class="p-6">404 Job not found.</p>
 </template>
