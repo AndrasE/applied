@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import RouterButton from "../ui/RouterButton.vue"; // Adjust path as needed
+import RouterButton from "../ui/RouterButton.vue";
 import type { Job } from "../../types/job";
 
 const props = defineProps<{
@@ -28,30 +28,28 @@ const statusTextClass = computed(() => {
 </script>
 
 <template>
-  <div>
-    <div class="flex items-start justify-between">
-      <h2 class="mb-1 w-full text-lg">{{ job.title }}</h2>
-      <div class="flex flex-col items-end">
-        <span
-          class="flex items-center text-xs ml-2 whitespace-nowrap"
-          :class="statusTextClass">
-          {{ job.status ?? "unknown" }}
-        </span>
-        <span class="text-xs">{{ job.date }}</span>
-      </div>
+  <div class="flex items-start justify-between flex-wrap">
+    <h2 class="mb-1 w-full text-lg break-words">{{ job.title }}</h2>
+    <div class="flex flex-col items-end">
+      <span
+        class="flex items-center text-xs ml-2 whitespace-nowrap"
+        :class="statusTextClass">
+        {{ job.status ?? "unknown" }}
+      </span>
+      <span class="text-xs">{{ job.date }}</span>
     </div>
+  </div>
 
-    <p class="mb-2 text-sm">{{ job.company }}</p>
+  <p class="mb-2 text-sm">{{ job.company }}</p>
 
-    <p class="text-sm text-justify break-words">{{ job.description }}</p>
+  <p class="text-sm text-justify break-words">{{ job.description }}</p>
 
-    <div class="flex flex-1 justify-end gap-2">
-      <RouterButton
-        :to="`/jobs/${job.id}/update`"
-        label="Update job"
-        icon="heroicons-solid:pencil-alt"
-        icon-position="left"
-        custom-class="pt-2" />
-    </div>
+  <div class="flex flex-1 justify-end gap-2">
+    <RouterButton
+      :to="`/jobs/${job.id}/update`"
+      label="Update job"
+      icon="heroicons-solid:pencil-alt"
+      icon-position="left"
+      custom-class="pt-2" />
   </div>
 </template>
