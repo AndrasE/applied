@@ -51,6 +51,7 @@ const emit = defineEmits<{
 
 // Handlers for events emitted by the sub-components
 function handleSaveJob(jobData: Job) {
+  console.log("✅ JobCard.vue: Received 'update' event");
   emit("update", jobData);
 }
 

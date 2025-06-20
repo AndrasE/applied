@@ -5,12 +5,12 @@ import RouterButton from "./RouterButton.vue";
 const isOpen = ref(false);
 
 const openPopup = () => {
-  console.log("🍭 Popup triggered");
+  console.log("🍭 Navbar popup triggered");
   isOpen.value = true;
 };
 
 const closePopup = () => {
-  console.log("🍭 Popup closed");
+  console.log("🍭 Navbar popup closed");
   isOpen.value = false;
 };
 
