@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, inject } from "vue";
+import { ref, inject, onMounted } from "vue";
 import { ref as dbRef, push, serverTimestamp } from "firebase/database"; // <-- Import serverTimestamp
 import type { Job } from "@/types/job";
 import Container from "@/components/ui/Container.vue";
@@ -74,6 +74,10 @@ async function handleAddJob(jobData: Job) {
     );
   }
 }
+
+onMounted(() => {
+  window.scrollTo(0, 0); // Scroll to the top overwriting any previous scroll
+});
 </script>
 
 <template>

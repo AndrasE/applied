@@ -156,6 +156,10 @@ async function handleDelete(id: string) {
     );
   }
 }
+
+onMounted(() => {
+  window.scrollTo(0, 0); // Scroll to the top overwriting any previous scroll
+});
 </script>
 
 <template>

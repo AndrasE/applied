@@ -23,6 +23,9 @@ const firebaseDatabase = inject<any>("firebaseDatabaseInstance"); // <-- Add thi
 let unsubscribe: (() => void) | null = null;
 
 onMounted(() => {
+  onMounted(() => {
+    window.scrollTo(0, 0); // Scroll to the top overwriting any previous scroll
+  });
   if (!jobId) {
     console.error("No job ID provided");
     router.push("/jobs");

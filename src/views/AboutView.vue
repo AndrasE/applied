@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Container from "@/components/ui/Container.vue";
 import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
-import { reactive, ref } from "vue";
+import { onMounted, reactive, ref } from "vue";
 import { Icon } from "@iconify/vue";
 import type { Job } from "@/types/job";
 
@@ -23,6 +23,10 @@ const jobStatusOptions = ref([
   "no response",
   "job offer",
 ]);
+
+onMounted(() => {
+  window.scrollTo(0, 0); // Scroll to the top overwriting any previous scroll
+});
 </script>
 
 <template>

@@ -37,6 +37,10 @@ const changeView = (style: string) => {
   viewStyle.value = style;
   localStorage.setItem("jobsViewStyle", style);
 };
+
+onMounted(() => {
+  window.scrollTo(0, 0); // Scroll to the top overwriting any previous scroll
+});
 </script>
 
 <template>

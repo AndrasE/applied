@@ -26,6 +26,7 @@ const Vue3Lottie = defineAsyncComponent({
 });
 
 onMounted(() => {
+  window.scrollTo(0, 0); // Scroll to the top overwriting any previous scroll
   // If the animation has already been marked as loaded in this session,
   // isLottieReady is already true, so we do nothing more.
   if (lottieAnimationLoadedOnce) {
