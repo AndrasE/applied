@@ -4,21 +4,17 @@ import { useRouter } from "vue-router";
 import RouterButton from "../ui/RouterButton.vue";
 import type { Job } from "../../types/job";
 
-// Props for v-model binding of the job object (initially empty from parent)
 const props = defineProps<{
   modelValue: Job;
 }>();
 
-// Emits: update:modelValue for v-model, plus add event
 const emit = defineEmits<{
   (e: "update:modelValue", job: Job): void;
   (e: "add", job: Job): void;
 }>();
 
-// Create a local reactive copy of modelValue to allow editing
 const localEditableJob = reactive({ ...props.modelValue });
 
-// Watch for changes in modelValue from the parent and update local copy
 watch(
   () => props.modelValue,
   (newValue) => {
@@ -27,7 +23,6 @@ watch(
   { deep: true, immediate: true }
 );
 
-// Watch for changes in localEditableJob and emit to parent
 watch(
   localEditableJob,
   (newValue) => {
@@ -38,49 +33,50 @@ watch(
 
 const router = useRouter();
 
-// Handles the form and emits the job to parent
 function handleAdd() {
   console.log("✅ JobCardAdd.vue: Emitting 'add'", localEditableJob);
   emit("add", localEditableJob);
-  // Navigate after emitting the event
-  router.push("/jobs");
 }
 </script>
 
 <template>
-  <div>
-    <div class="flex items-start justify-between">
-      <h2 class="mb-1 w-full text-lg">
+  <!-- Wrap everything in a <form> and use @submit.prevent -->
+  <form @submit.prevent="handleAdd">
+    <div>
+      <div class="flex items-start justify-between">
+        <h2 class="mb-1 w-full text-lg">
+          <input
+            v-model="localEditableJob.title"
+            type="text"
+            class="w-full rounded border border-color p-1"
+            placeholder="Job title" />
+        </h2>
+      </div>
+
+      <p class="mb-2 text-sm">
         <input
-          v-model="localEditableJob.title"
+          v-model="localEditableJob.company"
           type="text"
           class="w-full rounded border border-color p-1"
-          placeholder="Job title" />
-      </h2>
+          placeholder="Company name" />
+      </p>
+
+      <p class="text-sm text-justify break-words">
+        <textarea
+          v-model="localEditableJob.description"
+          class="w-full rounded border border-color p-1 custom-scrollbar"
+          placeholder="Job description"></textarea>
+      </p>
+
+      <div class="flex justify-end gap-2 pt-2">
+        <RouterButton
+          :onClick="handleAdd"
+          label="Add job"
+          icon="heroicons-solid:plus"
+          iconPosition="left"
+          customClass="pt-2 xl:pt-0 mr-2"
+          type="submit" />
+      </div>
     </div>
-
-    <p class="mb-2 text-sm">
-      <input
-        v-model="localEditableJob.company"
-        type="text"
-        class="w-full rounded border border-color p-1"
-        placeholder="Company name" />
-    </p>
-
-    <p class="text-sm text-justify break-words">
-      <textarea
-        v-model="localEditableJob.description"
-        class="w-full rounded border border-color p-1 custom-scrollbar"
-        placeholder="Job description"></textarea>
-    </p>
-
-    <div class="flex justify-end gap-2 pt-2">
-      <RouterButton
-        :onClick="handleAdd"
-        label="Add job"
-        icon="heroicons-solid:plus"
-        iconPosition="left"
-        customClass="pt-2 xl:pt-0 mr-2" />
-    </div>
-  </div>
+  </form>
 </template>

@@ -17,7 +17,7 @@ const router = useRouter();
 const job = ref<Job | null>(null);
 
 // Inject the Firebase database instance
-const firebaseDatabase = inject<any>("firebaseDatabaseInstance"); // <-- Add this line!
+const firebaseDatabase = inject<any>("firebaseDatabaseInstance");
 
 // Setup Firebase listener
 let unsubscribe: (() => void) | null = null;

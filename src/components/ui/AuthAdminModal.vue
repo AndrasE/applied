@@ -9,6 +9,7 @@ import {
   browserSessionPersistence,
 } from "firebase/auth";
 import type { User } from "firebase/auth";
+import RouterButton from "./RouterButton.vue";
 
 // Import the Firebase auth instance
 const auth = getAuth();
@@ -85,33 +86,30 @@ defineExpose({ open, checkIfCurrentUserIsAdmin });
 <template>
   <div
     v-if="showAuthModal"
-    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    class="fixed inset-0 bg-[var(--popup-opactiy-bg-light)] dark:bg-[var(--popup-opactiy-bg-dark)] bg-opacity-60 flex items-center justify-center z-[1000] p-2">
     <div
-      class="bg-white p-6 rounded-lg shadow-lg text-center dark:bg-gray-800 dark:text-white">
-      <h3 class="text-xl mb-4">Admin Rights Required</h3>
-      <p class="mb-4">
+      class="flex flex-col items-center justify-center max-w-sm p-2 rounded border border-color bg-[var(--bg-light)] dark:bg-[var(--bg-dark)]">
+      <h2 class="text-2xl mb-4">Hold Up, Wait a Minute</h2>
+      <p class="text-justify p-2 text-sm">
         To perform this action, you must sign in with your admin Google account.
       </p>
-      <button
-        @click="signInAsAdmin"
-        class="btn bg-green-600 text-white px-4 py-2 rounded mr-2">
-        Sign in with Google
-      </button>
-      <button
-        @click="
-          showAuthModal = false;
-          pendingAction = null;
-        "
-        class="btn bg-gray-300 text-gray-800 px-4 py-2 rounded">
-        Cancel
-      </button>
+
+      <div class="flex justify-center gap-4 mt-4">
+        <RouterButton
+          @click="
+            showAuthModal = false;
+            pendingAction = null;
+          "
+          label="Close"
+          icon="heroicons-solid:x"
+          iconPosition="left" />
+        <RouterButton
+          @click="signInAsAdmin"
+          label="Sign In"
+          icon="heroicons-solid:x"
+          iconPosition="right" />
+      </div>
       <p v-if="authError" class="text-red-500 mt-2">{{ authError }}</p>
     </div>
   </div>
 </template>
-
-<style scoped>
-.btn {
-  cursor: pointer;
-}
-</style>
