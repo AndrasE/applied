@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from "vue"; // onUnmounted is NOT needed for detach here
+import { ref, computed, onMounted } from "vue";
 import Container from "@/components/ui/Container.vue";
 import PageHeader from "@/components/ui/PageHeader.vue";
 import Divider from "@/components/ui/Divider.vue";
 import JobCard from "@/components/job-cards/JobCard.vue";
 import RouterButton from "@/components/ui/RouterButton.vue";
 import { Icon } from "@iconify/vue";
-import { useAppStore } from "@/stores/jobs"; // Ensure this path is correct
-
+import { useAppStore } from "@/stores/jobs";
 const appStore = useAppStore();
 
 const viewStyle = ref<string>(localStorage.getItem("jobsViewStyle") || "list");
@@ -28,7 +27,6 @@ onMounted(() => {
   // If the listener is already active, it will do nothing.
   appStore.ensureJobsListenerActive();
 });
-// onUnmounted is NOT used to detach the listener, making it persistent.
 
 const toggleLimit = () => {
   limit.value =

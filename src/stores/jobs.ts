@@ -1,52 +1,46 @@
-// src/stores/jobs.ts (or app.ts)
+// src/stores/jobs.ts
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 import { ref as dbRef, onValue } from "firebase/database";
-import { database } from "../config/database";
+import { database } from "@/config/firebase";
 import type { Job, JobStatus } from "@/types/job";
 
 export const useAppStore = defineStore("app", () => {
+  // --- STATE ---
   const jobs = ref<Job[]>([]);
-  const jobsDataLoadedInSession = ref(false); // Indicates if data has *ever* been loaded in this session
-  const isCurrentlyFetching = ref(false); // Indicates if an active fetch/listener setup is in progress
+  const jobsDataLoadedInSession = ref(false);
+  const isCurrentlyFetching = ref(false);
   const error = ref<string | null>(null);
 
-  // This will manage the single, persistent unsubscribe function for the Firebase listener.
-  // It's initialized to null, and only set once the listener is attached.
+  // --- LISTENERS ---
   let unsubscribeFirebase: (() => void) | null = null;
 
-  const skeletonMinDuration = 600; // ms
+  // --- TIMERS ---
+  const skeletonMinDuration = 600;
   let snapshotReceivedDuringInitialLoad = false;
   let minTimerDoneDuringInitialLoad = false;
 
   // --- ACTIONS ---
-  // This action will ensure the Firebase listener is attached and persistent.
-  // It will only attach if not already active.
   const ensureJobsListenerActive = () => {
-    // If the listener is already attached, do nothing. Data is already being kept in sync.
     if (unsubscribeFirebase !== null) {
       console.log("🚀 Firebase listener already active. No new fetch needed.");
       return;
     }
 
-    // If a fetch is already in progress, avoid duplicate calls.
     if (isCurrentlyFetching.value) {
       console.log("⏳ Fetch already in progress, skipping duplicate call.");
       return;
     }
 
-    isCurrentlyFetching.value = true; // Set to true to show skeleton for the initial load
+    isCurrentlyFetching.value = true;
     error.value = null;
 
-    // --- Skeleton Display Logic for the VERY FIRST LOAD IN SESSION ---
-    // These flags ensure the skeleton shows for a minimum duration only during the first fetch.
     snapshotReceivedDuringInitialLoad = false;
     minTimerDoneDuringInitialLoad = false;
 
     setTimeout(() => {
       minTimerDoneDuringInitialLoad = true;
       if (snapshotReceivedDuringInitialLoad) {
-        // If snapshot arrived and timer is done, hide skeleton
         isCurrentlyFetching.value = false;
       }
     }, skeletonMinDuration);
@@ -68,20 +62,18 @@ export const useAppStore = defineStore("app", () => {
           });
         });
         jobs.value = fetchedJobs;
-        jobsDataLoadedInSession.value = true; // Mark as loaded for the session
+        jobsDataLoadedInSession.value = true;
 
-        // Handle skeleton hiding for the initial load
         if (
           !snapshotReceivedDuringInitialLoad &&
           !minTimerDoneDuringInitialLoad
         ) {
           snapshotReceivedDuringInitialLoad = true;
           if (minTimerDoneDuringInitialLoad) {
-            isCurrentlyFetching.value = false; // Hide skeleton if duration met
+            isCurrentlyFetching.value = false;
           }
         } else {
-          // This is a subsequent real-time update, or initial load already finished its skeleton phase
-          isCurrentlyFetching.value = false; // Ensure skeleton is hidden if it wasn't already
+          isCurrentlyFetching.value = false;
         }
         console.log(
           "📥 Jobs data updated from Firebase (initial or real-time):",
@@ -91,23 +83,28 @@ export const useAppStore = defineStore("app", () => {
       (err) => {
         console.error("Firebase data fetch error:", err);
         error.value = err.message;
-        isCurrentlyFetching.value = false; // Hide skeleton on error
-        // Optionally: unsubscribeFirebase = null; here if you want to retry attaching on next call
+        isCurrentlyFetching.value = false;
       }
     );
   };
 
   // --- GETTERS ---
   const sortedJobs = computed(() => {
-    return [...jobs.value].reverse();
+    // Sort jobs based on the 'updatedAt' timestamp in descending order (newest first)
+    return [...jobs.value].sort((a, b) => {
+      const timeA = a.updatedAt || 0;
+      const timeB = b.updatedAt || 0;
+
+      return timeB - timeA;
+    });
   });
 
   return {
     jobs,
-    jobsDataLoadedInSession, // Can be used to check if any data is loaded at all
-    isCurrentlyFetching, // Use this for skeleton display (true when fetching/initializing)
+    jobsDataLoadedInSession,
+    isCurrentlyFetching,
     error,
-    ensureJobsListenerActive, // The key action to call from JobsView
+    ensureJobsListenerActive,
     sortedJobs,
   };
 });

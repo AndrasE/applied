@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted, inject } from "vue"; // <-- Add 'inject' here
 import { useRoute, useRouter } from "vue-router";
 import { ref as dbRef, onValue } from "firebase/database";
-import { database } from "../config/database";
+// REMOVE THIS LINE: import { database } from "../config/database";
 import Container from "@/components/ui/Container.vue";
 import Divider from "@/components/ui/Divider.vue";
 import PageHeader from "@/components/ui/PageHeader.vue";
@@ -16,6 +16,9 @@ const jobId = route.params.id as string;
 const router = useRouter();
 const job = ref<Job | null>(null);
 
+// Inject the Firebase database instance
+const firebaseDatabase = inject<any>("firebaseDatabaseInstance"); // <-- Add this line!
+
 // Setup Firebase listener
 let unsubscribe: (() => void) | null = null;
 
@@ -26,7 +29,14 @@ onMounted(() => {
     return;
   }
 
-  const jobRef = dbRef(database, `jobs/${jobId}`);
+  // Add a check to ensure firebaseDatabase is available
+  if (!firebaseDatabase) {
+    console.error("Firebase database instance not injected into JobView.vue!");
+    router.push("/jobs"); // Redirect if database isn't available
+    return;
+  }
+
+  const jobRef = dbRef(firebaseDatabase, `jobs/${jobId}`); // <-- Use the injected instance here!
   unsubscribe = onValue(jobRef, (snapshot) => {
     if (snapshot.exists()) {
       const jobData = snapshot.val();

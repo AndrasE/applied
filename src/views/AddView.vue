@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { ref as dbRef, push } from "firebase/database"; // Import dbRef and push from Firebase
-import { database } from "../config/database"; // Make sure you have a database export from your firebase config
+import { ref, inject } from "vue";
+import { ref as dbRef, push, serverTimestamp } from "firebase/database"; // <-- Import serverTimestamp
 import type { Job } from "@/types/job";
-
 import Container from "@/components/ui/Container.vue";
 import JobCard from "@/components/job-cards/JobCard.vue";
 import RouterButton from "@/components/ui/RouterButton.vue";
@@ -11,7 +9,16 @@ import Divider from "@/components/ui/Divider.vue";
 import PageHeader from "@/components/ui/PageHeader.vue";
 import router from "@/router";
 
-// Default job state - removed date since it's handled in JobCard
+// --- Inject the global Firebase instances and modal functions ---
+const firebaseAuth = inject<any>("firebaseAuthInstance");
+const firebaseDatabase = inject<any>("firebaseDatabaseInstance");
+
+const openAdminAuthModal =
+  inject<(actionCallback: () => Promise<void>) => void>("openAdminAuthModal");
+const checkIfCurrentUserIsAdmin = inject<() => boolean>(
+  "checkIfCurrentUserIsAdmin"
+);
+
 const job = ref<Job>({
   title: "",
   description: "",
@@ -19,14 +26,52 @@ const job = ref<Job>({
   status: "applied",
 });
 
-async function addJobToFirebase(job: Job) {
-  console.log("🔥 addJobToFirebase triggered");
+// --- Actual Database Operation Function ---
+async function performAddJob(jobData: Job) {
+  console.log("🔥 performAddJob triggered");
   try {
-    const jobsRef = dbRef(database, "jobs");
-    await push(jobsRef, job);
+    if (!firebaseDatabase) {
+      console.error("🔥Firebase Database not available for adding job.");
+      return;
+    }
+    const jobsRef = dbRef(firebaseDatabase, "jobs");
+
+    // Prepare the data to be pushed, including timestamps
+    const dataToPush = {
+      ...jobData,
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
+    };
+
+    await push(jobsRef, dataToPush);
+    console.log("✅ Job added successfully");
     router.push("/jobs");
   } catch (error) {
     console.error("❌ Error adding job:", error);
+  }
+}
+
+// --- Wrapper Function for Authentication Check ---
+// This function is called by the UI event (@add)
+async function handleAddJob(jobData: Job) {
+  // First, check if the user is already signed in as admin
+  if (
+    firebaseAuth &&
+    firebaseAuth.currentUser &&
+    checkIfCurrentUserIsAdmin &&
+    checkIfCurrentUserIsAdmin()
+  ) {
+    console.log("🕵️ Admin already logged in, performing add directly.");
+    await performAddJob(jobData);
+  } else if (openAdminAuthModal) {
+    // If not admin, or not authenticated, open the admin authentication modal
+    // Pass 'performAddJob' as the callback to execute after successful authentication
+    openAdminAuthModal(() => performAddJob(jobData));
+  } else {
+    // Fallback error if injections somehow fail
+    console.error(
+      "🕵️ Admin authentication modal not available. Is App.vue configured correctly?"
+    );
   }
 }
 </script>
@@ -42,7 +87,7 @@ async function addJobToFirebase(job: Job) {
         viewingMode="adding"
         class="w-full border-0 border-b sm:border-0 rounded-none pb-3 sm:pb-0 pt-0"
         :job="job"
-        @add="addJobToFirebase" />
+        @add="handleAddJob" />
     </div>
 
     <Divider label="nein geh zurück" labelPosition="bottom" />

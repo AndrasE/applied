@@ -1,23 +1,20 @@
-// Import the functions you need from the SDKs you need
-// Make sure you have 'firebase' installed and its type definitions.
-// If you encounter errors about missing types, you might need:
-// npm install @types/firebase --save-dev (though modern firebase includes types)
+// src/config/firebase.ts
 import { initializeApp } from "firebase/app";
-import type { FirebaseApp } from "firebase/app";
-import type { FirebaseOptions } from "@firebase/app"; // For explicit type hinting on firebaseConfig
+import { getAuth } from "firebase/auth";
+import { getDatabase } from "firebase/database";
 
-// Your web app's Firebase configuration
-// We define firebaseConfig as FirebaseOptions for strong type checking.
-const firebaseConfig: FirebaseOptions = {
+const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
   projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
   storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  databaseURL: import.meta.env.VITE_FIREBASE_DB_URL,
   appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
-// Initialize Firebaseexplicitly type the 'app' constant as FirebaseApp
-const app: FirebaseApp = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const database = getDatabase(app); // GET THE DATABASE INSTANCE FROM THE APP
 
-export { app };
+export { app, auth, database }; // EXPORT THIS 'database' INSTANCE
