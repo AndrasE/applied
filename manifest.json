@@ -2,7 +2,7 @@
     "name": "Applied application tracker",
     "short_name": "Applied",
     "description": "A simple, fast, and beautiful personal task management app for tracking application progress.",
-    "start_url": "https://andrasapplied.netlify.app/",
+    "start_url": "/",
     "display": "standalone",
     "background_color": "#1a1a1a",
     "theme_color": "#7bf1a8",
