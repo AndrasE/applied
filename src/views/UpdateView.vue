@@ -31,9 +31,6 @@ const firebaseDatabase = inject<any>("firebaseDatabaseInstance");
 let unsubscribe: (() => void) | null = null;
 
 onMounted(() => {
-  // Removed: console.log("UpdateView.vue: Component Mounted.");
-  // Removed: console.log("UpdateView.vue: Job ID from route params:", jobId);
-
   if (!jobId) {
     console.error("No job ID provided for update."); // Keep this, it's an important validation error
     router.push("/jobs");
@@ -49,19 +46,15 @@ onMounted(() => {
   unsubscribe = onValue(
     jobRef,
     (snapshot) => {
-      // Removed: console.log("UpdateView.vue: onValue listener triggered.");
-      // Removed: console.log("UpdateView.vue: Snapshot exists?", snapshot.exists());
-
       if (snapshot.exists()) {
         const jobData = snapshot.val();
-        // Removed: console.log("UpdateView.vue: Job data found:", jobData);
+
         job.value = {
           ...jobData,
           id: snapshot.key,
           status: jobData.status as JobStatus,
         };
       } else {
-        // Removed: console.warn("UpdateView.vue: No job data found for ID:", jobId);
         job.value = null;
         router.push("/jobs");
       }
@@ -93,30 +86,30 @@ async function performUpdate(updatedJob: Job) {
     const { id, ...jobWithoutId } = updatedJob;
     const updateData = {
       ...jobWithoutId,
-      updatedAt: serverTimestamp(), // Correctly using serverTimestamp()
+      updatedAt: serverTimestamp(),
     };
 
     await update(jobRef, updateData);
-    console.log("✅ Job updated successfully"); // Keep this, confirms success
+    console.log("✅ Job updated successfully");
     router.push("/jobs");
   } catch (error) {
-    console.error("❌ Error updating job:", error); // Keep this, captures errors
+    console.error("❌ Error updating job:", error);
   }
 }
 
 async function performDelete(id: string) {
   try {
-    console.log("🗑️ Deleting job:", id); // Keep this, confirms action
+    console.log("🗑️ Deleting job:", id);
     if (!firebaseDatabase) {
-      console.error("Firebase Database not available for delete."); // Keep this, critical error
+      console.error("Firebase Database not available for delete.");
       return;
     }
     const jobRef = dbRef(firebaseDatabase, `jobs/${id}`);
     await remove(jobRef);
-    console.log("✅ Job deleted successfully"); // Keep this, confirms success
+    console.log("✅ Job deleted successfully");
     router.push("/jobs");
   } catch (error) {
-    console.error("❌ Error deleting job:", error); // Keep this, captures errors
+    console.error("❌ Error deleting job:", error);
   }
 }
 
@@ -128,13 +121,13 @@ async function handleUpdate(updatedJob: Job) {
     checkIfCurrentUserIsAdmin &&
     checkIfCurrentUserIsAdmin()
   ) {
-    console.log("🕵️️ Admin already logged in, performing update directly."); // Keep this, confirms auth flow
+    console.log("🕵️️ Admin already logged in, performing update directly.");
     await performUpdate(updatedJob);
   } else if (openAdminAuthModal) {
     openAdminAuthModal(() => performUpdate(updatedJob));
   } else {
     console.error(
-      "🕵️️ Admin authentication modal not available. Is App.vue configured correctly?" // Keep this, critical config error
+      "🕵️️ Admin authentication modal not available. Is App.vue configured correctly?"
     );
   }
 }
@@ -146,13 +139,13 @@ async function handleDelete(id: string) {
     checkIfCurrentUserIsAdmin &&
     checkIfCurrentUserIsAdmin()
   ) {
-    console.log("🕵️️ Admin already logged in, performing delete directly."); // Keep this, confirms auth flow
+    console.log("🕵️️ Admin already logged in, performing delete directly.");
     await performDelete(id);
   } else if (openAdminAuthModal) {
     openAdminAuthModal(() => performDelete(id));
   } else {
     console.error(
-      "🕵️️ Admin authentication modal not available. Is App.vue configured correctly?" // Keep this, critical config error
+      "🕵️️ Admin authentication modal not available. Is App.vue configured correctly?"
     );
   }
 }
@@ -168,13 +161,13 @@ onMounted(() => {
     <Divider label="editing mode" labelPosition="top" />
 
     <div
-      class="flex flex-col items-center w-full justify-between margin950and640 border-color">
+      class="flex flex-col items-center justify-between w-full margin950and640">
       <JobCard
         viewingMode="editing"
         :job="job"
         @update="handleUpdate"
         @delete="handleDelete"
-        class="w-full border-0 border-b sm:border-0 rounded-none pb-3 sm:pb-0 pt-0" />
+        class="w-full pt-0 pb-3 border-0 border-b rounded-none sm:border-0 sm:pb-0" />
     </div>
 
     <Divider label="prev list" labelPosition="bottom" />

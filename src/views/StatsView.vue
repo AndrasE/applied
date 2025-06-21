@@ -12,11 +12,11 @@ onMounted(() => {
 
 <template>
   <Container>
-    <PageHeader label="About" />
-    <Divider label="hi there" labelPosition="top" />
+    <PageHeader label="Stats" />
+    <Divider label="applied metrics" labelPosition="top" />
     <div class="flex flex-col items-center justify-between margin950and640">
       <div
-        aria-label="about card"
+        aria-label="stats card"
         class="w-full p-4 text-justify break-words border rounded border-color">
         <p class="p-2 text-sm">
           blabla blabla blabla blablabla blablablablablablablablablab
@@ -32,6 +32,6 @@ onMounted(() => {
       </div>
     </div>
 
-    <Divider label="thanks for reading" labelPosition="bottom" />
+    <Divider label="good luck" labelPosition="bottom" />
   </Container>
 </template>

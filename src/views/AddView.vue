@@ -86,10 +86,10 @@ onMounted(() => {
     <Divider label="adding mode" labelPosition="top" />
 
     <div
-      class="flex flex-col items-center w-full justify-between margin950and640 border-color">
+      class="flex flex-col items-center justify-between w-full margin950and640 border-color">
       <JobCard
         viewingMode="adding"
-        class="w-full border-0 border-b sm:border-0 rounded-none pb-3 sm:pb-0 pt-0"
+        class="w-full pt-0 pb-3 border-0 border-b rounded-none sm:border-0 sm:pb-0"
         :job="job"
         @add="handleAddJob" />
     </div>

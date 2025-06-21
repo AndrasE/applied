@@ -150,8 +150,8 @@ const triggerPopup = () => {
           </RouterLink>
 
           <RouterLink
-            aria-label="Go to about page"
-            to="/about"
+            aria-label="Go to stats page"
+            to="/stats"
             v-slot="{ isActive, href, navigate }">
             <a
               :href="href"
@@ -163,8 +163,8 @@ const triggerPopup = () => {
               }">
               <Icon
                 role="presentation"
-                icon="ci:text-align-left"
-                class="text-2xl sm:text-3xl" />About
+                icon="ci:chart-line"
+                class="text-2xl sm:text-3xl" />Stats
             </a>
           </RouterLink>
         </div>

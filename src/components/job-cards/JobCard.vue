@@ -67,7 +67,7 @@ function handleAddJob(job: Job) {
 </script>
 
 <template>
-  <div aria-label="job card" class="p-4 rounded border border-color">
+  <div aria-label="job card" class="p-4 border rounded border-color">
     <template v-if="viewingMode === 'browsing'">
       <JobCardBrowse
         :job="job"

@@ -99,11 +99,11 @@ defineExpose({ open, checkIfCurrentUserIsAdmin });
     class="fixed inset-0 bg-[var(--popup-opactiy-bg-light)] dark:bg-[var(--popup-opactiy-bg-dark)] bg-opacity-60 flex items-center justify-center z-[1000] p-2">
     <div
       class="text-center flex flex-col items-center justify-center max-w-sm p-2 rounded border border-color bg-[var(--bg-light)] dark:bg-[var(--bg-dark)]">
-      <h2 class="text-2xl mb-4">Hold Up, Wait a Minute</h2>
+      <h2 class="mb-4 text-2xl">Hold Up, Wait a Minute</h2>
       <p class="text-sm">
         To perform this action, you must sign in with your admin Google account.
       </p>
-      <p v-if="authError" class="text-red-500 text-sm mt-4">{{ authError }}</p>
+      <p v-if="authError" class="mt-4 text-sm text-red-500">{{ authError }}</p>
       <div class="flex justify-center gap-4 mt-4">
         <RouterButton
           @click="handleCancel"

@@ -62,27 +62,27 @@ function handleDelete() {
 <template>
   <div>
     <div class="flex items-start justify-between">
-      <h2 class="mb-1 w-full text-lg">
+      <h2 class="w-full mb-1 text-lg">
         <input
           v-model="localEditableJob.title"
           type="text"
-          class="w-full rounded border border-color p-1"
+          class="w-full p-1 border rounded border-color"
           placeholder="Job title" />
       </h2>
     </div>
 
     <div
-      class="flex flex-col sm:flex-row text-sm justify-between gap-1 w-full mb-1">
+      class="flex flex-col justify-between w-full gap-1 mb-1 text-sm sm:flex-row">
       <JobStatusDropdown v-model="localEditableJob.status" />
 
       <div
-        class="flex flex-row relative items-center gap-1 w-full sm:w-auto sm:flex-1 group">
+        class="relative flex flex-row items-center w-full gap-1 sm:w-auto sm:flex-1 group">
         <input
           v-model="localEditableJob.date"
           type="text"
           readonly
           placeholder="Date"
-          class="w-full flex-1 rounded border p-1 border-color cursor-auto" />
+          class="flex-1 w-full p-1 border rounded cursor-auto border-color" />
 
         <Icon
           icon="heroicons-solid:refresh"
@@ -96,14 +96,14 @@ function handleDelete() {
       <input
         v-model="localEditableJob.company"
         type="text"
-        class="w-full rounded border border-color p-1"
+        class="w-full p-1 border rounded border-color"
         placeholder="Company name" />
     </p>
 
     <p class="text-sm text-justify break-words">
       <textarea
         v-model="localEditableJob.description"
-        class="w-full rounded border border-color p-1 custom-scrollbar"
+        class="w-full p-1 border rounded border-color custom-scrollbar"
         placeholder="Job description"></textarea>
     </p>
 
@@ -112,7 +112,7 @@ function handleDelete() {
         label="Delete job"
         icon="heroicons-solid:trash"
         icon-position="left"
-        custom-class="pt-2 xl:pt-0 mr-2"
+        custom-class="pt-2 mr-2 xl:pt-0"
         @click="handleDelete" />
       <RouterButton
         label="Save changes"

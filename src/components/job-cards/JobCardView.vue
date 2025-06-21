@@ -28,11 +28,11 @@ const statusTextClass = computed(() => {
 </script>
 
 <template>
-  <div class="flex items-start justify-between flex-wrap">
-    <h2 class="mb-1 w-full text-lg break-words">{{ job.title }}</h2>
+  <div class="flex items-start justify-between">
+    <h2 class="w-full mb-1 text-lg break-words">{{ job.title }}</h2>
     <div class="flex flex-col items-end">
       <span
-        class="flex items-center text-xs ml-2 whitespace-nowrap"
+        class="flex items-center ml-2 text-xs whitespace-nowrap"
         :class="statusTextClass">
         {{ job.status ?? "unknown" }}
       </span>
@@ -44,7 +44,7 @@ const statusTextClass = computed(() => {
 
   <p class="text-sm text-justify break-words">{{ job.description }}</p>
 
-  <div class="flex flex-1 justify-end gap-2">
+  <div class="flex justify-end flex-1 gap-2">
     <RouterButton
       :to="`/jobs/${job.id}/update`"
       label="Update job"

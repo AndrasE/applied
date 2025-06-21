@@ -44,11 +44,11 @@ function handleAdd() {
   <form @submit.prevent="handleAdd">
     <div>
       <div class="flex items-start justify-between">
-        <h2 class="mb-1 w-full text-lg">
+        <h2 class="w-full mb-1 text-lg">
           <input
             v-model="localEditableJob.title"
             type="text"
-            class="w-full rounded border border-color p-1"
+            class="w-full p-1 border rounded border-color"
             placeholder="Job title" />
         </h2>
       </div>
@@ -57,14 +57,14 @@ function handleAdd() {
         <input
           v-model="localEditableJob.company"
           type="text"
-          class="w-full rounded border border-color p-1"
+          class="w-full p-1 border rounded border-color"
           placeholder="Company name" />
       </p>
 
       <p class="text-sm text-justify break-words">
         <textarea
           v-model="localEditableJob.description"
-          class="w-full rounded border border-color p-1 custom-scrollbar"
+          class="w-full p-1 border rounded border-color custom-scrollbar"
           placeholder="Job description"></textarea>
       </p>
 

@@ -42,7 +42,7 @@ onMounted(() => {
     lottieAnimationLoadedOnce = true; // Mark as loaded for future instances in this session
     setTimeout(() => {
       isIconRotated.value = false;
-    }, 300);
+    }, 400);
   }, 1400);
 });
 </script>
@@ -56,9 +56,11 @@ onMounted(() => {
         <div
           aria-hidden="true"
           v-if="!isLottieReady"
-          class="absolute inset-0 mb-3 mt-1 mx-3 flex items-center justify-center rounded-lg bg-[var(--skeleton-light)] text-tiny text-gray-500 subtle-pulse tracking-widest dark:bg-[var(--skeleton-dark)] dark:text-gray-400">
-          loading...
+          class="absolute inset-0 mb-3 mt-1 mx-3 flex flex-col items-center justify-center rounded-lg bg-[var(--skeleton-light)] text-tiny text-gray-500 subtle-pulse tracking-widest dark:bg-[var(--skeleton-dark)] dark:text-gray-400">
+          <p class="mt-1">loading</p>
+          <Icon class="ml-1 text-xl" icon="svg-spinners:3-dots-fade" />
         </div>
+
         <Vue3Lottie
           v-else
           :animationData="applying"

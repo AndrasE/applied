@@ -61,7 +61,7 @@ watch(currentTheme, (newTheme) => {
     @click="toggleTheme"
     @mouseenter="isHovered = true"
     @mouseleave="isHovered = false"
-    class="flex flex-center text-hover cursor-pointer">
+    class="flex cursor-pointer flex-center text-hover">
     <Icon
       :icon="themeIcon"
       :class="[

@@ -78,7 +78,7 @@ onMounted(() => {
       :label="viewStyle === 'grid' ? 'grid cols' : 'flex col'"
       labelPosition="top" />
 
-    <div v-if="appStore.error" class="text-red-500 text-center my-4">
+    <div v-if="appStore.error" class="my-4 text-center text-red-500">
       Error loading jobs: {{ appStore.error }}
     </div>
 
