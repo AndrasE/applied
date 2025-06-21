@@ -1,27 +1,24 @@
-const CACHE_NAME = "applied-pwa-cache-v1"; // Increment cache version on changes
+const CACHE_NAME = "applied-pwa-cache-v1";
 const urlsToCache = [
-  // IMPORTANT CHANGE HERE: Match your manifest's start_url
-  "https://andrasapplied.netlify.app/", // The exact start_url from your manifest
-  "/index.html", // Keep this as a fallback/redundancy, or if accessed directly
-  "/src/assets/styles.css",
-  "/src/theme.ts",
-  "/src/main.ts",
+  "https://andrasapplied.netlify.app/",
+  "/index.html",
   "/favicon.ico",
   "/manifest.json",
   "/fonts/inter-400.woff2",
   "/fonts/inter-700.woff2",
   "/fonts/inter-900.woff2",
+  "/icons/icon-48x48.png",
   "/icons/icon-72x72.png",
   "/icons/icon-96x96.png",
-  "/icons/icon-128x128.png",
   "/icons/icon-144x144.png",
-  "/icons/icon-152x152.png",
   "/icons/icon-192x192.png",
-  "/icons/icon-384x384.png",
   "/icons/icon-512x512.png",
-  // Add any other static assets your app loads (e.g., other images, JSON data)
-];
 
+  // ***** IMPORTANT: UPDATE THESE TWO LINES *****
+  // Replace these with the EXACT paths you found in the Sources tab of your deployed site
+  "/assets/YOUR_ACTUAL_MAIN_JS_FILE_WITH_HASH.js", // e.g., /assets/index-Qp1LOOMV.js
+  "/assets/YOUR_ACTUAL_MAIN_CSS_FILE_WITH_HASH.css", // e.g., /assets/index-ABCD123.css
+];
 // Install Event: Caches specified assets
 self.addEventListener("install", (event) => {
   console.log("Service Worker: Install event received.");
