@@ -1,6 +1,6 @@
 const CACHE_NAME = "applied-pwa-cache-v1";
 const urlsToCache = [
-  "https://andrasapplied.netlify.app/",
+  "/",
   "/index.html",
   "/favicon.ico",
   "/manifest.json",
@@ -13,11 +13,8 @@ const urlsToCache = [
   "/icons/icon-144x144.png",
   "/icons/icon-192x192.png",
   "/icons/icon-512x512.png",
-
-  // ***** IMPORTANT: UPDATE THESE TWO LINES *****
-  // Replace these with the EXACT paths you found in the Sources tab of your deployed site
-  "/assets/YOUR_ACTUAL_MAIN_JS_FILE_WITH_HASH.js", // e.g., /assets/index-Qp1LOOMV.js
-  "/assets/YOUR_ACTUAL_MAIN_CSS_FILE_WITH_HASH.css", // e.g., /assets/index-ABCD123.css
+  "/assets/index-CAkyy1o_.js",
+  "/assets/index-CaDKaHdV.css",
 ];
 // Install Event: Caches specified assets
 self.addEventListener("install", (event) => {
