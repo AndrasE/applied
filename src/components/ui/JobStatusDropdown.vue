@@ -39,7 +39,7 @@ function selectStatus(status: Job["status"]) {
 <template>
   <Menu
     as="div"
-    class="relative inline-block text-left w-full sm:w-auto flex-1 group">
+    class="relative flex-1 inline-block w-full text-left sm:w-auto group">
     <div>
       <MenuButton
         class="inline-flex items-center justify-between w-full p-1 rounded border border-color bg-[var(--bg-light)] dark:bg-[var(--bg-dark)] text-gray-700 dark:text-gray-300 focus:ring-1 focus:ring-slate-700 dark:focus:ring-slate-300">
@@ -52,12 +52,12 @@ function selectStatus(status: Job["status"]) {
     </div>
 
     <transition
-      enter-active-class="transition ease-out duration-100"
-      enter-from-class="transform opacity-0 scale-95"
-      enter-to-class="transform opacity-100 scale-100"
-      leave-active-class="transition ease-in duration-75"
-      leave-from-class="transform opacity-100 scale-100"
-      leave-to-class="transform opacity-0 scale-95">
+      enter-active-class="transition duration-100 ease-out"
+      enter-from-class="transform scale-95 opacity-0"
+      enter-to-class="transform scale-100 opacity-100"
+      leave-active-class="transition duration-75 ease-in"
+      leave-from-class="transform scale-100 opacity-100"
+      leave-to-class="transform scale-95 opacity-0">
       <MenuItems
         class="origin-top-right absolute right-0 mt-1 w-full rounded-sm border border-color shadow-lg z-10 bg-[var(--bg-light)] dark:bg-[var(--bg-dark)] focus:outline-none">
         <div class="p-1">

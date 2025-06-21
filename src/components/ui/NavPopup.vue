@@ -41,12 +41,19 @@ defineExpose({
           This3232 is the content of my ontent of my popup!
         </p>
       </div>
-      <RouterButton
-        @click="closePopup"
-        label="Close"
-        icon="heroicons-solid:x"
-        iconPosition="right"
-        customClass="mt-4 xl:pt-0 ml-3" />
+      <div class="flex justify-center gap-4 mt-4">
+        <RouterButton
+          @click="closePopup"
+          label="Close"
+          icon="heroicons-solid:x"
+          iconPosition="left" />
+        <RouterButton
+          @click="closePopup"
+          :to="`/about`"
+          label="About"
+          icon="heroicons:bookmark"
+          iconPosition="right" />
+      </div>
     </div>
   </div>
 </template>
