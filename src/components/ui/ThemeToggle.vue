@@ -69,7 +69,7 @@ watch(currentTheme, (newTheme) => {
         'transition-transform',
         'duration-300',
         'ease-in-out',
-        { 'rotate-270': isHovered },
+        { 'rotate-90': isHovered },
       ]" />
   </button>
 </template>
