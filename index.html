@@ -6,19 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description"
     content="Applied is a simple, fast, and beautiful personal task management app that helps tracking my application progress.">
-  <meta name="theme-color" content="#7bf1a8" />
   <title>Applied</title>
   <link rel="icon" href="/favicon.ico">
 
+  <meta name="theme-color" content="#7bf1a8" />
   <link rel="manifest" href="/manifest.json">
-
   <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
-
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Applied">
-
-  <meta name="theme-color" content="#2563EB" />
   <link rel="preload" href="/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/inter-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/inter-900.woff2" as="font" type="font/woff2" crossorigin>
@@ -36,7 +32,6 @@
 
 <body>
   <div id="app"></div>
-  <!-- service worker for pwa -->
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
@@ -50,7 +45,6 @@
       });
     }
   </script>
-  <!-- theme and main -->
   <script type="module" src="/src/theme.ts"></script>
   <script type="module" src="/src/main.ts"></script>
 </body>
