@@ -112,13 +112,11 @@ function handleDelete() {
         label="Delete job"
         icon="heroicons-solid:trash"
         icon-position="left"
-        custom-class="pt-2 mr-2 xl:pt-0"
         @click="handleDelete" />
       <RouterButton
         label="Save changes"
         icon="heroicons-solid:check"
         icon-position="left"
-        custom-class="pt-2 xl:pt-0"
         @click="handleSave" />
     </div>
   </div>

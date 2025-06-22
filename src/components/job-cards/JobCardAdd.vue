@@ -74,7 +74,6 @@ function handleAdd() {
           label="Add job"
           icon="heroicons-solid:plus"
           iconPosition="left"
-          customClass="pt-2 xl:pt-0 mr-2"
           type="submit" />
       </div>
     </div>
