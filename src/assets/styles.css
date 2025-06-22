@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 /* Self hosted fonts */
 @font-face {
   font-family: "Inter";
@@ -22,8 +24,6 @@
   font-display: swap;
   src: url("/fonts/inter-900.woff2") format("woff2");
 }
-
-@import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
