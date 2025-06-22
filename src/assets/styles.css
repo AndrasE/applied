@@ -1,5 +1,4 @@
-@import "tailwindcss/preflight";
-@tailwind utilities;
+@import "tailwindcss";
 
 /* Self hosted fonts */
 @font-face {
@@ -74,7 +73,7 @@
   input:focus,
   textarea:focus,
   select:focus {
-    @apply outline-none ring-1 ring-offset-0 ring-[#334155] dark:ring-[#cbd5e1]; /* Use actual hex codes */
+    @apply outline-none ring-1 ring-offset-0  ring-slate-700 dark:ring-slate-300;
   }
 
   @media screen and (max-width: 640px) {
