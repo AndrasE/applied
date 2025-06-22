@@ -1,53 +1,72 @@
 :root {
+  /* Your existing theme variables */
   --bg-light: #ffffff;
   --bg-dark: #1a1a1a;
   --text-color-light: #213547;
   --text-color-dark: #d1d5db;
   --green-accent-light: #15803d;
   --green-accent-dark: #7bf1a8;
-  --pattern-color-light: #2135472d;
-  --pattern-color-dark: #d1d5db0c;
+  --border-color-light: #90a1b9;
+  --border-color-dark: #45556c;
+  --vt-color-progress-bar: #64ad7cc4;
 
-  /* General Toast Colors based on your theme */
+  /* These variables will set the default background and text color for toasts */
   --vt-toast-background: var(--bg-light);
   --vt-toast-text-color: var(--text-color-light);
-  --vt-color-progress-bar: #64ad7cc4; /* Your scroll color */
 
-  /* Specific toast type backgrounds (optional, if you want them different from general) */
-  --vt-color-info: var(--vt-toast-background);
-  --vt-color-success: var(--vt-toast-background);
-  --vt-color-warning: var(--vt-toast-background);
-  --vt-color-error: var(--vt-toast-background);
-
-  /* Border for toasts */
-  --vt-toast-border-color-light: var(--pattern-color-light);
-  --vt-toast-border-color-dark: var(--pattern-color-dark);
+  /* You can remove the --vt-color-info, --vt-color-success, etc. assignments from here
+     as we're going to directly target the classes below. */
 }
 
-/* Dark mode adjustments for toasts */
+/* Dark mode adjustments for toast CSS variables */
 @media (prefers-color-scheme: dark) {
   :root {
     --vt-toast-background: var(--bg-dark);
     --vt-toast-text-color: var(--text-color-dark);
-    --vt-color-info: var(--vt-toast-background);
-    --vt-color-success: var(--vt-toast-background);
-    --vt-color-warning: var(--vt-toast-background);
-    --vt-color-error: var(--vt-toast-background);
   }
 }
 
-/* Override core toast styles for rounded corners and 1px border */
+/*
+  Override core toast styles for rounded corners and 1px border.
+  The background color will be set by the type-specific rules below.
+*/
 .Vue-Toastification__toast {
-  border-radius: 8px !important;
-  border: 1px solid var(--vt-toast-border-color-light) !important;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1) !important;
+  border-radius: 10px !important;
+  box-shadow: none !important;
+  /*
+    The border color needs to be set here as it's not a type-specific style.
+    It will switch automatically with the media query on the .Vue-Toastification__toast
+    rule below.
+  */
+  border: 1px solid var(--border-color-light) !important;
 }
 
-/* Dark mode border */
+/* Dark mode specific border for the toast element */
 @media (prefers-color-scheme: dark) {
   .Vue-Toastification__toast {
-    border: 1px solid var(--vt-toast-border-color-dark) !important;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3) !important;
+    border: 1px solid var(--border-color-dark) !important;
+  }
+}
+
+/* Apply your custom background to ALL toast types (light mode) */
+.Vue-Toastification__toast--info,
+.Vue-Toastification__toast--success,
+.Vue-Toastification__toast--warning,
+.Vue-Toastification__toast--error {
+  background-color: var(--vt-toast-background) !important;
+  color: var(
+    --vt-toast-text-color
+  ) !important; /* Ensure text color is also correct */
+}
+
+/* Apply your custom background to ALL toast types (dark mode) */
+@media (prefers-color-scheme: dark) {
+  .Vue-Toastification__toast--info,
+  .Vue-Toastification__toast--success,
+  .Vue-Toastification__toast--warning,
+  .Vue-Toastification__toast--error {
+    background-color: var(--vt-toast-background) !important;
+    color: var(--vt-toast-text-color) !important;
   }
 }
 
@@ -63,8 +82,8 @@
 
 /* Icon Color (Green) */
 .Vue-Toastification__icon,
-  .custom-icon-wrapper .fa-rocket, /* For Font Awesome */
-  .custom-svg-icon-wrapper svg /* For SVG */ {
+.custom-icon-wrapper .fa-rocket, /* For Font Awesome */
+.custom-svg-icon-wrapper svg /* For SVG */ {
   color: var(--green-accent-light) !important;
 }
 
@@ -82,7 +101,7 @@
   font-size: 20px;
 }
 
-/* Custom icon wrapper styles (if they were in your Vue component's <style> block previously) */
+/* Custom icon wrapper styles */
 .custom-icon-wrapper {
   display: flex;
   align-items: center;
