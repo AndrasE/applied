@@ -1,3 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 /* Self hosted fonts */
 @font-face {
   font-family: "Inter";
