@@ -2,6 +2,7 @@
 // this variable exists at the module level. It is initialized ONLY ONCE
 //  when this component file is first processed by your bundler. No re-initialization occurs on component unmounts or re-mounts within the same application session.
 let lottieAnimationLoadedOnce: boolean = false;
+import { useToast } from "vue-toastification";
 </script>
 
 <script setup lang="ts">
@@ -15,7 +16,7 @@ import type { Component } from "vue";
 // isLottieReady is a local reactive state for THIS component instance.
 // Its initial value depends on whether the animation has loaded globally once.
 const isLottieReady = ref(lottieAnimationLoadedOnce); // Initialize based on persistent state
-
+const toast = useToast();
 // isIconRotated is a local reactive state for THIS component instance.
 const isIconRotated = ref(false);
 
@@ -26,6 +27,10 @@ const Vue3Lottie = defineAsyncComponent({
 });
 
 onMounted(() => {
+  console.log("first");
+  toast.info("Welcome to Vue3Lottie!", {
+    timeout: 99999000,
+  });
   window.scrollTo(0, 0); // Scroll to the top overwriting any previous scroll
   // If the animation has already been marked as loaded in this session,
   // isLottieReady is already true, so we do nothing more.

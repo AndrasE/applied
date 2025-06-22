@@ -1,0 +1,106 @@
+:root {
+  --bg-light: #ffffff;
+  --bg-dark: #1a1a1a;
+  --text-color-light: #213547;
+  --text-color-dark: #d1d5db;
+  --green-accent-light: #15803d;
+  --green-accent-dark: #7bf1a8;
+  --pattern-color-light: #2135472d;
+  --pattern-color-dark: #d1d5db0c;
+
+  /* General Toast Colors based on your theme */
+  --vt-toast-background: var(--bg-light);
+  --vt-toast-text-color: var(--text-color-light);
+  --vt-color-progress-bar: #64ad7cc4; /* Your scroll color */
+
+  /* Specific toast type backgrounds (optional, if you want them different from general) */
+  --vt-color-info: var(--vt-toast-background);
+  --vt-color-success: var(--vt-toast-background);
+  --vt-color-warning: var(--vt-toast-background);
+  --vt-color-error: var(--vt-toast-background);
+
+  /* Border for toasts */
+  --vt-toast-border-color-light: var(--pattern-color-light);
+  --vt-toast-border-color-dark: var(--pattern-color-dark);
+}
+
+/* Dark mode adjustments for toasts */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --vt-toast-background: var(--bg-dark);
+    --vt-toast-text-color: var(--text-color-dark);
+    --vt-color-info: var(--vt-toast-background);
+    --vt-color-success: var(--vt-toast-background);
+    --vt-color-warning: var(--vt-toast-background);
+    --vt-color-error: var(--vt-toast-background);
+  }
+}
+
+/* Override core toast styles for rounded corners and 1px border */
+.Vue-Toastification__toast {
+  border-radius: 8px !important;
+  border: 1px solid var(--vt-toast-border-color-light) !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Dark mode border */
+@media (prefers-color-scheme: dark) {
+  .Vue-Toastification__toast {
+    border: 1px solid var(--vt-toast-border-color-dark) !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3) !important;
+  }
+}
+
+/* Progress bar color */
+.Vue-Toastification__progress-bar {
+  background-color: var(--vt-color-progress-bar) !important;
+}
+
+/* Close button color (ensure visibility on your background) */
+.Vue-Toastification__close-button {
+  color: var(--vt-toast-text-color) !important;
+}
+
+/* Icon Color (Green) */
+.Vue-Toastification__icon,
+  .custom-icon-wrapper .fa-rocket, /* For Font Awesome */
+  .custom-svg-icon-wrapper svg /* For SVG */ {
+  color: var(--green-accent-light) !important;
+}
+
+/* Dark mode icon color */
+@media (prefers-color-scheme: dark) {
+  .Vue-Toastification__icon,
+  .custom-icon-wrapper .fa-rocket,
+  .custom-svg-icon-wrapper svg {
+    color: var(--green-accent-dark) !important;
+  }
+}
+
+/* Adjust size for default icons if needed */
+.Vue-Toastification__icon {
+  font-size: 20px;
+}
+
+/* Custom icon wrapper styles (if they were in your Vue component's <style> block previously) */
+.custom-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+.custom-svg-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+.custom-svg-icon-wrapper svg {
+  width: 100%;
+  height: 100%;
+}
