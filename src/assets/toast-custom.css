@@ -51,11 +51,13 @@ html.dark,
 
 @media screen and (max-width: 600px) {
   .Vue-Toastification__toast {
-    border-radius: 0 0 4px 4px !important;
+    border-top: 0 !important;
+    border-radius: 0 !important;
+    height: 65px !important;
   }
 }
 
-/* ---  Target the .dark class for toast border --- */
+/* ---  Target the .dark class for toast border --- */
 html.dark .Vue-Toastification__toast {
   border: 1px solid var(--border-color-dark) !important;
 }
@@ -82,8 +84,6 @@ html.dark .Vue-Toastification__toast {
 }
 
 /* Icon Color (Green) - Now directly use --vt-icon-color */
-.Vue-Toastification__icon,
-.custom-icon-wrapper .fa-rocket,
-.custom-svg-icon-wrapper svg {
+.Vue-Toastification__icon {
   color: var(--vt-icon-color) !important;
 }
