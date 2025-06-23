@@ -29,7 +29,7 @@ const Vue3Lottie = defineAsyncComponent({
 onMounted(() => {
   console.log("first");
   toast.info("test!", {
-    timeout: 99999000,
+    timeout: 9990,
   });
   window.scrollTo(0, 0); // Scroll to the top overwriting any previous scroll
   // If the animation has already been marked as loaded in this session,

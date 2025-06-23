@@ -10,90 +10,75 @@
   --border-color-dark: #45556c;
   --vt-color-progress-bar: #64ad7cc4;
 
-  /* These variables will set the default background and text color for toasts */
+  /*
+    Always define the LIGHT mode defaults in :root.
+    The .dark class will then override these.
+  */
   --vt-toast-background: var(--bg-light);
   --vt-toast-text-color: var(--text-color-light);
 
-  /* You can remove the --vt-color-info, --vt-color-success, etc. assignments from here
-     as we're going to directly target the classes below. */
+  --vt-color-info: var(--vt-toast-background);
+  --vt-color-success: var(--vt-toast-background);
+  --vt-color-warning: var(--vt-toast-background);
+  --vt-color-error: var(--vt-toast-background);
+
+  /* Icon color default (light) */
+  --vt-icon-color: var(--green-accent-light);
 }
 
-/* Dark mode adjustments for toast CSS variables */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --vt-toast-background: var(--bg-dark);
-    --vt-toast-text-color: var(--text-color-dark);
-  }
+/* --- THE KEY CHANGE: Use the .dark class for dark mode overrides --- */
+/* Target the :root when the 'dark' class is present on html (document.documentElement) */
+html.dark,
+.dark:root {
+  /* .dark:root is less common, but html.dark is standard */
+  --vt-toast-background: var(--bg-dark);
+  --vt-toast-text-color: var(--text-color-dark);
+  --vt-icon-color: var(--green-accent-dark); /* Dark mode icon color */
+
+  /* Ensure type-specific backgrounds also follow the dark theme if needed */
+  --vt-color-info: var(--vt-toast-background);
+  --vt-color-success: var(--vt-toast-background);
+  --vt-color-warning: var(--vt-toast-background);
+  --vt-color-error: var(--vt-toast-background);
 }
 
-/*
-  Override core toast styles for rounded corners and 1px border.
-  The background color will be set by the type-specific rules below.
-*/
+/* Override core toast styles (Light Mode Defaults) */
 .Vue-Toastification__toast {
   border-radius: 10px !important;
   box-shadow: none !important;
-  /*
-    The border color needs to be set here as it's not a type-specific style.
-    It will switch automatically with the media query on the .Vue-Toastification__toast
-    rule below.
-  */
   border: 1px solid var(--border-color-light) !important;
 }
 
-/* Dark mode specific border for the toast element */
-@media (prefers-color-scheme: dark) {
-  .Vue-Toastification__toast {
-    border: 1px solid var(--border-color-dark) !important;
-  }
+/* --- THE KEY CHANGE: Target the .dark class for toast border --- */
+html.dark .Vue-Toastification__toast {
+  border: 1px solid var(--border-color-dark) !important;
 }
 
-/* Apply your custom background to ALL toast types (light mode) */
+/* Apply your custom background to ALL toast types (always use these classes) */
 .Vue-Toastification__toast--info,
 .Vue-Toastification__toast--success,
 .Vue-Toastification__toast--warning,
 .Vue-Toastification__toast--error {
   background-color: var(--vt-toast-background) !important;
-  color: var(
-    --vt-toast-text-color
-  ) !important; /* Ensure text color is also correct */
+  color: var(--vt-toast-text-color) !important;
 }
+/* No separate .dark rule here, as --vt-toast-background will handle it */
 
-/* Apply your custom background to ALL toast types (dark mode) */
-@media (prefers-color-scheme: dark) {
-  .Vue-Toastification__toast--info,
-  .Vue-Toastification__toast--success,
-  .Vue-Toastification__toast--warning,
-  .Vue-Toastification__toast--error {
-    background-color: var(--vt-toast-background) !important;
-    color: var(--vt-toast-text-color) !important;
-  }
-}
-
-/* Progress bar color */
+/* Progress bar color (remains the same) */
 .Vue-Toastification__progress-bar {
   background-color: var(--vt-color-progress-bar) !important;
 }
 
-/* Close button color (ensure visibility on your background) */
+/* Close button color (will use --vt-toast-text-color which changes with theme) */
 .Vue-Toastification__close-button {
   color: var(--vt-toast-text-color) !important;
 }
 
-/* Icon Color (Green) */
+/* Icon Color (Green) - Now directly use --vt-icon-color */
 .Vue-Toastification__icon,
-.custom-icon-wrapper .fa-rocket, /* For Font Awesome */
-.custom-svg-icon-wrapper svg /* For SVG */ {
-  color: var(--green-accent-light) !important;
-}
-
-/* Dark mode icon color */
-@media (prefers-color-scheme: dark) {
-  .Vue-Toastification__icon,
-  .custom-icon-wrapper .fa-rocket,
-  .custom-svg-icon-wrapper svg {
-    color: var(--green-accent-dark) !important;
-  }
+.custom-icon-wrapper .fa-rocket,
+.custom-svg-icon-wrapper svg {
+  color: var(--vt-icon-color) !important; /* Use the new variable */
 }
 
 /* Adjust size for default icons if needed */
@@ -101,7 +86,7 @@
   font-size: 20px;
 }
 
-/* Custom icon wrapper styles */
+/* Custom icon wrapper styles (these remain unchanged) */
 .custom-icon-wrapper {
   display: flex;
   align-items: center;
