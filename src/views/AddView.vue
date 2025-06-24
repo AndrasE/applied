@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, inject, onMounted } from "vue";
-import { ref as dbRef, push, serverTimestamp } from "firebase/database"; // <-- Import serverTimestamp
+import { ref as dbRef, push, serverTimestamp } from "firebase/database";
 import type { Job } from "@/types/job";
 import Container from "@/components/ui/Container.vue";
 import JobCard from "@/components/job-cards/JobCard.vue";
@@ -9,7 +9,10 @@ import Divider from "@/components/ui/Divider.vue";
 import PageHeader from "@/components/ui/PageHeader.vue";
 import router from "@/router";
 
-// --- Inject the global Firebase instances and modal functions ---
+// Import useToast from vue-toastification
+import { useToast } from "vue-toastification";
+
+// Inject the global Firebase instances and modal functions
 const firebaseAuth = inject<any>("firebaseAuthInstance");
 const firebaseDatabase = inject<any>("firebaseDatabaseInstance");
 
@@ -19,6 +22,9 @@ const checkIfCurrentUserIsAdmin = inject<() => boolean>(
   "checkIfCurrentUserIsAdmin"
 );
 
+// Get Toast instance
+const toast = useToast();
+
 const job = ref<Job>({
   title: "",
   description: "",
@@ -26,13 +32,15 @@ const job = ref<Job>({
   status: "applied",
 });
 
-// --- Actual Database Operation Function ---
+// Actual Database Operation Function
 async function performAddJob(jobData: Job) {
-  console.log("🔥 performAddJob triggered");
+  console.log("🔥 performAddJob triggered"); // Keep this console.log
   try {
     if (!firebaseDatabase) {
-      console.error("🔥Firebase Database not available for adding job.");
-      return;
+      console.error("🔥Firebase Database not available for adding job."); // Keep this console.error
+      // Show a warning toast if database is not available
+      toast.warning("Database not available. Cannot add job.");
+      return; // Exit if no database
     }
     const jobsRef = dbRef(firebaseDatabase, "jobs");
 
@@ -44,14 +52,18 @@ async function performAddJob(jobData: Job) {
     };
 
     await push(jobsRef, dataToPush);
-    console.log("✅ Job added successfully");
+    console.log("✅ Job added successfully"); // Keep this console.log
+    // Show an info toast
+    toast.info("Job added successfully!");
     router.push("/jobs");
   } catch (error) {
-    console.error("❌ Error adding job:", error);
+    console.error("❌ Error adding job:", error); // Keep this console.error
+    // Show a warning toast on error
+    toast.warning("Failed to add job. Please try again.");
   }
 }
 
-// --- Wrapper Function for Authentication Check ---
+// Wrapper Function for Authentication Check
 // This function is called by the UI event (@add)
 async function handleAddJob(jobData: Job) {
   // First, check if the user is already signed in as admin
@@ -61,22 +73,28 @@ async function handleAddJob(jobData: Job) {
     checkIfCurrentUserIsAdmin &&
     checkIfCurrentUserIsAdmin()
   ) {
-    console.log("🕵️ Admin already logged in, performing add directly.");
+    console.log("🕵️ Admin already logged in, performing add directly."); // Keep this console.log
     await performAddJob(jobData);
   } else if (openAdminAuthModal) {
     // If not admin, or not authenticated, open the admin authentication modal
     // Pass 'performAddJob' as the callback to execute after successful authentication
-    openAdminAuthModal(() => performAddJob(jobData));
+    openAdminAuthModal(async () => {
+      // Show an info toast after successful admin login (if modal doesn't already)
+      toast.info("Admin login successful!");
+      await performAddJob(jobData);
+    });
   } else {
     // Fallback error if injections somehow fail
     console.error(
       "🕵️ Admin authentication modal not available. Is App.vue configured correctly?"
-    );
+    ); // Keep this console.error
+    // Show a warning toast for missing admin setup
+    toast.warning("Admin authentication setup missing.");
   }
 }
 
 onMounted(() => {
-  window.scrollTo(0, 0); // Scroll to the top overwriting any previous scroll
+  window.scrollTo(0, 0);
 });
 </script>
 

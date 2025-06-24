@@ -1,14 +1,11 @@
-// vue core
+// src/main.ts
 import { createApp } from "vue";
-import App from "./App.vue";
-// store, router, toaster
 import { createPinia } from "pinia";
+import App from "./App.vue";
 import router from "./router";
-import Toast from "vue-toastification";
-// css
-import "vue-toastification/dist/index.css";
-import "./assets/toast-custom.css";
 import "./assets/styles.css";
+import Toast from "vue-toastification";
+import "vue-toastification/dist/index.css";
 
 const app = createApp(App);
 const pinia = createPinia();

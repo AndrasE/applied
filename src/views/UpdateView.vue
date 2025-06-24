@@ -6,7 +6,7 @@ import {
   onValue,
   update,
   remove,
-  serverTimestamp, // <-- Make sure this is imported instead of ServerValue
+  serverTimestamp,
 } from "firebase/database";
 import Container from "@/components/ui/Container.vue";
 import Divider from "@/components/ui/Divider.vue";
@@ -14,6 +14,9 @@ import PageHeader from "@/components/ui/PageHeader.vue";
 import JobCard from "@/components/job-cards/JobCard.vue";
 import RouterButton from "@/components/ui/RouterButton.vue";
 import type { Job, JobStatus } from "@/types/job";
+
+// Import useToast from vue-toastification
+import { useToast } from "vue-toastification";
 
 const route = useRoute();
 const router = useRouter();
@@ -28,17 +31,23 @@ const checkIfCurrentUserIsAdmin = inject<() => boolean>(
 const firebaseAuth = inject<any>("firebaseAuthInstance");
 const firebaseDatabase = inject<any>("firebaseDatabaseInstance");
 
+const toast = useToast();
+
 let unsubscribe: (() => void) | null = null;
+// NEW: Flag to indicate if we've intentionally deleted the job
+const isDeletingJob = ref(false);
 
 onMounted(() => {
   if (!jobId) {
-    console.error("No job ID provided for update."); // Keep this, it's an important validation error
+    console.error("No job ID provided for update.");
+    toast.warning("No job ID provided for update.");
     router.push("/jobs");
     return;
   }
 
   if (!firebaseDatabase) {
-    console.error("UpdateView.vue: Firebase Database not injected!"); // Keep this, it's a critical configuration error
+    console.error("UpdateView.vue: Firebase Database not injected!");
+    toast.warning("Database not available. Cannot fetch job details.");
     return;
   }
 
@@ -55,12 +64,25 @@ onMounted(() => {
           status: jobData.status as JobStatus,
         };
       } else {
-        job.value = null;
-        router.push("/jobs");
+        // IMPORTANT: Only show "not found" toast if we're NOT in the process of deleting
+        if (!isDeletingJob.value) {
+          // <-- Check the flag here
+          job.value = null;
+          console.warn("UpdateView.vue: Job not found, redirecting.");
+          toast.warning("Job not found. Redirecting to jobs list.");
+          router.push("/jobs");
+        } else {
+          // If isDeletingJob is true, it means we intentionally deleted it,
+          // so we just let the navigation from performDelete take over
+          console.log(
+            "Job intentionally deleted, suppressing 'not found' toast."
+          );
+        }
       }
     },
     (error) => {
-      console.error("UpdateView.vue: Error fetching job data:", error); // Keep this, it's an error
+      console.error("UpdateView.vue: Error fetching job data:", error);
+      toast.warning("Error fetching job data. Please try again.");
       job.value = null;
       router.push("/jobs");
     }
@@ -76,9 +98,10 @@ onUnmounted(() => {
 // --- Actual Database Operations (performUpdate/performDelete) ---
 async function performUpdate(updatedJob: Job) {
   try {
-    console.log("🔄 Updating job:", updatedJob); // Keep this, confirms action
+    console.log("🔄 Updating job:", updatedJob);
     if (!firebaseDatabase) {
-      console.error("Firebase Database not available for update."); // Keep this, critical error
+      console.error("Firebase Database not available for update.");
+      toast.warning("Database not available. Cannot update job.");
       return;
     }
     const jobRef = dbRef(firebaseDatabase, `jobs/${jobId}`);
@@ -91,9 +114,11 @@ async function performUpdate(updatedJob: Job) {
 
     await update(jobRef, updateData);
     console.log("✅ Job updated successfully");
+    toast.info("Job updated successfully!");
     router.push("/jobs");
   } catch (error) {
     console.error("❌ Error updating job:", error);
+    toast.warning("Failed to update job. Please try again.");
   }
 }
 
@@ -102,14 +127,28 @@ async function performDelete(id: string) {
     console.log("🗑️ Deleting job:", id);
     if (!firebaseDatabase) {
       console.error("Firebase Database not available for delete.");
+      toast.warning("Database not available. Cannot delete job.");
       return;
     }
+
+    // NEW: Set flag to true BEFORE deleting
+    isDeletingJob.value = true;
+    // NEW: Unsubscribe the listener BEFORE deleting
+    if (unsubscribe) {
+      unsubscribe();
+      unsubscribe = null; // Clear it to prevent accidental re-use
+    }
+
     const jobRef = dbRef(firebaseDatabase, `jobs/${id}`);
     await remove(jobRef);
     console.log("✅ Job deleted successfully");
+    toast.info("Job deleted successfully!");
     router.push("/jobs");
   } catch (error) {
     console.error("❌ Error deleting job:", error);
+    toast.warning("Failed to delete job. Please try again.");
+    // IMPORTANT: If delete fails, reset the flag so listener behaves normally again
+    isDeletingJob.value = false;
   }
 }
 
@@ -124,11 +163,15 @@ async function handleUpdate(updatedJob: Job) {
     console.log("🕵️️ Admin already logged in, performing update directly.");
     await performUpdate(updatedJob);
   } else if (openAdminAuthModal) {
-    openAdminAuthModal(() => performUpdate(updatedJob));
+    openAdminAuthModal(async () => {
+      toast.info("Admin login successful!");
+      await performUpdate(updatedJob);
+    });
   } else {
     console.error(
       "🕵️️ Admin authentication modal not available. Is App.vue configured correctly?"
     );
+    toast.warning("Admin authentication setup missing.");
   }
 }
 
@@ -142,16 +185,22 @@ async function handleDelete(id: string) {
     console.log("🕵️️ Admin already logged in, performing delete directly.");
     await performDelete(id);
   } else if (openAdminAuthModal) {
-    openAdminAuthModal(() => performDelete(id));
+    openAdminAuthModal(async () => {
+      toast.info("Admin login successful!");
+      await performDelete(id);
+    });
   } else {
     console.error(
       "🕵️️ Admin authentication modal not available. Is App.vue configured correctly?"
     );
+    toast.warning("Admin authentication setup missing.");
   }
 }
 
 onMounted(() => {
-  window.scrollTo(0, 0); // Scroll to the top overwriting any previous scroll
+  // This onMounted is outside the main listener logic,
+  // ensure this is the intended behavior (scroll once on component mount)
+  window.scrollTo(0, 0);
 });
 </script>
 
