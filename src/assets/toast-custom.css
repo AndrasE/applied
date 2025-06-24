@@ -12,56 +12,35 @@
   --border-color-dark: #45556c;
   --vt-color-progress-bar: #64ad7cc4;
 
-  /* --- Vue-Toastification Global/Default Overrides (Light Mode) --- */
-  --vt-toast-background: var(
-    --bg-light
-  ); /* This is your consistent background */
-  --vt-toast-text-color: var(
-    --text-color-light
-  ); /* Default text color for info */
+  /*
+    These variables are still useful for consistency,
+    but we'll apply them directly below if the library isn't picking them up.
+  */
+  --vt-toast-background: var(--bg-light);
+  --vt-toast-text-color: var(--text-color-light);
 
-  /* Info Toast-Specific Variables (Light Mode) */
-  --vt-color-info-background: var(
-    --vt-toast-background
-  ); /* Explicitly use consistent background */
-  --vt-color-info-text: var(
-    --vt-toast-text-color
-  ); /* Info text color defaults to theme text */
-  --vt-color-info-border: var(--border-color-light); /* Info border color */
-  --vt-color-info-icon: var(--green-accent-light); /* Info icon color */
+  --vt-color-info-background: var(--vt-toast-background);
+  --vt-color-info-text: var(--vt-toast-text-color);
+  --vt-color-info-border: var(--border-color-light);
+  --vt-color-info-icon: var(--green-accent-light);
 
-  /* Warning Toast-Specific Variables (Light Mode) */
-  --vt-color-warning-background: var(
-    --vt-toast-background
-  ); /* Explicitly use consistent background */
-  --vt-color-warning-text: var(
-    --warning-accent-light
-  ); /* Warning text color is now your red */
-  --vt-color-warning-border: var(
-    --border-color-light
-  ); /* Warning border color */
-  --vt-color-warning-icon: var(
-    --warning-accent-light
-  ); /* Warning icon color is now your red */
+  --vt-color-warning-background: var(--vt-toast-background);
+  --vt-color-warning-text: var(--warning-accent-light);
+  --vt-color-warning-border: var(--border-color-light);
+  --vt-color-warning-icon: var(--warning-accent-light);
 }
 
 /* --- Dark Mode Overrides --- */
 html.dark,
 .dark:root {
-  --vt-toast-background: var(
-    --bg-dark
-  ); /* Consistent background for dark mode */
-  --vt-toast-text-color: var(
-    --text-color-dark
-  ); /* Default text color for dark mode info */
+  --vt-toast-background: var(--bg-dark);
+  --vt-toast-text-color: var(--text-color-dark);
 
-  /* Info Toast-Specific Variables (Dark Mode) */
   --vt-color-info-background: var(--vt-toast-background);
   --vt-color-info-text: var(--vt-toast-text-color);
   --vt-color-info-border: var(--border-color-dark);
   --vt-color-info-icon: var(--green-accent-dark);
 
-  /* Warning Toast-Specific Variables (Dark Mode) */
   --vt-color-warning-background: var(--vt-toast-background);
   --vt-color-warning-text: var(--warning-accent-dark);
   --vt-color-warning-border: var(--border-color-dark);
@@ -72,6 +51,31 @@ html.dark,
 .Vue-Toastification__toast {
   border-radius: 4px !important;
   box-shadow: none !important;
+
+  /* Force background color using your variable */
+  background-color: var(--vt-toast-background) !important;
+  /* Force default text color for the toast wrapper */
+  color: var(--vt-toast-text-color) !important;
+  /* Force border color */
+  border: 1px solid var(--border-color-light) !important;
+}
+
+/* Specific border for dark mode toast */
+html.dark .Vue-Toastification__toast {
+  border-color: var(--border-color-dark) !important;
+}
+
+/* Specific rules for type-specific toasts (text and icon colors) */
+.Vue-Toastification__toast--info .Vue-Toastification__icon {
+  color: var(--vt-color-info-icon) !important;
+}
+
+.Vue-Toastification__toast--warning .Vue-Toastification__content {
+  color: var(--vt-color-warning-text) !important;
+}
+
+.Vue-Toastification__toast--warning .Vue-Toastification__icon {
+  color: var(--vt-color-warning-icon) !important;
 }
 
 @media screen and (max-width: 600px) {
