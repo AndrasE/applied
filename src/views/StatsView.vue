@@ -81,12 +81,16 @@ const chartOptions = computed(() => {
     : "var(--text-color-light)";
   const gridColor = isDarkMode.value
     ? "rgba(255,255,255,0.05)"
-    : "rgba(0,0,0,0.05)"; // Adjust grid line color for dark mode
+    : "rgba(0,0,0,0.05)";
+  const accentColor = isDarkMode.value
+    ? "var(--green-accent-dark)" // Your dark accent green
+    : "var(--green-accent-light)"; // Your light accent green
 
   return {
     chart: {
       type: "line",
-      height: 350,
+      width: "100%",
+      height: "350",
       background: isDarkMode.value
         ? "var(--background-color-dark)"
         : "var(--background-color-light)",
@@ -107,14 +111,13 @@ const chartOptions = computed(() => {
           day: "dd MMM",
         },
         style: {
-          // Style for X-axis labels
           colors: textColor,
           fontSize: "12px",
           fontWeight: 400,
         },
       },
       tooltip: {
-        enabled: true,
+        enabled: true, // This enables the X-axis tooltip for the series
       },
       axisBorder: {
         show: true,
@@ -125,7 +128,6 @@ const chartOptions = computed(() => {
         color: gridColor,
       },
     },
-    // Y-axis title
     yaxis: {
       title: {
         text: "Applications",
@@ -134,7 +136,6 @@ const chartOptions = computed(() => {
           fontWeight: 400,
           color: textColor,
         },
-        // y-axis labels
       },
       labels: {
         formatter: function (val: number) {
@@ -158,17 +159,21 @@ const chartOptions = computed(() => {
         fontSize: "12px",
         fontFamily: "inherit",
         color: textColor,
+        // Ensure the tooltip background is also theme-aware
+        background: isDarkMode.value
+          ? "var(--background-color-dark)"
+          : "var(--background-color-light)",
       },
-      // This is the key for the tooltip marker
+      // --- UPDATED TOOLTIP MARKER SECTION ---
       marker: {
         show: true,
-        // size: 6, // Optional: control marker size
-        // colors: [accentColor], // If you want all markers to be the accent color, regardless of series
-        strokeWidth: 1, // Add a border to the marker
-        strokeColor: textColor, // Border color based on theme text color
-        radius: 2, // Border radius for the marker
-        cssClass: "apexcharts-tooltip-marker-custom", // Optional: add a custom class for more specific CSS
+        colors: [accentColor], // <--- SET THE FILL COLOR HERE
+        strokeWidth: 0, // <--- REMOVE BORDER FOR TOOLTIP MARKER
+        strokeColor: accentColor, // Set to accent for consistency (won't be visible with strokeWidth: 0)
+        radius: 2, // Applies if shape is not circle or if you use rect/square
+        // You can remove cssClass: "apexcharts-tooltip-marker-custom" if you're controlling everything via options
       },
+      // --- END TOOLTIP MARKER SECTION ---
       y: {
         formatter: function (val: number) {
           return `${Math.round(val)} Applications`;
@@ -182,12 +187,24 @@ const chartOptions = computed(() => {
     stroke: {
       curve: "smooth",
       width: 1.5,
-      colors: [
-        isDarkMode.value
-          ? "var(--green-accent-dark)"
-          : "var(--green-accent-light)",
-      ],
+      colors: [accentColor], // This controls the main line color
     },
+    // --- ADDED CHART SERIES MARKERS ---
+    markers: {
+      size: 0, // Size of the marker on the line itself
+      colors: [accentColor], // Fill color of the marker on the line
+      strokeColors: [accentColor], // Border color of the marker (set to accent even if width is 0)
+      strokeWidth: 0, // <--- REMOVE BORDER FOR SERIES MARKERS ON THE LINE
+      strokeOpacity: 0.7, // Opacity of the stroke
+      fillOpacity: 0.7,
+      shape: "circle",
+      radius: 2,
+      hover: {
+        size: 4, // Size on hover
+        sizeOffset: 3, // How much bigger it gets on hover
+      },
+    },
+    // --- END CHART SERIES MARKERS ---
     grid: {
       row: {
         colors: [gridColor, "transparent"],
@@ -212,7 +229,6 @@ const chartOptions = computed(() => {
     ],
   };
 });
-
 // Method to switch the timeframe
 const setTimeframe = (frame: "daily" | "3months" | "yearly") => {
   currentView.value = frame;
@@ -336,7 +352,7 @@ function generateMockDbDates(numDays: number): string[] {
               'p-2 mx-1 mt-3 border rounded cursor-pointer text-sm transition-all duration-200 ease-in-out',
               'border-[var(--green-accent-light)] dark:border-[var(--green-accent-dark)]', // Border color
               {
-                'bg-[var(--green-accent-light)] dark:bg-[var(--green-accent-dark)] text-[var(--text-color-dark)] dark:text-[var(--text-color-light)]':
+                'bg-[var(--green-accent-light)] dark:bg-[var(--green-accent-dark)] text-[var(--bg-light)] dark:text-[var(--bg-dark)]':
                   currentView === 'daily',
               },
               {
@@ -352,7 +368,7 @@ function generateMockDbDates(numDays: number): string[] {
               'p-2 mx-1 border rounded cursor-pointer text-sm transition-all duration-200 ease-in-out',
               'border-[var(--green-accent-light)] dark:border-[var(--green-accent-dark)]', // Border color
               {
-                'bg-[var(--green-accent-light)] dark:bg-[var(--green-accent-dark)] text-[var(--text-color-dark)] dark:text-[var(--text-color-light)]':
+                'bg-[var(--green-accent-light)] dark:bg-[var(--green-accent-dark)] text-[var(--bg-light)] dark:text-[var(--bg-dark)]':
                   currentView === '3months',
               },
               {
@@ -368,7 +384,7 @@ function generateMockDbDates(numDays: number): string[] {
               'p-2 mx-1 border rounded cursor-pointer text-sm transition-all duration-200 ease-in-out',
               'border-[var(--green-accent-light)] dark:border-[var(--green-accent-dark)]',
               {
-                'bg-[var(--green-accent-light)] dark:bg-[var(--green-accent-dark)] text-[var(--text-color-dark)] dark:text-[var(--text-color-light)]':
+                'bg-[var(--green-accent-light)] dark:bg-[var(--green-accent-dark)] text-[var(--bg-light)] dark:text-[var(--bg-dark)]':
                   currentView === 'yearly',
               },
               {
