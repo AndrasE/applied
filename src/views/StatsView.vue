@@ -257,18 +257,19 @@ function generateMockDbDates(numDays: number): string[] {
     <PageHeader label="Stats" />
     <Divider label="applied metrics" labelPosition="top" />
     <div class="flex flex-col items-center justify-between margin950and640">
-      <div
-        class="w-full max-w-4xl mt-5 p-5 bg-white rounded border border-color">
-        <div class="mb-5 text-center">
+      <div class="w-full max-w-4xl my-5 p-1 rounded border border-color">
+        <div class="mb-2 text-center">
           <button
             @click="setTimeframe('daily')"
             :class="[
-              'px-4 py-2 mx-1  border-[var(--green-accent-light)] dark:border-[var(--green-accent-dark)] rounded text-[var(--text-color-light)] dark:text-[var(--text-color-dark)] hover:text-[var(--green-accent-light)] dark:text-[var(--green-accent-dark)] cursor-pointer text-sm font-medium transition-all duration-200 ease-in-out',
+              'p-2 mx-1 border border-[var(--green-accent-light)] dark:border-[var(--green-accent-dark)] rounded  cursor-pointer text-sm transition-all duration-200 ease-in-out',
               {
-                'bg-blue-500 text-white font-semibold': currentView === 'daily',
+                'bg-[var(--green-accent-light)] dark:bg-[var(--green-accent-dark)] text-[var(--text-color-dark)] dark:text-[var(--text-color-light)]':
+                  currentView === 'daily',
               },
               {
-                'hover:bg-blue-50 hover:text-blue-600': currentView !== 'daily',
+                'text-[var(--text-color-light)] dark:text-[var(--text-color-dark)]':
+                  currentView !== 'daily',
               },
             ]">
             Daily
@@ -276,13 +277,13 @@ function generateMockDbDates(numDays: number): string[] {
           <button
             @click="setTimeframe('3months')"
             :class="[
-              'px-4 py-2 mx-1 border border-blue-500 rounded-md text-blue-500 cursor-pointer text-sm font-medium transition-all duration-200 ease-in-out',
+              'p-2 mx-1 border border-[var(--green-accent-light)] dark:border-[var(--green-accent-dark)] rounded  cursor-pointer text-sm transition-all duration-200 ease-in-out',
               {
-                'bg-blue-500 text-white font-semibold':
+                'bg-[var(--green-accent-light)] dark:bg-[var(--green-accent-dark)] text-[var(--text-color-dark)] dark:text-[var(--text-color-light)]':
                   currentView === '3months',
               },
               {
-                'hover:bg-blue-50 hover:text-blue-600':
+                'text-[var(--text-color-light)] dark:text-[var(--text-color-dark)]':
                   currentView !== '3months',
               },
             ]">
@@ -291,13 +292,13 @@ function generateMockDbDates(numDays: number): string[] {
           <button
             @click="setTimeframe('yearly')"
             :class="[
-              'px-4 py-2 mx-1 border border-blue-500 rounded-md text-blue-500 cursor-pointer text-sm font-medium transition-all duration-200 ease-in-out',
+              'p-2 mx-1 border border-[var(--green-accent-light)] dark:border-[var(--green-accent-dark)] rounded  cursor-pointer text-sm transition-all duration-200 ease-in-out',
               {
-                'bg-blue-500 text-white font-semibold':
+                'bg-[var(--green-accent-light)] dark:bg-[var(--green-accent-dark)] text-[var(--text-color-dark)] dark:text-[var(--text-color-light)]':
                   currentView === 'yearly',
               },
               {
-                'hover:bg-blue-50 hover:text-blue-600':
+                'text-[var(--text-color-light)] dark:text-[var(--text-color-dark)]':
                   currentView !== 'yearly',
               },
             ]">
