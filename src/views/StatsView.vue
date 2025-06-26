@@ -1,13 +1,33 @@
 <script setup lang="ts">
 import Container from "@/components/ui/Container.vue";
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, onMounted, onUnmounted } from "vue";
 import PageHeader from "@/components/ui/PageHeader.vue";
 import Divider from "@/components/ui/Divider.vue";
+//VueApexCharts is  registered  globally already in main.ts
+
+// --- Theme Detection (Choose one method) ---
+
+// 'dark' class on <html> (common with Tailwind)
+const isDarkMode = ref(false);
+const updateTheme = () => {
+  isDarkMode.value = document.documentElement.classList.contains("dark");
+};
+
+// Listen for changes (e.g., if a theme toggle exists)
+onMounted(() => {
+  updateTheme();
+  const observer = new MutationObserver(updateTheme);
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
+  //  disconnect the observer on unmount
+  onUnmounted(() => observer.disconnect());
+});
 
 onMounted(() => {
   window.scrollTo(0, 0); // Scroll to the top overwriting any previous scroll
-  // Simulate fetching data from your database when the component mounts
-  dbCreationDates.value = generateMockDbDates(365 * 2); // Generate mock data for the last 2 years
+  dbCreationDates.value = generateMockDbDates(365 * 2); // Generate mock data
 });
 
 // Reactive state for chart data and view selection
@@ -54,100 +74,151 @@ const chartSeries = computed(() => {
 });
 
 // Chart options for ApexCharts
-const chartOptions = computed(() => ({
-  chart: {
-    type: "line",
-    height: 350,
-    zoom: {
-      enabled: true,
-    },
-    toolbar: {
-      show: false,
-      tools: {
-        download: false,
-        selection: true,
-        zoom: false,
-        zoomin: true,
-        zoomout: true,
-        pan: false,
-        reset: true,
+const chartOptions = computed(() => {
+  // Determine colors based on theme
+  const textColor = isDarkMode.value
+    ? "var(--text-color-dark)"
+    : "var(--text-color-light)";
+  const gridColor = isDarkMode.value
+    ? "rgba(255,255,255,0.05)"
+    : "rgba(0,0,0,0.05)"; // Adjust grid line color for dark mode
+
+  return {
+    chart: {
+      type: "line",
+      height: 350,
+      background: isDarkMode.value
+        ? "var(--background-color-dark)"
+        : "var(--background-color-light)",
+      zoom: {
+        enabled: true,
       },
-      autoSelected: "zoom",
-    },
-  },
-  xaxis: {
-    type: "datetime",
-    labels: {
-      datetimeFormatter: {
-        year: "yyyy",
-        month: "MMM 'yy",
+      toolbar: {
+        show: false,
+        autoSelected: "zoom",
       },
+    },
+    xaxis: {
+      type: "datetime",
+      labels: {
+        datetimeFormatter: {
+          year: "yyyy",
+          month: "MMM 'yy",
+          day: "dd MMM",
+        },
+        style: {
+          // Style for X-axis labels
+          colors: textColor,
+          fontSize: "12px",
+          fontWeight: 400,
+        },
+      },
+      tooltip: {
+        enabled: true,
+      },
+      axisBorder: {
+        show: true,
+        color: gridColor,
+      },
+      axisTicks: {
+        show: true,
+        color: gridColor,
+      },
+    },
+    // Y-axis title
+    yaxis: {
+      title: {
+        text: "Applications",
+        style: {
+          fontSize: "14px",
+          fontWeight: 400,
+          color: textColor,
+        },
+        // y-axis labels
+      },
+      labels: {
+        formatter: function (val: number) {
+          return Math.round(val).toString();
+        },
+        style: {
+          fontSize: "12px",
+          fontWeight: 400,
+          colors: textColor,
+        },
+      },
+      min: 0,
     },
     tooltip: {
       enabled: true,
-    },
-  },
-  yaxis: {
-    title: {
-      text: "Applications",
+      x: {
+        format: "dd MMM",
+      },
+      theme: isDarkMode.value ? "dark" : "light",
       style: {
-        fontSize: "14px",
-        fontWeight: 400,
-        color: "#333",
+        fontSize: "12px",
+        fontFamily: "inherit",
+        color: textColor,
       },
-    },
-    labels: {
-      formatter: function (val: number) {
-        return Math.round(val).toString();
+      // This is the key for the tooltip marker
+      marker: {
+        show: true,
+        // size: 6, // Optional: control marker size
+        // colors: [accentColor], // If you want all markers to be the accent color, regardless of series
+        strokeWidth: 1, // Add a border to the marker
+        strokeColor: textColor, // Border color based on theme text color
+        radius: 2, // Border radius for the marker
+        cssClass: "apexcharts-tooltip-marker-custom", // Optional: add a custom class for more specific CSS
       },
-      style: {
-        fontSize: "10px",
-        fontWeight: 400,
-        color: "#333",
-      },
-    },
-    min: 0,
-  },
-  tooltip: {
-    x: {
-      format: "dd MMM",
-    },
-  },
-  dataLabels: {
-    enabled: false,
-  },
-  stroke: {
-    curve: "smooth",
-  },
-  grid: {
-    row: {
-      colors: ["#f3f7f9", "transparent"],
-      opacity: 0.5,
-    },
-  },
-  responsive: [
-    {
-      breakpoint: 600,
-      options: {
-        chart: {
-          height: 250,
+      y: {
+        formatter: function (val: number) {
+          return `${Math.round(val)} Applications`;
         },
-        xaxis: {
-          labels: {
-            rotate: -45,
+      },
+      fillSeriesColor: false, // Important to allow custom tooltip background
+    },
+    dataLabels: {
+      enabled: false,
+    },
+    stroke: {
+      curve: "smooth",
+      width: 1.5,
+      colors: [
+        isDarkMode.value
+          ? "var(--green-accent-dark)"
+          : "var(--green-accent-light)",
+      ],
+    },
+    grid: {
+      row: {
+        colors: [gridColor, "transparent"],
+        opacity: 0.1,
+      },
+      borderColor: gridColor,
+    },
+    responsive: [
+      {
+        breakpoint: 600,
+        options: {
+          chart: {
+            height: 250,
+          },
+          xaxis: {
+            labels: {
+              rotate: -45,
+            },
           },
         },
       },
-    },
-  ],
-}));
+    ],
+  };
+});
 
 // Method to switch the timeframe
 const setTimeframe = (frame: "daily" | "3months" | "yearly") => {
   currentView.value = frame;
 };
 
-// --- Data Aggregation Logic ---
+// --- Data Aggregation Logic (Unchanged) ---
 function aggregateData(
   dates: string[],
   groupBy: "day" | "month" | "year",
@@ -233,7 +304,7 @@ function aggregateData(
   return finalResult;
 }
 
-// Mock data fetching function (replace with your actual API call)
+// Mock data fetching function (Unchanged)
 function generateMockDbDates(numDays: number): string[] {
   const dates: string[] = [];
   const today = new Date();
@@ -257,12 +328,13 @@ function generateMockDbDates(numDays: number): string[] {
     <PageHeader label="Stats" />
     <Divider label="applied metrics" labelPosition="top" />
     <div class="flex flex-col items-center justify-between margin950and640">
-      <div class="w-full max-w-4xl my-5 p-1 rounded border border-color">
+      <div class="w-full max-w-4xl p-1 my-5 border rounded border-color">
         <div class="mb-2 text-center">
           <button
             @click="setTimeframe('daily')"
             :class="[
-              'p-2 mx-1 border border-[var(--green-accent-light)] dark:border-[var(--green-accent-dark)] rounded  cursor-pointer text-sm transition-all duration-200 ease-in-out',
+              'p-2 mx-1 mt-3 border rounded cursor-pointer text-sm transition-all duration-200 ease-in-out',
+              'border-[var(--green-accent-light)] dark:border-[var(--green-accent-dark)]', // Border color
               {
                 'bg-[var(--green-accent-light)] dark:bg-[var(--green-accent-dark)] text-[var(--text-color-dark)] dark:text-[var(--text-color-light)]':
                   currentView === 'daily',
@@ -277,7 +349,8 @@ function generateMockDbDates(numDays: number): string[] {
           <button
             @click="setTimeframe('3months')"
             :class="[
-              'p-2 mx-1 border border-[var(--green-accent-light)] dark:border-[var(--green-accent-dark)] rounded  cursor-pointer text-sm transition-all duration-200 ease-in-out',
+              'p-2 mx-1 border rounded cursor-pointer text-sm transition-all duration-200 ease-in-out',
+              'border-[var(--green-accent-light)] dark:border-[var(--green-accent-dark)]', // Border color
               {
                 'bg-[var(--green-accent-light)] dark:bg-[var(--green-accent-dark)] text-[var(--text-color-dark)] dark:text-[var(--text-color-light)]':
                   currentView === '3months',
@@ -292,7 +365,8 @@ function generateMockDbDates(numDays: number): string[] {
           <button
             @click="setTimeframe('yearly')"
             :class="[
-              'p-2 mx-1 border border-[var(--green-accent-light)] dark:border-[var(--green-accent-dark)] rounded  cursor-pointer text-sm transition-all duration-200 ease-in-out',
+              'p-2 mx-1 border rounded cursor-pointer text-sm transition-all duration-200 ease-in-out',
+              'border-[var(--green-accent-light)] dark:border-[var(--green-accent-dark)]',
               {
                 'bg-[var(--green-accent-light)] dark:bg-[var(--green-accent-dark)] text-[var(--text-color-dark)] dark:text-[var(--text-color-light)]':
                   currentView === 'yearly',
@@ -315,3 +389,39 @@ function generateMockDbDates(numDays: number): string[] {
     <Divider label="good luck" labelPosition="bottom" />
   </Container>
 </template>
+
+<!-- 
+<div
+    class="apexcharts-tooltip apexcharts-theme-light apexcharts-active"
+    style="left: 98.6875px; top: 219.15px">
+    <div
+      class="apexcharts-tooltip-title"
+      style="font-family: Helvetica, Arial, sans-serif; font-size: 12px">
+      18 Jun
+    </div>
+    <div
+      class="apexcharts-tooltip-series-group apexcharts-tooltip-series-group-0 apexcharts-active"
+      style="order: 1; display: flex">
+      <span
+        class="apexcharts-tooltip-marker"
+        shape="circle"
+        style="color: rgb(0, 143, 251)"></span>
+      <div
+        class="apexcharts-tooltip-text"
+        style="font-family: Helvetica, Arial, sans-serif; font-size: 12px">
+        <div class="apexcharts-tooltip-y-group">
+          <span class="apexcharts-tooltip-text-y-label">Applications: </span
+          ><span class="apexcharts-tooltip-text-y-value">1</span>
+        </div>
+        <div class="apexcharts-tooltip-goals-group">
+          <span class="apexcharts-tooltip-text-goals-label"></span
+          ><span class="apexcharts-tooltip-text-goals-value"></span>
+        </div>
+        <div class="apexcharts-tooltip-z-group">
+          <span class="apexcharts-tooltip-text-z-label"></span
+          ><span class="apexcharts-tooltip-text-z-value"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+-->
