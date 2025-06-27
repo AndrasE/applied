@@ -89,8 +89,7 @@ const chartOptions = computed(() => {
   return {
     chart: {
       type: "line",
-      width: "100%",
-      height: "350",
+
       background: isDarkMode.value
         ? "var(--background-color-dark)"
         : "var(--background-color-light)",
@@ -343,8 +342,9 @@ function generateMockDbDates(numDays: number): string[] {
   <Container>
     <PageHeader label="Stats" />
     <Divider label="applied metrics" labelPosition="top" />
-    <div class="flex flex-col items-center justify-between margin950and640">
-      <div class="w-full max-w-4xl p-1 my-5 border rounded border-color">
+    <div
+      class="flex flex-col margin950and640 items-center justify-between w-full">
+      <div class="w-full max-w-4xl p-1 border rounded border-color">
         <div class="mb-2 text-center">
           <button
             @click="setTimeframe('daily')"
@@ -405,39 +405,3 @@ function generateMockDbDates(numDays: number): string[] {
     <Divider label="good luck" labelPosition="bottom" />
   </Container>
 </template>
-
-<!-- 
-<div
-    class="apexcharts-tooltip apexcharts-theme-light apexcharts-active"
-    style="left: 98.6875px; top: 219.15px">
-    <div
-      class="apexcharts-tooltip-title"
-      style="font-family: Helvetica, Arial, sans-serif; font-size: 12px">
-      18 Jun
-    </div>
-    <div
-      class="apexcharts-tooltip-series-group apexcharts-tooltip-series-group-0 apexcharts-active"
-      style="order: 1; display: flex">
-      <span
-        class="apexcharts-tooltip-marker"
-        shape="circle"
-        style="color: rgb(0, 143, 251)"></span>
-      <div
-        class="apexcharts-tooltip-text"
-        style="font-family: Helvetica, Arial, sans-serif; font-size: 12px">
-        <div class="apexcharts-tooltip-y-group">
-          <span class="apexcharts-tooltip-text-y-label">Applications: </span
-          ><span class="apexcharts-tooltip-text-y-value">1</span>
-        </div>
-        <div class="apexcharts-tooltip-goals-group">
-          <span class="apexcharts-tooltip-text-goals-label"></span
-          ><span class="apexcharts-tooltip-text-goals-value"></span>
-        </div>
-        <div class="apexcharts-tooltip-z-group">
-          <span class="apexcharts-tooltip-text-z-label"></span
-          ><span class="apexcharts-tooltip-text-z-value"></span>
-        </div>
-      </div>
-    </div>
-  </div>
--->
