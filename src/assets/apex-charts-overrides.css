@@ -77,3 +77,21 @@ html.dark .apexcharts-yaxistooltip {
 html.dark .apexcharts-xaxistooltip-bottom.apexcharts-theme-dark:before {
   border-bottom-color: var(--green-accent-dark) !important;
 }
+
+/* Adjust padding for to the visablity of pattern label above @media below overwrites */
+/* its the same as margin950and640 in style.css, but padding, needing for apex overwrite, with margin and w-full  would overflow pattern labels */
+.padding950and640 {
+  padding: 1.5rem 1rem;
+}
+
+@media (max-width: 949px) {
+  .padding950and640 {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 639px) {
+  .padding950and640 {
+    padding: 0 1rem;
+  }
+}

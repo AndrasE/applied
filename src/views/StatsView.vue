@@ -343,8 +343,8 @@ function generateMockDbDates(numDays: number): string[] {
     <PageHeader label="Stats" />
     <Divider label="applied metrics" labelPosition="top" />
     <div
-      class="flex flex-col margin950and640 items-center justify-between w-full">
-      <div class="w-full max-w-4xl p-1 border rounded border-color">
+      class="flex flex-col items-center justify-between w-full padding950and640">
+      <div class="w-full p-1 border rounded border-color">
         <div class="mb-2 text-center">
           <button
             @click="setTimeframe('daily')"
