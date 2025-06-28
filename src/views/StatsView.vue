@@ -8,24 +8,39 @@ import { useAppStore } from "@/stores/jobs";
 // Initialize the store
 const appStore = useAppStore();
 
-// --- Theme Detection (Unchanged) ---
+// --- Theme Detection ---
 const isDarkMode = ref(false);
 const updateTheme = () => {
   isDarkMode.value = document.documentElement.classList.contains("dark");
 };
 
 onMounted(() => {
-  updateTheme();
+  updateTheme(); // Set initial theme state
   const observer = new MutationObserver(updateTheme);
   observer.observe(document.documentElement, {
     attributes: true,
     attributeFilter: ["class"],
   });
   onUnmounted(() => observer.disconnect());
+  window.scrollTo(0, 0);
+  appStore.ensureJobsListenerActive();
 });
 
+// Helper function to get theme-dependent colors
+const getThemeColors = () => {
+  const isDark = isDarkMode.value;
+  const textColor = isDark
+    ? "var(--text-color-dark)"
+    : "var(--text-color-light)";
+  const gridColor = isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)";
+  const accentColor = isDark
+    ? "var(--green-accent-dark)"
+    : "var(--green-accent-light)";
+  return { textColor, gridColor, accentColor };
+};
+
 // --- NEW: Ref for the chart instance ---
-const chartRef = ref<any>(null);
+const chartRef = ref<any>(null); // Use 'any' if ApexCharts types are not fully integrated
 
 // Reactive flag to control chart visibility (for ApexCharts re-render)
 const renderChart = ref(false);
@@ -52,24 +67,137 @@ watch(
   { immediate: true }
 );
 
+// --- Immediately set theme colors before first render ---
+const setInitialChartTheme = () => {
+  const { textColor, gridColor, accentColor } = getThemeColors();
+  chartOptions.value = {
+    ...chartOptions.value,
+    chart: {
+      ...chartOptions.value.chart,
+      background: isDarkMode.value
+        ? "var(--background-color-dark)"
+        : "var(--background-color-light)",
+    },
+    tooltip: {
+      ...chartOptions.value.tooltip,
+      theme: isDarkMode.value ? "dark" : "light",
+      style: { ...chartOptions.value.tooltip.style, color: textColor },
+      marker: {
+        ...chartOptions.value.tooltip.marker,
+        colors: [accentColor],
+        strokeColor: accentColor,
+      },
+    },
+    stroke: {
+      ...chartOptions.value.stroke,
+      colors: [accentColor],
+    },
+    markers: {
+      ...chartOptions.value.markers,
+      colors: [accentColor],
+      strokeColors: [accentColor],
+    },
+    xaxis: {
+      ...chartOptions.value.xaxis,
+      labels: {
+        ...chartOptions.value.xaxis.labels,
+        style: {
+          ...chartOptions.value.xaxis.labels.style,
+          colors: [
+            textColor,
+            textColor,
+            textColor,
+            textColor,
+            textColor,
+            textColor,
+            textColor,
+            textColor,
+            textColor,
+            textColor,
+            textColor,
+            textColor,
+            textColor,
+            textColor,
+            textColor,
+            textColor,
+            textColor,
+            textColor,
+            textColor,
+            textColor,
+          ],
+        },
+      },
+      axisBorder: { ...chartOptions.value.xaxis.axisBorder, color: gridColor },
+      axisTicks: { ...chartOptions.value.xaxis.axisTicks, color: gridColor },
+    },
+    yaxis: {
+      // Remove the title property to hide the y axis label
+      labels: {
+        ...chartOptions.value.yaxis.labels,
+        style: {
+          ...chartOptions.value.yaxis.labels.style,
+          colors: [
+            textColor,
+            textColor,
+            textColor,
+            textColor,
+            textColor,
+            textColor,
+            textColor,
+          ],
+        },
+      },
+      min: 0,
+    },
+    grid: {
+      ...chartOptions.value.grid,
+      row: {
+        ...chartOptions.value.grid.row,
+        colors: [gridColor, "transparent"],
+      },
+      borderColor: gridColor,
+    },
+  };
+};
+
+// --- Call this before renderChart is set to true ---
+onMounted(() => {
+  updateTheme();
+  const observer = new MutationObserver(updateTheme);
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
+  onUnmounted(() => observer.disconnect());
+  window.scrollTo(0, 0);
+  appStore.ensureJobsListenerActive();
+  setInitialChartTheme(); // <--- Add this line
+});
+
+// --- MODIFIED: Ensure chart theme is applied *after* the chart is rendered ---
 watch(
   () => appStore.isCurrentlyFetching,
-  (newVal) => {
+  async (newVal) => {
     if (!newVal) {
-      nextTick(() => {
-        renderChart.value = true;
-      });
+      renderChart.value = false; // Hide chart, show skeleton for at least one tick
+      await nextTick();
+      setInitialChartTheme();
+      renderChart.value = true;
+      await nextTick();
+      // Only call applyChartTheme if chartRef and its $el exist in DOM
+      if (
+        chartRef.value &&
+        chartRef.value.$el &&
+        typeof chartRef.value.updateOptions === "function"
+      ) {
+        applyChartTheme(isDarkMode.value);
+      }
     } else {
       renderChart.value = false;
     }
   },
   { immediate: true }
 );
-
-onMounted(() => {
-  window.scrollTo(0, 0);
-  appStore.ensureJobsListenerActive();
-});
 
 // Computed properties for data aggregation (Unchanged)
 const threeWeeksData = computed(() =>
@@ -109,14 +237,14 @@ const chartSeries = computed(() => {
   ];
 });
 
-// --- REVISED: Chart Options are now a static ref ---
-// This object is created only ONCE and will not cause re-renders.
-// Theme-dependent properties are omitted and will be set by a watcher.
+// --- REVISED: Chart Options are now a static ref, with *neutral* initial colors ---
+// Theme-dependent properties are omitted or set to a neutral value here.
+// They will be dynamically set by `applyChartTheme` once the chart is mounted.
 const chartOptions = ref({
   chart: {
     type: "line",
     height: 350,
-    background: "transparent", // Set dynamically
+    background: "transparent",
     zoom: { enabled: true },
     toolbar: { show: false, autoSelected: "zoom" },
   },
@@ -124,29 +252,32 @@ const chartOptions = ref({
     type: "datetime",
     labels: {
       datetimeFormatter: { year: "yyyy", month: "MMM 'yy", day: "dd MMM" },
-      style: { fontSize: "12px", fontWeight: 400 }, // Colors set dynamically
+      style: { fontSize: "12px", fontWeight: 400, colors: ["#6B7280"] },
     },
     tooltip: { enabled: true },
-    axisBorder: { show: true }, // Color set dynamically
-    axisTicks: { show: true }, // Color set dynamically
+    axisBorder: { show: true, color: "#E0E0E0" },
+    axisTicks: { show: true, color: "#E0E0E0" },
   },
   yaxis: {
-    title: {
-      text: "Applications",
-      style: { fontSize: "14px", fontWeight: 400 }, // Color set dynamically
-    },
+    // Remove the title property to hide the y axis label
     labels: {
       formatter: (val: number) => Math.round(val).toString(),
-      style: { fontSize: "12px", fontWeight: 400 }, // Colors set dynamically
+      style: { fontSize: "12px", fontWeight: 400, colors: ["#6B7280"] },
     },
     min: 0,
   },
   tooltip: {
     enabled: true,
     x: { format: "dd MMM" },
-    theme: "light", // Set dynamically
-    style: { fontSize: "12px", fontFamily: "inherit" },
-    marker: { show: true, strokeWidth: 0, radius: 2 }, // Colors set dynamically
+    theme: "light", // Will be overridden
+    style: { fontSize: "12px", fontFamily: "inherit", color: "#000" }, // Neutral default
+    marker: {
+      show: true,
+      strokeWidth: 0,
+      radius: 2,
+      colors: ["#000"],
+      strokeColor: "#000",
+    }, // Neutral default
     y: { formatter: (val: number) => `${Math.round(val)} Applications` },
     fillSeriesColor: false,
   },
@@ -154,7 +285,7 @@ const chartOptions = ref({
   stroke: {
     curve: "smooth",
     width: 1.5,
-    // Colors set dynamically
+    colors: ["#22C55E"], // Neutral default (e.g., a green)
   },
   markers: {
     size: 0,
@@ -162,11 +293,12 @@ const chartOptions = ref({
     shape: "circle",
     radius: 2,
     hover: { size: 4, sizeOffset: 3 },
-    // Colors set dynamically
+    colors: ["#22C55E"], // Neutral default
+    strokeColors: ["#22C55E"], // Neutral default
   },
   grid: {
-    // Colors set dynamically
-    row: { opacity: 0.1 },
+    row: { opacity: 0.1, colors: ["#E0E0E0", "transparent"] }, // Neutral default
+    borderColor: "#E0E0E0", // Neutral default
   },
   responsive: [
     {
@@ -179,25 +311,20 @@ const chartOptions = ref({
   ],
 });
 
-// --- NEW: Watcher to surgically update chart options on theme change ---
-// This is the key to fixing the flicker. It only updates what's needed.
-watch(
-  isDarkMode,
-  (isDark) => {
-    // Wait until the chart is mounted (`renderChart` is true)
-    if (!chartRef.value) {
-      return;
-    }
+// --- NEW: Centralized function to apply theme options ---
+const applyChartTheme = (isDark: boolean) => {
+  if (
+    !chartRef.value ||
+    !chartRef.value.$el ||
+    typeof chartRef.value.updateOptions !== "function"
+  ) {
+    return;
+  }
 
-    const textColor = isDark
-      ? "var(--text-color-dark)"
-      : "var(--text-color-light)";
-    const gridColor = isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)";
-    const accentColor = isDark
-      ? "var(--green-accent-dark)"
-      : "var(--green-accent-light)";
+  const { textColor, gridColor, accentColor } = getThemeColors();
 
-    chartRef.value.updateOptions({
+  chartRef.value.updateOptions(
+    {
       chart: {
         background: isDark
           ? "var(--background-color-dark)"
@@ -205,6 +332,14 @@ watch(
       },
       tooltip: {
         theme: isDark ? "dark" : "light",
+        style: { color: textColor, fontFamily: "inherit" },
+        marker: {
+          show: true,
+          strokeWidth: 0,
+          radius: 2,
+          colors: [accentColor],
+          strokeColor: accentColor,
+        },
       },
       stroke: {
         colors: [accentColor],
@@ -214,25 +349,60 @@ watch(
         strokeColors: [accentColor],
       },
       xaxis: {
-        labels: { style: { colors: textColor } },
+        labels: {
+          style: {
+            colors: [
+              textColor,
+              textColor,
+              textColor,
+              textColor,
+              textColor,
+              textColor,
+              textColor,
+            ],
+          },
+        },
         axisBorder: { color: gridColor },
         axisTicks: { color: gridColor },
       },
       yaxis: {
-        title: { style: { color: textColor } },
-        labels: { style: { colors: textColor } },
+        // Remove the title property to hide the y axis label
+        labels: {
+          style: {
+            colors: [
+              textColor,
+              textColor,
+              textColor,
+              textColor,
+              textColor,
+              textColor,
+              textColor,
+            ],
+          },
+        },
       },
       grid: {
         row: { colors: [gridColor, "transparent"] },
         borderColor: gridColor,
       },
-    });
-  },
-  {
-    // `immediate: true` ensures the theme is applied on the initial chart load
-    immediate: true,
+    },
+    false,
+    true
+  ); // The third argument 'true' forces a re-render. Important for some style changes.
+};
+
+// --- MODIFIED: Watcher to trigger theme application on theme change ---
+watch(isDarkMode, async (isDark) => {
+  await nextTick();
+  if (
+    renderChart.value &&
+    chartRef.value &&
+    chartRef.value.$el &&
+    typeof chartRef.value.updateOptions === "function"
+  ) {
+    applyChartTheme(isDark);
   }
-);
+});
 
 // Method to switch the timeframe (Unchanged)
 const setTimeframe = (frame: "3weeks" | "3months" | "yearly") => {
@@ -245,8 +415,6 @@ function aggregateData(
   groupBy: "day" | "month" | "year",
   viewType: "3weeks" | "3months" | "yearly"
 ) {
-  // Your existing aggregation logic is fine and does not need to be changed.
-  // ...
   const counts: { [key: string]: number } = {};
   dates.forEach((dateStr) => {
     const d = new Date(dateStr);
@@ -346,7 +514,7 @@ function aggregateData(
 
     <div
       class="flex padding950and640 flex-col items-center justify-between w-full margin950and640">
-      <template v-if="appStore.isCurrentlyFetching">
+      <template v-if="appStore.isCurrentlyFetching && !renderChart">
         <div class="my-5 border rounded border-color animate-pulse w-full">
           <div
             class="mb-4 h-8 w-2/3 bg-[var(--skeleton-light)] dark:bg-[var(--skeleton-dark)] rounded mx-auto"></div>
