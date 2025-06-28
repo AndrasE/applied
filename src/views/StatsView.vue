@@ -4,6 +4,7 @@ import { ref, computed, onMounted, onUnmounted, nextTick, watch } from "vue";
 import PageHeader from "@/components/ui/PageHeader.vue";
 import Divider from "@/components/ui/Divider.vue";
 import { useAppStore } from "@/stores/jobs";
+import { Icon } from "@iconify/vue";
 
 // Initialize the store
 const appStore = useAppStore();
@@ -57,15 +58,6 @@ const jobCreationDatesFromStore = computed(() => {
     })
     .filter((date) => date !== null) as string[];
 });
-
-// Watchers for data fetching and logging (Unchanged)
-watch(
-  jobCreationDatesFromStore,
-  (newDates) => {
-    // ... (your console logs are fine here)
-  },
-  { immediate: true }
-);
 
 // --- Immediately set theme colors before first render ---
 const setInitialChartTheme = () => {
@@ -131,7 +123,6 @@ const setInitialChartTheme = () => {
       axisTicks: { ...chartOptions.value.xaxis.axisTicks, color: gridColor },
     },
     yaxis: {
-      // Remove the title property to hide the y axis label
       labels: {
         ...chartOptions.value.yaxis.labels,
         style: {
@@ -313,6 +304,7 @@ const chartOptions = ref({
 
 // --- NEW: Centralized function to apply theme options ---
 const applyChartTheme = (isDark: boolean) => {
+  // Defensive: check chartRef is still valid and not unmounted
   if (
     !chartRef.value ||
     !chartRef.value.$el ||
@@ -320,87 +312,102 @@ const applyChartTheme = (isDark: boolean) => {
   ) {
     return;
   }
-
-  const { textColor, gridColor, accentColor } = getThemeColors();
-
-  chartRef.value.updateOptions(
-    {
-      chart: {
-        background: isDark
-          ? "var(--background-color-dark)"
-          : "var(--background-color-light)",
-      },
-      tooltip: {
-        theme: isDark ? "dark" : "light",
-        style: { color: textColor, fontFamily: "inherit" },
-        marker: {
-          show: true,
-          strokeWidth: 0,
-          radius: 2,
+  try {
+    const { textColor, gridColor, accentColor } = getThemeColors();
+    chartRef.value.updateOptions(
+      {
+        chart: {
+          background: isDark
+            ? "var(--background-color-dark)"
+            : "var(--background-color-light)",
+        },
+        tooltip: {
+          theme: isDark ? "dark" : "light",
+          style: { color: textColor, fontFamily: "inherit" },
+          marker: {
+            show: true,
+            strokeWidth: 0,
+            radius: 2,
+            colors: [
+              accentColor,
+              accentColor,
+              accentColor,
+              accentColor,
+              accentColor,
+              accentColor,
+              accentColor,
+            ],
+            strokeColor: accentColor,
+          },
+        },
+        stroke: {
           colors: [accentColor],
-          strokeColor: accentColor,
         },
-      },
-      stroke: {
-        colors: [accentColor],
-      },
-      markers: {
-        colors: [accentColor],
-        strokeColors: [accentColor],
-      },
-      xaxis: {
-        labels: {
-          style: {
-            colors: [
-              textColor,
-              textColor,
-              textColor,
-              textColor,
-              textColor,
-              textColor,
-              textColor,
-            ],
+        markers: {
+          colors: [accentColor],
+          strokeColors: [accentColor],
+        },
+        xaxis: {
+          labels: {
+            style: {
+              colors: [
+                textColor,
+                textColor,
+                textColor,
+                textColor,
+                textColor,
+                textColor,
+                textColor,
+              ],
+            },
+          },
+          axisBorder: { color: gridColor },
+          axisTicks: { color: gridColor },
+        },
+        yaxis: {
+          // Remove the title property to hide the y axis label
+          labels: {
+            style: {
+              colors: [
+                textColor,
+                textColor,
+                textColor,
+                textColor,
+                textColor,
+                textColor,
+                textColor,
+              ],
+            },
           },
         },
-        axisBorder: { color: gridColor },
-        axisTicks: { color: gridColor },
-      },
-      yaxis: {
-        // Remove the title property to hide the y axis label
-        labels: {
-          style: {
-            colors: [
-              textColor,
-              textColor,
-              textColor,
-              textColor,
-              textColor,
-              textColor,
-              textColor,
-            ],
-          },
+        grid: {
+          row: { colors: [gridColor, "transparent"] },
+          borderColor: gridColor,
         },
       },
-      grid: {
-        row: { colors: [gridColor, "transparent"] },
-        borderColor: gridColor,
-      },
-    },
-    false,
-    true
-  ); // The third argument 'true' forces a re-render. Important for some style changes.
+      false,
+      true
+    );
+  } catch (e) {
+    // Silently ignore if chart is unmounted or element not found
+  }
 };
 
 // --- MODIFIED: Watcher to trigger theme application on theme change ---
 watch(isDarkMode, async (isDark) => {
   await nextTick();
+  // Only apply theme if chart is rendered and chartRef is available and not unmounted
   if (
     renderChart.value &&
     chartRef.value &&
     chartRef.value.$el &&
     typeof chartRef.value.updateOptions === "function"
   ) {
-    applyChartTheme(isDark);
+    try {
+      applyChartTheme(isDark);
+    } catch (e) {
+      // Silently ignore if chart is unmounted or element not found
+    }
   }
 });
 
@@ -441,70 +448,108 @@ function aggregateData(
   const todayUTC = new Date(
     Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate())
   );
-  const loopEndDateUTC = new Date(todayUTC);
-  loopEndDateUTC.setUTCDate(todayUTC.getUTCDate() + 1);
 
   let startDateUTC: Date;
+  let endDateUTC: Date;
+
   if (viewType === "3weeks") {
     startDateUTC = new Date(todayUTC);
     startDateUTC.setUTCDate(todayUTC.getUTCDate() - 20);
+    endDateUTC = new Date(todayUTC);
   } else if (viewType === "3months") {
+    // Start at the 1st of the month, 2 months ago
     startDateUTC = new Date(
       Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - 2, 1)
     );
+    // End at today (not just the 1st of the month)
+    endDateUTC = new Date(todayUTC);
   } else {
-    // yearly
-    startDateUTC = new Date(Date.UTC(now.getUTCFullYear() - 1, 0, 1));
+    // yearly: show last 12 months, ending with current month (today)
+    startDateUTC = new Date(todayUTC);
+    startDateUTC.setUTCMonth(todayUTC.getUTCMonth() - 11);
+    startDateUTC.setUTCDate(1); // always the 1st of the month
+    endDateUTC = new Date(todayUTC);
   }
 
   let currentDateIterUTC = new Date(startDateUTC);
-  while (currentDateIterUTC < loopEndDateUTC) {
-    let key: string;
-    let chartDateForApex: Date;
-    if (groupBy === "day") {
-      key = `${currentDateIterUTC.getUTCFullYear()}-${String(
+
+  if (groupBy === "day") {
+    while (currentDateIterUTC <= endDateUTC) {
+      let key = `${currentDateIterUTC.getUTCFullYear()}-${String(
         currentDateIterUTC.getUTCMonth() + 1
       ).padStart(2, "0")}-${String(currentDateIterUTC.getUTCDate()).padStart(
         2,
         "0"
       )}`;
-      chartDateForApex = new Date(
+      let chartDateForApex = new Date(
         Date.UTC(
           currentDateIterUTC.getUTCFullYear(),
           currentDateIterUTC.getUTCMonth(),
           currentDateIterUTC.getUTCDate()
         )
       );
+      result.push({
+        date: chartDateForApex.toISOString(),
+        count: counts[key] || 0,
+      });
       currentDateIterUTC.setUTCDate(currentDateIterUTC.getUTCDate() + 1);
-    } else if (groupBy === "month") {
-      key = `${currentDateIterUTC.getUTCFullYear()}-${String(
+    }
+  } else if (groupBy === "month") {
+    // Always include the current month as the last label (up to today)
+    while (
+      currentDateIterUTC.getUTCFullYear() < endDateUTC.getUTCFullYear() ||
+      (currentDateIterUTC.getUTCFullYear() === endDateUTC.getUTCFullYear() &&
+        currentDateIterUTC.getUTCMonth() <= endDateUTC.getUTCMonth())
+    ) {
+      let key = `${currentDateIterUTC.getUTCFullYear()}-${String(
         currentDateIterUTC.getUTCMonth() + 1
       ).padStart(2, "0")}`;
-      chartDateForApex = new Date(
+      let chartDateForApex = new Date(
         Date.UTC(
           currentDateIterUTC.getUTCFullYear(),
           currentDateIterUTC.getUTCMonth(),
           1
         )
       );
+      result.push({
+        date: chartDateForApex.toISOString(),
+        count: counts[key] || 0,
+      });
       currentDateIterUTC.setUTCMonth(currentDateIterUTC.getUTCMonth() + 1);
-    } else {
-      // year
-      key = currentDateIterUTC.getUTCFullYear().toString();
-      chartDateForApex = new Date(
-        Date.UTC(currentDateIterUTC.getUTCFullYear(), 0, 1)
-      );
-      currentDateIterUTC.setUTCFullYear(
-        currentDateIterUTC.getUTCFullYear() + 1
-      );
     }
-    result.push({
-      date: chartDateForApex.toISOString(),
-      count: counts[key] || 0,
-    });
+  } else {
+    // groupBy === "year"
+    // Show last 12 months as individual months (not just a single year label)
+    // This is handled above by setting startDateUTC to 11 months ago and endDateUTC to today
+    while (
+      currentDateIterUTC.getUTCFullYear() < endDateUTC.getUTCFullYear() ||
+      (currentDateIterUTC.getUTCFullYear() === endDateUTC.getUTCFullYear() &&
+        currentDateIterUTC.getUTCMonth() <= endDateUTC.getUTCMonth())
+    ) {
+      let key = `${currentDateIterUTC.getUTCFullYear()}-${String(
+        currentDateIterUTC.getUTCMonth() + 1
+      ).padStart(2, "0")}`;
+      let chartDateForApex = new Date(
+        Date.UTC(
+          currentDateIterUTC.getUTCFullYear(),
+          currentDateIterUTC.getUTCMonth(),
+          1
+        )
+      );
+      result.push({
+        date: chartDateForApex.toISOString(),
+        count: counts[key] || 0,
+      });
+      currentDateIterUTC.setUTCMonth(currentDateIterUTC.getUTCMonth() + 1);
+    }
   }
   return result;
 }
+// No action needed for this warning:
+// [Violation] Added non-passive event listener to a scroll-blocking 'touchstart' event.
+// This is a common warning from Chrome when a library (like ApexCharts) adds touch event listeners without the 'passive' flag.
+// It does not break your app and is safe to ignore unless you notice scroll performance issues on mobile devices.
+// If you want to remove the warning, you would need to patch ApexCharts itself or request an update from the library authors.
 </script>
 
 <template>
@@ -513,18 +558,22 @@ function aggregateData(
     <Divider label="applied metrics" labelPosition="top" />
 
     <div
-      class="flex padding950and640 flex-col items-center justify-between w-full margin950and640">
-      <template v-if="appStore.isCurrentlyFetching && !renderChart">
-        <div class="my-5 border rounded border-color animate-pulse w-full">
+      class="flex padding950and640 flex-col items-center justify-between w-full">
+      <template v-if="appStore.isCurrentlyFetching && renderChart">
+        <div class="border rounded border-color animate-pulse w-full">
           <div
-            class="mb-4 h-8 w-2/3 bg-[var(--skeleton-light)] dark:bg-[var(--skeleton-dark)] rounded mx-auto"></div>
+            class="mt-8 mb-6 h-11 w-60 bg-[var(--skeleton-light)] dark:bg-[var(--skeleton-dark)] rounded mx-auto"></div>
           <div
-            class="h-[350px] w-full bg-[var(--skeleton-light)] dark:bg-[var(--skeleton-dark)] rounded"></div>
+            aria-hidden="true"
+            class="flex mx-6 mb-6 h-50 sm:h-87 flex-col items-center justify-center rounded bg-[var(--skeleton-light)] text-tiny text-gray-500 subtle-pulse tracking-widest dark:bg-[var(--skeleton-dark)] dark:text-gray-400">
+            <p class="mt-2">loading</p>
+            <Icon class="ml-1 text-2xl" icon="svg-spinners:3-dots-fade" />
+          </div>
         </div>
       </template>
 
       <template v-else>
-        <div class="w-full my-5 border rounded border-color">
+        <div class="w-full border rounded border-color">
           <div class="padding950and640">
             <div class="mb-2 text-center">
               <button

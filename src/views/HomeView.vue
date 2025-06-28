@@ -55,7 +55,7 @@ onMounted(() => {
         <div
           aria-hidden="true"
           v-if="!isLottieReady"
-          class="absolute inset-0 mb-3 mt-1 mx-3 flex flex-col items-center justify-center rounded-lg bg-[var(--skeleton-light)] text-tiny text-gray-500 subtle-pulse tracking-widest dark:bg-[var(--skeleton-dark)] dark:text-gray-400">
+          class="absolute inset-0 mb-3 mt-1 mx-3 flex flex-col items-center justify-center rounded bg-[var(--skeleton-light)] text-tiny text-gray-500 subtle-pulse tracking-widest dark:bg-[var(--skeleton-dark)] dark:text-gray-400">
           <p class="mt-2">loading</p>
           <Icon class="ml-1 text-2xl" icon="svg-spinners:3-dots-fade" />
         </div>
