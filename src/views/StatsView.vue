@@ -6,17 +6,17 @@ import Divider from "@/components/ui/Divider.vue";
 import { useAppStore } from "@/stores/jobs";
 import { Icon } from "@iconify/vue";
 
-// Initialize the store
+// Store initialization
 const appStore = useAppStore();
 
-// --- Theme Detection ---
+// --- Theme detection and update ---
 const isDarkMode = ref(false);
 const updateTheme = () => {
   isDarkMode.value = document.documentElement.classList.contains("dark");
 };
 
 onMounted(() => {
-  updateTheme(); // Set initial theme state
+  updateTheme();
   const observer = new MutationObserver(updateTheme);
   observer.observe(document.documentElement, {
     attributes: true,
@@ -27,7 +27,7 @@ onMounted(() => {
   appStore.ensureJobsListenerActive();
 });
 
-// Helper function to get theme-dependent colors
+// Get theme-dependent colors
 const getThemeColors = () => {
   const isDark = isDarkMode.value;
   const textColor = isDark
@@ -40,13 +40,13 @@ const getThemeColors = () => {
   return { textColor, gridColor, accentColor };
 };
 
-// --- NEW: Ref for the chart instance ---
-const chartRef = ref<any>(null); // Use 'any' if ApexCharts types are not fully integrated
+// Chart instance reference
+const chartRef = ref<any>(null);
 
-// Reactive flag to control chart visibility (for ApexCharts re-render)
+// Controls chart rendering (for skeleton display)
 const renderChart = ref(false);
 
-// --- Data & State from Store (Unchanged) ---
+// Timeframe state and job creation dates
 const currentView = ref<"3weeks" | "3months" | "yearly">("3weeks");
 const jobCreationDatesFromStore = computed(() => {
   return appStore.jobs
@@ -59,7 +59,7 @@ const jobCreationDatesFromStore = computed(() => {
     .filter((date) => date !== null) as string[];
 });
 
-// --- Immediately set theme colors before first render ---
+// Set initial chart theme colors
 const setInitialChartTheme = () => {
   const { textColor, gridColor, accentColor } = getThemeColors();
   chartOptions.value = {
@@ -151,7 +151,7 @@ const setInitialChartTheme = () => {
   };
 };
 
-// --- Call this before renderChart is set to true ---
+// Set theme before rendering chart
 onMounted(() => {
   updateTheme();
   const observer = new MutationObserver(updateTheme);
@@ -162,20 +162,19 @@ onMounted(() => {
   onUnmounted(() => observer.disconnect());
   window.scrollTo(0, 0);
   appStore.ensureJobsListenerActive();
-  setInitialChartTheme(); // <--- Add this line
+  setInitialChartTheme();
 });
 
-// --- MODIFIED: Ensure chart theme is applied *after* the chart is rendered ---
+// Watch for data fetching to toggle skeleton/chart and update theme
 watch(
   () => appStore.isCurrentlyFetching,
   async (newVal) => {
     if (!newVal) {
-      renderChart.value = false; // Hide chart, show skeleton for at least one tick
+      renderChart.value = false;
       await nextTick();
       setInitialChartTheme();
       renderChart.value = true;
       await nextTick();
-      // Only call applyChartTheme if chartRef and its $el exist in DOM
       if (
         chartRef.value &&
         chartRef.value.$el &&
@@ -190,7 +189,7 @@ watch(
   { immediate: true }
 );
 
-// Computed properties for data aggregation (Unchanged)
+// Aggregated data for each timeframe
 const threeWeeksData = computed(() =>
   aggregateData(jobCreationDatesFromStore.value, "day", "3weeks")
 );
@@ -198,10 +197,10 @@ const threeMonthData = computed(() =>
   aggregateData(jobCreationDatesFromStore.value, "month", "3months")
 );
 const yearlyData = computed(() =>
-  aggregateData(jobCreationDatesFromStore.value, "year", "yearly")
+  aggregateData(jobCreationDatesFromStore.value, "month", "yearly")
 );
 
-// Computed property for chart SERIES data (Unchanged - this is correct)
+// Chart series data
 const chartSeries = computed(() => {
   let dataToUse: { date: string; count: number }[];
   switch (currentView.value) {
@@ -228,9 +227,7 @@ const chartSeries = computed(() => {
   ];
 });
 
-// --- REVISED: Chart Options are now a static ref, with *neutral* initial colors ---
-// Theme-dependent properties are omitted or set to a neutral value here.
-// They will be dynamically set by `applyChartTheme` once the chart is mounted.
+// Chart options (neutral defaults, themed at runtime)
 const chartOptions = ref({
   chart: {
     type: "line",
@@ -242,7 +239,32 @@ const chartOptions = ref({
   xaxis: {
     type: "datetime",
     labels: {
-      datetimeFormatter: { year: "yyyy", month: "MMM 'yy", day: "dd MMM" },
+      datetimeFormatter: {
+        year: "yyyy",
+        month: "MMM 'yy",
+        day: "dd MMM",
+      },
+      formatter: function (val: string, timestamp?: number) {
+        if (timestamp) {
+          const date = new Date(timestamp);
+          if (
+            currentView.value === "yearly" ||
+            currentView.value === "3months"
+          ) {
+            // Show "MMM 'YY" for yearly and 3months
+            return date
+              .toLocaleString("en-US", { month: "short", year: "2-digit" })
+              .replace(".", "");
+          } else if (currentView.value === "3weeks") {
+            // Show "dd MMM" for 3weeks
+            return date.toLocaleString("en-US", {
+              day: "2-digit",
+              month: "short",
+            });
+          }
+        }
+        return val;
+      },
       style: { fontSize: "12px", fontWeight: 400, colors: ["#6B7280"] },
     },
     tooltip: { enabled: true },
@@ -250,7 +272,6 @@ const chartOptions = ref({
     axisTicks: { show: true, color: "#E0E0E0" },
   },
   yaxis: {
-    // Remove the title property to hide the y axis label
     labels: {
       formatter: (val: number) => Math.round(val).toString(),
       style: { fontSize: "12px", fontWeight: 400, colors: ["#6B7280"] },
@@ -260,15 +281,15 @@ const chartOptions = ref({
   tooltip: {
     enabled: true,
     x: { format: "dd MMM" },
-    theme: "light", // Will be overridden
-    style: { fontSize: "12px", fontFamily: "inherit", color: "#000" }, // Neutral default
+    theme: "light",
+    style: { fontSize: "12px", fontFamily: "inherit", color: "#000" },
     marker: {
       show: true,
       strokeWidth: 0,
       radius: 2,
       colors: ["#000"],
       strokeColor: "#000",
-    }, // Neutral default
+    },
     y: { formatter: (val: number) => `${Math.round(val)} Applications` },
     fillSeriesColor: false,
   },
@@ -276,7 +297,7 @@ const chartOptions = ref({
   stroke: {
     curve: "smooth",
     width: 1.5,
-    colors: ["#22C55E"], // Neutral default (e.g., a green)
+    colors: ["#22C55E"],
   },
   markers: {
     size: 0,
@@ -284,12 +305,12 @@ const chartOptions = ref({
     shape: "circle",
     radius: 2,
     hover: { size: 4, sizeOffset: 3 },
-    colors: ["#22C55E"], // Neutral default
-    strokeColors: ["#22C55E"], // Neutral default
+    colors: ["#22C55E"],
+    strokeColors: ["#22C55E"],
   },
   grid: {
-    row: { opacity: 0.1, colors: ["#E0E0E0", "transparent"] }, // Neutral default
-    borderColor: "#E0E0E0", // Neutral default
+    row: { opacity: 0.1, colors: ["#E0E0E0", "transparent"] },
+    borderColor: "#E0E0E0",
   },
   responsive: [
     {
@@ -302,9 +323,8 @@ const chartOptions = ref({
   ],
 });
 
-// --- NEW: Centralized function to apply theme options ---
+// Apply theme to chart after mount or theme change
 const applyChartTheme = (isDark: boolean) => {
-  // Defensive: check chartRef is still valid and not unmounted
   if (
     !chartRef.value ||
     !chartRef.value.$el ||
@@ -365,7 +385,6 @@ const applyChartTheme = (isDark: boolean) => {
           axisTicks: { color: gridColor },
         },
         yaxis: {
-          // Remove the title property to hide the y axis label
           labels: {
             style: {
               colors: [
@@ -389,14 +408,13 @@ const applyChartTheme = (isDark: boolean) => {
       true
     );
   } catch (e) {
-    // Silently ignore if chart is unmounted or element not found
+    // Ignore errors if chart is unmounted
   }
 };
 
-// --- MODIFIED: Watcher to trigger theme application on theme change ---
+// Watch for theme changes and update chart
 watch(isDarkMode, async (isDark) => {
   await nextTick();
-  // Only apply theme if chart is rendered and chartRef is available and not unmounted
   if (
     renderChart.value &&
     chartRef.value &&
@@ -406,23 +424,25 @@ watch(isDarkMode, async (isDark) => {
     try {
       applyChartTheme(isDark);
     } catch (e) {
-      // Silently ignore if chart is unmounted or element not found
+      // Ignore errors if chart is unmounted
     }
   }
 });
 
-// Method to switch the timeframe (Unchanged)
+// Change the chart timeframe
 const setTimeframe = (frame: "3weeks" | "3months" | "yearly") => {
   currentView.value = frame;
 };
 
-// Data Aggregation Logic (Unchanged)
+// Aggregate job creation data by day or month for the selected view
 function aggregateData(
   dates: string[],
-  groupBy: "day" | "month" | "year",
+  groupBy: "day" | "month",
   viewType: "3weeks" | "3months" | "yearly"
 ) {
   const counts: { [key: string]: number } = {};
+
+  // Count jobs per day or month
   dates.forEach((dateStr) => {
     const d = new Date(dateStr);
     let key: string;
@@ -431,18 +451,16 @@ function aggregateData(
         2,
         "0"
       )}-${String(d.getUTCDate()).padStart(2, "0")}`;
-    } else if (groupBy === "month") {
+    } else {
       key = `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(
         2,
         "0"
       )}`;
-    } else {
-      // year
-      key = d.getUTCFullYear().toString();
     }
     counts[key] = (counts[key] || 0) + 1;
   });
 
+  // Calculate date range for the view
   const result: { date: string; count: number }[] = [];
   const now = new Date();
   const todayUTC = new Date(
@@ -450,38 +468,34 @@ function aggregateData(
   );
 
   let startDateUTC: Date;
-  let endDateUTC: Date;
+  const endDateUTC = new Date(todayUTC);
 
   if (viewType === "3weeks") {
     startDateUTC = new Date(todayUTC);
     startDateUTC.setUTCDate(todayUTC.getUTCDate() - 20);
-    endDateUTC = new Date(todayUTC);
   } else if (viewType === "3months") {
-    // Start at the 1st of the month, 2 months ago
-    startDateUTC = new Date(
-      Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - 2, 1)
-    );
-    // End at today (not just the 1st of the month)
-    endDateUTC = new Date(todayUTC);
-  } else {
-    // yearly: show last 12 months, ending with current month (today)
     startDateUTC = new Date(todayUTC);
-    startDateUTC.setUTCMonth(todayUTC.getUTCMonth() - 11);
-    startDateUTC.setUTCDate(1); // always the 1st of the month
-    endDateUTC = new Date(todayUTC);
+    startDateUTC.setUTCMonth(todayUTC.getUTCMonth() - 3);
+  } else {
+    startDateUTC = new Date(todayUTC);
+    startDateUTC.setUTCFullYear(todayUTC.getUTCFullYear() - 1);
   }
 
+  // Fill result array with counts for each day or month
   let currentDateIterUTC = new Date(startDateUTC);
 
-  if (groupBy === "day") {
-    while (currentDateIterUTC <= endDateUTC) {
-      let key = `${currentDateIterUTC.getUTCFullYear()}-${String(
+  while (currentDateIterUTC <= endDateUTC) {
+    let key: string;
+    let chartDateForApex: Date;
+
+    if (groupBy === "day") {
+      key = `${currentDateIterUTC.getUTCFullYear()}-${String(
         currentDateIterUTC.getUTCMonth() + 1
       ).padStart(2, "0")}-${String(currentDateIterUTC.getUTCDate()).padStart(
         2,
         "0"
       )}`;
-      let chartDateForApex = new Date(
+      chartDateForApex = new Date(
         Date.UTC(
           currentDateIterUTC.getUTCFullYear(),
           currentDateIterUTC.getUTCMonth(),
@@ -493,18 +507,12 @@ function aggregateData(
         count: counts[key] || 0,
       });
       currentDateIterUTC.setUTCDate(currentDateIterUTC.getUTCDate() + 1);
-    }
-  } else if (groupBy === "month") {
-    // Always include the current month as the last label (up to today)
-    while (
-      currentDateIterUTC.getUTCFullYear() < endDateUTC.getUTCFullYear() ||
-      (currentDateIterUTC.getUTCFullYear() === endDateUTC.getUTCFullYear() &&
-        currentDateIterUTC.getUTCMonth() <= endDateUTC.getUTCMonth())
-    ) {
-      let key = `${currentDateIterUTC.getUTCFullYear()}-${String(
+    } else {
+      const monthKey = `${currentDateIterUTC.getUTCFullYear()}-${String(
         currentDateIterUTC.getUTCMonth() + 1
       ).padStart(2, "0")}`;
-      let chartDateForApex = new Date(
+
+      chartDateForApex = new Date(
         Date.UTC(
           currentDateIterUTC.getUTCFullYear(),
           currentDateIterUTC.getUTCMonth(),
@@ -513,43 +521,39 @@ function aggregateData(
       );
       result.push({
         date: chartDateForApex.toISOString(),
-        count: counts[key] || 0,
+        count: counts[monthKey] || 0,
       });
       currentDateIterUTC.setUTCMonth(currentDateIterUTC.getUTCMonth() + 1);
-    }
-  } else {
-    // groupBy === "year"
-    // Show last 12 months as individual months (not just a single year label)
-    // This is handled above by setting startDateUTC to 11 months ago and endDateUTC to today
-    while (
-      currentDateIterUTC.getUTCFullYear() < endDateUTC.getUTCFullYear() ||
-      (currentDateIterUTC.getUTCFullYear() === endDateUTC.getUTCFullYear() &&
-        currentDateIterUTC.getUTCMonth() <= endDateUTC.getUTCMonth())
-    ) {
-      let key = `${currentDateIterUTC.getUTCFullYear()}-${String(
-        currentDateIterUTC.getUTCMonth() + 1
-      ).padStart(2, "0")}`;
-      let chartDateForApex = new Date(
-        Date.UTC(
-          currentDateIterUTC.getUTCFullYear(),
-          currentDateIterUTC.getUTCMonth(),
-          1
-        )
-      );
-      result.push({
-        date: chartDateForApex.toISOString(),
-        count: counts[key] || 0,
-      });
-      currentDateIterUTC.setUTCMonth(currentDateIterUTC.getUTCMonth() + 1);
+      currentDateIterUTC.setUTCDate(1);
     }
   }
+
+  // Ensure last month is included for month grouping
+  if (groupBy === "month") {
+    const lastResultDate =
+      result.length > 0 ? new Date(result[result.length - 1].date) : null;
+    if (
+      !lastResultDate ||
+      lastResultDate.getUTCMonth() !== endDateUTC.getUTCMonth() ||
+      lastResultDate.getUTCFullYear() !== endDateUTC.getUTCFullYear()
+    ) {
+      const monthKey = `${endDateUTC.getUTCFullYear()}-${String(
+        endDateUTC.getUTCMonth() + 1
+      ).padStart(2, "0")}`;
+      const chartDateForApex = new Date(
+        Date.UTC(endDateUTC.getUTCFullYear(), endDateUTC.getUTCMonth(), 1)
+      );
+      result.push({
+        date: chartDateForApex.toISOString(),
+        count: counts[monthKey] || 0,
+      });
+    }
+  }
+
   return result;
 }
-// No action needed for this warning:
-// [Violation] Added non-passive event listener to a scroll-blocking 'touchstart' event.
-// This is a common warning from Chrome when a library (like ApexCharts) adds touch event listeners without the 'passive' flag.
-// It does not break your app and is safe to ignore unless you notice scroll performance issues on mobile devices.
-// If you want to remove the warning, you would need to patch ApexCharts itself or request an update from the library authors.
+
+// Chrome warning about non-passive event listeners from ApexCharts is safe to ignore.
 </script>
 
 <template>
@@ -636,8 +640,15 @@ function aggregateData(
 
             <div
               v-else
-              class="text-center p-4 text-[var(--text-color-light)] dark:text-[var(--text-color-dark)]">
-              Loading chart data...
+              class="border rounded border-color animate-pulse w-full">
+              <div
+                class="mt-8 mb-6 h-11 w-60 bg-[var(--skeleton-light)] dark:bg-[var(--skeleton-dark)] rounded mx-auto"></div>
+              <div
+                aria-hidden="true"
+                class="flex mx-6 mb-6 h-50 sm:h-87 flex-col items-center justify-center rounded bg-[var(--skeleton-light)] text-tiny text-gray-500 subtle-pulse tracking-widest dark:bg-[var(--skeleton-dark)] dark:text-gray-400">
+                <p class="mt-2">loading</p>
+                <Icon class="ml-1 text-2xl" icon="svg-spinners:3-dots-fade" />
+              </div>
             </div>
           </div>
         </div>
