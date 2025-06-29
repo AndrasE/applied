@@ -2,6 +2,7 @@
 import { computed } from "vue";
 import RouterButton from "../ui/RouterButton.vue";
 import type { Job } from "../../types/job";
+import { Icon } from "@iconify/vue";
 
 const props = defineProps<{
   job: Job;
@@ -40,7 +41,21 @@ const statusTextClass = computed(() => {
     </div>
   </div>
 
-  <p class="mb-2 text-sm">{{ job.company }}</p>
+  <div class="flex items-center justify-between">
+    <p class="mb-2 text-sm">
+      {{ job.company }}
+    </p>
+    <a
+      v-if="job.link"
+      :href="job.link"
+      target="_blank"
+      rel="noopener noreferrer">
+      <Icon
+        :aria-label="job.link"
+        icon="heroicons-solid:link"
+        class="w-4 h-4 text-hover" />
+    </a>
+  </div>
 
   <p class="text-sm text-justify break-words">{{ job.description }}</p>
 
