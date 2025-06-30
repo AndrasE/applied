@@ -559,17 +559,17 @@ function aggregateData(
 <template>
   <Container>
     <PageHeader label="Stats" />
-    <Divider label="applied metrics" labelPosition="top" />
+    <Divider label="your progress" labelPosition="top" />
 
     <div
       class="flex padding950and640 flex-col items-center justify-between w-full">
       <template v-if="appStore.isCurrentlyFetching && renderChart">
         <div class="border rounded border-color animate-pulse w-full">
           <div
-            class="mt-8 mb-6 h-11 w-60 bg-[var(--skeleton-light)] dark:bg-[var(--skeleton-dark)] rounded mx-auto"></div>
+            class="mt-4 sm:mt-8 mb-6 h-11 w-60 bg-[var(--skeleton-light)] dark:bg-[var(--skeleton-dark)] rounded mx-auto"></div>
           <div
             aria-hidden="true"
-            class="flex mx-6 mb-6 h-50 sm:h-87 flex-col items-center justify-center rounded bg-[var(--skeleton-light)] text-tiny text-gray-500 subtle-pulse tracking-widest dark:bg-[var(--skeleton-dark)] dark:text-gray-400">
+            class="flex mx-6 mb-6 h-54 sm:h-87 flex-col items-center justify-center rounded bg-[var(--skeleton-light)] text-tiny text-gray-500 subtle-pulse tracking-widest dark:bg-[var(--skeleton-dark)] dark:text-gray-400">
             <p class="mt-2">loading</p>
             <Icon class="ml-1 text-2xl" icon="svg-spinners:3-dots-fade" />
           </div>
@@ -577,8 +577,46 @@ function aggregateData(
       </template>
 
       <template v-else>
-        <div class="w-full border rounded border-color">
-          <div class="padding950and640">
+        <div class="w-full">
+          <div>
+            <p class="text-tiny text-center">metrics</p>
+            <div class="border rounded border-color">
+              <div class="flex flex-row justify-between py-4 sm:px-6 px-2">
+                <div class="flex flex-col items-center">
+                  <p class="text-md font-semibold">
+                    {{ appStore.jobs.length }}
+                  </p>
+                  <p class="text-xs">active</p>
+                </div>
+                <div class="flex flex-col items-center mt-4 sm:mt-0">
+                  <p class="text-md font-semibold">
+                    {{ appStore.jobs.length }}
+                  </p>
+                  <p class="text-xs">job offer</p>
+                </div>
+                <div class="flex flex-col items-center mt-4 sm:mt-0">
+                  <p class="text-md font-semibold">
+                    {{ appStore.jobs.length }}
+                  </p>
+                  <p class="text-xs">rejected</p>
+                </div>
+                <div class="flex flex-col items-center mt-4 sm:mt-0">
+                  <p class="text-md font-semibold">
+                    {{ appStore.jobs.length }}
+                  </p>
+                  <p class="text-xs">no response</p>
+                </div>
+                <div class="flex flex-col items-center mt-4 sm:mt-0">
+                  <p class="text-md font-semibold">
+                    {{ appStore.jobs.length }}
+                  </p>
+                  <p class="text-xs">total</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="text-tiny mt-10 text-center">applications / timeframe</p>
+          <div class="border rounded border-color">
             <div class="mb-2 text-center">
               <button
                 @click="setTimeframe('3weeks')"
@@ -642,7 +680,7 @@ function aggregateData(
               v-else
               class="border rounded border-color animate-pulse w-full">
               <div
-                class="mt-8 mb-6 h-11 w-60 bg-[var(--skeleton-light)] dark:bg-[var(--skeleton-dark)] rounded mx-auto"></div>
+                class="mt-4 sm:mt-8 mb-6 h-11 w-60 bg-[var(--skeleton-light)] dark:bg-[var(--skeleton-dark)] rounded mx-auto"></div>
               <div
                 aria-hidden="true"
                 class="flex mx-6 mb-6 h-50 sm:h-87 flex-col items-center justify-center rounded bg-[var(--skeleton-light)] text-tiny text-gray-500 subtle-pulse tracking-widest dark:bg-[var(--skeleton-dark)] dark:text-gray-400">
