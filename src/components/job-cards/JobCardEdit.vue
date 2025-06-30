@@ -63,6 +63,7 @@ function handleDelete() {
   <div>
     <div class="flex items-start justify-between">
       <h2 class="w-full mb-1 text-lg">
+        <!-- Editable job title -->
         <input
           v-model="localEditableJob.title"
           type="text"
@@ -73,10 +74,12 @@ function handleDelete() {
 
     <div
       class="flex flex-col justify-between w-full gap-1 mb-1 text-sm sm:flex-row">
+      <!-- Status dropdown -->
       <JobStatusDropdown v-model="localEditableJob.status" />
 
       <div
         class="relative flex flex-row items-center w-full gap-1 sm:w-auto sm:flex-1 group">
+        <!-- Readonly date field with refresh icon to update to today -->
         <input
           v-model="localEditableJob.date"
           type="text"
@@ -92,7 +95,8 @@ function handleDelete() {
       </div>
     </div>
 
-    <p class="mb-2 text-sm">
+    <p class="mb-1 text-sm">
+      <!-- Editable company name -->
       <input
         v-model="localEditableJob.company"
         type="text"
@@ -100,7 +104,16 @@ function handleDelete() {
         placeholder="Company name" />
     </p>
 
+    <p class="mb-2 text-sm">
+      <!-- Editable company link -->
+      <input
+        v-model="localEditableJob.link"
+        type="text"
+        class="w-full p-1 border rounded border-color"
+        placeholder="Company link" />
+    </p>
     <p class="text-sm text-justify break-words">
+      <!-- Editable job description -->
       <textarea
         v-model="localEditableJob.description"
         class="w-full p-1 border rounded border-color custom-scrollbar"
@@ -108,6 +121,7 @@ function handleDelete() {
     </p>
 
     <div class="flex justify-end gap-2 pt-2">
+      <!-- Delete and Save buttons -->
       <RouterButton
         label="Delete job"
         icon="heroicons-solid:trash"

@@ -40,14 +40,18 @@ const isDeletingJob = ref(false);
 onMounted(() => {
   if (!jobId) {
     console.error("No job ID provided for update.");
-    toast.warning("No job ID provided for update.");
+    toast.warning("No job ID provided for update.", {
+      timeout: 2200,
+    });
     router.push("/jobs");
     return;
   }
 
   if (!firebaseDatabase) {
     console.error("UpdateView.vue: Firebase Database not injected!");
-    toast.warning("Database not available. Cannot fetch job details.");
+    toast.warning("Database not available. Cannot fetch job details.", {
+      timeout: 2200,
+    });
     return;
   }
 
@@ -69,7 +73,9 @@ onMounted(() => {
           // <-- Check the flag here
           job.value = null;
           console.warn("UpdateView.vue: Job not found, redirecting.");
-          toast.warning("Job not found. Redirecting to jobs list.");
+          toast.warning("Job not found. Redirecting to jobs list.", {
+            timeout: 2200,
+          });
           router.push("/jobs");
         } else {
           // If isDeletingJob is true, it means we intentionally deleted it,
@@ -82,7 +88,9 @@ onMounted(() => {
     },
     (error) => {
       console.error("UpdateView.vue: Error fetching job data:", error);
-      toast.warning("Error fetching job data. Please try again.");
+      toast.warning("Error fetching job data. Please try again.", {
+        timeout: 2200,
+      });
       job.value = null;
       router.push("/jobs");
     }
@@ -101,7 +109,9 @@ async function performUpdate(updatedJob: Job) {
     console.log("🔄 Updating job:", updatedJob);
     if (!firebaseDatabase) {
       console.error("Firebase Database not available for update.");
-      toast.warning("Database not available. Cannot update job.");
+      toast.warning("Database not available. Cannot update job.", {
+        timeout: 2200,
+      });
       return;
     }
     const jobRef = dbRef(firebaseDatabase, `jobs/${jobId}`);
@@ -114,11 +124,15 @@ async function performUpdate(updatedJob: Job) {
 
     await update(jobRef, updateData);
     console.log("✅ Job updated successfully");
-    toast.info("Job updated successfully!");
+    toast.info("Job updated successfully!", {
+      timeout: 2200,
+    });
     router.push("/jobs");
   } catch (error) {
     console.error("❌ Error updating job:", error);
-    toast.warning("Failed to update job. Please try again.");
+    toast.warning("Failed to update job. Please try again.", {
+      timeout: 2200,
+    });
   }
 }
 
@@ -127,7 +141,9 @@ async function performDelete(id: string) {
     console.log("🗑️ Deleting job:", id);
     if (!firebaseDatabase) {
       console.error("Firebase Database not available for delete.");
-      toast.warning("Database not available. Cannot delete job.");
+      toast.warning("Database not available. Cannot delete job.", {
+        timeout: 2200,
+      });
       return;
     }
 
@@ -142,11 +158,15 @@ async function performDelete(id: string) {
     const jobRef = dbRef(firebaseDatabase, `jobs/${id}`);
     await remove(jobRef);
     console.log("✅ Job deleted successfully");
-    toast.info("Job deleted successfully!");
+    toast.info("Job deleted successfully!", {
+      timeout: 2200,
+    });
     router.push("/jobs");
   } catch (error) {
     console.error("❌ Error deleting job:", error);
-    toast.warning("Failed to delete job. Please try again.");
+    toast.warning("Failed to delete job. Please try again.", {
+      timeout: 2200,
+    });
     // IMPORTANT: If delete fails, reset the flag so listener behaves normally again
     isDeletingJob.value = false;
   }
@@ -164,14 +184,18 @@ async function handleUpdate(updatedJob: Job) {
     await performUpdate(updatedJob);
   } else if (openAdminAuthModal) {
     openAdminAuthModal(async () => {
-      toast.info("Admin login successful!");
+      toast.info("Admin login successful!", {
+        timeout: 2200,
+      });
       await performUpdate(updatedJob);
     });
   } else {
     console.error(
       "🕵️️ Admin authentication modal not available. Is App.vue configured correctly?"
     );
-    toast.warning("Admin authentication setup missing.");
+    toast.warning("Admin authentication setup missing.", {
+      timeout: 2200,
+    });
   }
 }
 
@@ -186,14 +210,18 @@ async function handleDelete(id: string) {
     await performDelete(id);
   } else if (openAdminAuthModal) {
     openAdminAuthModal(async () => {
-      toast.info("Admin login successful!");
+      toast.info("Admin login successful!", {
+        timeout: 2200,
+      });
       await performDelete(id);
     });
   } else {
     console.error(
       "🕵️️ Admin authentication modal not available. Is App.vue configured correctly?"
     );
-    toast.warning("Admin authentication setup missing.");
+    toast.warning("Admin authentication setup missing.", {
+      timeout: 2200,
+    });
   }
 }
 

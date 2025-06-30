@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, watch, type Ref } from "vue";
-// Import sub-components JobCard is the parent orchestration component
+// Import sub-components. JobCard is the parent orchestration component.
 import JobCardBrowse from "./JobCardBrowse.vue";
 import JobCardView from "./JobCardView.vue";
 import JobCardEdit from "./JobCardEdit.vue";
@@ -26,6 +26,7 @@ watch(
   () => props.viewingMode,
   (newMode) => {
     if (newMode === "adding") {
+      // Initialize empty job for adding mode
       editableJob.value = {
         title: "",
         company: "",
@@ -35,6 +36,7 @@ watch(
       };
       console.log("📄 JobCard.vue: editableJob initialized for 'adding'");
     } else if (newMode === "editing") {
+      // Populate editableJob with current job data for editing
       editableJob.value = { ...props.job };
       console.log("📄 JobCard.vue: editableJob populated for 'editing'");
     }
@@ -68,6 +70,7 @@ function handleAddJob(job: Job) {
 
 <template>
   <div aria-label="job card" class="p-4 border rounded border-color">
+    <!-- Render the correct sub-component based on viewingMode -->
     <template v-if="viewingMode === 'browsing'">
       <JobCardBrowse
         :job="job"

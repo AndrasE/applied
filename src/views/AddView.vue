@@ -39,7 +39,9 @@ async function performAddJob(jobData: Job) {
     if (!firebaseDatabase) {
       console.error("🔥Firebase Database not available for adding job."); // Keep this console.error
       // Show a warning toast if database is not available
-      toast.warning("Database not available. Cannot add job.");
+      toast.warning("Database not available. Cannot add job.", {
+        timeout: 2200,
+      });
       return; // Exit if no database
     }
     const jobsRef = dbRef(firebaseDatabase, "jobs");
@@ -54,12 +56,16 @@ async function performAddJob(jobData: Job) {
     await push(jobsRef, dataToPush);
     console.log("✅ Job added successfully"); // Keep this console.log
     // Show an info toast
-    toast.info("Job added successfully!");
+    toast.info("Job added successfully!", {
+      timeout: 2200,
+    });
     router.push("/jobs");
   } catch (error) {
     console.error("❌ Error adding job:", error); // Keep this console.error
     // Show a warning toast on error
-    toast.warning("Failed to add job. Please try again.");
+    toast.warning("Failed to add job. Please try again.", {
+      timeout: 2200,
+    });
   }
 }
 
@@ -80,7 +86,9 @@ async function handleAddJob(jobData: Job) {
     // Pass 'performAddJob' as the callback to execute after successful authentication
     openAdminAuthModal(async () => {
       // Show an info toast after successful admin login (if modal doesn't already)
-      toast.info("Admin login successful!");
+      toast.info("Admin login successful!", {
+        timeout: 2200,
+      });
       await performAddJob(jobData);
     });
   } else {
@@ -89,7 +97,9 @@ async function handleAddJob(jobData: Job) {
       "🕵️ Admin authentication modal not available. Is App.vue configured correctly?"
     ); // Keep this console.error
     // Show a warning toast for missing admin setup
-    toast.warning("Admin authentication setup missing.");
+    toast.warning("Admin authentication setup missing.", {
+      timeout: 2200,
+    });
   }
 }
 

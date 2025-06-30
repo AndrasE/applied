@@ -55,17 +55,17 @@ function handleAdd() {
 
       <p class="mb-1 text-sm">
         <input
-          v-model="localEditableJob.link"
+          v-model="localEditableJob.company"
           type="text"
           class="w-full p-1 border rounded border-color"
           placeholder="Company name" />
       </p>
       <p class="mb-2 text-sm">
         <input
-          v-model="localEditableJob.company"
+          v-model="localEditableJob.link"
           type="text"
           class="w-full p-1 border rounded border-color"
-          placeholder="Link" />
+          placeholder="Company link" />
       </p>
 
       <p class="text-sm text-justify break-words">

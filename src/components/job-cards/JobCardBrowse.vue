@@ -21,7 +21,7 @@ const truncatedDescription = computed(() => {
   return desc.length > limit.value ? desc.slice(0, limit.value) + "..." : desc;
 });
 
-// Status icon mapping (copied from your original JobCard)
+// Status icon mapping for job status
 const statusIconInfo = computed(() => {
   switch (props.job.status ?? "unknown") {
     case "applied":
@@ -72,6 +72,7 @@ const statusIconInfo = computed(() => {
   <div class="flex items-start justify-between">
     <h2 class="w-full mb-1 text-lg">{{ job.title }}</h2>
     <div class="flex flex-col items-end">
+      <!-- Status icon for job status -->
       <Icon
         :aria-label="statusIconInfo.label"
         :icon="statusIconInfo.icon"
@@ -81,9 +82,11 @@ const statusIconInfo = computed(() => {
 
   <p class="mb-2 text-sm">{{ job.company }}</p>
 
+  <!-- Truncated description if charLimit is set -->
   <p class="text-sm text-justify break-words">{{ truncatedDescription }}</p>
 
   <div class="flex">
+    <!-- Button to view job details -->
     <RouterButton
       as="link"
       :to="{
