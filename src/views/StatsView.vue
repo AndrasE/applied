@@ -562,9 +562,9 @@ function aggregateData(
     <Divider label="your progress" labelPosition="top" />
 
     <div
-      class="flex padding950and640 flex-col items-center justify-between w-full">
+      class="flex flex-col items-center justify-between w-full padding950and640">
       <template v-if="appStore.isCurrentlyFetching && renderChart">
-        <div class="border rounded border-color animate-pulse w-full">
+        <div class="w-full border rounded border-color animate-pulse">
           <div
             class="mt-4 sm:mt-8 mb-6 h-11 w-60 bg-[var(--skeleton-light)] dark:bg-[var(--skeleton-dark)] rounded mx-auto"></div>
           <div
@@ -579,43 +579,47 @@ function aggregateData(
       <template v-else>
         <div class="w-full">
           <div>
-            <p class="text-tiny text-center">metrics</p>
             <div class="border rounded border-color">
-              <div class="flex flex-row justify-between py-4 sm:px-6 px-2">
+              <div class="flex flex-row justify-between px-2 py-4 sm:px-6">
                 <div class="flex flex-col items-center">
-                  <p class="text-md font-semibold">
+                  <p
+                    class="text-md font-semibold text-[var(--green-accent-light)] dark:text-[var(--green-accent-dark)]">
                     {{ appStore.jobs.length }}
                   </p>
                   <p class="text-xs">active</p>
                 </div>
-                <div class="flex flex-col items-center mt-4 sm:mt-0">
-                  <p class="text-md font-semibold">
+                <div class="flex flex-col items-center">
+                  <p
+                    class="text-md font-semibold text-[var(--green-accent-light)] dark:text-[var(--green-accent-dark)]">
                     {{ appStore.jobs.length }}
                   </p>
                   <p class="text-xs">job offer</p>
                 </div>
-                <div class="flex flex-col items-center mt-4 sm:mt-0">
-                  <p class="text-md font-semibold">
+                <div class="flex flex-col items-center">
+                  <p
+                    class="text-md font-semibold text-[var(--green-accent-light)] dark:text-[var(--green-accent-dark)]">
                     {{ appStore.jobs.length }}
                   </p>
                   <p class="text-xs">rejected</p>
                 </div>
-                <div class="flex flex-col items-center mt-4 sm:mt-0">
-                  <p class="text-md font-semibold">
+                <div class="flex flex-col items-center">
+                  <p
+                    class="text-md font-semibold text-[var(--green-accent-light)] dark:text-[var(--green-accent-dark)]">
                     {{ appStore.jobs.length }}
                   </p>
                   <p class="text-xs">no response</p>
                 </div>
-                <div class="flex flex-col items-center mt-4 sm:mt-0">
-                  <p class="text-md font-semibold">
+                <div class="flex flex-col items-center">
+                  <p
+                    class="text-md font-semibold text-[var(--green-accent-light)] dark:text-[var(--green-accent-dark)]">
                     {{ appStore.jobs.length }}
                   </p>
                   <p class="text-xs">total</p>
                 </div>
               </div>
             </div>
+            <p class="mb-8 text-center text-tiny">metrics</p>
           </div>
-          <p class="text-tiny mt-10 text-center">applications / timeframe</p>
           <div class="border rounded border-color">
             <div class="mb-2 text-center">
               <button
@@ -678,7 +682,7 @@ function aggregateData(
 
             <div
               v-else
-              class="border rounded border-color animate-pulse w-full">
+              class="w-full border rounded border-color animate-pulse">
               <div
                 class="mt-4 sm:mt-8 mb-6 h-11 w-60 bg-[var(--skeleton-light)] dark:bg-[var(--skeleton-dark)] rounded mx-auto"></div>
               <div
@@ -689,6 +693,9 @@ function aggregateData(
               </div>
             </div>
           </div>
+          <p class="mb-0 text-center text-tiny sm:mb-4">
+            applications / timeframe
+          </p>
         </div>
       </template>
     </div>
