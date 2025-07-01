@@ -38,20 +38,20 @@ const totalJobsCount = computed(() => appStore.jobs.length);
     <Divider label="your progress" labelPosition="top" />
 
     <div
-      class="flex flex-col items-center justify-between w-full padding950and640 mb-12">
+      class="flex flex-col items-center justify-between w-full mb-12 padding950and640">
       <template v-if="appStore.isCurrentlyFetching">
-        <div
-          class="w-full border border-[var(--skeleton-light)] dark:border-[var(--skeleton-dark)] rounded animate-pulse mb-5">
+        <div class="w-full mb-5">
           <div
-            class="flex flex-row w-full justify-between px-2 py-4 sm:px-6 mb-9 h-19">
+            class="flex flex-row w-full justify-between px-2 py-4 sm:px-6 mb-9 h-19 border border-[var(--skeleton-light)] dark:border-[var(--skeleton-dark)] rounded animate-pulse">
             <div
               v-for="n in 5"
               :key="n"
               class="w-10 h-10 bg-[var(--skeleton-light)] dark:bg-[var(--skeleton-dark)] rounded"></div>
           </div>
-          <div class="w-full">
+          <div
+            class="w-full border border-[var(--skeleton-light)] dark:border-[var(--skeleton-dark)] rounded animate-pulse">
             <div
-              class="mt-3 mb-6 h-11 w-56 bg-[var(--skeleton-light)] dark:bg-[var(--skeleton-dark)] rounded mx-auto"></div>
+              class="mt-3 mb-6 h-12 w-56 bg-[var(--skeleton-light)] dark:bg-[var(--skeleton-dark)] rounded mx-auto"></div>
             <div
               aria-hidden="true"
               class="flex mx-4 mb-6 h-54 sm:h-80 flex-col items-center justify-center rounded bg-[var(--skeleton-light)] text-tiny text-gray-500 subtle-pulse tracking-widest dark:bg-[var(--skeleton-dark)] dark:text-gray-400">

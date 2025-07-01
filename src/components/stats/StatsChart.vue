@@ -296,8 +296,8 @@ const setInitialChartTheme = () => {
     tooltip: {
       ...chartOptions.value.tooltip,
       theme: isDarkMode.value ? "dark" : "light",
-      style: { color: textColor },
-      marker: { colors: [accentColor] },
+      // style: { color: textColor }, // Removed unsupported property
+      marker: { fillColors: [accentColor] },
     },
     stroke: { ...chartOptions.value.stroke, colors: [accentColor] },
     markers: {
@@ -314,13 +314,24 @@ const setInitialChartTheme = () => {
       axisBorder: { color: gridColor },
       axisTicks: { color: gridColor },
     },
-    yaxis: {
-      ...chartOptions.value.yaxis,
-      labels: {
-        ...chartOptions.value.yaxis?.labels,
-        style: { colors: Array(8).fill(textColor) },
-      },
-    },
+    yaxis: Array.isArray(chartOptions.value.yaxis)
+      ? chartOptions.value.yaxis.map((yAxisItem) => ({
+          ...yAxisItem,
+          labels: {
+            ...(yAxisItem.labels || {}),
+            style: { colors: Array(8).fill(textColor) },
+          },
+        }))
+      : {
+          ...chartOptions.value.yaxis,
+          labels: {
+            ...(chartOptions.value.yaxis &&
+            (chartOptions.value.yaxis as any).labels
+              ? (chartOptions.value.yaxis as any).labels
+              : {}),
+            style: { colors: Array(8).fill(textColor) },
+          },
+        },
     grid: {
       ...chartOptions.value.grid,
       row: {
@@ -373,7 +384,10 @@ const setTimeframe = (frame: "3weeks" | "3months" | "yearly") => {
         @click="setTimeframe('3weeks')"
         :class="[
           'p-2 mx-1 mt-3 ...',
-          { 'active-class': currentView === '3weeks' },
+          {
+            'rounded bg-[var(--green-accent-light)] dark:bg-[var(--green-accent-dark)] text-[var(--bg-light)] dark:text-[var(--bg-dark)]':
+              currentView === '3weeks',
+          },
         ]">
         3 Weeks
       </button>
@@ -381,7 +395,10 @@ const setTimeframe = (frame: "3weeks" | "3months" | "yearly") => {
         @click="setTimeframe('3months')"
         :class="[
           'p-2 mx-1 mt-3 ...',
-          { 'active-class': currentView === '3months' },
+          {
+            'rounded bg-[var(--green-accent-light)] dark:bg-[var(--green-accent-dark)] text-[var(--bg-light)] dark:text-[var(--bg-dark)]':
+              currentView === '3months',
+          },
         ]">
         3 Months
       </button>
@@ -389,7 +406,10 @@ const setTimeframe = (frame: "3weeks" | "3months" | "yearly") => {
         @click="setTimeframe('yearly')"
         :class="[
           'p-2 mx-1 mt-3 ...',
-          { 'active-class': currentView === 'yearly' },
+          {
+            'rounded bg-[var(--green-accent-light)] dark:bg-[var(--green-accent-dark)] text-[var(--bg-light)] dark:text-[var(--bg-dark)]':
+              currentView === 'yearly',
+          },
         ]">
         Yearly
       </button>
