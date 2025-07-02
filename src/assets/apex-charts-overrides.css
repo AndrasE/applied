@@ -5,25 +5,17 @@
   --text-color-dark: #d1d5db;
   --title-bg-color-light: #ffffffb5;
   --title-bg-color-dark: #1a1a1ac9;
-
-  --title-bg-color-lighter: #111827cd;
-  --title-bg-color-darker: #111827a3;
-  --pattern-color-light: #2135472d; /* slate-800 with 0.18 opacity */
-  --pattern-color-dark: #d1d5db0c; /* slate-200 with 0.05 opacity */
-  --green-accent-light: #15803d; /* green-700 */
-  --green-accent-dark: #7bf1a8; /* green-300 */
-  --skeleton-dark: #2a2a2ad3;
-  --skeleton-light: #d1d1d3;
-  --popup-opactiy-bg-dark: #1a1a1ad7;
-  --popup-opactiy-bg-light: #9c9d9ece;
+  --green-accent-light: #15803d;
+  --green-accent-dark: #7bf1a8;
 }
 
-/* Tooltip Title */
+/* Tooltip Title styles for ApexCharts tooltips */
 .apexcharts-tooltip-title {
   background-color: var(--title-bg-color-light) !important;
   padding: 8px 12px;
   border-bottom: 1px solid var(--border-color, #e0e0e0);
   font-weight: 400;
+  /* fallback background and text color */
   background-color: var(--background-color-light);
   color: var(--text-color-light);
 }
@@ -31,24 +23,27 @@
   font-weight: 400 !important;
 }
 
+/* Dark mode styles for tooltip title */
 html.dark .apexcharts-tooltip-title {
   color: var(--text-color-dark);
   background-color: var(--title-bg-color-dark) !important;
 }
 
-/* Main Tooltip Container */
+/* Main Tooltip Container styles */
 .apexcharts-tooltip {
   background-color: var(--title-bg-color-light) !important;
   border: 1px solid var(--border-color, #e0e0e0);
   box-shadow: none !important;
 }
 
+/* Dark mode for main tooltip container */
 html.dark .apexcharts-tooltip {
   background-color: var(--title-bg-color-dark) !important;
   border-color: rgba(255, 255, 255, 0.1);
   box-shadow: none !important;
 }
 
+/* Tooltip marker color */
 .apexcharts-tooltip-marker {
   color: var(--green-accent-light) !important;
 }
@@ -56,6 +51,7 @@ html.dark .apexcharts-tooltip-marker {
   color: var(--green-accent-dark) !important;
 }
 
+/* Axis tooltip styles */
 .apexcharts-xaxistooltip,
 .apexcharts-yaxistooltip {
   background-color: var(--bg-light) !important;
@@ -63,10 +59,12 @@ html.dark .apexcharts-tooltip-marker {
   border: 1px solid var(--border-color, #e0e0e0);
 }
 
+/* X-axis tooltip arrow color */
 .apexcharts-xaxistooltip-bottom:before {
   border-bottom-color: var(--green-accent-light) !important;
 }
 
+/* Dark mode for axis tooltips */
 html.dark .apexcharts-xaxistooltip,
 html.dark .apexcharts-yaxistooltip {
   background-color: var(--bg-dark) !important;
@@ -74,12 +72,16 @@ html.dark .apexcharts-yaxistooltip {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* Dark mode x-axis tooltip arrow color */
 html.dark .apexcharts-xaxistooltip-bottom.apexcharts-theme-dark:before {
   border-bottom-color: var(--green-accent-dark) !important;
 }
 
-/* Adjust padding for to the visablity of pattern label above @media below overwrites */
-/* its the same as margin950and640 in style.css, but padding, needing for apex overwrite, with margin and w-full  would overflow pattern labels */
+/* 
+  Adjust padding for visibility of pattern label above.
+  This is similar to margin950and640 in style.css, but uses padding instead.
+  Needed for ApexCharts overwrite, as margin and w-full would overflow pattern labels.
+*/
 .padding950and640 {
   padding: 1.5rem 1rem;
 }
@@ -87,6 +89,12 @@ html.dark .apexcharts-xaxistooltip-bottom.apexcharts-theme-dark:before {
 @media (max-width: 949px) {
   .padding950and640 {
     padding: 1rem;
+  }
+}
+
+@media (max-width: 639px) {
+  .padding950and640 {
+    padding: 0 1rem;
   }
 }
 

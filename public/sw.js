@@ -1,5 +1,6 @@
 const CACHE_NAME = "applied-pwa-cache-v1";
 const urlsToCache = [
+  // List of assets to cache for offline use
   "/",
   "/index.html",
   "/favicon.ico",
@@ -15,35 +16,40 @@ const urlsToCache = [
   "/icons/icon-512x512.png",
   "/assets/index-CAkyy1o_.js",
   "/assets/index-CaDKaHdV.css",
+  "/animations/loading.json",
 ];
-// Install Event: Caches specified assets
+
+// Install Event: Cache all specified assets when the service worker is installed
 self.addEventListener("install", (event) => {
   console.log("Service Worker: Install event received.");
   event.waitUntil(
     caches
       .open(CACHE_NAME)
       .then((cache) => {
-        console.log("Service Worker: Caching App Shell assets.");
+        console.log("Service Worker: Caching application shell and assets.");
         return cache.addAll(urlsToCache);
       })
       .catch((error) => {
         console.error(
-          "Service Worker: Cache addAll failed during install!",
+          "Service Worker: Failed to cache assets during install!",
           error
         );
       })
   );
 });
 
-// Fetch Event: Serves content from cache first, then network
+// Fetch Event: Serve requests from cache if available, otherwise fetch from network and cache the result
 self.addEventListener("fetch", (event) => {
   event.respondWith(
     caches.match(event.request).then((response) => {
       if (response) {
+        // Serve the cached response if found
         return response;
       }
+      // If not in cache, fetch from network and cache it for future use
       return fetch(event.request)
         .then((networkResponse) => {
+          // Only cache valid responses (status 200 and type 'basic')
           if (
             !networkResponse ||
             networkResponse.status !== 200 ||
@@ -65,19 +71,19 @@ self.addEventListener("fetch", (event) => {
             event.request.url,
             error
           );
-          // If the request is for the start_url and it fails, you might want to return a cached version
-          // This ensures that if the app is launched while offline, it still shows something.
+          // If the request is for the app's root URL and it fails, try to return the cached version
+          // This helps the app load offline if the user visits the root URL
           if (event.request.url === "https://andrasapplied.netlify.app/") {
-            return caches.match("https://andrasapplied.netlify.app/"); // Try to return the cached start_url
+            return caches.match("https://andrasapplied.netlify.app/");
           }
-          // For other requests, the browser will report a network error if not in cache
+          // For other requests, let the browser handle the error if not in cache
           throw error;
         });
     })
   );
 });
 
-// Activate Event: Cleans up old caches
+// Activate Event: Remove any old caches that don't match the current cache name
 self.addEventListener("activate", (event) => {
   console.log("Service Worker: Activate event received.");
   const cacheWhitelist = [CACHE_NAME];
@@ -95,7 +101,7 @@ self.addEventListener("activate", (event) => {
   );
 });
 
-// Optional: Intercept message events if you need communication between page and SW
+// Message Event: Listen for messages from the client (e.g., to trigger skipWaiting for immediate activation)
 self.addEventListener("message", (event) => {
   if (event.data && event.data.type === "SKIP_WAITING") {
     self.skipWaiting();

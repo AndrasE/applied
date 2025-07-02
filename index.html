@@ -18,6 +18,7 @@
   <link rel="preload" href="/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/inter-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/inter-900.woff2" as="font" type="font/woff2" crossorigin>
+  <!-- Set dark mode class based on user preference or system setting -->
   <script>
     document.documentElement.classList.toggle(
       "dark",
@@ -27,11 +28,13 @@
     );
   </script>
 
+  <!-- Load main stylesheet asynchronously for faster rendering -->
   <link href="/src/assets/styles.css" rel="stylesheet" media="print" onload="this.media='all'">
 </head>
 
 <body>
   <div id="app"></div>
+  <!-- Register service worker for offline support and caching -->
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
@@ -45,6 +48,7 @@
       });
     }
   </script>
+  <!-- Theme and main application scripts -->
   <script type="module" src="/src/theme.ts"></script>
   <script type="module" src="/src/main.ts"></script>
 </body>
