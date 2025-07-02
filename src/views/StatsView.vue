@@ -13,6 +13,11 @@ import StatsChart from "@/components/stats/StatsChart.vue";
 // --- STATE MANAGEMENT ---
 import { useAppStore } from "@/stores/jobs";
 
+// Import your JobStatus type if it's defined in a separate file
+// For this example, I'll assume it's in a types file, e.g., @/types/job.ts
+// If it's directly in this file or a shared types file, adjust the import path.
+// import type { JobStatus } from "@/types/job"; // Assuming this path, adjust if different
+
 const appStore = useAppStore();
 
 onMounted(() => {
@@ -21,14 +26,31 @@ onMounted(() => {
 });
 
 // --- COMPUTED PROPERTIES FOR METRICS ---
-// The TypeScript error occurred because job.status is not a simple string.
-// To fix it, you'll need to use the correct type for comparison,
-// likely from an enum, for example: `job.status === JobStatus.Offer`.
-// For now, we'll use the placeholder logic from your original component.
-const activeJobsCount = computed(() => appStore.jobs.length);
-const offerCount = computed(() => appStore.jobs.length); // FIX: Using placeholder until status logic is implemented
-const rejectedCount = computed(() => appStore.jobs.length); // FIX: Using placeholder
-const noResponseCount = computed(() => appStore.jobs.length); // FIX: Using placeholder
+const activeJobsCount = computed(() => {
+  return appStore.jobs.filter(
+    (job) =>
+      // Check if job.status exists and is one of the "active" statuses
+      job.status === "applied" ||
+      job.status === "1st round" ||
+      job.status === "2nd round" ||
+      job.status === "3rd round" ||
+      job.status === "job offer"
+  ).length;
+});
+
+const offerCount = computed(() => {
+  return appStore.jobs.filter((job) => job.status === "job offer").length;
+});
+
+const rejectedCount = computed(() => {
+  return appStore.jobs.filter((job) => job.status === "rejected").length;
+});
+
+const noResponseCount = computed(() => {
+  return appStore.jobs.filter((job) => job.status === "no response").length;
+});
+
+// Total jobs is simply the length of the entire jobs array
 const totalJobsCount = computed(() => appStore.jobs.length);
 </script>
 

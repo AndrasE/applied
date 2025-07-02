@@ -2,7 +2,6 @@
 import { ref, onMounted, onUnmounted, inject } from "vue"; // <-- Add 'inject' here
 import { useRoute, useRouter } from "vue-router";
 import { ref as dbRef, onValue } from "firebase/database";
-// REMOVE THIS LINE: import { database } from "../config/database";
 import Container from "@/components/ui/Container.vue";
 import Divider from "@/components/ui/Divider.vue";
 import PageHeader from "@/components/ui/PageHeader.vue";

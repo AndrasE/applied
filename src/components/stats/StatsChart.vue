@@ -383,9 +383,9 @@ const setTimeframe = (frame: "3weeks" | "3months" | "yearly") => {
       <button
         @click="setTimeframe('3weeks')"
         :class="[
-          'p-2 mx-1 mt-3 ...',
+          'p-2 mx-1 mt-3 border rounded border-[var(--green-accent-light)] dark:border-[var(--green-accent-dark)]',
           {
-            'rounded bg-[var(--green-accent-light)] dark:bg-[var(--green-accent-dark)] text-[var(--bg-light)] dark:text-[var(--bg-dark)]':
+            'bg-[var(--green-accent-light)] dark:bg-[var(--green-accent-dark)] text-[var(--bg-light)] dark:text-[var(--bg-dark)]':
               currentView === '3weeks',
           },
         ]">
@@ -394,9 +394,9 @@ const setTimeframe = (frame: "3weeks" | "3months" | "yearly") => {
       <button
         @click="setTimeframe('3months')"
         :class="[
-          'p-2 mx-1 mt-3 ...',
+          'p-2 mx-1 mt-3 rounded border border-[var(--green-accent-light)] dark:border-[var(--green-accent-dark)]',
           {
-            'rounded bg-[var(--green-accent-light)] dark:bg-[var(--green-accent-dark)] text-[var(--bg-light)] dark:text-[var(--bg-dark)]':
+            'bg-[var(--green-accent-light)] dark:bg-[var(--green-accent-dark)] text-[var(--bg-light)] dark:text-[var(--bg-dark)]':
               currentView === '3months',
           },
         ]">
@@ -405,9 +405,9 @@ const setTimeframe = (frame: "3weeks" | "3months" | "yearly") => {
       <button
         @click="setTimeframe('yearly')"
         :class="[
-          'p-2 mx-1 mt-3 ...',
+          'p-2 mx-1 mt-3 rounded border border-[var(--green-accent-light)] dark:border-[var(--green-accent-dark)]',
           {
-            'rounded bg-[var(--green-accent-light)] dark:bg-[var(--green-accent-dark)] text-[var(--bg-light)] dark:text-[var(--bg-dark)]':
+            'bg-[var(--green-accent-light)] dark:bg-[var(--green-accent-dark)] text-[var(--bg-light)] dark:text-[var(--bg-dark)]':
               currentView === 'yearly',
           },
         ]">
