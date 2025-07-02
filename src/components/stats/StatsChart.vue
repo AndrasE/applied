@@ -7,7 +7,7 @@ import type { ApexOptions } from "apexcharts";
 
 // --- PROPS ---
 const props = defineProps<{
-  jobs: Array<{ createdAt: number | any; [key: string]: any }>;
+  jobs: Array<{ createdAt?: number | any; [key: string]: any }>;
 }>();
 
 // --- THEME MANAGEMENT ---

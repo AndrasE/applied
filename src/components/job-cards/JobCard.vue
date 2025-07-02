@@ -32,7 +32,7 @@ watch(
         company: "",
         description: "",
         status: "applied",
-        date: getTodayFormatted(), // Set today's date
+        date: getTodayFormatted(),
       };
       console.log("📄 JobCard.vue: editableJob initialized for 'adding'");
     } else if (newMode === "editing") {

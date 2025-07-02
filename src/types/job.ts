@@ -17,6 +17,6 @@ export interface Job {
   description: string;
   status?: JobStatus;
   date?: string;
-  createdAt: number;
+  createdAt?: number;
   updatedAt?: number;
 }
