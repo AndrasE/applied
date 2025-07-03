@@ -1,3 +1,4 @@
+// This function is used to display job application date in a user-friendly format dd/mm/yy
 export function getTodayFormatted(): string {
   const today = new Date();
   const dd = String(today.getDate()).padStart(2, "0");

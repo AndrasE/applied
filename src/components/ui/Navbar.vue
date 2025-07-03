@@ -65,6 +65,7 @@ const triggerPopup = () => {
     <div
       class="flex flex-row gap-2 flex-center sm:flex-col sm:justify-between sm:items-center sm:h-full sm:w-auto">
       <div class="hidden sm:flex sm:flex-col sm:items-center">
+        <!-- Logo icon and popup trigger for sidebar (sm and up) -->
         <button
           type="button"
           @click="triggerPopup"
@@ -75,6 +76,7 @@ const triggerPopup = () => {
             class="text-6xl text-hover" />
         </button>
 
+        <!-- Logo label and divider for sidebar -->
         <div aria-hidden="true" class="block w-full mb-2">
           <div role="presentation" class="h-px tiny-border"></div>
           <p class="text-center text-tiny">logo</p>
@@ -82,6 +84,7 @@ const triggerPopup = () => {
       </div>
 
       <div class="flex flex-row flex-grow flex-center sm:w-full sm:flex-col">
+        <!-- Navigation label and divider (vertical or horizontal) -->
         <div
           aria-hidden="true"
           role="presentation"
@@ -90,6 +93,7 @@ const triggerPopup = () => {
           <div class="w-px h-12 tiny-border sm:w-full sm:h-px"></div>
         </div>
 
+        <!-- Main navigation links (responsive layout) -->
         <div
           class="flex flex-row justify-around w-full gap-2 sm:flex-col sm:gap-4 sm:p-0">
           <RouterLink

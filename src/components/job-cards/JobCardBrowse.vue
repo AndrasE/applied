@@ -1,9 +1,11 @@
 <script setup lang="ts">
+// JobCardBrowse.vue: Compact card for job list browsing
 import { computed } from "vue";
 import RouterButton from "../ui/RouterButton.vue";
 import { Icon } from "@iconify/vue";
 import type { Job } from "../../types/job";
 
+// Props: job data, optional character limit, and optional status icon class
 const props = defineProps<{
   job: Job;
   charLimit?: number;

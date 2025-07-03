@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// JobCardView.vue: Read-only card for viewing job details
 import { computed } from "vue";
 import RouterButton from "../ui/RouterButton.vue";
 import type { Job } from "../../types/job";
@@ -8,7 +9,7 @@ const props = defineProps<{
   job: Job;
 }>();
 
-// Status text class (copied from your original JobCard)
+// Status text class for different job statuses
 const statusTextClass = computed(() => {
   switch (props.job.status ?? "unknown") {
     case "applied":
@@ -32,6 +33,7 @@ const statusTextClass = computed(() => {
   <div class="flex items-start justify-between">
     <h2 class="w-full mb-1 text-lg break-words">{{ job.title }}</h2>
     <div class="flex flex-col items-end">
+      <!-- Status label for job status -->
       <span
         class="flex items-center ml-2 text-xs whitespace-nowrap"
         :class="statusTextClass">
@@ -60,6 +62,7 @@ const statusTextClass = computed(() => {
   <p class="text-sm text-justify break-words">{{ job.description }}</p>
 
   <div class="flex justify-end flex-1 gap-2">
+    <!-- Button to update job -->
     <RouterButton
       :to="`/jobs/${job.id}/update`"
       label="Update job"

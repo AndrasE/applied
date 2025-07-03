@@ -18,6 +18,7 @@ const isLottieReady = ref(lottieAnimationLoadedOnce); // Initialize based on per
 // isIconRotated is a local reactive state for THIS component instance.
 const isIconRotated = ref(false);
 
+// Dynamically import the Vue3Lottie component for animation
 const Vue3Lottie = defineAsyncComponent({
   loader: () => import("vue3-lottie").then((m) => m.Vue3Lottie as Component),
   delay: 0,
@@ -47,11 +48,19 @@ onMounted(() => {
 </script>
 
 <template>
+  <!--
+    HomeView: Landing page with animated Lottie illustration and skeleton loading effect.
+    - Uses Container and Divider for layout
+    - Shows a loading skeleton until the animation is ready
+    - Animated icon and title transition
+    - Description and bottom divider
+  -->
   <Container justify="center">
     <Divider label="vue3lottie" labelPosition="top" />
     <div
       class="flex flex-col items-center w-full max-w-sm p-1 mt-3 md:max-w-md lg:max-w-lg xl:max-w-xl">
       <div class="relative mb-3 w-full aspect-[10/7]">
+        <!-- Skeleton loader while Lottie animation is loading -->
         <div
           aria-hidden="true"
           v-if="!isLottieReady"
@@ -60,6 +69,7 @@ onMounted(() => {
           <Icon class="ml-1 text-2xl" icon="svg-spinners:3-dots-fade" />
         </div>
 
+        <!-- Lottie animation once ready -->
         <Vue3Lottie
           v-else
           :animationData="applying"
@@ -69,6 +79,7 @@ onMounted(() => {
           class="w-full h-full" />
       </div>
 
+      <!-- Animated title with icon and skeleton fallback -->
       <h1 class="flex items-center justify-center mt-2 text-2xl text-center">
         <template v-if="!isLottieReady">
           <span
@@ -91,6 +102,7 @@ onMounted(() => {
       </h1>
     </div>
 
+    <!-- Description with skeleton fallback -->
     <p class="mb-3 text-sm text-center">
       <template v-if="!isLottieReady">
         <span

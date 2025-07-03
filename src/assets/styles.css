@@ -1,4 +1,6 @@
-/* Self hosted fonts */
+/* =========================
+   Self hosted fonts
+   ========================= */
 @font-face {
   font-family: "Inter";
   font-style: normal;
@@ -23,17 +25,26 @@
   src: url("/fonts/inter-900.woff2") format("woff2");
 }
 
+/* =========================
+   Import Tailwind base styles
+   ========================= */
 @import "tailwindcss";
 
+/* =========================
+   Custom dark variant for Tailwind
+   ========================= */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* =========================
+   Theme custom properties (CSS variables)
+   ========================= */
 @theme {
   /* Font families */
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-mono: "Courier New", monospace;
 
-  /* Theme */
+  /* Theme colors for light and dark mode */
   --bg-light: #ffffff;
   --bg-dark: #1a1a1a;
   --text-color-light: #213547; /* slate-800 */
@@ -48,6 +59,9 @@
   --popup-opactiy-bg-light: #9c9d9ece;
 }
 
+/* =========================
+   Base layer: global element styles
+   ========================= */
 @layer base {
   html {
     scrollbar-gutter: stable; /* reserve scrollbar space to prevent layout shifts */
@@ -69,13 +83,14 @@
     max-height: 800px;
   }
 
-  /* these matches the inline headless-ui dropdowns style */
+  /* Focus ring for inputs, textareas, selects */
   input:focus,
   textarea:focus,
   select:focus {
     @apply outline-none ring-1 ring-offset-0  ring-slate-700 dark:ring-slate-300;
   }
 
+  /* Responsive textarea height for mobile */
   @media screen and (max-width: 640px) {
     textarea {
       min-height: 500px;
@@ -84,11 +99,16 @@
   }
 }
 
+/* =========================
+   Components layer: reusable classes
+   ========================= */
 @layer components {
+  /* Navigation link styling */
   .nav-link {
     @apply flex flex-col justify-center items-center w-full py-2 cursor-pointer;
   }
 
+  /* Popup overlay and content styling */
   .popup-overlay {
     position: fixed;
     top: 0;
@@ -109,6 +129,7 @@
     color: black; /* Ensure text is visible against white background */
   }
 
+  /* Text hover color transitions */
   .text-hover {
     @apply dark:hover:text-green-300 hover:text-green-700 transition-colors duration-300 ease-in-out;
   }
@@ -118,19 +139,22 @@
     @apply transition-colors duration-300 ease-in-out;
   }
 
-  /* border-color (same as tiny in utility) but there is bg (1px divs as devider lines)*/
+  /* Border color utility for dividers */
   .border-color {
     @apply border-slate-400 dark:border-slate-600;
   }
 
+  /* Skeleton loading animation */
   .color-shift-skeleton {
     animation: colorShift 1.5s infinite alternate;
   }
 
+  /* Subtle pulse animation for loading states */
   .subtle-pulse {
     animation: subtlePulse 1.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
 
+  /* Keyframes for subtle pulse animation */
   @keyframes subtlePulse {
     0%,
     100% {
@@ -142,12 +166,16 @@
   }
 }
 
+/* =========================
+   Utilities layer: helper classes
+   ========================= */
 @layer utilities {
+  /* Center content using flex */
   .flex-center {
     @apply flex justify-center items-center;
   }
 
-  /* tiny text and border color (1px divs as divider lines) */
+  /* Tiny border and text for dividers/labels */
   .tiny-border {
     @apply bg-slate-400 dark:bg-slate-600;
   }
@@ -157,10 +185,12 @@
     tracking-[-2px]; /* Adjusts letter spacing for better readability */
   }
 
+  /* Rotate utility (customize as needed) */
   .rotate-270 {
     transform: rotate(deg);
   }
 
+  /* Vertical text orientation for labels */
   .text-orientation {
     writing-mode: vertical-rl; /* Text flows top to bottom, right to left */
     text-orientation: upright; /* Letters remain horizontal */
@@ -172,18 +202,21 @@
     }
   }
 
+  /* Upright vertical text */
   .text-upright {
     writing-mode: vertical-rl; /* Text flows top to bottom, right to left */
     text-orientation: upright; /* Letters remain horizontal */
     letter-spacing: -2px;
   }
 
-  /* Adjust padding for to the visablity of pattern label above @media below overwrites */
+  /* Margin utility for pattern label visibility */
   .margin950and640 {
     margin: 1.5rem 1rem;
   }
 
-  /* custom global scrollbar */
+  /* =========================
+     Custom global scrollbar styles
+     ========================= */
   *::-webkit-scrollbar {
     width: 6px;
   }
@@ -200,7 +233,9 @@
     scrollbar-color: #64ad7cc4 transparent; /* thumb and track */
   }
 
-  /* fading animation */
+  /* =========================
+     Fade in/out animation utilities
+     ========================= */
   .fade-enter-from {
     @apply opacity-0 translate-y-2;
   }
@@ -220,6 +255,11 @@
     @apply transition duration-150 ease-in;
   }
 }
+
+/* =========================
+   Responsive utilities and overrides
+   ========================= */
+
 /* Hide buffer label on smaller screens */
 @media (max-width: 1419px) {
   .hide-under-1420 {
@@ -227,6 +267,7 @@
   }
 }
 
+/* Hide pattern label on larger screens */
 @media (min-width: 1368px) {
   /* Hide pattern label on smaller screens */
   .border-hide-over-1368 {
@@ -241,21 +282,23 @@
   }
 }
 
-/* Adjust padding for to the visablity of pattern label above */
+/* Adjust padding for pattern label visibility */
 @media (max-width: 949px) {
   .margin950and640 {
     margin: 1rem;
   }
 }
 
-/* Adjust padding for to the visablity of pattern label above */
+/* Adjust padding for pattern label visibility on mobile */
 @media (max-width: 639px) {
   .margin950and640 {
     margin: 0 1rem;
   }
 }
 
-/* Navbar setup so no overlap on content */
+/* =========================
+   Navbar padding for desktop layout
+   ========================= */
 @media (min-width: 640px) {
   body {
     padding-bottom: 0;

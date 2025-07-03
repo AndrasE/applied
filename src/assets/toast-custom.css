@@ -1,5 +1,8 @@
+/* =========================
+   Toast Theme Variables
+   ========================= */
 :root {
-  /* ... (your existing theme variables) ... */
+  /* Main theme colors */
   --bg-light: #ffffff;
   --bg-dark: #1a1a1a;
   --text-color-light: #213547;
@@ -19,65 +22,76 @@
   --vt-toast-background: var(--bg-light);
   --vt-toast-text-color: var(--text-color-light);
 
+  /* Info toast variables */
   --vt-color-info-background: var(--vt-toast-background);
   --vt-color-info-text: var(--vt-toast-text-color);
   --vt-color-info-border: var(--border-color-light);
   --vt-color-info-icon: var(--green-accent-light);
 
+  /* Warning toast variables */
   --vt-color-warning-background: var(--vt-toast-background);
   --vt-color-warning-text: var(--warning-accent-light);
   --vt-color-warning-border: var(--border-color-light);
   --vt-color-warning-icon: var(--warning-accent-light);
 }
 
-/* --- Dark Mode Overrides --- */
+/* =========================
+   Dark Mode Overrides
+   ========================= */
 html.dark,
 .dark:root {
   --vt-toast-background: var(--bg-dark);
   --vt-toast-text-color: var(--text-color-dark);
 
+  /* Info toast variables (dark) */
   --vt-color-info-background: var(--vt-toast-background);
   --vt-color-info-text: var(--vt-toast-text-color);
   --vt-color-info-border: var(--border-color-dark);
   --vt-color-info-icon: var(--green-accent-dark);
 
+  /* Warning toast variables (dark) */
   --vt-color-warning-background: var(--vt-toast-background);
   --vt-color-warning-text: var(--warning-accent-dark);
   --vt-color-warning-border: var(--border-color-dark);
   --vt-color-warning-icon: var(--warning-accent-dark);
 }
 
-/* --- General Vue-Toastification Class Overrides --- */
+/* =========================
+   General Toast Overrides
+   ========================= */
+/* Toast container styling */
 .Vue-Toastification__toast {
   border-radius: 4px !important;
   box-shadow: none !important;
-
-  /* Force background color using your variable */
   background-color: var(--vt-toast-background) !important;
-  /* Force default text color for the toast wrapper */
   color: var(--vt-toast-text-color) !important;
-  /* Force border color */
   border: 1px solid var(--border-color-light) !important;
 }
 
-/* Specific border for dark mode toast */
+/* Border color for dark mode toast */
 html.dark .Vue-Toastification__toast {
   border-color: var(--border-color-dark) !important;
 }
 
-/* Specific rules for type-specific toasts (text and icon colors) */
+/* =========================
+   Type-specific Toast Styling
+   ========================= */
+/* Info toast icon color */
 .Vue-Toastification__toast--info .Vue-Toastification__icon {
   color: var(--vt-color-info-icon) !important;
 }
 
+/* Warning toast text and icon color */
 .Vue-Toastification__toast--warning .Vue-Toastification__content {
   color: var(--vt-color-warning-text) !important;
 }
-
 .Vue-Toastification__toast--warning .Vue-Toastification__icon {
   color: var(--vt-color-warning-icon) !important;
 }
 
+/* =========================
+   Responsive Toast Styling
+   ========================= */
 @media screen and (max-width: 600px) {
   .Vue-Toastification__toast {
     border-top: 0 !important;
@@ -86,12 +100,15 @@ html.dark .Vue-Toastification__toast {
   }
 }
 
+/* =========================
+   Progress Bar and Close Button
+   ========================= */
 /* Progress bar color */
 .Vue-Toastification__progress-bar {
   background-color: var(--vt-color-progress-bar) !important;
 }
 
-/* Close button color (uses default text color) */
+/* Close button color */
 .Vue-Toastification__close-button {
   color: var(--vt-toast-text-color) !important;
 }

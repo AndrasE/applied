@@ -1,6 +1,7 @@
 <script setup lang="ts">
+// JobCard.vue: Parent orchestration component for job cards
 import { ref, watch, type Ref } from "vue";
-// Import sub-components. JobCard is the parent orchestration component.
+// Import sub-components for different modes
 import JobCardBrowse from "./JobCardBrowse.vue";
 import JobCardView from "./JobCardView.vue";
 import JobCardEdit from "./JobCardEdit.vue";
@@ -8,6 +9,7 @@ import JobCardAdd from "./JobCardAdd.vue";
 import type { Job } from "../../types/job";
 import { getTodayFormatted } from "@/utils/getTodayFormatted";
 
+// Props: job data, mode, and optional display settings
 const props = defineProps<{
   job: Job;
   charLimit?: number;
@@ -69,9 +71,11 @@ function handleAddJob(job: Job) {
 </script>
 
 <template>
+  <!-- Main job card container -->
   <div aria-label="job card" class="p-4 border rounded border-color">
     <!-- Render the correct sub-component based on viewingMode -->
     <template v-if="viewingMode === 'browsing'">
+      <!-- Browsing mode: compact card for job list -->
       <JobCardBrowse
         :job="job"
         :char-limit="charLimit"
@@ -79,10 +83,12 @@ function handleAddJob(job: Job) {
     </template>
 
     <template v-else-if="viewingMode === 'viewing'">
+      <!-- Viewing mode: detailed read-only card -->
       <JobCardView :job="job" />
     </template>
 
     <template v-else-if="viewingMode === 'editing'">
+      <!-- Editing mode: editable card with save/delete -->
       <JobCardEdit
         :model-value="editableJob"
         @update:model-value="(val) => (editableJob = { ...val })"
@@ -91,6 +97,7 @@ function handleAddJob(job: Job) {
     </template>
 
     <template v-else-if="viewingMode === 'adding'">
+      <!-- Adding mode: empty card for new job entry -->
       <JobCardAdd
         :model-value="editableJob"
         @update:model-value="(val) => (editableJob = { ...val })"

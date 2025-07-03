@@ -4,16 +4,16 @@ import { applyTheme } from "@/theme";
 import { Icon, addCollection } from "@iconify/vue";
 import clarityIcons from "@iconify-json/clarity/icons.json";
 
-// Register the Clarity Icons collection
+// Register the Clarity Icons collection for use in the toggle button
 addCollection(clarityIcons);
 
-// Check if the user has a preferred theme in localStorage
+// Track the current theme (light or dark)
 const currentTheme = ref<"light" | "dark">("light");
 
-// Track hover state
+// Track hover state for icon animation
 const isHovered = ref(false);
 
-// Function to apply the theme and set the icon
+// Compute the icon to display based on theme and hover state
 const themeIcon = computed(() => {
   const isDark = currentTheme.value === "dark";
   const hoverIcon = isDark ? "ci:sun" : "ci:moon";
@@ -21,14 +21,14 @@ const themeIcon = computed(() => {
   return isHovered.value ? hoverIcon : staticIcon;
 });
 
-// Function to set the theme and update localStorage
+// Set the theme on the document and in localStorage
 const setTheme = (theme: "light" | "dark") => {
   document.documentElement.setAttribute("data-theme", theme);
   localStorage.theme = theme;
   applyTheme(theme);
 };
 
-// Initialize the theme based on localStorage or system preference
+// On mount, initialize the theme from localStorage or system preference
 onMounted(() => {
   if (
     localStorage.theme === "dark" ||
@@ -42,19 +42,25 @@ onMounted(() => {
   setTheme(currentTheme.value);
 });
 
-// Function to toggle the theme
+// Toggle between light and dark themes
 const toggleTheme = () => {
   currentTheme.value = currentTheme.value === "light" ? "dark" : "light";
   console.log("🌇 Theme set to", currentTheme.value);
 };
 
-// Watch for changes in the theme and apply it
+// Watch for theme changes and apply them
 watch(currentTheme, (newTheme) => {
   setTheme(newTheme);
 });
 </script>
 
 <template>
+  <!--
+    ThemeToggle: Button to switch between light and dark themes.
+    - Shows a sun or moon icon depending on the theme
+    - Icon animates on hover
+    - Accessible with aria-label
+  -->
   <button
     aria-label="Toggle theme"
     type="button"

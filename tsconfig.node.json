@@ -1,3 +1,7 @@
+// tsconfig.node.json: TypeScript config for Node.js-related files and tooling
+// - Extends Node 22 base config
+// - Includes config files for Vite, Vitest, Cypress, etc.
+// - Sets up compiler options for Node.js and disables emit
 {
   "extends": "@tsconfig/node22/tsconfig.json",
   "include": [

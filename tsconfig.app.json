@@ -1,4 +1,8 @@
-// tsconfig.app.json (Ideal Minimal)
+// tsconfig.app.json: TypeScript configuration for the main Vue application build
+// - Extends Vue's recommended DOM config
+// - Includes all source files and .vue files
+// - Excludes test files
+// - Sets up project-specific path alias and compiler options
 {
   "extends": "@vue/tsconfig/tsconfig.dom.json",
   "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],

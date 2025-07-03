@@ -1,4 +1,4 @@
-// src/main.ts
+// Main entry point: sets up Vue app, plugins, global styles, and mounts the app.
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 

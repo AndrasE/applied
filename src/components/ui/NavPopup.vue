@@ -21,6 +21,13 @@ defineExpose({
 </script>
 
 <template>
+  <!--
+    NavPopup: Modal popup overlay for navigation or info.
+    - Appears when isOpen is true
+    - Clicking the overlay closes the popup
+    - Clicking inside the modal content does not close it
+    - Contains sample content and two RouterButton actions
+  -->
   <div
     v-if="isOpen"
     @click="closePopup"
@@ -30,6 +37,7 @@ defineExpose({
       class="flex flex-col items-center justify-center max-w-sm p-2 rounded border border-color bg-[var(--bg-light)] dark:bg-[var(--bg-dark)]">
       <h2 class="mb-4 text-2xl">Hi there!</h2>
       <div class="p-2 text-sm text-justify">
+        <!-- Example popup content paragraphs -->
         <p class="mb-1">
           This is the content of mysdfwf42 23This i23s the content of my This is
           the content of my This is the conte232nt of my popup!
@@ -42,11 +50,13 @@ defineExpose({
         </p>
       </div>
       <div class="flex justify-center gap-4 mt-4">
+        <!-- Close button -->
         <RouterButton
           @click="closePopup"
           label="Close"
           icon="heroicons-solid:x"
           iconPosition="left" />
+        <!-- About button (navigates to /about) -->
         <RouterButton
           @click="closePopup"
           :to="`/about`"

@@ -12,7 +12,7 @@ import router from "@/router";
 // Import useToast from vue-toastification
 import { useToast } from "vue-toastification";
 
-// Inject the global Firebase instances and modal functions
+// --- Inject the global Firebase instances and modal functions ---
 const firebaseAuth = inject<any>("firebaseAuthInstance");
 const firebaseDatabase = inject<any>("firebaseDatabaseInstance");
 
@@ -22,9 +22,10 @@ const checkIfCurrentUserIsAdmin = inject<() => boolean>(
   "checkIfCurrentUserIsAdmin"
 );
 
-// Get Toast instance
+// --- Get Toast instance ---
 const toast = useToast();
 
+// --- Local job state for the form ---
 const job = ref<Job>({
   title: "",
   description: "",
@@ -32,11 +33,12 @@ const job = ref<Job>({
   status: "applied",
 });
 
-// Actual Database Operation Function
+// --- Actual Database Operation Function ---
 async function performAddJob(jobData: Job) {
   console.log("🔥 performAddJob triggered"); // Keep this console.log
   try {
     if (!firebaseDatabase) {
+      // Database not available
       console.error("🔥Firebase Database not available for adding job."); // Keep this console.error
       // Show a warning toast if database is not available
       toast.warning("Database not available. Cannot add job.", {
@@ -61,6 +63,7 @@ async function performAddJob(jobData: Job) {
     });
     router.push("/jobs");
   } catch (error) {
+    // Handle add error
     console.error("❌ Error adding job:", error); // Keep this console.error
     // Show a warning toast on error
     toast.warning("Failed to add job. Please try again.", {
@@ -69,7 +72,7 @@ async function performAddJob(jobData: Job) {
   }
 }
 
-// Wrapper Function for Authentication Check
+// --- Wrapper Function for Authentication Check ---
 // This function is called by the UI event (@add)
 async function handleAddJob(jobData: Job) {
   // First, check if the user is already signed in as admin
@@ -79,6 +82,7 @@ async function handleAddJob(jobData: Job) {
     checkIfCurrentUserIsAdmin &&
     checkIfCurrentUserIsAdmin()
   ) {
+    // Admin already logged in, perform add
     console.log("🕵️ Admin already logged in, performing add directly."); // Keep this console.log
     await performAddJob(jobData);
   } else if (openAdminAuthModal) {
@@ -103,18 +107,21 @@ async function handleAddJob(jobData: Job) {
   }
 }
 
+// --- Scroll to top on mount ---
 onMounted(() => {
   window.scrollTo(0, 0);
 });
 </script>
 
 <template>
+  <!-- Main container, only shown if job exists -->
   <Container v-if="job">
     <PageHeader label="Add job" />
     <Divider label="adding mode" labelPosition="top" />
 
     <div
       class="flex flex-col items-center justify-between w-full margin950and640 border-color">
+      <!-- JobCard in adding mode -->
       <JobCard
         viewingMode="adding"
         class="w-full pt-0 pb-3 border-0 border-b rounded-none sm:border-0 sm:pb-0"
@@ -123,6 +130,7 @@ onMounted(() => {
     </div>
 
     <Divider label="nein geh zurück" labelPosition="bottom" />
+    <!-- Cancel/go back button -->
     <RouterButton
       as="link"
       :to="`/jobs`"
@@ -132,5 +140,6 @@ onMounted(() => {
       customClass="pr-5 py-4" />
   </Container>
 
+  <!-- Fallback if job not found -->
   <p v-else class="p-6">Job not found.</p>
 </template>

@@ -282,19 +282,23 @@ const chartOptions = ref<ApexOptions>({
   ],
 });
 
-// This function now works because TypeScript knows the full shape of chartOptions
+// This function sets the initial chart theme colors and styles based on the current dark/light mode.
 const setInitialChartTheme = () => {
+  // Get the current theme colors for text, grid, and accent.
   const { textColor, gridColor, accentColor } = getThemeColors();
+  // Update the chartOptions reactive object with theme-specific values.
   chartOptions.value = {
     ...chartOptions.value,
     chart: {
       ...chartOptions.value.chart,
+      // Set chart background based on dark mode
       background: isDarkMode.value
         ? "var(--background-color-dark)"
         : "var(--background-color-light)",
     },
     tooltip: {
       ...chartOptions.value.tooltip,
+      // Set tooltip theme and accent marker color
       theme: isDarkMode.value ? "dark" : "light",
       // style: { color: textColor }, // Removed unsupported property
       marker: { fillColors: [accentColor] },
@@ -309,6 +313,7 @@ const setInitialChartTheme = () => {
       ...chartOptions.value.xaxis,
       labels: {
         ...chartOptions.value.xaxis?.labels,
+        // Set x-axis label colors for theme
         style: { colors: Array(20).fill(textColor) },
       },
       axisBorder: { color: gridColor },

@@ -13,23 +13,20 @@ import StatsChart from "@/components/stats/StatsChart.vue";
 // --- STATE MANAGEMENT ---
 import { useAppStore } from "@/stores/jobs";
 
-// Import your JobStatus type if it's defined in a separate file
-// For this example, I'll assume it's in a types file, e.g., @/types/job.ts
-// If it's directly in this file or a shared types file, adjust the import path.
-// import type { JobStatus } from "@/types/job"; // Assuming this path, adjust if different
-
+// --- Get the app store instance ---
 const appStore = useAppStore();
 
+// --- On mount, ensure jobs listener is active and scroll to top ---
 onMounted(() => {
   appStore.ensureJobsListenerActive();
   window.scrollTo(0, 0);
 });
 
 // --- COMPUTED PROPERTIES FOR METRICS ---
+// Count of jobs in active statuses
 const activeJobsCount = computed(() => {
   return appStore.jobs.filter(
     (job) =>
-      // Check if job.status exists and is one of the "active" statuses
       job.status === "applied" ||
       job.status === "1st round" ||
       job.status === "2nd round" ||
@@ -38,14 +35,17 @@ const activeJobsCount = computed(() => {
   ).length;
 });
 
+// Count of jobs with offer status
 const offerCount = computed(() => {
   return appStore.jobs.filter((job) => job.status === "job offer").length;
 });
 
+// Count of jobs with rejected status
 const rejectedCount = computed(() => {
   return appStore.jobs.filter((job) => job.status === "rejected").length;
 });
 
+// Count of jobs with no response status
 const noResponseCount = computed(() => {
   return appStore.jobs.filter((job) => job.status === "no response").length;
 });
@@ -61,6 +61,7 @@ const totalJobsCount = computed(() => appStore.jobs.length);
 
     <div
       class="flex flex-col items-center justify-between w-full mb-12 padding950and640">
+      <!-- Skeleton loading state while fetching jobs -->
       <template v-if="appStore.isCurrentlyFetching">
         <div class="w-full mb-5">
           <div
@@ -84,6 +85,7 @@ const totalJobsCount = computed(() => appStore.jobs.length);
         </div>
       </template>
 
+      <!-- Metrics and chart when jobs are loaded -->
       <template v-else>
         <div class="w-full">
           <StatsMetrics

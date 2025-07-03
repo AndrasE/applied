@@ -9,35 +9,39 @@ import { Icon } from "@iconify/vue";
 import { useAppStore } from "@/stores/jobs";
 const appStore = useAppStore();
 
+// --- View style and pagination state ---
 const viewStyle = ref<string>(localStorage.getItem("jobsViewStyle") || "list");
 const DEFAULT_LIMIT = 8;
 const limit = ref<number>(DEFAULT_LIMIT);
 
-// Skeleton logic: show skeleton if isCurrentlyFetching is true
+// --- Skeleton logic: show skeleton if isCurrentlyFetching is true ---
 const isJobsSkeletonReady = computed(() => !appStore.isCurrentlyFetching);
 
-// Data comes directly from the store's reactive state
+// --- Data comes directly from the store's reactive state ---
 const visibleJobs = computed(() => {
   return appStore.sortedJobs.slice(0, limit.value);
 });
 
-// --- Lifecycle Hook ---
+// --- Lifecycle Hook: Attach jobs listener on mount ---
 onMounted(() => {
   // This will attach the listener only once per app session when JobsView is first mounted.
   // If the listener is already active, it will do nothing.
   appStore.ensureJobsListenerActive();
 });
 
+// --- Toggle between showing all jobs or default limit ---
 const toggleLimit = () => {
   limit.value =
     limit.value === DEFAULT_LIMIT ? appStore.jobs.length : DEFAULT_LIMIT;
 };
 
+// --- Change view style and persist to localStorage ---
 const changeView = (style: string) => {
   viewStyle.value = style;
   localStorage.setItem("jobsViewStyle", style);
 };
 
+// --- Scroll to top on mount ---
 onMounted(() => {
   window.scrollTo(0, 0); // Scroll to the top overwriting any previous scroll
 });
@@ -47,6 +51,7 @@ onMounted(() => {
   <Container>
     <PageHeader label="Recent applications" />
 
+    <!-- View style toggle icons -->
     <div class="absolute flex-row hidden gap-3 top-12 right-4 sm:flex">
       <Icon
         type="button"
@@ -78,10 +83,12 @@ onMounted(() => {
       :label="viewStyle === 'grid' ? 'grid cols' : 'flex col'"
       labelPosition="top" />
 
+    <!-- Error message if jobs failed to load -->
     <div v-if="appStore.error" class="my-4 text-center text-red-500">
       Error loading jobs: {{ appStore.error }}
     </div>
 
+    <!-- Skeleton loading state -->
     <template v-if="appStore.isCurrentlyFetching">
       <div
         :class="[
@@ -140,6 +147,7 @@ onMounted(() => {
       </div>
     </template>
 
+    <!-- Jobs list/grid display -->
     <transition name="fade" mode="out-in">
       <template v-if="isJobsSkeletonReady">
         <template v-if="viewStyle === 'grid'">
@@ -170,6 +178,7 @@ onMounted(() => {
     </transition>
 
     <Divider label="@click toggleLimit" labelPosition="bottom" />
+    <!-- Toggle limit button -->
     <RouterButton
       v-if="isJobsSkeletonReady"
       :label="limit === DEFAULT_LIMIT ? 'Browse all' : 'See less'"

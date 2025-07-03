@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// JobCardEdit.vue: Editable card for updating a job
 import { reactive, watch } from "vue";
 import RouterButton from "../ui/RouterButton.vue";
 import JobStatusDropdown from "../ui/JobStatusDropdown.vue";

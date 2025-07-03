@@ -1,4 +1,3 @@
-// src/config/firebase.ts
 // Import Firebase core and required services
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";

@@ -1,3 +1,6 @@
+// tsconfig.json: Root TypeScript configuration for the monorepo/project
+// - Serves as the entry point for project-wide TS settings
+// - Uses project references to split config for app and node (server/build)
 {
   "files": [],
   "references": [
