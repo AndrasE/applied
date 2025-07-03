@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import RouterButton from "./RouterButton.vue";
 
+// NavPopup: Modal popup overlay for navigation or info.
 const isOpen = ref(false);
 
 const openPopup = () => {
@@ -22,34 +23,41 @@ defineExpose({
 
 <template>
   <!--
-    NavPopup: Modal popup overlay for navigation or info.
-    - Appears when isOpen is true
-    - Clicking the overlay closes the popup
-    - Clicking inside the modal content does not close it
-    - Contains sample content and two RouterButton actions
-  -->
+    NavPopup: Modal popup overlay for navigation or info.-->
   <div
     v-if="isOpen"
     @click="closePopup"
     class="fixed inset-0 bg-[var(--popup-opactiy-bg-light)] dark:bg-[var(--popup-opactiy-bg-dark)] bg-opacity-60 flex items-center justify-center z-[1000] p-2">
     <div
       @click.stop
-      class="flex flex-col items-center justify-center max-w-sm p-2 rounded border border-color bg-[var(--bg-light)] dark:bg-[var(--bg-dark)]">
-      <h2 class="mb-4 text-2xl">Hi there!</h2>
+      class="flex flex-col items-center justify-center max-w-md p-2 rounded border border-color bg-[var(--bg-light)] dark:bg-[var(--bg-dark)]">
+      <h2 class="text-2xl mb-1">Hi there!</h2>
+
       <div class="p-2 text-sm text-justify">
         <!-- Example popup content paragraphs -->
         <p class="mb-1">
-          This is the content of mysdfwf42 23This i23s the content of my This is
-          the content of my This is the conte232nt of my popup!
+          I really enjoyed building this project with Vue 3, especially using
+          the Composition API to keep the code clean and reusable. It`s styled
+          with Tailwind CSS v4 and written in TypeScript to make the whole
+          application more robust.
         </p>
-        <p class="mb-1">This is the co23ntent of my popup!</p>
-        <p class="mb-1">This is the T323his is the content of my my popup!</p>
         <p>
-          This is the cThis is the23 content of my This is the content of my
-          This3232 is the content of my ontent of my popup!
+          On the features side, it has full CRUD (Create, Read, Update, Delete)
+          operations connected to a Firebase backend, a secure admin login, and
+          a dynamic charts that visualize data in real-time. If you would like
+          to read more about this project, you can check out the About section
+          by the button below. Or you'd like to explore more of my work, please
+          feel free to
+          <a
+            aria-label="Visit my portfolio"
+            class="text-hover hover:underline"
+            target="_blank"
+            href="https://andrasegyed.netlify.app/"
+            >click here</a
+          >.
         </p>
       </div>
-      <div class="flex justify-center gap-4 mt-4">
+      <div class="flex justify-center mt-1 gap-4">
         <!-- Close button -->
         <RouterButton
           @click="closePopup"
