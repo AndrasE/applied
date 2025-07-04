@@ -31,7 +31,7 @@ defineExpose({
     <div
       @click.stop
       class="flex flex-col items-center justify-center max-w-md p-2 rounded border border-color bg-[var(--bg-light)] dark:bg-[var(--bg-dark)]">
-      <h2 class="text-2xl mb-1">Hi there!</h2>
+      <h2 class="mb-1 text-2xl">Hi there!</h2>
 
       <div class="p-2 text-sm text-justify">
         <!-- Example popup content paragraphs -->
@@ -44,20 +44,20 @@ defineExpose({
         <p>
           On the features side, it has full CRUD (Create, Read, Update, Delete)
           operations connected to a Firebase backend, a secure admin login, and
-          a dynamic charts that visualize data in real-time. If you would like
+          a dynamic charts that visualise data in real-time. If you would like
           to read more about this project, you can check out the About section
           by the button below. Or you'd like to explore more of my work, please
           feel free to
           <a
             aria-label="Visit my portfolio"
-            class="text-hover hover:underline"
+            class="link-underline"
             target="_blank"
             href="https://andrasegyed.netlify.app/"
             >click here</a
           >.
         </p>
       </div>
-      <div class="flex justify-center mt-1 gap-4">
+      <div class="flex justify-center gap-4 mt-1">
         <!-- Close button -->
         <RouterButton
           @click="closePopup"

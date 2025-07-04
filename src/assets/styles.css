@@ -144,6 +144,11 @@
     @apply border-slate-400 dark:border-slate-600;
   }
 
+  .link-underline {
+    @apply underline decoration-green-700 dark:decoration-green-300;
+    @apply hover:text-green-700 dark:hover:text-green-300;
+  }
+
   /* Skeleton loading animation */
   .color-shift-skeleton {
     animation: colorShift 1.5s infinite alternate;
