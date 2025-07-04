@@ -437,5 +437,8 @@ const setTimeframe = (frame: "3weeks" | "3months" | "yearly") => {
       </div>
     </div>
   </div>
-  <p class="mb-0 text-center text-tiny sm:mb-4">applications / timeframe</p>
+  <p
+    class="mb-0 text-center text-[0.6rem] leading-[0.5rem] font-mono dark:text-green-300 text-green-700 tracking-wider sm:mb-4">
+    subs/period
+  </p>
 </template>

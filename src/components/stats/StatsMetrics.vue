@@ -59,6 +59,9 @@ defineProps<{
       </div>
     </div>
     <!-- Metrics label -->
-    <p class="mb-8 text-center text-tiny">metrics</p>
+    <p
+      class="mb-8 text-center text-[0.6rem] leading-[0.5rem] font-mono dark:text-green-300 text-green-700 tracking-wider">
+      metrics
+    </p>
   </div>
 </template>
