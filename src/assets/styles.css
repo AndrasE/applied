@@ -190,6 +190,11 @@
     tracking-[-2px]; /* Adjusts letter spacing for better readability */
   }
 
+  /* tiny text no tracking changes*/
+  .text-tiny-tracking-wider {
+    @apply text-[0.6rem] leading-[0.5rem] font-mono dark:text-green-300 text-green-700;
+  }
+
   /* Rotate utility (customize as needed) */
   .rotate-270 {
     transform: rotate(deg);
