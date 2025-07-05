@@ -61,7 +61,7 @@ const signInAsAdmin = async () => {
     } else {
       // If not admin, sign out and show error
       console.log("🕵️️ Non-admin user detected, signing out.");
-      authError.value = "This Google account is not authorized as an admin.";
+      authError.value = "This Google account is not authorised as an admin.";
       await auth.signOut();
     }
   } catch (error: any) {
@@ -111,7 +111,8 @@ defineExpose({ open, checkIfCurrentUserIsAdmin });
       class="text-center flex flex-col items-center justify-center max-w-sm p-2 rounded border border-color bg-[var(--bg-light)] dark:bg-[var(--bg-dark)]">
       <h2 class="mb-4 text-2xl">Hold Up, Wait a Minute</h2>
       <p class="text-sm">
-        To perform this action, you must sign in with your admin Google account.
+        To perform this action, you must sign in with a Google account that has
+        admin privileges.
       </p>
       <!-- Show authentication error if present -->
       <p v-if="authError" class="mt-4 text-sm text-red-500">{{ authError }}</p>
