@@ -161,6 +161,13 @@ onMounted(() => {
           first fetch occurs, we subscribe to changes and the app updates in
           real time.
         </p>
+        <p class="text-tiny-tracking-wider">pwa</p>
+        <p class="mb-3 text-sm">
+          The app can be installed as a Progressive Web App (PWA) on your
+          device. This allows it to be used offline, with many features
+          continuing to work thanks to caching, which also helps reduce load
+          times and internet traffic.
+        </p>
         <p class="text-tiny-tracking-wider">post</p>
         <p class="mb-3 text-sm">
           I hope you found this project both interesting and informative. If you
