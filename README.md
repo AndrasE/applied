@@ -20,9 +20,9 @@ Tailwind CSS was used for styling, offering a fast, responsive, and consistent U
 For a more in-depth breakdown of the project's evolution and features, and practical examples, please visit the app and click on the logo. You will find an About section.
 
 <div align="center">
-<img src="https://github.com/AndrasE/raw-readme/blob/a680ed99ff9a58fa3248fbd5b9bb89a1a192cafe/thumbs/applied_1.png" width="200">
-<img src="https://github.com/AndrasE/raw-readme/blob/a680ed99ff9a58fa3248fbd5b9bb89a1a192cafe/thumbs/applied_2.png" width="200">
-<img src="https://github.com/AndrasE/raw-readme/blob/a680ed99ff9a58fa3248fbd5b9bb89a1a192cafe/thumbs/applied_3.png" width="200">
+<img src="https://github.com/AndrasE/raw-readme/blob/a680ed99ff9a58fa3248fbd5b9bb89a1a192cafe/thumbs/applied_1.png" width="240">
+<img src="https://github.com/AndrasE/raw-readme/blob/a680ed99ff9a58fa3248fbd5b9bb89a1a192cafe/thumbs/applied_2.png" width="240">
+<img src="https://github.com/AndrasE/raw-readme/blob/a680ed99ff9a58fa3248fbd5b9bb89a1a192cafe/thumbs/applied_3.png" width="240">
 </div>
 
 ### Packadges used
