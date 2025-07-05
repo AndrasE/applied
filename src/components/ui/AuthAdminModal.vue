@@ -61,7 +61,7 @@ const signInAsAdmin = async () => {
     } else {
       // If not admin, sign out and show error
       console.log("🕵️️ Non-admin user detected, signing out.");
-      authError.value = "This Google account is not authorised as an admin.";
+      authError.value = "This Google account is not authorisbed as an admin.";
       await auth.signOut();
     }
   } catch (error: any) {
