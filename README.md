@@ -27,7 +27,7 @@ For a more in-depth breakdown of the project's evolution and features, and pract
 
 ### Packadges used
 
- **[vue](https://vuejs.org/)** -  
+- **[vue](https://vuejs.org/)** -  
   JavaScript framework used to build this application, leveraging the Composition API for better structure and reusability.
 
 - **[firebase](https://firebase.google.com/docs/web/setup)** -  Provides real-time database and authentication services, enabling data syncing and secure access.
