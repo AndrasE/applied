@@ -28,7 +28,8 @@ For a more in-depth breakdown of the project's evolution and features, and pract
 
  **[vue](https://vuejs.org/)** -  
   JavaScript framework used to build this application, leveraging the Composition API for better structure and reusability.
-- **[firebase](https://www.npmjs.com/package/react-firebase)** -  Provides real-time database and authentication services, enabling data syncing and secure access.
+
+- **[firebase](https://firebase.google.com/docs/web/setup)** -  Provides real-time database and authentication services, enabling data syncing and secure access.
 
 - **[pinia](https://pinia.vuejs.org/)** -   – A lightweight and intuitive state management library for Vue.
 
@@ -40,14 +41,12 @@ For a more in-depth breakdown of the project's evolution and features, and pract
 
 - **[apexcharts + vue3-apexcharts](http://apexcharts.com/)** - – Used for rendering interactive and responsive chart to visualise job tracking data.
 
-- **[apexcharts + vue3-apexcharts](http://apexcharts.com/)** - – Used for rendering interactive and responsive chart to visualise job tracking data.
-
 - **[vue-toastification](https://vue-toastification.maronato.dev/)** - Adds elegant toast notifications for user feedback without interrupting flow.
 
 - **[vue3-lottie](https://www.npmjs.com/package/vue3-lottie)** -
  Enables the use of Lottie animations for engaging visual feedback and loaders.
 
-- **[vite](https://www.npmjs.com/package/vue3-lottie)** - A modern build tool and development server that provides fast bundling and hot module replacement.
+- **[vite](https://vite.dev/)** - A modern build tool and development server that provides fast bundling and hot module replacement.
 
 - **[vite-plugin-pwa](https://vite-pwa-org.netlify.app/)** - Adds Progressive Web App support, allowing users to install the app and use it offline.
 
