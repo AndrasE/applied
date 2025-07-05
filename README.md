@@ -24,6 +24,7 @@ For a more in-depth breakdown of the project's evolution and features, and pract
 <img src="https://github.com/AndrasE/raw-readme/blob/a680ed99ff9a58fa3248fbd5b9bb89a1a192cafe/thumbs/applied_2.png" width="200">
 <img src="https://github.com/AndrasE/raw-readme/blob/a680ed99ff9a58fa3248fbd5b9bb89a1a192cafe/thumbs/applied_3.png" width="200">
 </div>
+
 ### Packadges used
 
  **[vue](https://vuejs.org/)** -  
