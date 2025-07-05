@@ -1,7 +1,6 @@
 <h3 align="center">
   <a href="https://andrasapplied.netlify.app/" target="_blank" rel="noopener noreferrer">
-  <img src="https://github.com/AndrasE/raw-readme/blob/7a93175c63780473dfa44e00cbd97021d55e5d90/logo/applied-readme.png
-  " width="150">
+  <img src="https://github.com/AndrasE/raw-readme/blob/7a93175c63780473dfa44e00cbd97021d55e5d90/logo/applied-readme.png" width="150">
   </a>
   <br>
   Vue 3 CRUD app powered by Firebase Realtime Database
