@@ -30,7 +30,7 @@ For a more in-depth breakdown of the project's evolution and features, and pract
 
 - **[firebase](https://firebase.google.com/docs/web/setup)** -  Provides real-time database and authentication services, enabling data syncing and secure access.
 
-- **[pinia](https://pinia.vuejs.org/)** -   – A lightweight and intuitive state management library for Vue.
+- **[pinia](https://pinia.vuejs.org/)** - A lightweight and intuitive state management library for Vue.
 
 - **[vue-router](https://router.vuejs.org/)** - Handles client-side routing and navigation between views within the app.
 
