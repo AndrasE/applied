@@ -59,6 +59,9 @@ Start with cloning this repo on your local machine via cli or github-desktop:
 
 `
 $ git clone https://github.com/AndrasE/applied
+`
+
+`
 $ cd applied
 `
 
