@@ -26,8 +26,7 @@ For a more in-depth breakdown of the project's evolution and features, and pract
 
 ### Packadges used
 
-- **[vue](https://vuejs.org/)** -  
-  JavaScript framework used to build this application, leveraging the Composition API for better structure and reusability.
+- **[vue](https://vuejs.org/)** - JavaScript framework used to build this application, leveraging the Composition API for better structure and reusability.
 
 - **[firebase](https://firebase.google.com/docs/web/setup)** -  Provides real-time database and authentication services, enabling data syncing and secure access.
 
@@ -51,3 +50,70 @@ For a more in-depth breakdown of the project's evolution and features, and pract
 - **[vite-plugin-pwa](https://vite-pwa-org.netlify.app/)** - Adds Progressive Web App support, allowing users to install the app and use it offline.
 
 - **[typeScript](https://www.typescriptlang.org/)** - Used throughout the codebase to add static typing and improve maintainability and developer experience.
+
+
+## Run 🚀
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
+
+Start with cloning this repo on your local machine via cli or github-desktop:
+
+`
+$ git clone https://github.com/AndrasE/applied
+$ cd applied
+`
+
+To install and set up the library, run:
+
+`
+$ npm install 
+`
+
+Or if you prefer using Yarn:
+
+`
+$ yarn install
+`
+
+
+
+Create a firabase webapp add real-time database and authentication
+
+`
+edit firebase.ts or add .env 
+`
+<code>
+VITE_API_KEY="your-api-key"
+VITE_AUTH_DOMAIN="your-auth-domain"
+VITE_PROJECT_ID="your-project-id"
+VITE_STORAGE_BUCKET="your-storage-bucket"
+VITE_MESSAGING_SENDER_ID="your-messaging-sender-id"
+VITE_APP_ID="your-app-id"
+VITE_ADMIN_UID=" your Google account's User ID (UID)"
+</code>
+
+`
+Setup firbase rules
+
+`
+{
+  "rules": {
+    "jobs": {
+      ".read": true,
+      ".write": "auth != null && auth.uid == 'YOUR UID'",
+    }
+  }
+}
+`
+
+Serving the app:
+
+`
+$ npm run dev
+`
+
+Building a distribution version:
+
+`
+$ npm run build
+`

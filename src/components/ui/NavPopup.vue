@@ -44,9 +44,9 @@ defineExpose({
         <p>
           On the features side, it has full CRUD (Create, Read, Update, Delete)
           operations connected to a Firebase backend, a secure admin login, and
-          a dynamic charts that visualise data in real-time. If you would like
-          to read more about this project, you can check out the About section
-          by the button below. Or you'd like to explore more of my work, please
+          a dynamic chart that visualise data in real-time. If you would like to
+          read more about this project, you can check out the About section by
+          the button below. Or you'd like to explore more of my work, please
           feel free to
           <a
             aria-label="Visit my portfolio"

@@ -92,7 +92,7 @@ onMounted(() => {
         <p class="text-tiny-tracking-wider">tailwind v4</p>
         <p class="mb-3 text-sm">
           Tailwind CSS has proven to be an incredibly useful tool for styling
-          applications. It`s well-documented and fairly easy to learn, which
+          the application. It`s well-documented and fairly easy to learn, which
           makes getting started smooth and intuitive. In my previous project, I
           used Styled Components—a great library for styling React apps—but I
           found Tailwind to be more straightforward. The predefined utility
@@ -104,9 +104,9 @@ onMounted(() => {
         <p class="text-tiny-tracking-wider">ai</p>
         <p class="mb-3 text-sm">
           We've come a long way in the world of AI. Where I once spent hours
-          digging through Stack Overflow for answers, now a simple prompt can
+          digging through Stackoverflow for answers, now a simple prompt can
           explain a concept or solve a problem in seconds. I`ve tried many of
-          the free models—Gemini, GPT, Claude, Windsurfer, and others—and I have
+          the free models—Gemini, GPT, Claude, Windsurf, and others—and I have
           to say, I`ve been genuinely impressed by the quality of responses.
           It's become an invaluable tool, especially when you're stuck or in
           need of fresh ideas. That said, it`s important to approach
@@ -131,10 +131,11 @@ onMounted(() => {
           chart types and integrates well with Vue. Although it took some time
           to customise and override the default settings, the effort paid
           off—the chart is responsive and looks great across different screen
-          sizes. Much of the data aggregation and filtering logic was assisted
-          by AI, and honestly, it would`ve taken me a lot longer to figure it
-          all out on my own. I think this highlights how AI can significantly
-          speed up development and help us write more efficient code.
+          sizes and themes. Much of the data aggregation and filtering logic was
+          assisted by AI, and honestly, it would`ve taken me a lot longer to
+          figure it all out on my own. I think this highlights how AI can
+          significantly speed up development and help us write more efficient
+          code.
         </p>
         <p class="text-tiny-tracking-wider">auth</p>
         <p class="mb-3 text-sm">
@@ -155,7 +156,7 @@ onMounted(() => {
             >Vue Toastification</a
           >
           library for toast notifications, which provides a great way to give
-          feedback to users without interrupting their workflow. For loading
+          feedback to user without interrupting their workflow. For loading
           states, I implemented skeleton components using Tailwind CSS to
           enhance the user experience while data is being fetched. Once the
           first fetch occurs, we subscribe to changes and the app updates in
