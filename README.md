@@ -51,10 +51,9 @@ For a more in-depth breakdown of the project's evolution and features, and pract
 
 - **[typeScript](https://www.typescriptlang.org/)** - Used throughout the codebase to add static typing and improve maintainability and developer experience.
 
-
 ## Run 🚀
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 Start with cloning this repo on your local machine via cli or github-desktop:
 
@@ -66,7 +65,7 @@ $ cd applied
 To install and set up the library, run:
 
 `
-$ npm install 
+$ npm install
 `
 
 Or if you prefer using Yarn:
@@ -75,14 +74,9 @@ Or if you prefer using Yarn:
 $ yarn install
 `
 
+Create a firabase webapp add real-time database and authentication & edit firebase.ts or add .env
 
-
-Create a firabase webapp add real-time database and authentication
-
-`
-edit firebase.ts or add .env 
-`
-<code>
+```js
 VITE_API_KEY="your-api-key"
 VITE_AUTH_DOMAIN="your-auth-domain"
 VITE_PROJECT_ID="your-project-id"
@@ -90,21 +84,18 @@ VITE_STORAGE_BUCKET="your-storage-bucket"
 VITE_MESSAGING_SENDER_ID="your-messaging-sender-id"
 VITE_APP_ID="your-app-id"
 VITE_ADMIN_UID=" your Google account's User ID (UID)"
-</code>
+```
 
-`
 Setup firbase rules
 
-`
-{
+```js
   "rules": {
     "jobs": {
       ".read": true,
       ".write": "auth != null && auth.uid == 'YOUR UID'",
     }
   }
-}
-`
+```
 
 Serving the app:
 
