@@ -74,7 +74,7 @@ Or if you prefer using Yarn:
 $ yarn install
 `
 
-Create a firabase webapp add real-time database and authentication & edit firebase.ts or add .env
+Create a firabase webapp add real-time database and authentication & edit firebase.ts or add .env:
 
 ```js
 VITE_API_KEY="your-api-key"
@@ -86,7 +86,7 @@ VITE_APP_ID="your-app-id"
 VITE_ADMIN_UID=" your Google account's User ID (UID)"
 ```
 
-Setup firbase rules
+Setup firbase rules:
 
 ```js
   "rules": {
